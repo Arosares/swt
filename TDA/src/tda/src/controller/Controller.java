@@ -1,4 +1,9 @@
+package tda.src.controller;
 import java.util.Set;
+
+import tda.src.model.Model;
+import tda.src.view.View;
+
 import java.util.HashSet;
 
 public class Controller {

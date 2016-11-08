@@ -1,4 +1,9 @@
+package tda.src.model;
 import java.util.Set;
+
+import tda.src.logic.Parser;
+import tda.src.logic.TestRun;
+
 import java.util.HashSet;
 
 public class Model {

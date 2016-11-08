@@ -1,3 +1,5 @@
+package tda.src.view;
+import tda.src.model.Model;
 
 public class View {
 /**

@@ -1,3 +1,4 @@
+package tda.src.logic;
 import java.util.Set;
 
 public class AprioriAnalyzer implements Analyzer {

@@ -1,3 +1,4 @@
+package tda.src.logic;
 
 public class Test {
 private String/*No type specified!*/ failurePercentage;
