@@ -4,41 +4,57 @@ import java.util.Set;
 import java.util.HashSet;
 
 public class TestRun {
-	private String/* No type specified! */ tests;
+	/**
+	 * <pre>
+	 *           0..*     0..*
+	 * TestRun ------------------------- TestedClass
+	 *           testRun        &gt;       testedClass
+	 * </pre>
+	 */
+	private Set<TestedClass> testedClass;
 
-	public void setTests(String/* No type specified! */ value) {
-		this.tests = value;
-	}
-
-	public String/* No type specified! */ getTests() {
-		return this.tests;
-	}
-
-	private String/* No type specified! */ failedPercentage;
-
-	public void setFailedPercentage(String/* No type specified! */ value) {
-		this.failedPercentage = value;
-	}
-
-	public String/* No type specified! */ getFailedPercentage() {
-		return this.failedPercentage;
+	public Set<TestedClass> getTestedClass() {
+		if (this.testedClass == null) {
+			this.testedClass = new HashSet<TestedClass>();
+		}
+		return this.testedClass;
 	}
 
 	/**
 	 * <pre>
-	 *           1..1     0..*
-	 * TestRun ------------------------- Test
-	 *           testRun        &gt;       test
+	 *           0..*     0..*
+	 * TestRun ------------------------- Counters
+	 *           testRun        &gt;       counters
 	 * </pre>
 	 */
-	private Set<Test> test;
+	private Set<Counters> counters;
 
-	public Set<Test> getTest() {
-		if (this.test == null) {
-			this.test = new HashSet<Test>();
+	public Set<Counters> getCounters() {
+		if (this.counters == null) {
+			this.counters = new HashSet<Counters>();
 		}
-		return this.test;
+		return this.counters;
 	}
+
+private TestedClass testedClasses;
+
+public void setTestedClasses(TestedClass value) {
+   this.testedClasses = value;
+}
+
+public TestedClass getTestedClasses() {
+   return this.testedClasses;
+}
+
+private Counters resultSummary;
+
+public void setResultSummary(Counters value) {
+   this.resultSummary = value;
+}
+
+public Counters getResultSummary() {
+   return this.resultSummary;
+}
 
 	/**
 	 * <pre>
