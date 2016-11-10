@@ -19,22 +19,6 @@ this.testRun = new HashSet<TestRun>();
    return this.testRun;
 }
 
-/**
- * <pre>
- *           0..*     0..*
- * TestedClass ------------------------- Test
- *           testedClass        &gt;       test
- * </pre>
- */
-private Set<Test> test;
-
-public Set<Test> getTest() {
-   if (this.test == null) {
-this.test = new HashSet<Test>();
-   }
-   return this.test;
-}
-
 private String className;
 
 public void setClassName(String value) {
