@@ -3,7 +3,7 @@ package tda.src.logic;
 import java.util.Set;
 import java.util.HashSet;
 
-public class Test {
+public class UnitTest {
 /**
  * <pre>
  *           0..*     0..*
@@ -27,11 +27,11 @@ this.testedClass = new HashSet<TestedClass>();
  *           test1        &lt;       test
  * </pre>
  */
-private Set<Test> test;
+private Set<UnitTest> test;
 
-public Set<Test> getTest() {
+public Set<UnitTest> getTest() {
    if (this.test == null) {
-this.test = new HashSet<Test>();
+this.test = new HashSet<UnitTest>();
    }
    return this.test;
 }
@@ -43,11 +43,11 @@ this.test = new HashSet<Test>();
  *           test        &gt;       test1
  * </pre>
  */
-private Set<Test> test1;
+private Set<UnitTest> test1;
 
-public Set<Test> getTest1() {
+public Set<UnitTest> getTest1() {
    if (this.test1 == null) {
-this.test1 = new HashSet<Test>();
+this.test1 = new HashSet<UnitTest>();
    }
    return this.test1;
 }
