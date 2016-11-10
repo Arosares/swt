@@ -11,7 +11,7 @@ import javax.xml.stream.XMLStreamReader;
 public class StAXParser implements Parser {
 
 	private String xmlPath = "/afs/swt.wiai.uni-bamberg.de/users/home.swt-041097/XML_Files/testRun_1.xml";
-	private List<Test> unitTests;
+	private List<Test> unitTests = new LinkedList<Test>();
 	private List<TestedClass> testedClasses = new LinkedList<TestedClass>();
 	
 	public void parse() {
@@ -48,11 +48,7 @@ public class StAXParser implements Parser {
 		String sumWarning;
 		String stdOutContent;
 		
-		
-		
-		
 		try {
-
 			// creating inputFactory
 			XMLInputFactory inputFactory = XMLInputFactory.newInstance();
 			// create InputStream
@@ -150,5 +146,4 @@ public class StAXParser implements Parser {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }
