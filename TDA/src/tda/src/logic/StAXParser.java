@@ -1,5 +1,6 @@
 package tda.src.logic;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -10,7 +11,9 @@ import javax.xml.stream.XMLStreamReader;
 public class StAXParser implements Parser {
 
 	private String xmlPath = "/afs/swt.wiai.uni-bamberg.de/users/home.swt-041097/XML_Files/testRun_1.xml";
-	private List<UnitTest> unitTests;
+
+	private List<UnitTest> unitTests = new LinkedList<UnitTest>();
+	private List<TestedClass> testedClasses = new LinkedList<TestedClass>();
 	
 	public void parse() {
 		boolean waitForStdOut = false;
@@ -46,11 +49,7 @@ public class StAXParser implements Parser {
 		String sumWarning;
 		String stdOutContent;
 		
-		
-		
-		
 		try {
-
 			// creating inputFactory
 			XMLInputFactory inputFactory = XMLInputFactory.newInstance();
 			// create InputStream
@@ -125,6 +124,10 @@ public class StAXParser implements Parser {
 					break;
 				
 				case XMLStreamConstants.END_ELEMENT:
+					if ("UnitTest".equals(reader.getLocalName())) {
+						
+						//TODO: Create TestedClass Object
+					}
 					break;
 				
 				default:
@@ -144,5 +147,4 @@ public class StAXParser implements Parser {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }
