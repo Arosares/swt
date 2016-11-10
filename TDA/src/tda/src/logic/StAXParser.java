@@ -13,6 +13,10 @@ public class StAXParser implements Parser {
 	private List<Test> unitTests;
 	
 	public void parse() {
+		boolean waitForStdOut = false;
+		boolean readingStdOut = false;
+		
+		
 		try {
 
 			// creating inputFactory
@@ -32,8 +36,10 @@ public class StAXParser implements Parser {
 					}
 					
 					if ("Execution".equals(reader.getLocalName())) {
-						String executionID = reader.getAttributeValue(0);
-					
+						if(reader.getAttributeCount() == 1){
+							// To avoid wrong 'execution' start element
+							String executionID = reader.getAttributeValue(0);
+						}
 					}
 					if ("TestMethod".equals(reader.getLocalName())) {
 						String className = reader.getAttributeValue(1);
@@ -53,6 +59,40 @@ public class StAXParser implements Parser {
 						String start = reader.getAttributeValue(3);
 
 					}
+					if ("ResultSummary".equals(reader.getLocalName())) {
+						String outcome = reader.getAttributeValue(0);
+						waitForStdOut = true;
+					}
+					if ("Counters".equals(reader.getLocalName())) {
+						String sumAborted = reader.getAttributeValue(0);
+						String sumCompleted = reader.getAttributeValue(1);
+						String sumDisconnected = reader.getAttributeValue(2);
+						String sumError = reader.getAttributeValue(3);
+						String sumFailed = reader.getAttributeValue(4);
+						String sumInProgress = reader.getAttributeValue(5);
+						String sumInconclusive = reader.getAttributeValue(6);
+						String sumNotExecuted = reader.getAttributeValue(7);
+						String sumNotRunnable = reader.getAttributeValue(8);
+						String sumPassed = reader.getAttributeValue(9);
+						String sumPassedButRunAborted = reader.getAttributeValue(10);
+						String sumPending = reader.getAttributeValue(11);
+						String sumTimeOut = reader.getAttributeValue(12);
+						String sumTotal = reader.getAttributeValue(13);
+						String sumWarning = reader.getAttributeValue(14);
+						//TODO: Create Counters Class
+					}
+					if ("StdOut".equals(reader.getLocalName()) && waitForStdOut) {
+						readingStdOut = true;
+					}
+					break;
+				
+				case XMLStreamConstants.CHARACTERS:
+					if(readingStdOut){
+						String stdOutContent = reader.getText().trim();
+					}
+					break;
+				
+				case XMLStreamConstants.END_ELEMENT:
 					break;
 				
 				default:
