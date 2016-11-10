@@ -10,7 +10,7 @@ import javax.xml.stream.XMLStreamReader;
 public class StAXParser implements Parser {
 
 	private String xmlPath = "/afs/swt.wiai.uni-bamberg.de/users/home.swt-041097/XML_Files/testRun_1.xml";
-	private List<Test> unitTests;
+	private List<UnitTest> unitTests;
 	
 	public void parse() {
 		boolean waitForStdOut = false;
@@ -76,7 +76,7 @@ public class StAXParser implements Parser {
 					if ("TestMethod".equals(reader.getLocalName())) {
 						className = reader.getAttributeValue(1);
 						methodName = reader.getAttributeValue(3);
-						//TODO: Create TestedClass Object
+						//TODO: Create UnitTest Object
 					}
 					if ("TestRun".equals(reader.getLocalName())) {
 						runID = reader.getAttributeValue(1);

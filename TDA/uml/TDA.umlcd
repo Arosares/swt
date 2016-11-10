@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<com.yattasolutions.uml.diagrams.classifier:ClassDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.yattasolutions.uml.diagrams.classifier="http://ns.yatta-solutions.com/umllab/diagrams/classifier/1.1.0" xmi:id="_lJZr4KXSEeaFu4ufEpq50A">
+<com.yattasolutions.uml.diagrams.classifier:ClassDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.yattasolutions.diagrams="http://ns.yatta-solutions.com/umllab/diagrams/1.1.0" xmlns:com.yattasolutions.uml.diagrams.classifier="http://ns.yatta-solutions.com/umllab/diagrams/classifier/1.1.0" xmi:id="_lJZr4KXSEeaFu4ufEpq50A">
   <modelElement href="TDA.uml#_lc1lQKXSEeaFu4ufEpq50A"/>
   <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_7nXGsKXSEeaFu4ufEpq50A" sourceAnchor="124.0,55.0" targetAnchor="0.0,79.0" target="_7sYwoKXSEeaFu4ufEpq50A" source="_7oiLYKXSEeaFu4ufEpq50A">
     <modelElement href="TDA.uml#_lflXQKXSEeaFu4ufEpq50A"/>
@@ -254,6 +254,7 @@
       <cardinality xmi:id="_CxkUhqXcEeacQKrU3zHO5g" label="1" max="1" min="1"/>
     </targetRole>
   </edges>
+  <edges xsi:type="com.yattasolutions.diagrams:ConnectionVisual" xmi:id="_Hg7BoKdzEea2N_fk3ceYeQ" targetItem="_7rf_16XSEeaFu4ufEpq50A" sourceItem="_Hg5McKdzEea2N_fk3ceYeQ"/>
   <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:InterfaceVisual" xmi:id="_7oiLYKXSEeaFu4ufEpq50A" name="Analyzer" associationsOut="_7nXGsKXSEeaFu4ufEpq50A" subclassedBy="_7pmiYKXSEeaFu4ufEpq50A">
     <modelElement href="TDA.uml#_ld5VMKXSEeaFu4ufEpq50A"/>
     <visualProperties xmi:id="_7oiLYaXSEeaFu4ufEpq50A" position="179.0,367.0" size="-1.0,-1.0"/>
@@ -284,7 +285,7 @@
         <modelElement href="TDA.uml#_leM3MKXSEeaFu4ufEpq50A"/>
       </type>
     </attributes>
-    <operations xmi:id="_7rf_16XSEeaFu4ufEpq50A" name="parse">
+    <operations xmi:id="_7rf_16XSEeaFu4ufEpq50A" comments="_Hg5McKdzEea2N_fk3ceYeQ" targetConnectionVisual="_Hg7BoKdzEea2N_fk3ceYeQ" name="parse">
       <modelElement href="TDA.uml#_leLpEKXSEeaFu4ufEpq50A"/>
       <visibility xmi:id="_7rf_2KXSEeaFu4ufEpq50A" label="+"/>
       <cardinality xmi:id="_7rf_2aXSEeaFu4ufEpq50A" label="1" max="1" min="1"/>
@@ -446,59 +447,6 @@
       </type>
     </attributes>
   </nodes>
-  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_Ix6KgKXVEear1O-8CgUT7g" name="Test" associationsIn="_MK5fkKXVEear1O-8CgUT7g _NDxoUKXVEear1O-8CgUT7g" associationsOut="_NDxoUKXVEear1O-8CgUT7g">
-    <modelElement href="TDA.uml#_Ix1SAKXVEear1O-8CgUT7g"/>
-    <visualProperties xmi:id="_Ix6KgaXVEear1O-8CgUT7g" position="865.0,629.0" size="217.0,111.0"/>
-    <visibility xmi:id="_Ix6KgqXVEear1O-8CgUT7g" label="+"/>
-    <attributes xmi:id="_MK6tsKXVEear1O-8CgUT7g" name="testedClass">
-      <modelElement href="TDA.uml#_MK1OIKXVEear1O-8CgUT7g"/>
-      <visibility xmi:id="_MK6tsaXVEear1O-8CgUT7g" label="+"/>
-      <cardinality xmi:id="_MK6tsqXVEear1O-8CgUT7g" label="*" max="-1"/>
-      <type xmi:id="_MK6ts6XVEear1O-8CgUT7g" name="TestedClass">
-        <modelElement href="TDA.uml#_leVaEKXSEeaFu4ufEpq50A"/>
-      </type>
-    </attributes>
-    <attributes xmi:id="_NDy2cKXVEear1O-8CgUT7g" name="test">
-      <modelElement href="TDA.uml#_NDpsgaXVEear1O-8CgUT7g"/>
-      <visibility xmi:id="_NDy2caXVEear1O-8CgUT7g" label="+"/>
-      <cardinality xmi:id="_NDy2cqXVEear1O-8CgUT7g" label="*" max="-1"/>
-      <type xmi:id="_NDy2c6XVEear1O-8CgUT7g" name="Test">
-        <modelElement href="TDA.uml#_Ix1SAKXVEear1O-8CgUT7g"/>
-      </type>
-    </attributes>
-    <attributes xmi:id="_NDy2dKXVEear1O-8CgUT7g" name="test1">
-      <modelElement href="TDA.uml#_NDq6oKXVEear1O-8CgUT7g"/>
-      <visibility xmi:id="_NDy2daXVEear1O-8CgUT7g" label="+"/>
-      <cardinality xmi:id="_NDy2dqXVEear1O-8CgUT7g" label="*" max="-1"/>
-      <type xmi:id="_NDy2d6XVEear1O-8CgUT7g" name="Test">
-        <modelElement href="TDA.uml#_Ix1SAKXVEear1O-8CgUT7g"/>
-      </type>
-    </attributes>
-    <attributes xmi:id="_T_O-kKXVEear1O-8CgUT7g" name="testName">
-      <modelElement href="TDA.uml#_T_NwcKXVEear1O-8CgUT7g"/>
-      <visibility xmi:id="_T_O-kaXVEear1O-8CgUT7g" label="+"/>
-      <cardinality xmi:id="_T_O-kqXVEear1O-8CgUT7g" label="1" max="1" min="1"/>
-      <type xmi:id="_q4Io8KXVEear1O-8CgUT7g" name="String">
-        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-      </type>
-    </attributes>
-    <attributes xmi:id="_Y7So4KXVEear1O-8CgUT7g" name="executionID">
-      <modelElement href="TDA.uml#_Y7SB0KXVEear1O-8CgUT7g"/>
-      <visibility xmi:id="_Y7So4aXVEear1O-8CgUT7g" label="+"/>
-      <cardinality xmi:id="_Y7So4qXVEear1O-8CgUT7g" label="1" max="1" min="1"/>
-      <type xmi:id="_r8khcKXVEear1O-8CgUT7g" name="int">
-        <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
-      </type>
-    </attributes>
-    <attributes xmi:id="_ixYkQKXVEear1O-8CgUT7g" name="outcome">
-      <modelElement href="TDA.uml#_ixX9MKXVEear1O-8CgUT7g"/>
-      <visibility xmi:id="_ixYkQaXVEear1O-8CgUT7g" label="+"/>
-      <cardinality xmi:id="_ixYkQqXVEear1O-8CgUT7g" label="1" max="1" min="1"/>
-      <type xmi:id="_s67nIKXVEear1O-8CgUT7g" name="boolean">
-        <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
-      </type>
-    </attributes>
-  </nodes>
   <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_7tVL0KXSEeaFu4ufEpq50A" name="StAXParser" generalizations="_7tGiUKXSEeaFu4ufEpq50A">
     <modelElement href="TDA.uml#_leXPQKXSEeaFu4ufEpq50A"/>
     <visualProperties xmi:id="_7tVy4KXSEeaFu4ufEpq50A" position="894.0,84.0" size="282.0,90.0"/>
@@ -584,6 +532,62 @@
       <cardinality xmi:id="_DX3RwqXXEear1O-8CgUT7g" label="*" max="-1"/>
       <type xmi:id="_DX3Rw6XXEear1O-8CgUT7g" name="Counters">
         <modelElement href="TDA.uml#_aliuwKXWEear1O-8CgUT7g"/>
+      </type>
+    </attributes>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.diagrams:CommentVisual" xmi:id="_Hg5McKdzEea2N_fk3ceYeQ" sourceConnectionVisual="_Hg7BoKdzEea2N_fk3ceYeQ" text=" Parses a given XML File in our Data-Structure.&#xD;&#xA;    *  Mainly to {@code UnitTest.java} format" item="_7rf_16XSEeaFu4ufEpq50A">
+    <modelElement href="TDA.uml#_Hgzs4KdzEea2N_fk3ceYeQ"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_Ix6KgKXVEear1O-8CgUT7g" name="UnitTest" associationsIn="_MK5fkKXVEear1O-8CgUT7g _NDxoUKXVEear1O-8CgUT7g" associationsOut="_NDxoUKXVEear1O-8CgUT7g">
+    <modelElement href="TDA.uml#_Ix1SAKXVEear1O-8CgUT7g"/>
+    <visualProperties xmi:id="_Ix6KgaXVEear1O-8CgUT7g" position="865.0,629.0" size="217.0,111.0"/>
+    <visibility xmi:id="_Ix6KgqXVEear1O-8CgUT7g" label="+"/>
+    <attributes xmi:id="_MK6tsKXVEear1O-8CgUT7g" name="testedClass">
+      <modelElement href="TDA.uml#_MK1OIKXVEear1O-8CgUT7g"/>
+      <visibility xmi:id="_MK6tsaXVEear1O-8CgUT7g" label="+"/>
+      <cardinality xmi:id="_MK6tsqXVEear1O-8CgUT7g" label="*" max="-1"/>
+      <type xmi:id="_MK6ts6XVEear1O-8CgUT7g" name="TestedClass">
+        <modelElement href="TDA.uml#_leVaEKXSEeaFu4ufEpq50A"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_NDy2cKXVEear1O-8CgUT7g" name="test">
+      <modelElement href="TDA.uml#_NDpsgaXVEear1O-8CgUT7g"/>
+      <visibility xmi:id="_NDy2caXVEear1O-8CgUT7g" label="+"/>
+      <cardinality xmi:id="_NDy2cqXVEear1O-8CgUT7g" label="*" max="-1"/>
+      <type xmi:id="_NDy2c6XVEear1O-8CgUT7g" name="UnitTest">
+        <modelElement href="TDA.uml#_Ix1SAKXVEear1O-8CgUT7g"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_NDy2dKXVEear1O-8CgUT7g" name="test1">
+      <modelElement href="TDA.uml#_NDq6oKXVEear1O-8CgUT7g"/>
+      <visibility xmi:id="_NDy2daXVEear1O-8CgUT7g" label="+"/>
+      <cardinality xmi:id="_NDy2dqXVEear1O-8CgUT7g" label="*" max="-1"/>
+      <type xmi:id="_NDy2d6XVEear1O-8CgUT7g" name="UnitTest">
+        <modelElement href="TDA.uml#_Ix1SAKXVEear1O-8CgUT7g"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_T_O-kKXVEear1O-8CgUT7g" name="testName">
+      <modelElement href="TDA.uml#_T_NwcKXVEear1O-8CgUT7g"/>
+      <visibility xmi:id="_T_O-kaXVEear1O-8CgUT7g" label="+"/>
+      <cardinality xmi:id="_T_O-kqXVEear1O-8CgUT7g" label="1" max="1" min="1"/>
+      <type xmi:id="_q4Io8KXVEear1O-8CgUT7g" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_Y7So4KXVEear1O-8CgUT7g" name="executionID">
+      <modelElement href="TDA.uml#_Y7SB0KXVEear1O-8CgUT7g"/>
+      <visibility xmi:id="_Y7So4aXVEear1O-8CgUT7g" label="+"/>
+      <cardinality xmi:id="_Y7So4qXVEear1O-8CgUT7g" label="1" max="1" min="1"/>
+      <type xmi:id="_r8khcKXVEear1O-8CgUT7g" name="int">
+        <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_ixYkQKXVEear1O-8CgUT7g" name="outcome">
+      <modelElement href="TDA.uml#_ixX9MKXVEear1O-8CgUT7g"/>
+      <visibility xmi:id="_ixYkQaXVEear1O-8CgUT7g" label="+"/>
+      <cardinality xmi:id="_ixYkQqXVEear1O-8CgUT7g" label="1" max="1" min="1"/>
+      <type xmi:id="_s67nIKXVEear1O-8CgUT7g" name="boolean">
+        <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
       </type>
     </attributes>
   </nodes>

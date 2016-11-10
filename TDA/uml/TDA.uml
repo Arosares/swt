@@ -4,7 +4,7 @@
     <eAnnotations xmi:id="_lRq3EKXSEeaFu4ufEpq50A" source="http://ns.yatta.de/umllab">
       <contents xmi:type="ecore:EAnnotation" xmi:id="_lRreIKXSEeaFu4ufEpq50A" source="codegen">
         <details xmi:id="_lRreIaXSEeaFu4ufEpq50A" key="codegenDirectory" value="/TDA/src"/>
-        <details xmi:id="_0lAeQKXSEeaFu4ufEpq50A" key="AssociatedSourceCode" value="/TDA/src/tda/src/logic/TestRun.java;1383514596/1;/TDA/src/tda/src/controller/Controller.java;3550694327/1;/TDA/src/tda/src/logic/Analyzer.java;1281935213/1;/TDA/src/tda/src/logic/AprioriAnalyzer.java;3453081459/1;/TDA/src/tda/src/logic/Parser.java;1255895618/1;/TDA/src/tda/src/logic/TestedClass.java;1453817471/1;/TDA/src/tda/src/model/Model.java;51604481/1;/TDA/src/tda/src/view/View.java;712972811/1;"/>
+        <details xmi:id="_0lAeQKXSEeaFu4ufEpq50A" key="AssociatedSourceCode" value="/TDA/src/tda/src/logic/TestRun.java;1383514596/1;/TDA/src/tda/src/controller/Controller.java;3550694327/1;/TDA/src/tda/src/logic/Analyzer.java;1281935213/1;/TDA/src/tda/src/logic/AprioriAnalyzer.java;3453081459/1;/TDA/src/tda/src/logic/Parser.java;3592852581/1;/TDA/src/tda/src/logic/TestedClass.java;1453817471/1;/TDA/src/tda/src/model/Model.java;51604481/1;/TDA/src/tda/src/view/View.java;712972811/1;"/>
       </contents>
       <contents xmi:type="ecore:EAnnotation" xmi:id="_2rihYKXcEea_4JiChsX4sw" source="preferences">
         <contents xmi:type="ecore:EAnnotation" xmi:id="_2rjIcKXcEea_4JiChsX4sw" source="com.yattasolutions.codegen.reverse">
@@ -115,7 +115,12 @@
               <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_leLCAKXSEeaFu4ufEpq50A"/>
               <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_leLCAaXSEeaFu4ufEpq50A" value="*"/>
             </ownedAttribute>
-            <ownedOperation xmi:id="_leLpEKXSEeaFu4ufEpq50A" name="parse"/>
+            <ownedOperation xmi:id="_leLpEKXSEeaFu4ufEpq50A" name="parse">
+              <ownedComment xmi:id="_Hgzs4KdzEea2N_fk3ceYeQ">
+                <body> Parses a given XML File in our Data-Structure.&#xD;
+    *  Mainly to {@code UnitTest.java} format</body>
+              </ownedComment>
+            </ownedOperation>
           </packagedElement>
           <packagedElement xmi:type="uml:Class" xmi:id="_leM3MKXSEeaFu4ufEpq50A" name="TestRun">
             <ownedAttribute xmi:id="_lfjiEKXSEeaFu4ufEpq50A" name="testedClasses" type="_leVaEKXSEeaFu4ufEpq50A" association="_CxJdwKXcEeacQKrU3zHO5g"/>
@@ -180,7 +185,7 @@
           <packagedElement xmi:type="uml:Association" xmi:id="_QwBigKXTEeaFu4ufEpq50A" name="" memberEnd="_QwCJkKXTEeaFu4ufEpq50A _QwDXsKXTEeaFu4ufEpq50A"/>
           <packagedElement xmi:type="uml:Association" xmi:id="_MK0nEKXVEear1O-8CgUT7g" name="" memberEnd="_MK1OIKXVEear1O-8CgUT7g _MK2cQqXVEear1O-8CgUT7g _2lPFEKXcEea_4JiChsX4sw"/>
           <packagedElement xmi:type="uml:Association" xmi:id="_DXzAUKXXEear1O-8CgUT7g" name="" memberEnd="_DXznYKXXEear1O-8CgUT7g _DXznY6XXEear1O-8CgUT7g"/>
-          <packagedElement xmi:type="uml:Class" xmi:id="_Ix1SAKXVEear1O-8CgUT7g" name="Test">
+          <packagedElement xmi:type="uml:Class" xmi:id="_Ix1SAKXVEear1O-8CgUT7g" name="UnitTest">
             <ownedAttribute xmi:id="_MK1OIKXVEear1O-8CgUT7g" name="testedClass" type="_leVaEKXSEeaFu4ufEpq50A" association="_MK0nEKXVEear1O-8CgUT7g">
               <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_MK2cQKXVEear1O-8CgUT7g"/>
               <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_MK2cQaXVEear1O-8CgUT7g" value="*"/>
