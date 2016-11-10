@@ -18,6 +18,38 @@ public class StAXParser implements Parser {
 		boolean waitForStdOut = false;
 		boolean readingStdOut = false;
 		
+		String unitTestID;
+		String testName;
+		String executionID;
+		String className;
+		String methodName;
+		String runID;
+		String runName;
+		String runUser;
+		String creationTime;
+		String finishTime;
+		String queuingTime;
+		String startTime;
+		String outcome;
+		String sumAborted;
+		String sumCompleted;
+		String sumDisconnected;
+		String sumError;
+		String sumFailed;
+		String sumInProgress;
+		String sumInconclusive;
+		String sumNotExecuted;
+		String sumNotRunnable;
+		String sumPassed;
+		String sumPassedButRunAborted;
+		String sumPending;
+		String sumTimeOut;
+		String sumTotal;
+		String sumWarning;
+		String stdOutContent;
+		
+		
+		
 		
 		try {
 
@@ -32,55 +64,55 @@ public class StAXParser implements Parser {
 				switch (event) {
 				case XMLStreamConstants.START_ELEMENT:
 					if ("UnitTest".equals(reader.getLocalName())) {
-						String unitTestID = reader.getAttributeValue(0);
-						String name = reader.getAttributeValue(1);
+						unitTestID = reader.getAttributeValue(0);
+						testName = reader.getAttributeValue(1);
 						//TODO: Create TestedClass Object
 					}
 					
 					if ("Execution".equals(reader.getLocalName())) {
 						if(reader.getAttributeCount() == 1){
 							// To avoid wrong 'execution' start element
-							String executionID = reader.getAttributeValue(0);
+							executionID = reader.getAttributeValue(0);
 						}
 					}
 					if ("TestMethod".equals(reader.getLocalName())) {
-						String className = reader.getAttributeValue(1);
-						String methodName = reader.getAttributeValue(3);
+						className = reader.getAttributeValue(1);
+						methodName = reader.getAttributeValue(3);
 						//TODO: Create TestedClass Object
 					}
 					if ("TestRun".equals(reader.getLocalName())) {
-						String runID = reader.getAttributeValue(1);
-						String runName = reader.getAttributeValue(2);
-						String runUser = reader.getAttributeValue(3);
+						runID = reader.getAttributeValue(1);
+						runName = reader.getAttributeValue(2);
+						runUser = reader.getAttributeValue(3);
 
 					}
 					if ("Times".equals(reader.getLocalName())) {
-						String creation = reader.getAttributeValue(0);
-						String finish = reader.getAttributeValue(1);
-						String queuing = reader.getAttributeValue(2);
-						String start = reader.getAttributeValue(3);
+						creationTime = reader.getAttributeValue(0);
+						finishTime = reader.getAttributeValue(1);
+						queuingTime = reader.getAttributeValue(2);
+						startTime = reader.getAttributeValue(3);
 
 					}
 					if ("ResultSummary".equals(reader.getLocalName())) {
-						String outcome = reader.getAttributeValue(0);
+						outcome = reader.getAttributeValue(0);
 						waitForStdOut = true;
 					}
 					if ("Counters".equals(reader.getLocalName())) {
-						String sumAborted = reader.getAttributeValue(0);
-						String sumCompleted = reader.getAttributeValue(1);
-						String sumDisconnected = reader.getAttributeValue(2);
-						String sumError = reader.getAttributeValue(3);
-						String sumFailed = reader.getAttributeValue(4);
-						String sumInProgress = reader.getAttributeValue(5);
-						String sumInconclusive = reader.getAttributeValue(6);
-						String sumNotExecuted = reader.getAttributeValue(7);
-						String sumNotRunnable = reader.getAttributeValue(8);
-						String sumPassed = reader.getAttributeValue(9);
-						String sumPassedButRunAborted = reader.getAttributeValue(10);
-						String sumPending = reader.getAttributeValue(11);
-						String sumTimeOut = reader.getAttributeValue(12);
-						String sumTotal = reader.getAttributeValue(13);
-						String sumWarning = reader.getAttributeValue(14);
+						sumAborted = reader.getAttributeValue(0);
+						sumCompleted = reader.getAttributeValue(1);
+						sumDisconnected = reader.getAttributeValue(2);
+						sumError = reader.getAttributeValue(3);
+						sumFailed = reader.getAttributeValue(4);
+						sumInProgress = reader.getAttributeValue(5);
+						sumInconclusive = reader.getAttributeValue(6);
+						sumNotExecuted = reader.getAttributeValue(7);
+						sumNotRunnable = reader.getAttributeValue(8);
+						sumPassed = reader.getAttributeValue(9);
+						sumPassedButRunAborted = reader.getAttributeValue(10);
+						sumPending = reader.getAttributeValue(11);
+						sumTimeOut = reader.getAttributeValue(12);
+						sumTotal = reader.getAttributeValue(13);
+						sumWarning = reader.getAttributeValue(14);
 						//TODO: Create Counters Class
 					}
 					if ("StdOut".equals(reader.getLocalName()) && waitForStdOut) {
@@ -90,7 +122,7 @@ public class StAXParser implements Parser {
 				
 				case XMLStreamConstants.CHARACTERS:
 					if(readingStdOut){
-						String stdOutContent = reader.getText().trim();
+						stdOutContent = reader.getText().trim();
 					}
 					break;
 				
