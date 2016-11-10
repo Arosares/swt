@@ -1,5 +1,6 @@
 package tda.src.logic;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -12,26 +13,24 @@ public class StAXParser implements Parser {
 
 	private String xmlPath = "/afs/swt.wiai.uni-bamberg.de/users/home.swt-041097/XML_Files/testRun_1.xml";
 
-	private List<UnitTest> unitTests = new LinkedList<UnitTest>();
-	private List<TestedClass> testedClasses = new LinkedList<TestedClass>();
+	private List<UnitTest> unitTests = new ArrayList<UnitTest>();
+	private List<TestedClass> testedClasses = new ArrayList<TestedClass>();
 	
 	public void parse() {
 		boolean waitForStdOut = false;
 		boolean readingStdOut = false;
 		
-		String unitTestID;
-		String testName;
-		String executionID;
-		String className;
-		String methodName;
-		String runID;
-		String runName;
-		String runUser;
-		String creationTime;
-		String finishTime;
-		String queuingTime;
-		String startTime;
+		//UnitTest Data
+		String unitTestID, unitTestName, unitTestExecutionID;
+		//Tested Class Data
+		String testedClassName, testMethodName;
+		//TestRun Data
+		String runID, runName, runUser;
+		//TestRunTimeD
+		String creationTime, finishTime, queuingTime, startTime;
 		String outcome;
+		
+		//Counters
 		String sumAborted;
 		String sumCompleted;
 		String sumDisconnected;
@@ -47,6 +46,8 @@ public class StAXParser implements Parser {
 		String sumTimeOut;
 		String sumTotal;
 		String sumWarning;
+		
+		//StandardOuts
 		String stdOutContent;
 		
 		try {
@@ -62,19 +63,19 @@ public class StAXParser implements Parser {
 				case XMLStreamConstants.START_ELEMENT:
 					if ("UnitTest".equals(reader.getLocalName())) {
 						unitTestID = reader.getAttributeValue(0);
-						testName = reader.getAttributeValue(1);
+						unitTestName = reader.getAttributeValue(1);
 						//TODO: Create TestedClass Object
 					}
 					
 					if ("Execution".equals(reader.getLocalName())) {
 						if(reader.getAttributeCount() == 1){
 							// To avoid wrong 'execution' start element
-							executionID = reader.getAttributeValue(0);
+							unitTestExecutionID = reader.getAttributeValue(0);
 						}
 					}
 					if ("TestMethod".equals(reader.getLocalName())) {
-						className = reader.getAttributeValue(1);
-						methodName = reader.getAttributeValue(3);
+						testedClassName = reader.getAttributeValue(1);
+						testMethodName = reader.getAttributeValue(3);
 						//TODO: Create UnitTest Object
 					}
 					if ("TestRun".equals(reader.getLocalName())) {
@@ -126,7 +127,8 @@ public class StAXParser implements Parser {
 				case XMLStreamConstants.END_ELEMENT:
 					if ("UnitTest".equals(reader.getLocalName())) {
 						
-						//TODO: Create TestedClass Object
+						//TODO: Create UnitTest Object
+						
 					}
 					break;
 				
