@@ -1,42 +1,49 @@
 package tda.src.logic;
-import java.util.HashSet;
-import java.util.Set;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TestedClass {
-/**
- * <pre>
- *           0..*     0..*
- * TestedClass ------------------------- TestRun
- *           testedClass        &lt;       testRun
- * </pre>
- */
-private Set<TestRun> testRun;
+	/**
+	 * <pre>
+	 *           0..*     0..*
+	 * TestedClass ------------------------- TestRun
+	 *           testedClass        &lt;       testRun
+	 * </pre>
+	 */
+	private String className;
 
-public Set<TestRun> getTestRun() {
-   if (this.testRun == null) {
-this.testRun = new HashSet<TestRun>();
-   }
-   return this.testRun;
-}
+	/*
+	 * classLog:
+	 * 
+	 * [testRunID|failurePercentage|executionID|executionID|...]
+	 * [testRunID|failurePercentage|executionID|...]
+	 */
+	public List<ArrayList<String>> classLog = new ArrayList<ArrayList<String>>();
 
-private String className;
+	public void setClassName(String value) {
+		this.className = value;
+	}
 
-public void setClassName(String value) {
-   this.className = value;
-}
+	public String getClassName() {
+		return this.className;
+	}
 
-public String getClassName() {
-   return this.className;
-}
+	public void addTestRunToClassLog(String testRunID, List<UnitTest> testList) {
 
-private String/*No type specified!*/ failurePercentage;
+		ArrayList<String> testRunToAdd = new ArrayList<String>();
+		testRunToAdd.add(testRunID);
+		testRunToAdd.add("dummy");
 
-public void setFailurePercentage(String/*No type specified!*/ value) {
-   this.failurePercentage = value;
-}
-
-public String/*No type specified!*/ getFailurePercentage() {
-   return this.failurePercentage;
-}
+		int passedCounter = 0;
+		for (UnitTest oneTest : testList) {
+			testRunToAdd.add(oneTest.getExecutionID());
+			if (oneTest.getOutcome()) {
+				passedCounter++;
+			}
+		}
+		testRunToAdd.set(1, Integer.toString(passedCounter / testList.size()));
+		classLog.add(testRunToAdd);
+	}
 
 }
