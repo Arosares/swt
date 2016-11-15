@@ -34,13 +34,12 @@ public class Model extends Observable {
 		testData = new TestData();
 		Parser parser = new StAXParser(this);
 		parser.parse();
-		System.out.println(testData.getTestedClassList().size());
-
+		
+		System.out.println(testData.getTestedClassList());
+		
+		
 		parser.parse();
-		System.out.println(testData.getTestedClassList().size());
-		for (TestedClass testedClass : testData.getTestedClassList()) {
-			System.out.println(testedClass);
-		}
+		System.out.println(testData.getTestedClassList());
 	}
 	
 	

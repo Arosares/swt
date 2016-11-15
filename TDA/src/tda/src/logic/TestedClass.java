@@ -3,7 +3,7 @@ package tda.src.logic;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestedClass implements Comparable<TestedClass>{
+public class TestedClass implements Comparable<TestedClass> {
 	/**
 	 * <pre>
 	 *           0..*     0..*
@@ -13,7 +13,7 @@ public class TestedClass implements Comparable<TestedClass>{
 	 */
 	private String className;
 	private List<UnitTest> unitTests;
-	
+
 	public TestedClass(String className) {
 		super();
 		this.className = className;
@@ -34,10 +34,11 @@ public class TestedClass implements Comparable<TestedClass>{
 	public String getClassName() {
 		return this.className;
 	}
-	
-	public void addUnitTestToList(UnitTest unitTest){
-		
+
+	public void addUnitTestToList(UnitTest unitTest) {
+
 	}
+
 	public void addTestRunToClassLog(String testRunID, List<UnitTest> testList) {
 
 		ArrayList<String> testRunToAdd = new ArrayList<String>();
@@ -58,8 +59,16 @@ public class TestedClass implements Comparable<TestedClass>{
 	@Override
 	public int compareTo(TestedClass o) {
 		// TODO Auto-generated method stub
-		return className.compareTo(o.className);
-		
+		if (className.equals(o.getClassName())) {
+			return 0;
+		}
+		return -1;
+
+	}
+
+	@Override
+	public String toString() {
+		return "Name: " + className;
 	}
 
 }

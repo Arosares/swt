@@ -105,7 +105,7 @@ public Counters getResultSummary() {
 	@Override
 	public int compareTo(TestRun o) {
 		// TODO Auto-generated method stub
-		if (runID == o.getRunID()) {
+		if (runID.equals(o.getRunID())) {
 			return 0;
 		}
 		return -1;

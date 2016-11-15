@@ -24,9 +24,6 @@ public class StAXParser implements Parser {
 
 	private String xmlPath = "/home/aro/Studium/swt/testRun_1.xml";
 	
-	private List<UnitTest> unitTests = new ArrayList<UnitTest>();
-	private List<TestedClass> testedClasses = new ArrayList<TestedClass>();
-	
 	public void parse() {
 		System.out.println("Starting to parse");
 		boolean waitForStdOut = false;
@@ -86,7 +83,8 @@ public class StAXParser implements Parser {
 						}
 					}
 					if ("TestMethod".equals(reader.getLocalName())) {
-						testedClassName = reader.getAttributeValue(1);
+						//Changed to Zero for simplifierd XML-File
+						testedClassName = reader.getAttributeValue(0);
 						testMethodName = reader.getAttributeValue(3);
 						//TODO: Create UnitTest Object
 					}
@@ -101,7 +99,8 @@ public class StAXParser implements Parser {
 						//add class to list if not already there
 						
 						for (TestRun existingRun : testData.getTestRunList()) {
-							if (testRun == existingRun) {
+							int equal = testRun.compareTo(existingRun);
+							if (equal == 0) {
 								
 								testRun = existingRun;
 								existing = true;
@@ -170,7 +169,8 @@ public class StAXParser implements Parser {
 						
 						//TODO: Class comparison not working yet
 						for (TestedClass existingClass : testData.getTestedClassList()) {
-							if (testedClass.equals(existingClass)) {
+							int equal = existingClass.compareTo(testedClass);
+							if (equal == 0) {
 								System.out.println("drin");
 								testedClass = existingClass;
 								existing = true;
@@ -190,7 +190,8 @@ public class StAXParser implements Parser {
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.err.println(e.getMessage());
+			e.printStackTrace();
+			System.err.println("Error Message: " + e.getMessage());
 		}
 
 	}
