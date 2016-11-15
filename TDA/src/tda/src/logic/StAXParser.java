@@ -9,10 +9,22 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamReader;
 
+import tda.src.model.Model;
+
 public class StAXParser implements Parser {
+	
+	private final Model model;
+	private final TestData testData;
+	
+	public StAXParser(Model model) {
+		this.model = model;
+		testData = model.getTestDataInstance();
+	}
 
 	private String xmlPath = "/afs/swt.wiai.uni-bamberg.de/users/home.swt-041097/XML_Files/testRun_1.xml";
-
+	
+	
+	
 	private List<UnitTest> unitTests = new ArrayList<UnitTest>();
 	private List<TestedClass> testedClasses = new ArrayList<TestedClass>();
 	
@@ -128,7 +140,11 @@ public class StAXParser implements Parser {
 					if ("UnitTest".equals(reader.getLocalName())) {
 						
 						//TODO: Create UnitTest Object
+						UnitTest unitTest = new UnitTest(unitTestID, unitTestName, unitTestExecutionID, testMethodName);
 						
+						testData.getTestedClassList().stream().filter(class -> class.)
+						
+						TestedClass testedClass = new TestedClass(testedClassName);
 					}
 					break;
 				

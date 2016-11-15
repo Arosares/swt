@@ -3,6 +3,8 @@ package tda.src.model;
 import java.util.Set;
 
 import tda.src.logic.Parser;
+import tda.src.logic.StAXParser;
+import tda.src.logic.TestData;
 import tda.src.logic.TestRun;
 
 import java.util.HashSet;
@@ -17,11 +19,18 @@ public class Model extends Observable {
 	 * </pre>
 	 */
 	private Parser parser;
+	final private TestData testData;
+	
+	public TestData getTestDataInstance() {
+		return testData;
+	}
+
 
 	public Model() {
 		super();
 		//initialize program:
-		
+		testData = new TestData();
+		Parser parser = new StAXParser(this);
 	}
 	
 	
