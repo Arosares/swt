@@ -1,0 +1,34 @@
+<TestRun id="5CC1F3BD-D157-4A0E-AB22-492F65AF1C21">
+<Times creation="2016-09-21T13:37:43.7071946+02:00"/>
+<ResultSummary outcome="Failed">
+	<Counters total="4" executed="4" passed="2" failed="2"/>
+</ResultSummary>
+<TestDefinitions>
+	<UnitTest name="CopyCount">
+		<Execution id="8d001da1-6fef-487f-afb3-359c0a3c9be9"/>
+		<TestMethod className="DMPplus.Body.SettingsProvider"/>
+	</UnitTest>
+	<UnitTest name="GetPackagenumberByDocumentationCount">
+		<Execution id="c46f0469-3203-4dd6-832a-0f13486bdc3f"/>
+		<TestMethod className="DMPplus.Abrechnung.AbrechnungProvider"/>
+	</UnitTest>
+	<UnitTest name="AssertAllStringsForEnumsExist">
+		<Execution id="37e1dd8e-555b-4ef7-8370-e56c192c6838"/>
+		<TestMethod className="DMPplus.Head.Helper.EnumStringsForDocumentation"/>
+	</UnitTest>
+	<UnitTest name="AddAndDeleteSettings">
+		<Execution id="acb85e41-6925-47fd-9f04-7fee663343b4"/>
+		<TestMethod className="DMPplus.Body.SettingsProvider"/>
+	</UnitTest>
+</TestDefinitions>
+<Results>
+	<UnitTestResult executionId="8d001da1-6fef-487f-afb3-359c0a3c9be9" outcome="Passed">
+	</UnitTestResult>
+	<UnitTestResult executionId="37e1dd8e-555b-4ef7-8370-e56c192c6838" outcome="Failed">
+	</UnitTestResult>
+	<UnitTestResult executionId="acb85e41-6925-47fd-9f04-7fee663343b4" outcome="Passed">
+	</UnitTestResult>
+	<UnitTestResult executionId="c46f0469-3203-4dd6-832a-0f13486bdc3f" outcome="Failed">
+	</UnitTestResult>
+</Results>
+</TestRun>

@@ -22,7 +22,7 @@ public class StAXParser implements Parser {
 		testData = model.getTestDataInstance();
 	}
 
-	private String xmlPath = "/afs/swt.wiai.uni-bamberg.de/users/home.swt-041097/XML_Files/testRun_1.xml";
+	private String xmlPath = "/home/aro/Studium/swt/testRun_1.xml";
 	
 	private List<UnitTest> unitTests = new ArrayList<UnitTest>();
 	private List<TestedClass> testedClasses = new ArrayList<TestedClass>();

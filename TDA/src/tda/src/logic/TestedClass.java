@@ -58,10 +58,8 @@ public class TestedClass implements Comparable<TestedClass>{
 	@Override
 	public int compareTo(TestedClass o) {
 		// TODO Auto-generated method stub
-		if (this.getClassName() == o.getClassName()) {
-			return 0;
-		}
-		return -1;
+		return className.compareTo(o.className);
+		
 	}
 
 }
