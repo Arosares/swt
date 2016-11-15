@@ -5,21 +5,21 @@ import java.util.ArrayList;
 public class TestData {
 
 	// Lists of already parsed Testruns
-	ArrayList<String> testedClassList = new ArrayList<String>();
+	ArrayList<TestedClass> testedClassList = new ArrayList<TestedClass>();
 
-	ArrayList<String> testRunList = new ArrayList<String>();
+	ArrayList<TestRun> testRunList = new ArrayList<TestRun>();
 
-	ArrayList<String> unitTestList = new ArrayList<String>();
+	ArrayList<UnitTest> unitTestList = new ArrayList<UnitTest>();
 	
-	public ArrayList<String> getTestRunList() {
+	public ArrayList<TestRun> getTestRunList() {
 		return testRunList;
 	}
 	
-	public ArrayList<String> getTestedClassList() {
+	public ArrayList<TestedClass> getTestedClassList() {
 		return testedClassList;
 	}
 
-	public ArrayList<String> getUnitTestList() {
+	public ArrayList<UnitTest> getUnitTestList() {
 		return unitTestList;
 	}
 
@@ -46,18 +46,18 @@ public class TestData {
 	public boolean createInstanceOfTestedClass(String parsedClassName) {
 //		TODO: new Instance currently temporary!
 		TestedClass newTestedClass= new TestedClass(parsedClassName);
-		testedClassList.add(parsedClassName);
+		testedClassList.add(newTestedClass);
 		return true;
 	}
 
 	// Adds a new entry to the TestRunList with the ID of a new Test Run.
 	public void addToTestRunList(String parsedTestRun) {
-		testRunList.add(parsedTestRun);
+//		testRunList.add(parsedTestRun);
 	}
 
 	// Add a newly found Test to the TestList.
 	public void addToTestList(String parsedTest) {
-		testRunList.add(parsedTest);
+//		testRunList.add(parsedTest);
 	}
 
 }

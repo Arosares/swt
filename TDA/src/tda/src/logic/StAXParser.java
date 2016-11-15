@@ -1,5 +1,6 @@
 package tda.src.logic;
 
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -23,19 +24,19 @@ public class StAXParser implements Parser {
 
 	private String xmlPath = "/afs/swt.wiai.uni-bamberg.de/users/home.swt-041097/XML_Files/testRun_1.xml";
 	
-	
-	
 	private List<UnitTest> unitTests = new ArrayList<UnitTest>();
 	private List<TestedClass> testedClasses = new ArrayList<TestedClass>();
 	
 	public void parse() {
+		System.out.println("Starting to parse");
 		boolean waitForStdOut = false;
 		boolean readingStdOut = false;
 		
+		TestRun testRun = null;
 		//UnitTest Data
-		String unitTestID, unitTestName, unitTestExecutionID;
+		String unitTestID = "", unitTestName = "", unitTestExecutionID = "", testMethodName = "";
 		//Tested Class Data
-		String testedClassName, testMethodName;
+		String testedClassName = "";
 		//TestRun Data
 		String runID, runName, runUser;
 		//TestRunTimeD
@@ -66,11 +67,10 @@ public class StAXParser implements Parser {
 			// creating inputFactory
 			XMLInputFactory inputFactory = XMLInputFactory.newInstance();
 			// create InputStream
-			XMLStreamReader reader = inputFactory.createXMLStreamReader(ClassLoader.getSystemResourceAsStream(xmlPath));
+			XMLStreamReader reader = inputFactory.createXMLStreamReader(new FileInputStream(xmlPath));
 			
 			while (reader.hasNext()) {
 				int event = reader.next();
-				
 				switch (event) {
 				case XMLStreamConstants.START_ELEMENT:
 					if ("UnitTest".equals(reader.getLocalName())) {
@@ -94,6 +94,25 @@ public class StAXParser implements Parser {
 						runID = reader.getAttributeValue(1);
 						runName = reader.getAttributeValue(2);
 						runUser = reader.getAttributeValue(3);
+						
+						testRun = new TestRun(runID, runName, runUser);
+						
+						boolean existing = false;
+						//add class to list if not already there
+						
+						for (TestRun existingRun : testData.getTestRunList()) {
+							if (testRun == existingRun) {
+								
+								testRun = existingRun;
+								existing = true;
+								//change to correct Exception
+								throw new Exception("TestRun already loaded");
+							}
+						}
+						
+						if (!existing) {
+							testData.getTestRunList().add(testRun);
+						}
 
 					}
 					if ("Times".equals(reader.getLocalName())) {
@@ -140,11 +159,28 @@ public class StAXParser implements Parser {
 					if ("UnitTest".equals(reader.getLocalName())) {
 						
 						//TODO: Create UnitTest Object
-						UnitTest unitTest = new UnitTest(unitTestID, unitTestName, unitTestExecutionID, testMethodName);
+						UnitTest unitTest = new UnitTest(testRun, unitTestID, unitTestName, unitTestExecutionID, testMethodName);
+						testData.getUnitTestList().add(unitTest);
 						
-						testData.getTestedClassList().stream().filter(class -> class.)
+						
 						
 						TestedClass testedClass = new TestedClass(testedClassName);
+						boolean existing = false;
+						//add class to list if not already there
+						
+						//TODO: Class comparison not working yet
+						for (TestedClass existingClass : testData.getTestedClassList()) {
+							if (testedClass.equals(existingClass)) {
+								System.out.println("drin");
+								testedClass = existingClass;
+								existing = true;
+								break;
+							}
+						}
+						
+						if (!existing) {
+							testData.getTestedClassList().add(testedClass);
+						}
 					}
 					break;
 				
@@ -154,10 +190,9 @@ public class StAXParser implements Parser {
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
+			System.err.println(e.getMessage());
 		}
 
-		// TODO implement this operation
-		throw new UnsupportedOperationException("not implemented");
 	}
 
 	@Override

@@ -6,6 +6,8 @@ import tda.src.logic.Parser;
 import tda.src.logic.StAXParser;
 import tda.src.logic.TestData;
 import tda.src.logic.TestRun;
+import tda.src.logic.TestedClass;
+import tda.src.logic.UnitTest;
 
 import java.util.HashSet;
 import java.util.Observable;
@@ -31,6 +33,14 @@ public class Model extends Observable {
 		//initialize program:
 		testData = new TestData();
 		Parser parser = new StAXParser(this);
+		parser.parse();
+		System.out.println(testData.getTestedClassList().size());
+
+		parser.parse();
+		System.out.println(testData.getTestedClassList().size());
+		for (TestedClass testedClass : testData.getTestedClassList()) {
+			System.out.println(testedClass);
+		}
 	}
 	
 	

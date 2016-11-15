@@ -13,6 +13,22 @@ public class UnitTest {
 	 */
 	private Set<TestedClass> testedClass;
 
+	String unitTestID;
+	String unitTestName;
+	String unitTestExecutionID;
+	String testMethodName;
+	TestRun testRun;
+
+	public UnitTest(TestRun testRun, String unitTestID, String unitTestName, String unitTestExecutionID,
+			String testMethodName) {
+		// TODO Auto-generated constructor stub
+		this.testRun = testRun;
+		this.unitTestID = unitTestID;
+		this.unitTestName = unitTestName;
+		this.unitTestExecutionID = unitTestExecutionID;
+		this.testMethodName = testMethodName;
+	}
+
 	public Set<TestedClass> getTestedClass() {
 		if (this.testedClass == null) {
 			this.testedClass = new HashSet<TestedClass>();
@@ -81,5 +97,6 @@ public class UnitTest {
 	public boolean getOutcome() {
 		return this.outcome;
 	}
-
+	
+	
 }
