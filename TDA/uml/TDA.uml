@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:UMLLabProfile="http:///schemas/UMLLabProfile/NS/0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http:///schemas/UMLLabProfile/NS/0 pathmap://UMLLAB_PROFILES/UMLLab.profile.uml#UMLLabProfile-Annotation_2-UMLLabProfile">
+  <uml:Model xmi:id="_lI2SQKXSEeaFu4ufEpq50A" name="TDA">
+    <eAnnotations xmi:id="_lRq3EKXSEeaFu4ufEpq50A" source="http://ns.yatta.de/umllab">
+      <contents xmi:type="ecore:EAnnotation" xmi:id="_lRreIKXSEeaFu4ufEpq50A" source="codegen">
+        <details xmi:id="_lRreIaXSEeaFu4ufEpq50A" key="codegenDirectory" value="/TDA/src"/>
+        <details xmi:id="_0lAeQKXSEeaFu4ufEpq50A" key="AssociatedSourceCode" value="/TDA/src/tda/src/logic/TestRun.java;1383514596/1;/TDA/src/tda/src/controller/Controller.java;3550694327/1;/TDA/src/tda/src/logic/Analyzer.java;1281935213/1;/TDA/src/tda/src/logic/AprioriAnalyzer.java;3453081459/1;/TDA/src/tda/src/logic/Parser.java;3592852581/1;/TDA/src/tda/src/logic/TestedClass.java;1453817471/1;/TDA/src/tda/src/model/Model.java;51604481/1;/TDA/src/tda/src/view/View.java;712972811/1;"/>
+      </contents>
+      <contents xmi:type="ecore:EAnnotation" xmi:id="_2rihYKXcEea_4JiChsX4sw" source="preferences">
+        <contents xmi:type="ecore:EAnnotation" xmi:id="_2rjIcKXcEea_4JiChsX4sw" source="com.yattasolutions.codegen.reverse">
+          <details xmi:id="_2rjIcaXcEea_4JiChsX4sw" key="com.yattasolutions.codegen.reverse.roundtrip.ReverseEngineerNewFiles" value="true"/>
+          <details xmi:id="_2rjIcqXcEea_4JiChsX4sw" key="com.yattasolutions.codegen.reverse.roundtrip.ReverseEngineerChangedFiles" value="true"/>
+          <details xmi:id="_2rjIc6XcEea_4JiChsX4sw" key="com.yattasolutions.codegen.reverse.roundtrip.RemoveDeletedFiles" value="true"/>
+        </contents>
+      </contents>
+    </eAnnotations>
+    <elementImport xmi:id="_ldY-4KXSEeaFu4ufEpq50A">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+    </elementImport>
+    <elementImport xmi:id="_ldY-4aXSEeaFu4ufEpq50A">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#byte"/>
+    </elementImport>
+    <elementImport xmi:id="_ldY-4qXSEeaFu4ufEpq50A">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#char"/>
+    </elementImport>
+    <elementImport xmi:id="_ldY-46XSEeaFu4ufEpq50A">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#double"/>
+    </elementImport>
+    <elementImport xmi:id="_ldY-5KXSEeaFu4ufEpq50A">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#float"/>
+    </elementImport>
+    <elementImport xmi:id="_ldZl8KXSEeaFu4ufEpq50A">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+    </elementImport>
+    <elementImport xmi:id="_ldZl8aXSEeaFu4ufEpq50A">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#long"/>
+    </elementImport>
+    <elementImport xmi:id="_ldZl8qXSEeaFu4ufEpq50A">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#short"/>
+    </elementImport>
+    <elementImport xmi:id="_ldZl86XSEeaFu4ufEpq50A">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </elementImport>
+    <packagedElement xmi:type="uml:Package" xmi:id="_lc0-MKXSEeaFu4ufEpq50A" name="tda">
+      <packagedElement xmi:type="uml:Package" xmi:id="_lc1lQKXSEeaFu4ufEpq50A" name="src">
+        <packagedElement xmi:type="uml:Package" xmi:id="_lc2MUqXSEeaFu4ufEpq50A" name="model">
+          <packagedElement xmi:type="uml:Class" xmi:id="_lebgsKXSEeaFu4ufEpq50A" name="Model">
+            <ownedAttribute xmi:id="_lft6IKXSEeaFu4ufEpq50A" name="parser" type="_leDGMKXSEeaFu4ufEpq50A" association="_lfvIQKXSEeaFu4ufEpq50A"/>
+            <ownedAttribute xmi:id="_lfvIQaXSEeaFu4ufEpq50A" name="testRun" type="_leM3MKXSEeaFu4ufEpq50A" association="_lfwWYKXSEeaFu4ufEpq50A">
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lfvIQqXSEeaFu4ufEpq50A"/>
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lfvvUKXSEeaFu4ufEpq50A" value="*"/>
+            </ownedAttribute>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_lfvIQKXSEeaFu4ufEpq50A" name="" memberEnd="_lfuhMKXSEeaFu4ufEpq50A _lft6IKXSEeaFu4ufEpq50A">
+            <ownedEnd xmi:id="_lfuhMKXSEeaFu4ufEpq50A" name="model" type="_lebgsKXSEeaFu4ufEpq50A" association="_lfvIQKXSEeaFu4ufEpq50A"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_lfwWYKXSEeaFu4ufEpq50A" name="" memberEnd="_lfvvUaXSEeaFu4ufEpq50A _lfvIQaXSEeaFu4ufEpq50A">
+            <ownedEnd xmi:id="_lfvvUaXSEeaFu4ufEpq50A" name="model" type="_lebgsKXSEeaFu4ufEpq50A" association="_lfwWYKXSEeaFu4ufEpq50A"/>
+          </packagedElement>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Package" xmi:id="_lc2zYKXSEeaFu4ufEpq50A" name="view">
+          <packagedElement xmi:type="uml:Class" xmi:id="_lefLEKXSEeaFu4ufEpq50A" name="View">
+            <ownedAttribute xmi:id="_lfw9cKXSEeaFu4ufEpq50A" name="model" type="_lebgsKXSEeaFu4ufEpq50A" association="_lfxkgKXSEeaFu4ufEpq50A"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_lfxkgKXSEeaFu4ufEpq50A" name="" memberEnd="_lfw9caXSEeaFu4ufEpq50A _lfw9cKXSEeaFu4ufEpq50A">
+            <ownedEnd xmi:id="_lfw9caXSEeaFu4ufEpq50A" name="view" type="_lefLEKXSEeaFu4ufEpq50A" association="_lfxkgKXSEeaFu4ufEpq50A"/>
+          </packagedElement>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Package" xmi:id="_lc4okKXSEeaFu4ufEpq50A" name="controller">
+          <packagedElement xmi:type="uml:Class" xmi:id="_ldUGYKXSEeaFu4ufEpq50A" name="Controller">
+            <ownedAttribute xmi:id="_lfgewKXSEeaFu4ufEpq50A" name="model" type="_lebgsKXSEeaFu4ufEpq50A" association="_lf6HYKXSEeaFu4ufEpq50A"/>
+            <ownedAttribute xmi:id="_lfhF0KXSEeaFu4ufEpq50A" name="view" type="_lefLEKXSEeaFu4ufEpq50A" association="_lfhs4aXSEeaFu4ufEpq50A"/>
+            <ownedOperation xmi:id="_ldaNAKXSEeaFu4ufEpq50A" name="showView"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_lfhs4aXSEeaFu4ufEpq50A" name="" memberEnd="_lfhs4KXSEeaFu4ufEpq50A _lfhF0KXSEeaFu4ufEpq50A">
+            <ownedEnd xmi:id="_lfhs4KXSEeaFu4ufEpq50A" name="controller" type="_ldUGYKXSEeaFu4ufEpq50A" association="_lfhs4aXSEeaFu4ufEpq50A"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_lf6HYKXSEeaFu4ufEpq50A" name="" memberEnd="_lfgewKXSEeaFu4ufEpq50A _lf6ucKXSEeaFu4ufEpq50A">
+            <ownedEnd xmi:id="_lf6ucKXSEeaFu4ufEpq50A" name="" type="_ldUGYKXSEeaFu4ufEpq50A" association="_lf6HYKXSEeaFu4ufEpq50A"/>
+          </packagedElement>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Package" xmi:id="_lc6dwKXSEeaFu4ufEpq50A" name="logic">
+          <packagedElement xmi:type="uml:Interface" xmi:id="_ld5VMKXSEeaFu4ufEpq50A" name="Analyzer">
+            <ownedAttribute xmi:id="_ld6jUKXSEeaFu4ufEpq50A" name="testRun" type="_leM3MKXSEeaFu4ufEpq50A" association="_lflXQKXSEeaFu4ufEpq50A">
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ld6jUaXSEeaFu4ufEpq50A"/>
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ld7KYKXSEeaFu4ufEpq50A" value="*"/>
+            </ownedAttribute>
+            <ownedOperation xmi:id="_ld7xcKXSEeaFu4ufEpq50A" name="analyze"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_ld9moKXSEeaFu4ufEpq50A" name="AprioriAnalyzer">
+            <interfaceRealization xmi:id="_lfX74KXSEeaFu4ufEpq50A" client="_ld9moKXSEeaFu4ufEpq50A" supplier="_ld5VMKXSEeaFu4ufEpq50A" contract="_ld5VMKXSEeaFu4ufEpq50A"/>
+            <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_lfzZsKXSEeaFu4ufEpq50A" name="analyze" specification="_ld-NsKXSEeaFu4ufEpq50A">
+              <language>java</language>
+              <body>throw new UnsupportedOperationException(&quot;not implemented&quot;);
+	</body>
+            </ownedBehavior>
+            <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_lf0AwKXSEeaFu4ufEpq50A" name="getTestRun" specification="_ld_b0qXSEeaFu4ufEpq50A">
+              <ownedParameter xmi:id="_lf0AwaXSEeaFu4ufEpq50A" type="_leM3MKXSEeaFu4ufEpq50A" direction="return">
+                <name xsi:nil="true"/>
+                <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lf0AwqXSEeaFu4ufEpq50A" value="*"/>
+              </ownedParameter>
+              <language>java</language>
+              <body>return null;
+	</body>
+            </ownedBehavior>
+            <ownedOperation xmi:id="_ld-NsKXSEeaFu4ufEpq50A" name="analyze" method="_lfzZsKXSEeaFu4ufEpq50A"/>
+            <ownedOperation xmi:id="_ld_b0qXSEeaFu4ufEpq50A" name="getTestRun" method="_lf0AwKXSEeaFu4ufEpq50A">
+              <ownedParameter xmi:id="_leAC4KXSEeaFu4ufEpq50A" type="_leM3MKXSEeaFu4ufEpq50A" direction="return">
+                <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_leAC4aXSEeaFu4ufEpq50A" value="*"/>
+              </ownedParameter>
+            </ownedOperation>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Interface" xmi:id="_leDGMKXSEeaFu4ufEpq50A" name="Parser">
+            <ownedAttribute xmi:id="_leKa8KXSEeaFu4ufEpq50A" name="testRun" type="_leM3MKXSEeaFu4ufEpq50A" association="_lfl-UaXSEeaFu4ufEpq50A">
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_leLCAKXSEeaFu4ufEpq50A"/>
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_leLCAaXSEeaFu4ufEpq50A" value="*"/>
+            </ownedAttribute>
+            <ownedOperation xmi:id="_leLpEKXSEeaFu4ufEpq50A" name="parse">
+              <ownedComment xmi:id="_Hgzs4KdzEea2N_fk3ceYeQ">
+                <body> Parses a given XML File in our Data-Structure.&#xD;
+    *  Mainly to {@code UnitTest.java} format</body>
+              </ownedComment>
+            </ownedOperation>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_leM3MKXSEeaFu4ufEpq50A" name="TestRun">
+            <ownedAttribute xmi:id="_lfjiEKXSEeaFu4ufEpq50A" name="testedClasses" type="_leVaEKXSEeaFu4ufEpq50A" association="_CxJdwKXcEeacQKrU3zHO5g"/>
+            <ownedAttribute xmi:id="_lfkJIKXSEeaFu4ufEpq50A" name="resultSummary" type="_aliuwKXWEear1O-8CgUT7g" association="_CxKE0KXcEeacQKrU3zHO5g"/>
+            <ownedAttribute xmi:id="_lfkJIaXSEeaFu4ufEpq50A" name="test" type="_lfnzgKXSEeaFu4ufEpq50A" association="_lfpBoaXSEeaFu4ufEpq50A">
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lfpBoKXSEeaFu4ufEpq50A"/>
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lfkJIqXSEeaFu4ufEpq50A" value="*"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_lfkwMKXSEeaFu4ufEpq50A" name="analyzer" type="_ld5VMKXSEeaFu4ufEpq50A" association="_lflXQKXSEeaFu4ufEpq50A"/>
+            <ownedAttribute xmi:id="_lfl-UKXSEeaFu4ufEpq50A" name="parser" type="_leDGMKXSEeaFu4ufEpq50A" association="_lfl-UaXSEeaFu4ufEpq50A"/>
+            <ownedAttribute xmi:id="_QwDXsKXTEeaFu4ufEpq50A" name="testedClass" type="_leVaEKXSEeaFu4ufEpq50A" association="_QwBigKXTEeaFu4ufEpq50A">
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_QwDXsaXTEeaFu4ufEpq50A"/>
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_QwDXsqXTEeaFu4ufEpq50A" value="*"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_DXznY6XXEear1O-8CgUT7g" name="counters" type="_aliuwKXWEear1O-8CgUT7g" association="_DXzAUKXXEear1O-8CgUT7g">
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_DX0OcKXXEear1O-8CgUT7g"/>
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_DX0OcaXXEear1O-8CgUT7g" value="*"/>
+            </ownedAttribute>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_leVaEKXSEeaFu4ufEpq50A" name="TestedClass">
+            <ownedAttribute xmi:id="_lfmlYKXSEeaFu4ufEpq50A" name="failurePercentage"/>
+            <ownedAttribute xmi:id="_lfnMcKXSEeaFu4ufEpq50A" name="tests" type="_lfnzgKXSEeaFu4ufEpq50A" association="_lfpBoaXSEeaFu4ufEpq50A"/>
+            <ownedAttribute xmi:id="_QwCJkKXTEeaFu4ufEpq50A" name="testRun" type="_leM3MKXSEeaFu4ufEpq50A" association="_QwBigKXTEeaFu4ufEpq50A">
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_QwCwoKXTEeaFu4ufEpq50A"/>
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_QwCwoaXTEeaFu4ufEpq50A" value="*"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_MK2cQqXVEear1O-8CgUT7g" name="test" type="_lfnzgKXSEeaFu4ufEpq50A" association="_MK0nEKXVEear1O-8CgUT7g">
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_MK2cQ6XVEear1O-8CgUT7g"/>
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_MK3DUKXVEear1O-8CgUT7g" value="*"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_m8suIKXVEear1O-8CgUT7g" name="className" visibility="public">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+            </ownedAttribute>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_leXPQKXSEeaFu4ufEpq50A" name="StAXParser">
+            <interfaceRealization xmi:id="_lfbmQKXSEeaFu4ufEpq50A" client="_leXPQKXSEeaFu4ufEpq50A" supplier="_leDGMKXSEeaFu4ufEpq50A" contract="_leDGMKXSEeaFu4ufEpq50A"/>
+            <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_lf0Aw6XSEeaFu4ufEpq50A" name="getTestRun" specification="_leYdYaXSEeaFu4ufEpq50A">
+              <ownedParameter xmi:id="_lf0AxKXSEeaFu4ufEpq50A" type="_leM3MKXSEeaFu4ufEpq50A" direction="return">
+                <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lf0AxaXSEeaFu4ufEpq50A" value="*"/>
+              </ownedParameter>
+              <language>java</language>
+              <body>return null;
+</body>
+            </ownedBehavior>
+            <ownedOperation xmi:id="_leYdYKXSEeaFu4ufEpq50A" name="parse"/>
+            <ownedOperation xmi:id="_leYdYaXSEeaFu4ufEpq50A" name="getTestRun" method="_lf0Aw6XSEeaFu4ufEpq50A">
+              <ownedParameter xmi:id="_leZEcKXSEeaFu4ufEpq50A" type="_leM3MKXSEeaFu4ufEpq50A" direction="return">
+                <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_leZEcaXSEeaFu4ufEpq50A" value="*"/>
+              </ownedParameter>
+            </ownedOperation>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_lflXQKXSEeaFu4ufEpq50A" name="" memberEnd="_lfkwMKXSEeaFu4ufEpq50A _ld6jUKXSEeaFu4ufEpq50A"/>
+          <packagedElement xmi:type="uml:Association" xmi:id="_lfl-UaXSEeaFu4ufEpq50A" name="" memberEnd="_lfl-UKXSEeaFu4ufEpq50A _leKa8KXSEeaFu4ufEpq50A"/>
+          <packagedElement xmi:type="uml:Class" xmi:id="_lfnzgKXSEeaFu4ufEpq50A" name="Test">
+            <ownedAttribute xmi:id="_0wy3gKXSEeaFu4ufEpq50A" name="testRun" type="_leM3MKXSEeaFu4ufEpq50A" association="_lfpBoaXSEeaFu4ufEpq50A"/>
+            <ownedAttribute xmi:id="_2lPFEKXcEea_4JiChsX4sw" name="testedClass" type="_leVaEKXSEeaFu4ufEpq50A" association="_MK0nEKXVEear1O-8CgUT7g">
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_2lPsIKXcEea_4JiChsX4sw"/>
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_2lPsIaXcEea_4JiChsX4sw" value="*"/>
+            </ownedAttribute>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_lfpBoaXSEeaFu4ufEpq50A" name="" memberEnd="_lfnMcKXSEeaFu4ufEpq50A _lfkJIaXSEeaFu4ufEpq50A _0wy3gKXSEeaFu4ufEpq50A"/>
+          <packagedElement xmi:type="uml:Association" xmi:id="_QwBigKXTEeaFu4ufEpq50A" name="" memberEnd="_QwCJkKXTEeaFu4ufEpq50A _QwDXsKXTEeaFu4ufEpq50A"/>
+          <packagedElement xmi:type="uml:Association" xmi:id="_MK0nEKXVEear1O-8CgUT7g" name="" memberEnd="_MK1OIKXVEear1O-8CgUT7g _MK2cQqXVEear1O-8CgUT7g _2lPFEKXcEea_4JiChsX4sw"/>
+          <packagedElement xmi:type="uml:Association" xmi:id="_DXzAUKXXEear1O-8CgUT7g" name="" memberEnd="_DXznYKXXEear1O-8CgUT7g _DXznY6XXEear1O-8CgUT7g"/>
+          <packagedElement xmi:type="uml:Class" xmi:id="_Ix1SAKXVEear1O-8CgUT7g" name="UnitTest">
+            <ownedAttribute xmi:id="_MK1OIKXVEear1O-8CgUT7g" name="testedClass" type="_leVaEKXSEeaFu4ufEpq50A" association="_MK0nEKXVEear1O-8CgUT7g">
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_MK2cQKXVEear1O-8CgUT7g"/>
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_MK2cQaXVEear1O-8CgUT7g" value="*"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_NDpsgaXVEear1O-8CgUT7g" name="test" type="_Ix1SAKXVEear1O-8CgUT7g" association="_NDpsgKXVEear1O-8CgUT7g">
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_NDqTkKXVEear1O-8CgUT7g"/>
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NDqTkaXVEear1O-8CgUT7g" value="*"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_NDq6oKXVEear1O-8CgUT7g" name="test1" type="_Ix1SAKXVEear1O-8CgUT7g" association="_NDpsgKXVEear1O-8CgUT7g">
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_NDq6oaXVEear1O-8CgUT7g"/>
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NDq6oqXVEear1O-8CgUT7g" value="*"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_T_NwcKXVEear1O-8CgUT7g" name="testName" visibility="public">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_Y7SB0KXVEear1O-8CgUT7g" name="executionID" visibility="public">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_ixX9MKXVEear1O-8CgUT7g" name="outcome" visibility="public">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+            </ownedAttribute>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_aliuwKXWEear1O-8CgUT7g" name="Counters">
+            <ownedAttribute xmi:id="_DXznYKXXEear1O-8CgUT7g" name="testRun" type="_leM3MKXSEeaFu4ufEpq50A" association="_DXzAUKXXEear1O-8CgUT7g">
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_DXznYaXXEear1O-8CgUT7g"/>
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_DXznYqXXEear1O-8CgUT7g" value="*"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_U_WlgKXaEeacQKrU3zHO5g" name="resultType" visibility="public">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+            </ownedAttribute>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_CxJdwKXcEeacQKrU3zHO5g" name="" memberEnd="_lfjiEKXSEeaFu4ufEpq50A _CxJdwaXcEeacQKrU3zHO5g">
+            <ownedEnd xmi:id="_CxJdwaXcEeacQKrU3zHO5g" name="" type="_leM3MKXSEeaFu4ufEpq50A" association="_CxJdwKXcEeacQKrU3zHO5g"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_CxKE0KXcEeacQKrU3zHO5g" name="" memberEnd="_lfkJIKXSEeaFu4ufEpq50A _CxKE0aXcEeacQKrU3zHO5g">
+            <ownedEnd xmi:id="_CxKE0aXcEeacQKrU3zHO5g" name="" type="_leM3MKXSEeaFu4ufEpq50A" association="_CxKE0KXcEeacQKrU3zHO5g"/>
+          </packagedElement>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Association" xmi:id="_NDpsgKXVEear1O-8CgUT7g" name="" memberEnd="_NDpsgaXVEear1O-8CgUT7g _NDq6oKXVEear1O-8CgUT7g"/>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_lc2MUKXSEeaFu4ufEpq50A" name="java">
+      <packagedElement xmi:type="uml:Package" xmi:id="_lc2MUaXSEeaFu4ufEpq50A" name="util">
+        <packagedElement xmi:type="uml:Interface" xmi:id="_lfTqcKXSEeaFu4ufEpq50A" name="Set"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_lfU4kKXSEeaFu4ufEpq50A" name="HashSet"/>
+      </packagedElement>
+    </packagedElement>
+    <profileApplication xmi:id="_lRsFMKXSEeaFu4ufEpq50A">
+      <eAnnotations xmi:id="_lRssQKXSEeaFu4ufEpq50A" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://UMLLAB_PROFILES/UMLLab.profile.uml#UMLLabProfile-Annotation_2-UMLLabProfile"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UMLLAB_PROFILES/UMLLab.profile.uml#UMLLabProfile"/>
+    </profileApplication>
+  </uml:Model>
+  <UMLLabProfile:TargetLanguage xmi:id="_lRssQaXSEeaFu4ufEpq50A" base_Package="_lI2SQKXSEeaFu4ufEpq50A">
+    <languageName>java</languageName>
+  </UMLLabProfile:TargetLanguage>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_ld-0wKXSEeaFu4ufEpq50A" base_Element="_ld-NsKXSEeaFu4ufEpq50A"/>
+  <UMLLabProfile:Annotations xmi:id="_ld_b0KXSEeaFu4ufEpq50A" base_Element="_ld-NsKXSEeaFu4ufEpq50A">
+    <annotations xmi:id="_ld_b0aXSEeaFu4ufEpq50A" name="Override"/>
+  </UMLLabProfile:Annotations>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_leAp8KXSEeaFu4ufEpq50A" base_Element="_ld_b0qXSEeaFu4ufEpq50A"/>
+  <UMLLabProfile:Annotations xmi:id="_leBRAKXSEeaFu4ufEpq50A" base_Element="_ld_b0qXSEeaFu4ufEpq50A">
+    <annotations xmi:id="_leBRAaXSEeaFu4ufEpq50A" name="Override"/>
+  </UMLLabProfile:Annotations>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_leZrgKXSEeaFu4ufEpq50A" base_Element="_leYdYaXSEeaFu4ufEpq50A"/>
+  <UMLLabProfile:Annotations xmi:id="_leaSkKXSEeaFu4ufEpq50A" base_Element="_leYdYaXSEeaFu4ufEpq50A">
+    <annotations xmi:id="_leaSkaXSEeaFu4ufEpq50A" name="Override"/>
+  </UMLLabProfile:Annotations>
+  <UMLLabProfile:Reference xmi:id="_lfURgKXSEeaFu4ufEpq50A" base_Element="_lfTqcKXSEeaFu4ufEpq50A"/>
+  <UMLLabProfile:Reference xmi:id="_lfWGsKXSEeaFu4ufEpq50A" base_Element="_lfU4kKXSEeaFu4ufEpq50A"/>
+  <UMLLabProfile:Reference xmi:id="_lfoakKXSEeaFu4ufEpq50A" base_Element="_lfnzgKXSEeaFu4ufEpq50A"/>
+</xmi:XMI>

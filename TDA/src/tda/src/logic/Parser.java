@@ -11,6 +11,10 @@ public interface Parser {
     */
    public Set<TestRun> getTestRun();
    
-   public void parse();
+   /**
+    *  Parses a given XML File in our Data-Structure.
+    *  Mainly to {@code UnitTest.java} format
+    */
+	public void parse();
 
 }

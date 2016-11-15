@@ -1,4 +1,5 @@
 package tda.src.view;
+import tda.src.controller.Controller;
 import tda.src.model.Model;
 
 public class View {
@@ -10,6 +11,13 @@ public class View {
  * </pre>
  */
 private Model model;
+private Controller controller;
+
+public View(Model model, Controller controller) {
+	super();
+	this.model = model;
+	this.controller = controller;
+}
 
 public void setModel(Model value) {
    this.model = value;
