@@ -13,6 +13,12 @@ public class TestedClass {
 	 */
 	private String className;
 
+	
+	public TestedClass(String className) {
+		super();
+		this.className = className;
+	}
+
 	/*
 	 * classLog:
 	 * 

@@ -40,10 +40,14 @@ public class TestData {
 	public boolean checkTestListContent(String parsedTest) {
 		return unitTestList.contains(parsedTest);
 	}
-
-	// Adds a new entry to the List with the name of a newly parsed Class.
-	public void addToTestedClassList(String parsedClassName) {
+	
+	
+//	Adds a new entry to the List with the name of a newly parsed Class.
+	public boolean createInstanceOfTestedClass(String parsedClassName) {
+//		TODO: new Instance currently temporary!
+		TestedClass newTestedClass= new TestedClass(parsedClassName);
 		testedClassList.add(parsedClassName);
+		return true;
 	}
 
 	// Adds a new entry to the TestRunList with the ID of a new Test Run.

@@ -7,7 +7,7 @@ public class UnitTest {
 	/**
 	 * <pre>
 	 *           0..*     0..*
-	 * Test ------------------------- TestedClass
+	 * Test -------------------------  TestedClass
 	 *           test        &lt;       testedClass
 	 * </pre>
 	 */
