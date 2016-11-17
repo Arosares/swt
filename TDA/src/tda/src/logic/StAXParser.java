@@ -21,7 +21,7 @@ public class StAXParser implements Parser {
 	
 	public StAXParser(Model model) {
 		this.model = model;
-		testData = model.getTestDataInstance();
+		testData = TestData.getInstance();
 	}
 
 	public void parse(String path) {

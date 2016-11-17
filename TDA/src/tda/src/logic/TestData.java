@@ -5,12 +5,26 @@ import java.util.ArrayList;
 public class TestData {
 
 	// Lists of already parsed Testruns
-	ArrayList<TestedClass> testedClassList = new ArrayList<TestedClass>();
-
-	ArrayList<TestRun> testRunList = new ArrayList<TestRun>();
-
-	ArrayList<UnitTest> unitTestList = new ArrayList<UnitTest>();
 	
+	private static TestData testDataInstance;
+	
+	private ArrayList<TestedClass> testedClassList = new ArrayList<>();
+
+	private ArrayList<TestRun> testRunList = new ArrayList<>();
+
+	private ArrayList<UnitTest> unitTestList = new ArrayList<>();
+	
+	private TestData() {
+	}
+	
+	public static TestData getInstance () {
+	    if (TestData.testDataInstance == null) {
+	    	TestData.testDataInstance  = new TestData ();
+	    }
+	    return TestData.testDataInstance;
+	  }
+
+	// Lists of already parsed Testruns
 	public ArrayList<TestRun> getTestRunList() {
 		return testRunList;
 	}
@@ -40,24 +54,13 @@ public class TestData {
 	public boolean checkTestListContent(String parsedTest) {
 		return unitTestList.contains(parsedTest);
 	}
-	
-	
-//	Adds a new entry to the List with the name of a newly parsed Class.
+
+	// Adds a new entry to the List with the name of a newly parsed Class.
 	public boolean createInstanceOfTestedClass(String parsedClassName) {
 //		TODO: new Instance currently temporary!
 		TestedClass newTestedClass= new TestedClass(parsedClassName);
 		testedClassList.add(newTestedClass);
+
 		return true;
 	}
-
-	// Adds a new entry to the TestRunList with the ID of a new Test Run.
-	public void addToTestRunList(String parsedTestRun) {
-//		testRunList.add(parsedTestRun);
-	}
-
-	// Add a newly found Test to the TestList.
-	public void addToTestList(String parsedTest) {
-//		testRunList.add(parsedTest);
-	}
-
 }

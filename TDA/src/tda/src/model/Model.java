@@ -25,15 +25,10 @@ public class Model extends Observable {
 	private Parser parser;
 	final private TestData testData;
 	
-	public TestData getTestDataInstance() {
-		return testData;
-	}
-
-
 	public Model() {
 		super();
 		//initialize program:
-		testData = new TestData();
+		testData = TestData.getInstance();
 		Parser parser = new StAXParser(this);
 		
 		String path = "/afs/swt.wiai.uni-bamberg.de/users/home.swt-041097/XML_Files/testRun_1.xml";
