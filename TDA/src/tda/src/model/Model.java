@@ -10,7 +10,6 @@ import tda.src.logic.Parser;
 import tda.src.logic.StAXParser;
 import tda.src.logic.TestData;
 import tda.src.logic.TestRun;
-import tda.src.logic.TestedClass;
 
 public class Model extends Observable {
 	/**
@@ -24,24 +23,12 @@ public class Model extends Observable {
 	final private TestData testData;
 	final private Controller controller;
 
-	public TestData getTestDataInstance() {
-		return testData;
-	}
-
 	public Model(Controller controller) {
 		this.controller = controller;
 
 		// initialize program:
-		testData = new TestData();
-		Parser parser = new StAXParser(this);
-		parser.parse();
-		System.out.println(testData.getTestedClassList().size());
-
-		parser.parse();
-		System.out.println(testData.getTestedClassList().size());
-		for (TestedClass testedClass : testData.getTestedClassList()) {
-			System.out.println(testedClass);
-		}
+		testData = TestData.getInstance();
+		parser = new StAXParser();
 	}
 
 	public void setParser(Parser value) {
