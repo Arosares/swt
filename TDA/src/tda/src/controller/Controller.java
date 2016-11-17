@@ -1,31 +1,26 @@
 package tda.src.controller;
 
-import java.util.Set;
-
 import tda.src.model.Model;
 import tda.src.view.View;
 
-import java.util.HashSet;
-
 public class Controller {
-	
 
 	final private Model model;
 	final private View view;
 
-	
-
 	public Controller() {
 		this.model = new Model();
 		this.view = new View(this.model, this);
-		
+
 	}
 
-
-
-	public void showView() {
+	public void start() {
 		// TODO implement this operation
-		throw new UnsupportedOperationException("not implemented");
+		this.view.show();
+	}
+
+	public void exitMain() {
+		this.view.exitAlert();
 	}
 
 }
