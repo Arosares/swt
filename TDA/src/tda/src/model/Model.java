@@ -8,6 +8,7 @@ import tda.src.logic.TestData;
 import tda.src.logic.TestRun;
 import tda.src.logic.TestedClass;
 import tda.src.logic.UnitTest;
+import tda.src.logic.UnitTestsToTestRunMapper;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -33,13 +34,7 @@ public class Model extends Observable {
 		
 		String path = "/afs/swt.wiai.uni-bamberg.de/users/home.swt-041097/XML_Files/testRun_1.xml";
 		parser.parse(path);
-		System.out.println(testData.getTestedClassList().size());
-
-		parser.parse(path);
-		System.out.println(testData.getTestedClassList().size());
-		for (TestedClass testedClass : testData.getTestedClassList()) {
-			System.out.println(testedClass);
-		}
+		
 	}
 	
 	
