@@ -2,6 +2,7 @@ package tda.src.logic;
 
 import java.util.Set;
 import java.util.HashSet;
+import java.util.List;
 
 public class TestRun {
 	/**
@@ -11,7 +12,7 @@ public class TestRun {
 	 *           testRun        &gt;       testedClass
 	 * </pre>
 	 */
-	private Set<TestedClass> testedClass;
+	private List<TestedClass> testedClassList;
 	private String runID, runName, runUser;
 
 	public String getRunID() {
@@ -25,12 +26,6 @@ public class TestRun {
 		this.runUser = runUser;
 	}
 
-	public Set<TestedClass> getTestedClass() {
-		if (this.testedClass == null) {
-			this.testedClass = new HashSet<TestedClass>();
-		}
-		return this.testedClass;
-	}
 
 	/**
 	 * <pre>

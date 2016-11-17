@@ -29,7 +29,7 @@ public class Model extends Observable {
 		super();
 		//initialize program:
 		testData = TestData.getInstance();
-		Parser parser = new StAXParser(this);
+		Parser parser = new StAXParser();
 		
 		String path = "/afs/swt.wiai.uni-bamberg.de/users/home.swt-041097/XML_Files/testRun_1.xml";
 		parser.parse(path);

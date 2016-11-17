@@ -4,20 +4,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class UnitTest {
-	/**
-	 * <pre>
-	 *           0..*     0..*
-	 * Test -------------------------  TestedClass
-	 *           test        &lt;       testedClass
-	 * </pre>
-	 */
-	private Set<TestedClass> testedClass;
 
 	String unitTestID;
 	String unitTestName;
 	String unitTestExecutionID;
 	String testMethodName;
 	TestRun testRun;
+	TestedClass testedClass;
 
 	public UnitTest(TestRun testRun, String unitTestID, String unitTestName, String unitTestExecutionID,
 			String testMethodName) {
@@ -27,45 +20,7 @@ public class UnitTest {
 		this.unitTestName = unitTestName;
 		this.unitTestExecutionID = unitTestExecutionID;
 		this.testMethodName = testMethodName;
-	}
-
-	public Set<TestedClass> getTestedClass() {
-		if (this.testedClass == null) {
-			this.testedClass = new HashSet<TestedClass>();
-		}
-		return this.testedClass;
-	}
-
-	/**
-	 * <pre>
-	 *           0..*     0..*
-	 * Test ------------------------- Test
-	 *           test1        &lt;       test
-	 * </pre>
-	 */
-	private Set<UnitTest> test;
-
-	public Set<UnitTest> getTest() {
-		if (this.test == null) {
-			this.test = new HashSet<UnitTest>();
-		}
-		return this.test;
-	}
-
-	/**
-	 * <pre>
-	 *           0..*     0..*
-	 * Test ------------------------- Test
-	 *           test        &gt;       test1
-	 * </pre>
-	 */
-	private Set<UnitTest> test1;
-
-	public Set<UnitTest> getTest1() {
-		if (this.test1 == null) {
-			this.test1 = new HashSet<UnitTest>();
-		}
-		return this.test1;
+		
 	}
 
 	private String testName;
@@ -96,6 +51,22 @@ public class UnitTest {
 
 	public boolean getOutcome() {
 		return this.outcome;
+	}
+
+	public TestedClass getTestedClass() {
+		return testedClass;
+	}
+
+	public void setTestedClass(TestedClass testedClass) {
+		this.testedClass = testedClass;
+	}
+
+	public TestRun getTestRun() {
+		return testRun;
+	}
+
+	public void setTestRun(TestRun testRun) {
+		this.testRun = testRun;
 	}
 	
 	

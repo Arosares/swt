@@ -4,31 +4,27 @@ import java.util.ArrayList;
 
 public class TestData {
 
-	// Lists of already parsed Testruns
-	
 	private static TestData testDataInstance;
-	
 	private ArrayList<TestedClass> testedClassList = new ArrayList<>();
-
 	private ArrayList<TestRun> testRunList = new ArrayList<>();
-
 	private ArrayList<UnitTest> unitTestList = new ArrayList<>();
-	
+
 	private TestData() {
 	}
-	
-	public static TestData getInstance () {
-	    if (TestData.testDataInstance == null) {
-	    	TestData.testDataInstance  = new TestData ();
-	    }
-	    return TestData.testDataInstance;
-	  }
 
-	// Lists of already parsed Testruns
+	// Singleton
+	public static TestData getInstance() {
+		if (TestData.testDataInstance == null) {
+			TestData.testDataInstance = new TestData();
+		}
+		return TestData.testDataInstance;
+	}
+
+	// Getters for the lists
 	public ArrayList<TestRun> getTestRunList() {
 		return testRunList;
 	}
-	
+
 	public ArrayList<TestedClass> getTestedClassList() {
 		return testedClassList;
 	}
@@ -37,30 +33,48 @@ public class TestData {
 		return unitTestList;
 	}
 
-	// Checks the testedClassList for the currently parsed Class. Returns
-	// boolean.
-	public boolean checkTestedClassListContent(String parsedClass) {
-		return testedClassList.contains(parsedClass);
+	public void addNewTestRun(TestRun testRun) throws Exception {
+		boolean existing = false;
+		// add class to list if not already there
+
+		for (TestRun existingRun : testRunList) {
+			if (testRun.getRunID().equals(existingRun.getRunID())) {
+
+				testRun = existingRun;
+				existing = true;
+				// change to correct Exception
+				throw new Exception("\nTestRun: " + testRun.getRunID() + " already loaded\n");
+			}
+		}
+		if (!existing) {
+			testRunList.add(testRun);
+		}
+	}
+	
+	
+	/**
+	 * @param testedClass
+	 * @return True, if the class is succesfully added to the List
+	 * This information is needed in the Parser
+	 */
+	public void addNewTestedClass(TestedClass testedClass) {
+		boolean existing = false;
+		// add class to list if not already there
+
+		for (TestedClass existingClass : testedClassList) {
+			if (testedClass.getClassName().equals(existingClass.getClassName())) {
+				testedClass = existingClass;
+				existing = true;
+				break;
+			}
+		}
+		if (!existing) {
+			testedClassList.add(testedClass);
+		}
 	}
 
-	// Checks the testRunList for the Testrun currently being parsed. Returns
-	// Boolean.
-	public boolean checkTestRunListContent(String parsedTestRunID) {
-		return testRunList.contains(parsedTestRunID.toString());
+	public void addNewUnitTest(UnitTest unitTest) {
+		unitTestList.add(unitTest);
 	}
 
-	// Checks the TestList for the currently parsed Test. Returns boolean. High
-	// performance Impact.
-	public boolean checkTestListContent(String parsedTest) {
-		return unitTestList.contains(parsedTest);
-	}
-
-	// Adds a new entry to the List with the name of a newly parsed Class.
-	public boolean createInstanceOfTestedClass(String parsedClassName) {
-//		TODO: new Instance currently temporary!
-		TestedClass newTestedClass= new TestedClass(parsedClassName);
-		testedClassList.add(newTestedClass);
-
-		return true;
-	}
 }
