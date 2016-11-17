@@ -1,16 +1,16 @@
 package tda.src.model;
 
+import java.nio.file.Path;
+import java.util.HashSet;
+import java.util.Observable;
 import java.util.Set;
 
+import tda.src.controller.Controller;
 import tda.src.logic.Parser;
 import tda.src.logic.StAXParser;
 import tda.src.logic.TestData;
 import tda.src.logic.TestRun;
 import tda.src.logic.TestedClass;
-import tda.src.logic.UnitTest;
-
-import java.util.HashSet;
-import java.util.Observable;
 
 public class Model extends Observable {
 	/**
@@ -22,15 +22,16 @@ public class Model extends Observable {
 	 */
 	private Parser parser;
 	final private TestData testData;
-	
+	final private Controller controller;
+
 	public TestData getTestDataInstance() {
 		return testData;
 	}
 
+	public Model(Controller controller) {
+		this.controller = controller;
 
-	public Model() {
-		super();
-		//initialize program:
+		// initialize program:
 		testData = new TestData();
 		Parser parser = new StAXParser(this);
 		parser.parse();
@@ -42,8 +43,7 @@ public class Model extends Observable {
 			System.out.println(testedClass);
 		}
 	}
-	
-	
+
 	public void setParser(Parser value) {
 		this.parser = value;
 	}
@@ -66,6 +66,11 @@ public class Model extends Observable {
 			this.testRun = new HashSet<TestRun>();
 		}
 		return this.testRun;
+	}
+
+	public void parseFile(Path xmlPath) {
+		// TODO Auto-generated method stub
+		parser.parse(xmlPath.toString());
 	}
 
 }

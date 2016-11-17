@@ -12,7 +12,7 @@ public class Controller {
 	final private View view;
 
 	public Controller() {
-		this.model = new Model();
+		this.model = new Model(this);
 		this.view = new View(this.model, this);
 
 	}
@@ -21,20 +21,29 @@ public class Controller {
 		// TODO implement this operation
 		this.view.show();
 	}
-	
-	public void initiateFileParsing(){
+
+	public void openFileOrFolder() {
+		if (view.isFileChooserAlert()) {
+			this.openFile();
+		} else {
+			this.openFolder();
+		}
+
+	}
+
+	public void openFile() {
 		List<File> fileChoices = this.view.pathAlert();
 		if (fileChoices != null) {
-            for (File xmlFile : fileChoices) {
-                openFile(xmlFile);
-            }
-        }
-		
-		return choice.toPath();
-		
+			for (File xmlFile : fileChoices) {
+				model.parseFile(xmlFile.toPath());
+			}
+		}
 	}
-	
-	
+
+	public void openFolder() {
+		// TODO
+	}
+
 	public void exitMain() {
 		this.view.exitAlert();
 	}

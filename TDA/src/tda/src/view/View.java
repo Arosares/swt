@@ -18,7 +18,6 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Path;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -55,15 +54,14 @@ public class View extends Stage implements Observer {
 	private Node createMenueBar() {
 		MenuBar menuBar = new MenuBar();
 		Menu file = new Menu("File");
-		
+
 		// Open the File Browser, capable of selecting multiple files
 		MenuItem openItem = new MenuItem("Open");
 		openItem.setOnAction(new EventHandler<ActionEvent>() {
-			
+
 			@Override
 			public void handle(final ActionEvent event) {
-				// TODO				
-				
+				controller.openFileOrFolder();
 
 			}
 		});
@@ -108,15 +106,22 @@ public class View extends Stage implements Observer {
 			this.close();
 		}
 	}
-	
-	public List<File> pathAlert(){
-		
+
+	// true = file
+	// false = folder
+	public boolean isFileChooserAlert() {
+		// TODO
+		return true;
+	}
+
+	public List<File> pathAlert() {
+
 		FileChooser fileBrowser = new FileChooser();
 		fileBrowser.setTitle("Open Resource File");
 		fileBrowser.getExtensionFilters().add(new FileChooser.ExtensionFilter("*.xml"));
 		List<File> listedFiles = fileBrowser.showOpenMultipleDialog(this);
-		
-	return listedFiles;
+
+		return listedFiles;
 	}
 
 	public void initCloseEventHandler(View view) {
