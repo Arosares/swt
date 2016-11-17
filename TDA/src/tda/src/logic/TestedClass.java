@@ -3,7 +3,7 @@ package tda.src.logic;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestedClass implements Comparable<TestedClass>{
+public class TestedClass {
 	/**
 	 * <pre>
 	 *           0..*     0..*
@@ -55,13 +55,10 @@ public class TestedClass implements Comparable<TestedClass>{
 		classLog.add(testRunToAdd);
 	}
 
+	
 	@Override
-	public int compareTo(TestedClass o) {
-		// TODO Auto-generated method stub
-		if (this.getClassName() == o.getClassName()) {
-			return 0;
-		}
-		return -1;
+	public String toString() {
+		return "Name: " + className;
 	}
 
 }

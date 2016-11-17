@@ -3,7 +3,7 @@ package tda.src.logic;
 import java.util.Set;
 import java.util.HashSet;
 
-public class TestRun implements Comparable<TestRun> {
+public class TestRun {
 	/**
 	 * <pre>
 	 *           0..*     0..*
@@ -100,15 +100,6 @@ public Counters getResultSummary() {
 
 	public Parser getParser() {
 		return this.parser;
-	}
-
-	@Override
-	public int compareTo(TestRun o) {
-		// TODO Auto-generated method stub
-		if (runID == o.getRunID()) {
-			return 0;
-		}
-		return -1;
 	}
 
 }

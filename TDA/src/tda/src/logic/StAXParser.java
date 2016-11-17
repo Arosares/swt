@@ -1,6 +1,8 @@
 package tda.src.logic;
 
 import java.io.FileInputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,12 +24,7 @@ public class StAXParser implements Parser {
 		testData = model.getTestDataInstance();
 	}
 
-	private String xmlPath = "/afs/swt.wiai.uni-bamberg.de/users/home.swt-041097/XML_Files/testRun_1.xml";
-	
-	private List<UnitTest> unitTests = new ArrayList<UnitTest>();
-	private List<TestedClass> testedClasses = new ArrayList<TestedClass>();
-	
-	public void parse() {
+	public void parse(String path) {
 		System.out.println("Starting to parse");
 		boolean waitForStdOut = false;
 		boolean readingStdOut = false;
@@ -67,7 +64,7 @@ public class StAXParser implements Parser {
 			// creating inputFactory
 			XMLInputFactory inputFactory = XMLInputFactory.newInstance();
 			// create InputStream
-			XMLStreamReader reader = inputFactory.createXMLStreamReader(new FileInputStream(xmlPath));
+			XMLStreamReader reader = inputFactory.createXMLStreamReader(new FileInputStream(path));
 			
 			while (reader.hasNext()) {
 				int event = reader.next();
@@ -101,12 +98,12 @@ public class StAXParser implements Parser {
 						//add class to list if not already there
 						
 						for (TestRun existingRun : testData.getTestRunList()) {
-							if (testRun == existingRun) {
+							if (testRun.getRunID().equals(existingRun.getRunID())) {
 								
 								testRun = existingRun;
 								existing = true;
 								//change to correct Exception
-								throw new Exception("TestRun already loaded");
+								throw new Exception("\nTestRun: " + testRun.getRunID() + " already loaded\n");
 							}
 						}
 						
@@ -170,8 +167,7 @@ public class StAXParser implements Parser {
 						
 						//TODO: Class comparison not working yet
 						for (TestedClass existingClass : testData.getTestedClassList()) {
-							if (testedClass.equals(existingClass)) {
-								System.out.println("drin");
+							if (testedClass.getClassName().equals(existingClass.getClassName())) {
 								testedClass = existingClass;
 								existing = true;
 								break;

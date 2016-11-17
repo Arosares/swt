@@ -9,6 +9,8 @@ import tda.src.logic.TestRun;
 import tda.src.logic.TestedClass;
 import tda.src.logic.UnitTest;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.Observable;
 
@@ -33,10 +35,12 @@ public class Model extends Observable {
 		//initialize program:
 		testData = new TestData();
 		Parser parser = new StAXParser(this);
-		parser.parse();
+		
+		String path = "/afs/swt.wiai.uni-bamberg.de/users/home.swt-041097/XML_Files/testRun_1.xml";
+		parser.parse(path);
 		System.out.println(testData.getTestedClassList().size());
 
-		parser.parse();
+		parser.parse(path);
 		System.out.println(testData.getTestedClassList().size());
 		for (TestedClass testedClass : testData.getTestedClassList()) {
 			System.out.println(testedClass);
