@@ -118,7 +118,7 @@ public class View extends Stage implements Observer {
 
 		FileChooser fileBrowser = new FileChooser();
 		fileBrowser.setTitle("Open Resource File");
-		fileBrowser.getExtensionFilters().add(new FileChooser.ExtensionFilter("*.xml"));
+		fileBrowser.getExtensionFilters().add(new FileChooser.ExtensionFilter("XML files", "*.xml"));
 		List<File> listedFiles = fileBrowser.showOpenMultipleDialog(this);
 
 		return listedFiles;

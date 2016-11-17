@@ -3,6 +3,8 @@ package tda.src.controller;
 import java.io.File;
 import java.util.List;
 
+import tda.src.logic.TestData;
+import tda.src.logic.TestRun;
 import tda.src.model.Model;
 import tda.src.view.View;
 
@@ -37,6 +39,10 @@ public class Controller {
 			for (File xmlFile : fileChoices) {
 				model.parseFile(xmlFile.toPath());
 			}
+		}
+		// Debug:
+		for (TestRun run : TestData.getInstance().getTestRunList()) {
+			System.out.println(run.getRunID());
 		}
 	}
 
