@@ -2,8 +2,9 @@ package tda.src.logic;
 
 import java.util.Set;
 import java.util.HashSet;
+import java.util.List;
 
-public class TestRun implements Comparable<TestRun> {
+public class TestRun {
 	/**
 	 * <pre>
 	 *           0..*     0..*
@@ -11,7 +12,7 @@ public class TestRun implements Comparable<TestRun> {
 	 *           testRun        &gt;       testedClass
 	 * </pre>
 	 */
-	private Set<TestedClass> testedClass;
+	private List<TestedClass> testedClassList;
 	private String runID, runName, runUser;
 
 	public String getRunID() {
@@ -25,12 +26,6 @@ public class TestRun implements Comparable<TestRun> {
 		this.runUser = runUser;
 	}
 
-	public Set<TestedClass> getTestedClass() {
-		if (this.testedClass == null) {
-			this.testedClass = new HashSet<TestedClass>();
-		}
-		return this.testedClass;
-	}
 
 	/**
 	 * <pre>
@@ -100,15 +95,6 @@ public Counters getResultSummary() {
 
 	public Parser getParser() {
 		return this.parser;
-	}
-
-	@Override
-	public int compareTo(TestRun o) {
-		// TODO Auto-generated method stub
-		if (runID == o.getRunID()) {
-			return 0;
-		}
-		return -1;
 	}
 
 }

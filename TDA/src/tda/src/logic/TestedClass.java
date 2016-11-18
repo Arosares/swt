@@ -3,7 +3,7 @@ package tda.src.logic;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestedClass implements Comparable<TestedClass>{
+public class TestedClass {
 	/**
 	 * <pre>
 	 *           0..*     0..*
@@ -12,8 +12,8 @@ public class TestedClass implements Comparable<TestedClass>{
 	 * </pre>
 	 */
 	private String className;
-	private List<UnitTest> unitTests;
-	
+	private List<UnitTest> unitTestList;
+
 	public TestedClass(String className) {
 		super();
 		this.className = className;
@@ -25,7 +25,7 @@ public class TestedClass implements Comparable<TestedClass>{
 	 * [testRunID|failurePercentage|executionID|executionID|...]
 	 * [testRunID|failurePercentage|executionID|...]
 	 */
-	public List<ArrayList<String>> classLog = new ArrayList<ArrayList<String>>();
+	public List<UnitTestsToTestRunMapper> classLog = new ArrayList<>();
 
 	public void setClassName(String value) {
 		this.className = value;
@@ -34,34 +34,28 @@ public class TestedClass implements Comparable<TestedClass>{
 	public String getClassName() {
 		return this.className;
 	}
-	
-	public void addUnitTestToList(UnitTest unitTest){
-		
+
+	public void addUnitTestToList(UnitTest unitTest) {
+
 	}
-	public void addTestRunToClassLog(String testRunID, List<UnitTest> testList) {
 
-		ArrayList<String> testRunToAdd = new ArrayList<String>();
-		testRunToAdd.add(testRunID);
-		testRunToAdd.add("dummy");
-
-		int passedCounter = 0;
-		for (UnitTest oneTest : testList) {
-			testRunToAdd.add(oneTest.getExecutionID());
-			if (oneTest.getOutcome()) {
-				passedCounter++;
+	public void addMapperToList(UnitTestsToTestRunMapper mapper) {
+		boolean existing = false;
+		
+		for (UnitTestsToTestRunMapper mapperInLog : classLog) {
+			if (mapperInLog.getTestRun().getRunID().equals(mapper.getTestRun().getRunID())) {
+				existing = true;
 			}
 		}
-		testRunToAdd.set(1, Integer.toString(passedCounter / testList.size()));
-		classLog.add(testRunToAdd);
+		
+		if (!existing) {
+			classLog.add(mapper);
+		}
 	}
 
 	@Override
-	public int compareTo(TestedClass o) {
-		// TODO Auto-generated method stub
-		if (this.getClassName() == o.getClassName()) {
-			return 0;
-		}
-		return -1;
+	public String toString() {
+		return "Name: " + className;
 	}
 
 }

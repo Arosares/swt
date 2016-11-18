@@ -2,35 +2,26 @@ package tda.src.logic;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamReader;
 
-import tda.src.model.Model;
 
 public class StAXParser implements Parser {
 	
-	private final Model model;
 	private final TestData testData;
-	
-	public StAXParser(Model model) {
-		this.model = model;
-		testData = model.getTestDataInstance();
+	private List<UnitTest> unitTestsOfOneTestRun = new ArrayList<>();
+	public StAXParser() {
+		testData = TestData.getInstance();
 	}
 
-	private String xmlPath = "/afs/swt.wiai.uni-bamberg.de/users/home.swt-041097/XML_Files/testRun_1.xml";
-	
-	private List<UnitTest> unitTests = new ArrayList<UnitTest>();
-	private List<TestedClass> testedClasses = new ArrayList<TestedClass>();
-	
-	public void parse() {
+	public void parse(String path) {
 		System.out.println("Starting to parse");
 		boolean waitForStdOut = false;
 		boolean readingStdOut = false;
+		
 		
 		TestRun testRun = null;
 		//UnitTest Data
@@ -63,11 +54,13 @@ public class StAXParser implements Parser {
 		//StandardOuts
 		String stdOutContent;
 		
+		UnitTestsToTestRunMapper mapper = null;
+		
 		try {
 			// creating inputFactory
 			XMLInputFactory inputFactory = XMLInputFactory.newInstance();
 			// create InputStream
-			XMLStreamReader reader = inputFactory.createXMLStreamReader(new FileInputStream(xmlPath));
+			XMLStreamReader reader = inputFactory.createXMLStreamReader(new FileInputStream(path));
 			
 			while (reader.hasNext()) {
 				int event = reader.next();
@@ -91,28 +84,16 @@ public class StAXParser implements Parser {
 						//TODO: Create UnitTest Object
 					}
 					if ("TestRun".equals(reader.getLocalName())) {
+						unitTestsOfOneTestRun = new ArrayList<>();
+						
 						runID = reader.getAttributeValue(1);
 						runName = reader.getAttributeValue(2);
 						runUser = reader.getAttributeValue(3);
 						
 						testRun = new TestRun(runID, runName, runUser);
 						
-						boolean existing = false;
-						//add class to list if not already there
-						
-						for (TestRun existingRun : testData.getTestRunList()) {
-							if (testRun == existingRun) {
-								
-								testRun = existingRun;
-								existing = true;
-								//change to correct Exception
-								throw new Exception("TestRun already loaded");
-							}
-						}
-						
-						if (!existing) {
-							testData.getTestRunList().add(testRun);
-						}
+						mapper = new UnitTestsToTestRunMapper(testRun);
+						testData.addNewTestRun(testRun);
 
 					}
 					if ("Times".equals(reader.getLocalName())) {
@@ -158,29 +139,24 @@ public class StAXParser implements Parser {
 				case XMLStreamConstants.END_ELEMENT:
 					if ("UnitTest".equals(reader.getLocalName())) {
 						
-						//TODO: Create UnitTest Object
 						UnitTest unitTest = new UnitTest(testRun, unitTestID, unitTestName, unitTestExecutionID, testMethodName);
-						testData.getUnitTestList().add(unitTest);
-						
-						
-						
 						TestedClass testedClass = new TestedClass(testedClassName);
-						boolean existing = false;
-						//add class to list if not already there
+						testedClass.addMapperToList(mapper);
 						
-						//TODO: Class comparison not working yet
-						for (TestedClass existingClass : testData.getTestedClassList()) {
-							if (testedClass.equals(existingClass)) {
-								System.out.println("drin");
-								testedClass = existingClass;
-								existing = true;
-								break;
-							}
+						unitTest.setTestedClass(testedClass);
+						unitTest.setTestRun(testRun);
+						
+						testData.addNewUnitTest(unitTest);
+						unitTestsOfOneTestRun.add(unitTest);
+
+						testData.addNewTestedClass(testedClass);
+						
+					}
+					if ("TestRun".equals(reader.getLocalName())) {
+						for (UnitTest unitTest : unitTestsOfOneTestRun) {
 						}
 						
-						if (!existing) {
-							testData.getTestedClassList().add(testedClass);
-						}
+						
 					}
 					break;
 				
@@ -193,11 +169,5 @@ public class StAXParser implements Parser {
 			System.err.println(e.getMessage());
 		}
 
-	}
-
-	@Override
-	public Set<TestRun> getTestRun() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }
