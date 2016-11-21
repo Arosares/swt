@@ -1,7 +1,8 @@
 package tda.src.logic;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+
 
 public class TestedClass {
 	/**
@@ -12,11 +13,29 @@ public class TestedClass {
 	 * </pre>
 	 */
 	private String className;
-	private List<UnitTest> unitTestList;
 
-	public TestedClass(String className) {
+	public TestedClass(String className, UnitTest unitTest) {
 		super();
 		this.className = className;
+		
+		classLog.add(new UnitTestsToTestRunMapper(unitTest));
+		
+	}
+
+	public void addUnitTestToClassLog(UnitTest unitTest) {
+		System.err.println("Adding Test...");
+		
+		String runID = unitTest.getTestRun().getRunID();
+		
+		for (UnitTestsToTestRunMapper existingRun : classLog) {
+			if (existingRun.getTestRun().getRunID().equals(runID)) {
+				existingRun.addUnitTestToTestRun(unitTest);
+				System.out.println("added test");
+			} else {
+				classLog.add(new UnitTestsToTestRunMapper(unitTest));
+				System.out.println("New Run! created new mapper");
+			}
+		}
 	}
 
 	/*
@@ -25,7 +44,11 @@ public class TestedClass {
 	 * [testRunID|failurePercentage|executionID|executionID|...]
 	 * [testRunID|failurePercentage|executionID|...]
 	 */
-	public List<UnitTestsToTestRunMapper> classLog = new ArrayList<>();
+	private List<UnitTestsToTestRunMapper> classLog = new LinkedList<>();
+
+	public List<UnitTestsToTestRunMapper> getClassLog() {
+		return classLog;
+	}
 
 	public void setClassName(String value) {
 		this.className = value;
@@ -39,19 +62,7 @@ public class TestedClass {
 
 	}
 
-	public void addMapperToList(UnitTestsToTestRunMapper mapper) {
-		boolean existing = false;
-		
-		for (UnitTestsToTestRunMapper mapperInLog : classLog) {
-			if (mapperInLog.getTestRun().getRunID().equals(mapper.getTestRun().getRunID())) {
-				existing = true;
-			}
-		}
-		
-		if (!existing) {
-			classLog.add(mapper);
-		}
-	}
+	
 
 	@Override
 	public String toString() {

@@ -12,7 +12,6 @@ import javax.xml.stream.XMLStreamReader;
 public class StAXParser implements Parser {
 	
 	private final TestData testData;
-	private List<UnitTest> unitTestsOfOneTestRun = new ArrayList<>();
 	public StAXParser() {
 		testData = TestData.getInstance();
 	}
@@ -84,7 +83,6 @@ public class StAXParser implements Parser {
 						//TODO: Create UnitTest Object
 					}
 					if ("TestRun".equals(reader.getLocalName())) {
-						unitTestsOfOneTestRun = new ArrayList<>();
 						
 						runID = reader.getAttributeValue(1);
 						runName = reader.getAttributeValue(2);
@@ -92,7 +90,6 @@ public class StAXParser implements Parser {
 						
 						testRun = new TestRun(runID, runName, runUser);
 						
-						mapper = new UnitTestsToTestRunMapper(testRun);
 						testData.addNewTestRun(testRun);
 
 					}
@@ -140,23 +137,18 @@ public class StAXParser implements Parser {
 					if ("UnitTest".equals(reader.getLocalName())) {
 						
 						UnitTest unitTest = new UnitTest(testRun, unitTestID, unitTestName, unitTestExecutionID, testMethodName);
-						TestedClass testedClass = new TestedClass(testedClassName);
-						testedClass.addMapperToList(mapper);
+						TestedClass testedClass = new TestedClass(testedClassName, unitTest);
 						
-						unitTest.setTestedClass(testedClass);
-						unitTest.setTestRun(testRun);
-						
-						testData.addNewUnitTest(unitTest);
-						unitTestsOfOneTestRun.add(unitTest);
-
 						testData.addNewTestedClass(testedClass);
+						testData.addNewUnitTest(unitTest);
+						
+
+						
 						
 					}
 					if ("TestRun".equals(reader.getLocalName())) {
-						for (UnitTest unitTest : unitTestsOfOneTestRun) {
-						}
 						
-						
+						System.out.println("Finished TestRun: " + testRun.getRunID());
 					}
 					break;
 				

@@ -1,6 +1,9 @@
 package tda.src.logic;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.text.StyledEditorKit.ForegroundAction;
 
 public class TestData {
 
@@ -52,29 +55,34 @@ public class TestData {
 	}
 	
 	
-	/**
-	 * @param testedClass
-	 * @return True, if the class is succesfully added to the List
-	 * This information is needed in the Parser
-	 */
-	public void addNewTestedClass(TestedClass testedClass) {
+	
+	public void addNewTestedClass(TestedClass newlyCreatedClass) {
 		boolean existing = false;
 		// add class to list if not already there
 
 		for (TestedClass existingClass : testedClassList) {
-			if (testedClass.getClassName().equals(existingClass.getClassName())) {
-				testedClass = existingClass;
+			
+			if (newlyCreatedClass.getClassName().equals(existingClass.getClassName())) {
+				UnitTestsToTestRunMapper newMapping = newlyCreatedClass.getClassLog().get(0);
+				//classLog of new created Classes always have only one item
+				UnitTest unitTestOfNewClass = newMapping.getUnitTestList().get(0);
+				System.err.println("Size\nBefore: " + existingClass.getClassLog().size());
+				existingClass.addUnitTestToClassLog(unitTestOfNewClass);
+				System.err.println("After: " + existingClass.getClassLog().size());
+
 				existing = true;
 				break;
 			}
 		}
 		if (!existing) {
-			testedClassList.add(testedClass);
+			testedClassList.add(newlyCreatedClass);
 		}
 	}
 
 	public void addNewUnitTest(UnitTest unitTest) {
 		unitTestList.add(unitTest);
+		
+		
 	}
 
 }

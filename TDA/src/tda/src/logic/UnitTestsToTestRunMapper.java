@@ -12,11 +12,12 @@ public class UnitTestsToTestRunMapper {
 	private List<UnitTest> unitTestList = new ArrayList<>();
 	private int failurePercentage;
 
-	public UnitTestsToTestRunMapper(TestRun testRun) {
-		this.testRun = testRun;
+	public UnitTestsToTestRunMapper(UnitTest unitTest) {
+		this.testRun = unitTest.getTestRun();
+		unitTestList.add(unitTest);
 	}
 	
-	public void mapUnitTestsToTestRun(UnitTest unitTest){
+	public void addUnitTestToTestRun(UnitTest unitTest){
 		unitTestList.add(unitTest);
 	}
 	public int getFailurePercentage() {
@@ -43,4 +44,11 @@ public class UnitTestsToTestRunMapper {
 		this.failurePercentage = failurePercentage;
 	}
 
+	@Override
+	public String toString() {
+		return "Mapper [testRun=" + testRun.getRunID() + ", unitTestList=" + unitTestList
+				+ ", failurePercentage=" + failurePercentage + "]";
+	}
+	
+	
 }

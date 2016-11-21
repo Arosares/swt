@@ -68,6 +68,12 @@ public class UnitTest {
 	public void setTestRun(TestRun testRun) {
 		this.testRun = testRun;
 	}
+
+	@Override
+	public String toString() {
+		return "UnitTest [unitTestID=" + unitTestID + ", unitTestName=" + unitTestName + ", outcome=" + outcome + "]";
+	}
+	
 	
 	
 }
