@@ -1,9 +1,6 @@
 package tda.src.logic;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.text.StyledEditorKit.ForegroundAction;
 
 public class TestData {
 
@@ -53,8 +50,6 @@ public class TestData {
 			testRunList.add(testRun);
 		}
 	}
-	
-	
 	
 	public void addNewTestedClass(TestedClass newlyCreatedClass) {
 		boolean existing = false;

@@ -2,6 +2,7 @@ package tda.src.logic;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.xml.stream.XMLInputFactory;
@@ -18,12 +19,16 @@ public class StAXParser implements Parser {
 
 	public void parse(String path) {
 		System.out.println("Starting to parse");
+		List<UnitTest> unitTestsOfOneRun = new LinkedList<>();
 		boolean waitForStdOut = false;
 		boolean readingStdOut = false;
 
 		TestRun testRun = null;
 		// UnitTest Data
 		String unitTestID = "", unitTestName = "", unitTestExecutionID = "", testMethodName = "";
+		//UnitTestResult Data
+		String resultUnitTestID;
+		String unitTestOutcome;
 		// Tested Class Data
 		String testedClassName = "";
 		// TestRun Data
@@ -70,7 +75,14 @@ public class StAXParser implements Parser {
 						// TODO: Create TestedClass Object
 					}
 					if ("UnitTestResult".equals(reader.getLocalName())) {
+						resultUnitTestID = reader.getAttributeValue(8);
+						unitTestOutcome = reader.getAttributeValue(5);
 						
+						for (UnitTest unitTest : unitTestsOfOneRun) {
+							if (unitTest.getUnitTestID().equals(resultUnitTestID)) {
+								unitTest.setOutcome(unitTestOutcome);
+							}
+						}
 					}
 
 					if ("Execution".equals(reader.getLocalName())) {
@@ -149,7 +161,10 @@ public class StAXParser implements Parser {
 
 						testData.addNewTestedClass(testedClass);
 						testData.addNewUnitTest(unitTest);
-
+						unitTestsOfOneRun.add(unitTest);
+						
+						testRun.addTestedClassToTestRun(testedClass);
+						
 					}
 					if ("TestRun".equals(reader.getLocalName())) {
 						System.out.println("Finished TestRun: " + testRun.getRunID());

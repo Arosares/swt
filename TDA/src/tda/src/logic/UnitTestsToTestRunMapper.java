@@ -21,7 +21,19 @@ public class UnitTestsToTestRunMapper {
 		unitTestList.add(unitTest);
 	}
 	public int getFailurePercentage() {
+		calculateFailurePercentage();
 		return failurePercentage;
+	}
+
+	private void calculateFailurePercentage() {
+		int numberOfUnitTests = unitTestList.size();
+		int numberOfFailedTests = 0;
+		for (UnitTest unitTest : unitTestList) {
+			if (!unitTest.hasPassed()) {
+				numberOfFailedTests++;
+			}
+		}
+		failurePercentage = (numberOfFailedTests / numberOfUnitTests) * 100;
 	}
 
 	public List<UnitTest> getUnitTestList() {
@@ -47,8 +59,6 @@ public class UnitTestsToTestRunMapper {
 	@Override
 	public String toString() {
 		return "Mapper [testRun=" + testRun.getRunID() + ", unitTestList=" + unitTestList
-				+ ", failurePercentage=" + failurePercentage + "]";
+				+ ", failurePercentage=" + getFailurePercentage() + "]";
 	}
-	
-	
 }

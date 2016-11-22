@@ -13,6 +13,14 @@ public class TestedClass {
 	 * </pre>
 	 */
 	private String className;
+	
+	/**
+	 * classLog:
+	 * 
+	 * [testRunID|failurePercentage|executionID|executionID|...]
+	 * [testRunID|failurePercentage|executionID|...]
+	 */
+	private List<UnitTestsToTestRunMapper> classLog = new LinkedList<>();
 
 	public TestedClass(String className, UnitTest unitTest) {
 		super();
@@ -41,16 +49,7 @@ public class TestedClass {
 			classLog.add(new UnitTestsToTestRunMapper(unitTest));
 		}
 		
-		
 	}
-
-	/*
-	 * classLog:
-	 * 
-	 * [testRunID|failurePercentage|executionID|executionID|...]
-	 * [testRunID|failurePercentage|executionID|...]
-	 */
-	private List<UnitTestsToTestRunMapper> classLog = new LinkedList<>();
 
 	public List<UnitTestsToTestRunMapper> getClassLog() {
 		return classLog;
@@ -64,11 +63,6 @@ public class TestedClass {
 		return this.className;
 	}
 
-	public void addUnitTestToList(UnitTest unitTest) {
-
-	}
-
-	
 
 	@Override
 	public String toString() {
