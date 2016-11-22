@@ -23,19 +23,25 @@ public class TestedClass {
 	}
 
 	public void addUnitTestToClassLog(UnitTest unitTest) {
-		System.err.println("Adding Test...");
-		
 		String runID = unitTest.getTestRun().getRunID();
 		
-		for (UnitTestsToTestRunMapper existingRun : classLog) {
-			if (existingRun.getTestRun().getRunID().equals(runID)) {
-				existingRun.addUnitTestToTestRun(unitTest);
-				System.out.println("added test");
-			} else {
-				classLog.add(new UnitTestsToTestRunMapper(unitTest));
-				System.out.println("New Run! created new mapper");
+		//Assume newTestRun
+		boolean newTestRun = true;
+		
+		//Look for existing TestRuns
+		for (UnitTestsToTestRunMapper runMapper : classLog) {
+			if (runMapper.getTestRun().getRunID().equals(runID)) {
+				newTestRun = false;
+				//add UnitTest to existing TestRun
+				runMapper.addUnitTestToTestRun(unitTest);
 			}
 		}
+		//Create a new Mapping for a new TestRun
+		if (newTestRun) {
+			classLog.add(new UnitTestsToTestRunMapper(unitTest));
+		}
+		
+		
 	}
 
 	/*

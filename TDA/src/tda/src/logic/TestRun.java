@@ -2,17 +2,8 @@ package tda.src.logic;
 
 import java.util.Set;
 import java.util.HashSet;
-import java.util.List;
 
 public class TestRun {
-	/**
-	 * <pre>
-	 *           0..*     0..*
-	 * TestRun ------------------------- TestedClass
-	 *           testRun        &gt;       testedClass
-	 * </pre>
-	 */
-	private List<TestedClass> testedClassList;
 	private String runID, runName, runUser;
 
 	public String getRunID() {
@@ -27,21 +18,6 @@ public class TestRun {
 	}
 
 
-	/**
-	 * <pre>
-	 *           0..*     0..*
-	 * TestRun ------------------------- Counters
-	 *           testRun        &gt;       counters
-	 * </pre>
-	 */
-	private Set<Counters> counters;
-
-	public Set<Counters> getCounters() {
-		if (this.counters == null) {
-			this.counters = new HashSet<Counters>();
-		}
-		return this.counters;
-	}
 
 private TestedClass testedClasses;
 

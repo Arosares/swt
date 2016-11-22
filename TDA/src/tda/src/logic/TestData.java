@@ -66,9 +66,7 @@ public class TestData {
 				UnitTestsToTestRunMapper newMapping = newlyCreatedClass.getClassLog().get(0);
 				//classLog of new created Classes always have only one item
 				UnitTest unitTestOfNewClass = newMapping.getUnitTestList().get(0);
-				System.err.println("Size\nBefore: " + existingClass.getClassLog().size());
 				existingClass.addUnitTestToClassLog(unitTestOfNewClass);
-				System.err.println("After: " + existingClass.getClassLog().size());
 
 				existing = true;
 				break;

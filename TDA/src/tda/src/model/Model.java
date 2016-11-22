@@ -4,6 +4,8 @@ import java.util.Set;
 
 import javax.swing.text.html.MinimalHTMLWriter;
 
+import org.junit.rules.Timeout;
+import org.omg.CORBA.TIMEOUT;
 import org.omg.Messaging.SyncScopeHelper;
 
 import tda.src.logic.Parser;
@@ -37,20 +39,20 @@ public class Model extends Observable {
 		testData = TestData.getInstance();
 		Parser parser = new StAXParser();
 
-		String path = "/home/aro/Studium/XML/testRun_1.xml";
+		String path = "/afs/swt.wiai.uni-bamberg.de/users/home.swt-041097/XML_Files/testRun_1.xml";
 		parser.parse(path);
 		
 		
-		path = "/home/aro/Studium/XML/testRun_2.xml";
+		path = "/afs/swt.wiai.uni-bamberg.de/users/home.swt-041097/XML_Files/testRun_2.xml";
 		parser.parse(path);
 		
-		path = "/home/aro/Studium/XML/testRun_3.xml";
+		path = "/afs/swt.wiai.uni-bamberg.de/users/home.swt-041097/XML_Files/testRun_3.xml";
 		parser.parse(path);
 		
-		path = "/home/aro/Studium/XML/testRun_4.xml";
+		path = "/afs/swt.wiai.uni-bamberg.de/users/home.swt-041097/XML_Files/testRun_4.xml";
 		parser.parse(path);
 		
-		path = "/home/aro/Studium/XML/testRun_5.xml";
+		path = "/afs/swt.wiai.uni-bamberg.de/users/home.swt-041097/XML_Files/testRun_5.xml";
 		parser.parse(path);
 		
 		List<TestedClass> classes = TestData.getInstance().getTestedClassList();
