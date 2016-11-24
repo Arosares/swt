@@ -80,7 +80,6 @@ public class Controller {
 	public TreeView<File> createTreeView(File rootDirectory) {
 
 		TreeView<File> treeView = new TreeView<File>();
-
 		TreeItem<File> rootItem = createTreeItems(rootDirectory);
 		treeView.setRoot(rootItem);
 

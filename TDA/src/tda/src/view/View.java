@@ -6,34 +6,20 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Optional;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TreeView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import tda.src.controller.Controller;
-import tda.src.logic.TestedClass;
 import tda.src.model.Model;
 
 public class View extends Stage implements Observer {
@@ -47,7 +33,8 @@ public class View extends Stage implements Observer {
 	private Model model;
 	private Controller controller;
 	private BorderPane rootPane;
-	private TableView<TestedClass> testedClassesTable;
+	
+	//To be set when selecting a testRun in the treeView for the table
 	private String runID;
 
 	public View(Model model, Controller controller) {
@@ -68,7 +55,9 @@ public class View extends Stage implements Observer {
 		GridPane gridPane = new GridPane();
 		rootPane.setCenter(gridPane);
 		
-		this.rootPane.setCenter(createTestedClassesTable());
+		TDATableView table = new TDATableView(controller);
+		rootPane.setCenter(table.createTestedClassesTable());
+		
 		return rootPane;
 	}
 	
@@ -84,16 +73,7 @@ public class View extends Stage implements Observer {
 		error.showAndWait();
 	}
 
-	public void exitAlert() {
-		Alert exitAlert = new Alert(AlertType.CONFIRMATION,
-				"Do you really want to exit? All unsaved changes will be lost.");
-		exitAlert.setTitle("Are you really, really sure? I mean Really!?");
-		exitAlert.setHeaderText(null);
-		Optional<ButtonType> result = exitAlert.showAndWait();
-		if (result.isPresent() && result.get() == ButtonType.OK) {
-			this.close();
-		}
-	}
+	
 
 	public List<File> pathAlert() {
 
@@ -120,40 +100,25 @@ public class View extends Stage implements Observer {
 			}
 		});
 	}
+	
+	public void exitAlert() {
+		Alert exitAlert = new Alert(AlertType.CONFIRMATION,
+				"Do you really want to exit? All unsaved changes will be lost.");
+		exitAlert.setTitle("Are you really, really sure? I mean Really!?");
+		exitAlert.setHeaderText(null);
+		Optional<ButtonType> result = exitAlert.showAndWait();
+		if (result.isPresent() && result.get() == ButtonType.OK) {
+			this.close();
+		}
+	}
 
 	public void showTreeView(TreeView<File> treeView) {
 		treeView.setPrefWidth(500);
 		rootPane.setLeft(treeView);
 	}
 
-	// Initiate Table
-	private Node createTestedClassesTable() {
-		testedClassesTable = new TableView<TestedClass>();
-		testedClassesTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-		
-		testedClassesTable.setPrefWidth(800);
-		testedClassesTable.setPrefHeight(300);
+	
 
-		ScrollPane scrollPane = new ScrollPane(testedClassesTable);
-
-		return scrollPane;
-
-	}
-
-	private void fillTestedClassTable() {
-
-		ObservableList<TestedClass> data = FXCollections
-				.observableArrayList(controller.getTestedClassesFromTestRun(runID));
-
-		TableColumn classNameCol = new TableColumn("Tested Class");
-		TableColumn failurePercentageCol = new TableColumn("Failure Percentage");
-
-		classNameCol.setCellValueFactory(new PropertyValueFactory<TestedClass, String>("className"));
-		failurePercentageCol
-				.setCellValueFactory(new PropertyValueFactory<TestedClass, Double>("currentFailurePercentage"));
-
-		testedClassesTable.setItems(data);
-		testedClassesTable.getColumns().addAll(classNameCol, failurePercentageCol);
-	}
+	
 
 }
