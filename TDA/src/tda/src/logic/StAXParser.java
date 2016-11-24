@@ -2,39 +2,42 @@ package tda.src.logic;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamReader;
 
-
 public class StAXParser implements Parser {
-	
+
 	private final TestData testData;
-	private List<UnitTest> unitTestsOfOneTestRun = new ArrayList<>();
+
 	public StAXParser() {
 		testData = TestData.getInstance();
 	}
 
 	public void parse(String path) {
 		System.out.println("Starting to parse");
+		List<UnitTest> unitTestsOfOneRun = new LinkedList<>();
 		boolean waitForStdOut = false;
 		boolean readingStdOut = false;
-		
-		
+
 		TestRun testRun = null;
-		//UnitTest Data
+		// UnitTest Data
 		String unitTestID = "", unitTestName = "", unitTestExecutionID = "", testMethodName = "";
-		//Tested Class Data
+		//UnitTestResult Data
+		String resultUnitTestID;
+		String unitTestOutcome;
+		// Tested Class Data
 		String testedClassName = "";
-		//TestRun Data
+		// TestRun Data
 		String runID, runName, runUser;
-		//TestRunTimeD
+		// TestRunTimeD
 		String creationTime, finishTime, queuingTime, startTime;
 		String outcome;
-		
-		//Counters
+
+		// Counters
 		String sumAborted;
 		String sumCompleted;
 		String sumDisconnected;
@@ -50,18 +53,18 @@ public class StAXParser implements Parser {
 		String sumTimeOut;
 		String sumTotal;
 		String sumWarning;
-		
-		//StandardOuts
+
+		// StandardOuts
 		String stdOutContent;
-		
+
 		UnitTestsToTestRunMapper mapper = null;
-		
+
 		try {
 			// creating inputFactory
 			XMLInputFactory inputFactory = XMLInputFactory.newInstance();
 			// create InputStream
 			XMLStreamReader reader = inputFactory.createXMLStreamReader(new FileInputStream(path));
-			
+
 			while (reader.hasNext()) {
 				int event = reader.next();
 				switch (event) {
@@ -69,11 +72,21 @@ public class StAXParser implements Parser {
 					if ("UnitTest".equals(reader.getLocalName())) {
 						unitTestID = reader.getAttributeValue(0);
 						unitTestName = reader.getAttributeValue(1);
-						//TODO: Create TestedClass Object
+						// TODO: Create TestedClass Object
 					}
-					
+					if ("UnitTestResult".equals(reader.getLocalName())) {
+						resultUnitTestID = reader.getAttributeValue(8);
+						unitTestOutcome = reader.getAttributeValue(5);
+						
+						for (UnitTest unitTest : unitTestsOfOneRun) {
+							if (unitTest.getUnitTestID().equals(resultUnitTestID)) {
+								unitTest.setOutcome(unitTestOutcome);
+							}
+						}
+					}
+
 					if ("Execution".equals(reader.getLocalName())) {
-						if(reader.getAttributeCount() == 1){
+						if (reader.getAttributeCount() == 1) {
 							// To avoid wrong 'execution' start element
 							unitTestExecutionID = reader.getAttributeValue(0);
 						}
@@ -81,18 +94,16 @@ public class StAXParser implements Parser {
 					if ("TestMethod".equals(reader.getLocalName())) {
 						testedClassName = reader.getAttributeValue(1);
 						testMethodName = reader.getAttributeValue(3);
-						//TODO: Create UnitTest Object
+						// TODO: Create UnitTest Object
 					}
 					if ("TestRun".equals(reader.getLocalName())) {
-						unitTestsOfOneTestRun = new ArrayList<>();
-						
+
 						runID = reader.getAttributeValue(1);
 						runName = reader.getAttributeValue(2);
 						runUser = reader.getAttributeValue(3);
-						
+
 						testRun = new TestRun(runID, runName, runUser);
-						
-						mapper = new UnitTestsToTestRunMapper(testRun);
+
 						testData.addNewTestRun(testRun);
 
 					}
@@ -123,43 +134,43 @@ public class StAXParser implements Parser {
 						sumTimeOut = reader.getAttributeValue(12);
 						sumTotal = reader.getAttributeValue(13);
 						sumWarning = reader.getAttributeValue(14);
-						//TODO: Create Counters Class
+						
+						//Create Counters Class
+						Counters counter = new Counters(sumAborted, sumCompleted, sumDisconnected, sumError, sumFailed,
+								sumInProgress, sumInconclusive, sumNotExecuted, sumNotRunnable, sumPassed,
+								sumPassedButRunAborted, sumPending, sumTimeOut, sumTotal, sumWarning);
+						testRun.setResultSummary(counter);
 					}
 					if ("StdOut".equals(reader.getLocalName()) && waitForStdOut) {
 						readingStdOut = true;
 					}
 					break;
-				
+
 				case XMLStreamConstants.CHARACTERS:
-					if(readingStdOut){
+					if (readingStdOut) {
 						stdOutContent = reader.getText().trim();
 					}
 					break;
-				
+
 				case XMLStreamConstants.END_ELEMENT:
 					if ("UnitTest".equals(reader.getLocalName())) {
-						
-						UnitTest unitTest = new UnitTest(testRun, unitTestID, unitTestName, unitTestExecutionID, testMethodName);
-						TestedClass testedClass = new TestedClass(testedClassName);
-						testedClass.addMapperToList(mapper);
-						
-						unitTest.setTestedClass(testedClass);
-						unitTest.setTestRun(testRun);
-						
-						testData.addNewUnitTest(unitTest);
-						unitTestsOfOneTestRun.add(unitTest);
+
+						UnitTest unitTest = new UnitTest(testRun, unitTestID, unitTestName, unitTestExecutionID,
+								testMethodName);
+						TestedClass testedClass = new TestedClass(testedClassName, unitTest);
 
 						testData.addNewTestedClass(testedClass);
+						testData.addNewUnitTest(unitTest);
+						unitTestsOfOneRun.add(unitTest);
+						
+						testRun.addTestedClassToTestRun(testedClass);
 						
 					}
 					if ("TestRun".equals(reader.getLocalName())) {
-						for (UnitTest unitTest : unitTestsOfOneTestRun) {
-						}
-						
-						
+						System.out.println("Finished TestRun: " + testRun.getRunID());
 					}
 					break;
-				
+
 				default:
 					break;
 				}

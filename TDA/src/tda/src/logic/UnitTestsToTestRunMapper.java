@@ -10,17 +10,36 @@ import java.util.List;
 public class UnitTestsToTestRunMapper {
 	private TestRun testRun;
 	private List<UnitTest> unitTestList = new ArrayList<>();
-	private int failurePercentage;
-
+	private double failurePercentage;
+	
 	public UnitTestsToTestRunMapper(TestRun testRun) {
 		this.testRun = testRun;
+		unitTestList = new ArrayList<>();
 	}
-	
-	public void mapUnitTestsToTestRun(UnitTest unitTest){
+
+	public UnitTestsToTestRunMapper(UnitTest unitTest) {
+		this.testRun = unitTest.getTestRun();
 		unitTestList.add(unitTest);
 	}
-	public int getFailurePercentage() {
+	
+	public void addUnitTestToTestRun(UnitTest unitTest){
+		unitTestList.add(unitTest);
+	}
+	
+	public double getFailurePercentage() {
+		calculateFailurePercentage();
 		return failurePercentage;
+	}
+
+	private void calculateFailurePercentage() {
+		double numberOfUnitTests = unitTestList.size();
+		double numberOfFailedTests = 0;
+		for (UnitTest unitTest : unitTestList) {
+			if (!unitTest.hasPassed()) {
+				numberOfFailedTests++;
+			}
+		}
+		failurePercentage = (numberOfFailedTests * 100 / numberOfUnitTests); 
 	}
 
 	public List<UnitTest> getUnitTestList() {
@@ -43,4 +62,9 @@ public class UnitTestsToTestRunMapper {
 		this.failurePercentage = failurePercentage;
 	}
 
+	@Override
+	public String toString() {
+		return "Mapper [testRun=" + testRun.getRunID() + ", unitTestList=" + unitTestList
+				+ ", failurePercentage=" + getFailurePercentage() + "]";
+	}
 }

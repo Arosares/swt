@@ -1,19 +1,11 @@
 package tda.src.logic;
 
-import java.util.Set;
-import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 
 public class TestRun {
-	/**
-	 * <pre>
-	 *           0..*     0..*
-	 * TestRun ------------------------- TestedClass
-	 *           testRun        &gt;       testedClass
-	 * </pre>
-	 */
-	private List<TestedClass> testedClassList;
 	private String runID, runName, runUser;
+	private Counters resultSummary;
 
 	public String getRunID() {
 		return runID;
@@ -26,75 +18,34 @@ public class TestRun {
 		this.runUser = runUser;
 	}
 
+	private List<TestedClass> testedClasses = new LinkedList<>();
 
-	/**
-	 * <pre>
-	 *           0..*     0..*
-	 * TestRun ------------------------- Counters
-	 *           testRun        &gt;       counters
-	 * </pre>
-	 */
-	private Set<Counters> counters;
-
-	public Set<Counters> getCounters() {
-		if (this.counters == null) {
-			this.counters = new HashSet<Counters>();
+	public void addTestedClassToTestRun(TestedClass testedClass) {
+		boolean existing = false;
+		for (TestedClass existingClass : testedClasses) {
+			if (existingClass.getClassName().equals(testedClass.getClassName())) {
+				existing = true;
+			}
 		}
-		return this.counters;
+		if (!existing) {
+			testedClasses.add(testedClass);
+		}
 	}
 
-private TestedClass testedClasses;
-
-public void setTestedClasses(TestedClass value) {
-   this.testedClasses = value;
-}
-
-public TestedClass getTestedClasses() {
-   return this.testedClasses;
-}
-
-private Counters resultSummary;
-
-public void setResultSummary(Counters value) {
-   this.resultSummary = value;
-}
-
-public Counters getResultSummary() {
-   return this.resultSummary;
-}
-
-	/**
-	 * <pre>
-	 *           0..*     1..1
-	 * TestRun ------------------------- Analyzer
-	 *           testRun        &lt;       analyzer
-	 * </pre>
-	 */
-	private Analyzer analyzer;
-
-	public void setAnalyzer(Analyzer value) {
-		this.analyzer = value;
+	public void setTestedClasses(List<TestedClass> testedClasses) {
+		this.testedClasses = testedClasses;
 	}
 
-	public Analyzer getAnalyzer() {
-		return this.analyzer;
+	public List<TestedClass> getTestedClasses() {
+		return this.testedClasses;
 	}
 
-	/**
-	 * <pre>
-	 *           0..*     1..1
-	 * TestRun ------------------------- Parser
-	 *           testRun        &lt;       parser
-	 * </pre>
-	 */
-	private Parser parser;
-
-	public void setParser(Parser value) {
-		this.parser = value;
+	public void setResultSummary(Counters value) {
+		this.resultSummary = value;
 	}
 
-	public Parser getParser() {
-		return this.parser;
+	public Counters getResultSummary() {
+		return this.resultSummary;
 	}
 
 }

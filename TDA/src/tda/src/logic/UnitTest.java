@@ -5,12 +5,13 @@ import java.util.Set;
 
 public class UnitTest {
 
-	String unitTestID;
-	String unitTestName;
-	String unitTestExecutionID;
-	String testMethodName;
-	TestRun testRun;
-	TestedClass testedClass;
+	private String unitTestID;
+	private String unitTestName;
+	private String unitTestExecutionID;
+	private String testMethodName;
+	private TestRun testRun;
+	private TestedClass testedClass;
+	private boolean passed;
 
 	public UnitTest(TestRun testRun, String unitTestID, String unitTestName, String unitTestExecutionID,
 			String testMethodName) {
@@ -20,37 +21,47 @@ public class UnitTest {
 		this.unitTestName = unitTestName;
 		this.unitTestExecutionID = unitTestExecutionID;
 		this.testMethodName = testMethodName;
-		
+
 	}
 
-	private String testName;
-
-	public void setTestName(String value) {
-		this.testName = value;
+	public String getUnitTestID() {
+		return unitTestID;
 	}
 
-	public String getTestName() {
-		return this.testName;
+	public void setUnitTestID(String unitTestID) {
+		this.unitTestID = unitTestID;
 	}
 
-	private String executionID;
-
-	public void setExecutionID(String value) {
-		this.executionID = value;
+	public String getUnitTestName() {
+		return unitTestName;
 	}
 
-	public String getExecutionID() {
-		return this.executionID;
+	public void setUnitTestName(String unitTestName) {
+		this.unitTestName = unitTestName;
 	}
 
-	private boolean outcome;
-
-	public void setOutcome(boolean value) {
-		this.outcome = value;
+	public String getUnitTestExecutionID() {
+		return unitTestExecutionID;
 	}
 
-	public boolean getOutcome() {
-		return this.outcome;
+	public void setUnitTestExecutionID(String unitTestExecutionID) {
+		this.unitTestExecutionID = unitTestExecutionID;
+	}
+
+	public String getTestMethodName() {
+		return testMethodName;
+	}
+
+	public void setTestMethodName(String testMethodName) {
+		this.testMethodName = testMethodName;
+	}
+
+	public TestRun getTestRun() {
+		return testRun;
+	}
+
+	public void setTestRun(TestRun testRun) {
+		this.testRun = testRun;
 	}
 
 	public TestedClass getTestedClass() {
@@ -61,13 +72,21 @@ public class UnitTest {
 		this.testedClass = testedClass;
 	}
 
-	public TestRun getTestRun() {
-		return testRun;
+	public boolean hasPassed() {
+		return passed;
 	}
 
-	public void setTestRun(TestRun testRun) {
-		this.testRun = testRun;
+	public void setOutcome(String outcome) {
+		if (outcome.equals("Passed")) {
+			this.passed = true;
+		} else {
+			this.passed = false;
+		}
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "UnitTest [unitTestID=" + unitTestID + ", unitTestName=" + unitTestName + ", outcome=" + passed + "]";
+	}
+
 }
