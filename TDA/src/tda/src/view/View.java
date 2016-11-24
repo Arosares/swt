@@ -24,7 +24,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TreeView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -54,62 +57,21 @@ public class View extends Stage implements Observer {
 		this.model.addObserver(this);
 		this.setScene(new Scene(createRootPane(), 1200, 900));
 		this.setTitle("Test Data Analyser");
+		this.setMaximized(true);
 	}
 
 	private Pane createRootPane() {
-		this.rootPane = new BorderPane();
-		this.rootPane.setTop(createMenueBar());
+		rootPane = new BorderPane();
+		TDAMenuBar menuBar = new TDAMenuBar(controller);
+		
+		this.rootPane.setTop(menuBar.createMenuBar());
+		GridPane gridPane = new GridPane();
+		rootPane.setCenter(gridPane);
+		
 		this.rootPane.setCenter(createTestedClassesTable());
-		return this.rootPane;
+		return rootPane;
 	}
-
-	private Node createMenueBar() {
-		MenuBar menuBar = new MenuBar();
-		Menu file = new Menu("File");
-
-		// Open the File Browser, capable of selecting multiple files
-		MenuItem openFile = new MenuItem("Open File");
-		openFile.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-
-				controller.openFile();
-
-			}
-		});
-
-		// Open the Folder Browser, capable of selecting multiple files
-		MenuItem openFolder = new MenuItem("Open Folder");
-		openFolder.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-
-				controller.openFolder();
-
-			}
-		});
-		MenuItem recentItem = new MenuItem("Recent");
-		recentItem.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				// TODO
-			}
-		});
-		MenuItem exitItem = new MenuItem("Exit");
-		exitItem.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				controller.exitMain();
-				event.consume();
-			}
-		});
-		file.getItems().addAll(openFile, openFolder, recentItem, exitItem);
-		menuBar.getMenus().add(file);
-
-		return menuBar;
-	}
+	
 
 	@Override
 	public void update(Observable o, Object arg) {
@@ -168,6 +130,7 @@ public class View extends Stage implements Observer {
 	private Node createTestedClassesTable() {
 		testedClassesTable = new TableView<TestedClass>();
 		testedClassesTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		
 		testedClassesTable.setPrefWidth(800);
 		testedClassesTable.setPrefHeight(300);
 
