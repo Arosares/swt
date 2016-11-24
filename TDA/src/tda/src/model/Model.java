@@ -91,9 +91,9 @@ public class Model extends Observable {
 		return this.testRun;
 	}
 
-	public void parseFile(Path xmlPath) {
+	public void parseFile(String xmlPath) {
 		// TODO Auto-generated method stub
-		parser.parse(xmlPath.toString());
+		parser.parse(xmlPath);
 	}
 
 	// Create Lists from Classnames

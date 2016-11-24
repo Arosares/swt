@@ -112,7 +112,7 @@ public class View extends Stage implements Observer {
 		}
 	}
 
-	public void showTreeView(TreeView<File> treeView) {
+	public void showTreeView(TreeView<String> treeView) {
 		treeView.setPrefWidth(500);
 		rootPane.setLeft(treeView);
 	}

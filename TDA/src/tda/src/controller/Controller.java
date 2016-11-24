@@ -1,6 +1,8 @@
 package tda.src.controller;
 
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import javafx.scene.control.TreeItem;
@@ -29,7 +31,7 @@ public class Controller {
 		List<File> fileChoices = view.pathAlert();
 		if (fileChoices != null) {
 			for (File xmlFile : fileChoices) {
-				model.parseFile(xmlFile.toPath());
+				model.parseFile(xmlFile.toString());
 			}
 		}
 	}
@@ -46,7 +48,7 @@ public class Controller {
 			} else {
 				String lowerCaseFile = file.toString().toLowerCase();
 				if (lowerCaseFile.endsWith(".xml") && lowerCaseFile.contains("testrun")) {
-					model.parseFile(file.toPath());
+					model.parseFile(file.toString());
 				}
 
 			}
@@ -54,15 +56,18 @@ public class Controller {
 
 	}
 
-	public TreeItem<File> createTreeItems(File rootDirectory) {
-
-		TreeItem<File> rootItem = new TreeItem<File>(rootDirectory);
-
-		File[] files = rootDirectory.listFiles();
+	public TreeItem<String> createTreeItems(String rootDirectory) {
+		
+		//Not sure if working on windows with this regex 
+		String[] rootFolder = rootDirectory.split("/|\\\\");
+		
+		TreeItem<String> rootItem = new TreeItem<String>(rootFolder[rootFolder.length - 1]);
+		Path rootPath = Paths.get(rootDirectory);
+		File[] files = rootPath.toFile().listFiles();
 		for (File file : files) {
 			if (file.isDirectory()) {
 				// Create new TreeItem as root with children
-				TreeItem<File> subRoot = createTreeItems(file);
+				TreeItem<String> subRoot = createTreeItems(file.toString());
 				if (subRoot.getChildren().size() != 0) {
 					rootItem.getChildren().add(subRoot);
 				}
@@ -77,10 +82,10 @@ public class Controller {
 		return rootItem;
 	}
 
-	public TreeView<File> createTreeView(File rootDirectory) {
+	public TreeView<String> createTreeView(String rootDirectory) {
 
-		TreeView<File> treeView = new TreeView<File>();
-		TreeItem<File> rootItem = createTreeItems(rootDirectory);
+		TreeView<String> treeView = new TreeView<String>();
+		TreeItem<String> rootItem = createTreeItems(rootDirectory);
 		treeView.setRoot(rootItem);
 
 		return treeView;
@@ -96,7 +101,7 @@ public class Controller {
 			parseFilesInDirectory(files);
 
 			// Create a TreeView that has the selectedDirectory as rootItem
-			TreeView<File> treeView = createTreeView(selectedDirectory);
+			TreeView<String> treeView = createTreeView(selectedDirectory.toString());
 			this.view.showTreeView(treeView);
 
 		}
