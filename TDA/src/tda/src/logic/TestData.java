@@ -42,7 +42,7 @@ public class TestData {
 
 				testRun = existingRun;
 				existing = true;
-				// change to correct Exception
+				// TODO: change to correct Exception
 				throw new Exception("\nTestRun: " + testRun.getRunID() + " already loaded\n");
 			}
 		}
@@ -52,22 +52,14 @@ public class TestData {
 	}
 	
 	public void addNewTestedClass(TestedClass newlyCreatedClass) {
-		boolean existing = false;
-		// add class to list if not already there
-
-		for (TestedClass existingClass : testedClassList) {
-			
-			if (newlyCreatedClass.getClassName().equals(existingClass.getClassName())) {
-				UnitTestsToTestRunMapper newMapping = newlyCreatedClass.getClassLog().get(0);
-				//classLog of new created Classes always have only one item
-				UnitTest unitTestOfNewClass = newMapping.getUnitTestList().get(0);
-				existingClass.addUnitTestToClassLog(unitTestOfNewClass);
-
-				existing = true;
-				break;
-			}
-		}
-		if (!existing) {
+		TestedClass existingClass = getClassByName(newlyCreatedClass.getClassName());
+		
+		if(existingClass != null) {
+			//classLog of new created Classes always have only one item
+			UnitTestsToTestRunMapper newMapping = newlyCreatedClass.getClassLog().get(0);
+			UnitTest unitTestOfNewClass = newMapping.getUnitTestList().get(0);
+			existingClass.addUnitTestToClassLog(unitTestOfNewClass);
+		} else {
 			testedClassList.add(newlyCreatedClass);
 		}
 	}
