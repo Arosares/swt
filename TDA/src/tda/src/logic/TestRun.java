@@ -6,6 +6,7 @@ import java.util.List;
 public class TestRun {
 	private String runID, runName, runUser;
 	private Counters resultSummary;
+	private List<TestedClass> testedClasses = new LinkedList<>();
 
 	public String getRunID() {
 		return runID;
@@ -17,8 +18,6 @@ public class TestRun {
 		this.runName = runName;
 		this.runUser = runUser;
 	}
-
-	private List<TestedClass> testedClasses = new LinkedList<>();
 
 	public void addTestedClassToTestRun(TestedClass testedClass) {
 		boolean existing = false;
@@ -48,4 +47,28 @@ public class TestRun {
 		return this.resultSummary;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((runID == null) ? 0 : runID.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TestRun other = (TestRun) obj;
+		if (runID == null) {
+			if (other.runID != null)
+				return false;
+		} else if (!runID.equals(other.runID))
+			return false;
+		return true;
+	}
 }
