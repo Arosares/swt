@@ -52,13 +52,13 @@ public class TDAMenuBar {
 
 			}
 		});
-		MenuItem recentItem = new MenuItem("Recent");
+/*		MenuItem recentItem = new MenuItem("Recent");
 		recentItem.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				// TODO
 			}
-		});
+		});*/
 		MenuItem exitItem = new MenuItem("Exit");
 		exitItem.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -67,7 +67,7 @@ public class TDAMenuBar {
 				event.consume();
 			}
 		});
-		file.getItems().addAll(openFile, openFolder, recentItem, exitItem);
+		file.getItems().addAll(openFile, openFolder, exitItem);
 		menuBar.getMenus().add(file);
 		
 		return menuBar;
