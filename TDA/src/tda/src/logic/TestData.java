@@ -73,9 +73,28 @@ public class TestData {
 	}
 
 	public void addNewUnitTest(UnitTest unitTest) {
-		unitTestList.add(unitTest);
-		
-		
+		unitTestList.add(unitTest);	
 	}
-
+	
+	public TestRun getTestRunByID (String runID) {
+		for (TestRun testRun : testRunList) {
+			if (testRun.getRunID().equals(runID)) {
+				return testRun;
+			}
+		}
+		System.err.println(runID + " is not a valid test run id.");
+		// TODO: Throw Exception
+		return null;
+	}
+	
+	public TestedClass getClassByName (String name) {
+		for (TestedClass testedClass : testedClassList) {
+			if (testedClass.getClassName().equals(name)){
+				return testedClass;
+			}
+		}
+		System.err.println(name + " is not a valid class name.");
+		// TODO: Throw Exception
+		return null;
+	}
 }
