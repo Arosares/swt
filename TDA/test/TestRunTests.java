@@ -2,8 +2,6 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import javax.swing.text.StyledEditorKit.ForegroundAction;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -72,5 +70,21 @@ public class TestRunTests {
 		testRun1.addTestedClassToTestRun(testedClass1);
 		
 		assertEquals(testedClasses, testRun1.getTestedClasses());
+	}
+	
+	@Test
+	public void testEqualsSameTestRuns() {
+		assertEquals(true, testRun1.equals(testRun1));
+	}
+	
+	@Test
+	public void testEqualsSameTestID() {
+		TestRun testRun3 = new TestRun("Run1", "run-name-2", "fooUser");
+		assertEquals(true, testRun1.equals(testRun3));
+	}
+	
+	@Test
+	public void testEqualsDifferentTestRuns() {
+		assertEquals(false, testRun1.equals(testRun2));
 	}
 }
