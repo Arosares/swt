@@ -7,6 +7,9 @@ import java.util.List;
 
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.util.Callback;
+import tda.src.logic.TestData;
+import tda.src.logic.TestRun;
 import tda.src.logic.TestedClass;
 import tda.src.model.Model;
 import tda.src.view.View;
@@ -34,11 +37,11 @@ public class Controller {
 				model.parseFile(xmlFile.toString());
 			}
 		}
+		
+		TestRun testRun = TestData.getInstance().getTestRunList().get(0);
+		view.getTable().fillTestedClassTable(testRun);
 	}
 
-	public List<TestedClass> getTestedClassesFromTestRun(String runID) {
-		return model.getTestedClassesFromTestRun(runID);
-	}
 
 	private void parseFilesInDirectory(File[] files) {
 		for (File file : files) {
@@ -103,6 +106,10 @@ public class Controller {
 			// Create a TreeView that has the selectedDirectory as rootItem
 			TreeView<String> treeView = createTreeView(selectedDirectory.toString());
 			this.view.showTreeView(treeView);
+			
+			//TODO: insted of get(0) get the marked testRun in the treeView
+			TestRun testRun = TestData.getInstance().getTestRunList().get(0);
+			view.getTable().fillTestedClassTable(testRun);
 
 		}
 	}
@@ -110,5 +117,10 @@ public class Controller {
 	public void exitMain() {
 		this.view.exitAlert();
 	}
+
+	public List<TestedClass> getTestedClassesFromTestRun(TestRun testRun) {
+		return model.getTestedClassesFromTestRun(testRun);
+	}
+
 
 }

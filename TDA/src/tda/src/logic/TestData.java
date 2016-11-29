@@ -50,12 +50,12 @@ public class TestData {
 			testRunList.add(testRun);
 		}
 	}
-	
+
 	public void addNewTestedClass(TestedClass newlyCreatedClass) {
 		TestedClass existingClass = getClassByName(newlyCreatedClass.getClassName());
-		
-		if(existingClass != null) {
-			//classLog of new created Classes always have only one item
+
+		if (existingClass != null) {
+			// classLog of new created Classes always have only one item
 			UnitTestsToTestRunMapper newMapping = newlyCreatedClass.getClassLog().get(0);
 			UnitTest unitTestOfNewClass = newMapping.getUnitTestList().get(0);
 			existingClass.addUnitTestToClassLog(unitTestOfNewClass);
@@ -65,27 +65,37 @@ public class TestData {
 	}
 
 	public void addNewUnitTest(UnitTest unitTest) {
-		unitTestList.add(unitTest);	
+		unitTestList.add(unitTest);
 	}
-	
-	public TestRun getTestRunByID (String runID) {
+
+	/**
+	 * @param runID
+	 * @return the TestRun according to the runID; returns null if TestRun
+	 *         doesn't exist
+	 */
+	public TestRun getTestRunByID(String runID) {
 		for (TestRun testRun : testRunList) {
 			if (testRun.getRunID().equals(runID)) {
 				return testRun;
 			}
 		}
-		System.err.println(runID + " is not a valid test run id.");
+		// System.err.println(runID + " is not a valid test run id.");
 		// TODO: Throw Exception
 		return null;
 	}
-	
-	public TestedClass getClassByName (String name) {
+
+	/**
+	 * @param name
+	 * @return the TestedClass according to the class name; returns null if
+	 *         TestedClass doesn't exist
+	 */
+	public TestedClass getClassByName(String name) {
 		for (TestedClass testedClass : testedClassList) {
-			if (testedClass.getClassName().equals(name)){
+			if (testedClass.getClassName().equals(name)) {
 				return testedClass;
 			}
 		}
-		System.err.println(name + " is not a valid class name.");
+		// System.err.println(name + " is not a valid class name.");
 		// TODO: Throw Exception
 		return null;
 	}

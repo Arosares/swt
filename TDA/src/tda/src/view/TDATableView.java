@@ -10,6 +10,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import tda.src.controller.Controller;
+import tda.src.logic.TestRun;
 import tda.src.logic.TestedClass;
 
 public class TDATableView {
@@ -37,10 +38,10 @@ public class TDATableView {
 
 	}
 	
-	public void fillTestedClassTable(String runID) {
+	public void fillTestedClassTable(TestRun testRun) {
 
 		ObservableList<TestedClass> data = FXCollections
-				.observableArrayList(controller.getTestedClassesFromTestRun(runID));
+				.observableArrayList(controller.getTestedClassesFromTestRun(testRun));
 
 		TableColumn classNameCol = new TableColumn("Tested Class");
 		TableColumn failurePercentageCol = new TableColumn("Failure Percentage");

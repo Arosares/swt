@@ -84,12 +84,7 @@ public class TestedClass {
 	}
 
 	public void setCurrentFailurePercentage(TestRun testrun) {
-		for (int i = 0; i < classLog.size(); i++) {
-			if (getClassLog().get(i).getTestRun().getRunID().equals(testrun.getRunID())) {
-				this.currentFailurePercentage = getClassLog().get(i).getFailurePercentage();
-				break;
-			}
-		}
+		currentFailurePercentage = getFailurePercentageByTestrun(testrun);
 	}
 	
 	@Override

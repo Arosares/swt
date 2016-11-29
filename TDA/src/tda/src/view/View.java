@@ -36,6 +36,7 @@ public class View extends Stage implements Observer {
 	
 	//To be set when selecting a testRun in the treeView for the table
 	private String runID;
+	private TDATableView table;
 
 	public View(Model model, Controller controller) {
 		super();
@@ -55,7 +56,7 @@ public class View extends Stage implements Observer {
 		GridPane gridPane = new GridPane();
 		rootPane.setCenter(gridPane);
 		
-		TDATableView table = new TDATableView(controller);
+		table = new TDATableView(controller);
 		rootPane.setCenter(table.createTestedClassesTable());
 		
 		return rootPane;
@@ -115,6 +116,10 @@ public class View extends Stage implements Observer {
 	public void showTreeView(TreeView<String> treeView) {
 		treeView.setPrefWidth(500);
 		rootPane.setLeft(treeView);
+	}
+
+	public TDATableView getTable() {
+		return table;
 	}
 
 	
