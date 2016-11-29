@@ -74,17 +74,17 @@ public class TestRunTests {
 	
 	@Test
 	public void testEqualsSameTestRuns() {
-		assertEquals(true, testRun1.equals(testRun1));
+		assertTrue(testRun1.equals(testRun1));
 	}
 	
 	@Test
 	public void testEqualsSameTestID() {
 		TestRun testRun3 = new TestRun("Run1", "run-name-2", "fooUser");
-		assertEquals(true, testRun1.equals(testRun3));
+		assertTrue(testRun1.equals(testRun3));
 	}
 	
 	@Test
 	public void testEqualsDifferentTestRuns() {
-		assertEquals(false, testRun1.equals(testRun2));
+		assertFalse(testRun1.equals(testRun2));
 	}
 }

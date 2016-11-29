@@ -1,5 +1,7 @@
 package tda.src.view;
 
+import java.io.File;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -20,10 +22,12 @@ public class TDAMenuBar {
 	 *           view        &gt;       model
 	 * </pre>
 	 */
-	public Controller controller;
-
-	public TDAMenuBar(Controller controller) {
+	private Controller controller;
+	private View view;
+	
+	public TDAMenuBar(Controller controller, View view) {
 		this.controller = controller;
+		this.view = view;
 	}
 
 	public Node createMenuBar() {
@@ -48,8 +52,8 @@ public class TDAMenuBar {
 			@Override
 			public void handle(ActionEvent event) {
 
-				controller.openFolder();
-
+				File selectedDirectory = controller.openFolder();
+				view.getTree().fillTreeView(selectedDirectory);
 			}
 		});
 /*		MenuItem recentItem = new MenuItem("Recent");

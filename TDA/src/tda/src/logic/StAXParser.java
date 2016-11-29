@@ -42,6 +42,7 @@ public class StAXParser implements Parser {
 		String sumCompleted;
 		String sumDisconnected;
 		String sumError;
+		String sumExecuted;
 		String sumFailed;
 		String sumInProgress;
 		String sumInconclusive;
@@ -103,7 +104,7 @@ public class StAXParser implements Parser {
 						runUser = reader.getAttributeValue(3);
 
 						testRun = new TestRun(runID, runName, runUser);
-
+						testRun.setPath(path);
 						testData.addNewTestRun(testRun);
 
 					}
@@ -123,20 +124,21 @@ public class StAXParser implements Parser {
 						sumCompleted = reader.getAttributeValue(1);
 						sumDisconnected = reader.getAttributeValue(2);
 						sumError = reader.getAttributeValue(3);
-						sumFailed = reader.getAttributeValue(4);
-						sumInProgress = reader.getAttributeValue(5);
-						sumInconclusive = reader.getAttributeValue(6);
-						sumNotExecuted = reader.getAttributeValue(7);
-						sumNotRunnable = reader.getAttributeValue(8);
-						sumPassed = reader.getAttributeValue(9);
-						sumPassedButRunAborted = reader.getAttributeValue(10);
-						sumPending = reader.getAttributeValue(11);
-						sumTimeOut = reader.getAttributeValue(12);
-						sumTotal = reader.getAttributeValue(13);
-						sumWarning = reader.getAttributeValue(14);
+						sumExecuted = reader.getAttributeValue(4);
+						sumFailed = reader.getAttributeValue(5);
+						sumInProgress = reader.getAttributeValue(6);
+						sumInconclusive = reader.getAttributeValue(7);
+						sumNotExecuted = reader.getAttributeValue(8);
+						sumNotRunnable = reader.getAttributeValue(9);
+						sumPassed = reader.getAttributeValue(10);
+						sumPassedButRunAborted = reader.getAttributeValue(11);
+						sumPending = reader.getAttributeValue(12);
+						sumTimeOut = reader.getAttributeValue(13);
+						sumTotal = reader.getAttributeValue(14);
+						sumWarning = reader.getAttributeValue(15);
 						
 						//Create Counters Class
-						Counters counter = new Counters(sumAborted, sumCompleted, sumDisconnected, sumError, sumFailed,
+						Counters counter = new Counters(sumAborted, sumCompleted, sumDisconnected, sumError, sumExecuted, sumFailed,
 								sumInProgress, sumInconclusive, sumNotExecuted, sumNotRunnable, sumPassed,
 								sumPassedButRunAborted, sumPending, sumTimeOut, sumTotal, sumWarning);
 						testRun.setResultSummary(counter);

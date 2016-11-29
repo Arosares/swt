@@ -11,11 +11,6 @@ public class UnitTestsToTestRunMapper {
 	private TestRun testRun;
 	private List<UnitTest> unitTestList = new ArrayList<>();
 	private double failurePercentage;
-	
-	public UnitTestsToTestRunMapper(TestRun testRun) {
-		this.testRun = testRun;
-		unitTestList = new ArrayList<>();
-	}
 
 	public UnitTestsToTestRunMapper(UnitTest unitTest) {
 		this.testRun = unitTest.getTestRun();

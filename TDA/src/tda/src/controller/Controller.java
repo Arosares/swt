@@ -5,9 +5,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+import javafx.collections.ObservableList;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
-import javafx.util.Callback;
 import tda.src.logic.TestData;
 import tda.src.logic.TestRun;
 import tda.src.logic.TestedClass;
@@ -37,11 +37,12 @@ public class Controller {
 				model.parseFile(xmlFile.toString());
 			}
 		}
-		
-		TestRun testRun = TestData.getInstance().getTestRunList().get(0);
-		view.getTable().fillTestedClassTable(testRun);
-	}
 
+		TestRun testRun = TestData.getInstance().getTestRunList().get(0);
+
+		view.getTable().fillTestedClassTable(testRun);
+		view.getTotals().showTestRunTotals(testRun, false);
+	}
 
 	private void parseFilesInDirectory(File[] files) {
 		for (File file : files) {
@@ -58,19 +59,19 @@ public class Controller {
 		}
 
 	}
+	
+	public TreeItem<TestRun> createTreeItems(String rootDirectory) {
 
-	public TreeItem<String> createTreeItems(String rootDirectory) {
-		
-		//Not sure if working on windows with this regex 
+		// Not sure if working on windows with this regex
 		String[] rootFolder = rootDirectory.split("/|\\\\");
-		
-		TreeItem<String> rootItem = new TreeItem<String>(rootFolder[rootFolder.length - 1]);
+
+		TreeItem rootItem = new TreeItem(rootFolder[rootFolder.length - 1]);
 		Path rootPath = Paths.get(rootDirectory);
 		File[] files = rootPath.toFile().listFiles();
 		for (File file : files) {
 			if (file.isDirectory()) {
 				// Create new TreeItem as root with children
-				TreeItem<String> subRoot = createTreeItems(file.toString());
+				TreeItem subRoot = createTreeItems(file.toString());
 				if (subRoot.getChildren().size() != 0) {
 					rootItem.getChildren().add(subRoot);
 				}
@@ -78,23 +79,24 @@ public class Controller {
 				String lowerCaseFile = file.toString().toLowerCase();
 				if (lowerCaseFile.endsWith(".xml") && lowerCaseFile.contains("testrun")) {
 					// Create new TreeItem as leaf and add to rootItem
-					rootItem.getChildren().add(new TreeItem(file.getName()));
+					TreeItem<TestRun> treeItem = new TreeItem(file.getName());
+					rootItem.getChildren().add(treeItem);
 				}
 			}
 		}
 		return rootItem;
 	}
 
-	public TreeView<String> createTreeView(String rootDirectory) {
+	public TreeView<TestRun> createTreeView(String rootDirectory) {
 
-		TreeView<String> treeView = new TreeView<String>();
-		TreeItem<String> rootItem = createTreeItems(rootDirectory);
+		TreeView<TestRun> treeView = new TreeView<TestRun>();
+		TreeItem<TestRun> rootItem = createTreeItems(rootDirectory);
 		treeView.setRoot(rootItem);
 
 		return treeView;
 	}
 
-	public void openFolder() {
+	public File openFolder() {
 
 		File selectedDirectory = this.view.directoryAlert();
 		if (selectedDirectory != null) {
@@ -103,15 +105,9 @@ public class Controller {
 			File[] files = selectedDirectory.listFiles();
 			parseFilesInDirectory(files);
 
-			// Create a TreeView that has the selectedDirectory as rootItem
-			TreeView<String> treeView = createTreeView(selectedDirectory.toString());
-			this.view.showTreeView(treeView);
-			
-			//TODO: insted of get(0) get the marked testRun in the treeView
-			TestRun testRun = TestData.getInstance().getTestRunList().get(0);
-			view.getTable().fillTestedClassTable(testRun);
-
 		}
+
+		return selectedDirectory;
 	}
 
 	public void exitMain() {
@@ -122,5 +118,16 @@ public class Controller {
 		return model.getTestedClassesFromTestRun(testRun);
 	}
 
+	public void handleTreeItemClick(String xmlName) {
+		List<TestRun> testRuns = TestData.getInstance().getTestRunList();
+
+		for (TestRun testRun : testRuns) {
+			if (testRun.getPath().contains(xmlName)) {
+				view.getTable().fillTestedClassTable(testRun);
+				view.getTotals().showTestRunTotals(testRun, false);
+				break;
+			}
+		}
+	}
 
 }

@@ -1,7 +1,5 @@
 package tda.src.view;
 
-import java.util.ResourceBundle.Control;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -14,12 +12,14 @@ import tda.src.logic.TestRun;
 import tda.src.logic.TestedClass;
 
 public class TDATableView {
-	
+
 	private Controller controller;
 	private TableView<TestedClass> testedClassesTable;
+	private ObservableList<TestedClass> data;
+	private TableColumn classNameCol;
+	private TableColumn failurePercentageCol;
 	
 	
-
 	public TDATableView(Controller controller) {
 		super();
 		this.controller = controller;
@@ -28,29 +28,43 @@ public class TDATableView {
 	public Node createTestedClassesTable() {
 		testedClassesTable = new TableView<TestedClass>();
 		testedClassesTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-		
+
 		testedClassesTable.setPrefWidth(800);
 		testedClassesTable.setPrefHeight(300);
-
+		
+		classNameCol = new TableColumn("Tested Class");
+		failurePercentageCol = new TableColumn("Failure Percentage");
+		
+		classNameCol.setCellValueFactory(new PropertyValueFactory<TestedClass, String>("className"));
+		failurePercentageCol
+				.setCellValueFactory(new PropertyValueFactory<TestedClass, Double>("currentFailurePercentage"));
+		
+		failurePercentageCol.setSortType(TableColumn.SortType.DESCENDING);
+		
+		testedClassesTable.getColumns().addAll(classNameCol, failurePercentageCol);
+		testedClassesTable.getSortOrder().add(failurePercentageCol);
+		
 		ScrollPane scrollPane = new ScrollPane(testedClassesTable);
 
 		return scrollPane;
 
 	}
-	
+
+	@SuppressWarnings("unchecked")
 	public void fillTestedClassTable(TestRun testRun) {
-
-		ObservableList<TestedClass> data = FXCollections
+		data = FXCollections
 				.observableArrayList(controller.getTestedClassesFromTestRun(testRun));
-
-		TableColumn classNameCol = new TableColumn("Tested Class");
-		TableColumn failurePercentageCol = new TableColumn("Failure Percentage");
-
-		classNameCol.setCellValueFactory(new PropertyValueFactory<TestedClass, String>("className"));
-		failurePercentageCol
-				.setCellValueFactory(new PropertyValueFactory<TestedClass, Double>("currentFailurePercentage"));
-
+		
 		testedClassesTable.setItems(data);
-		testedClassesTable.getColumns().addAll(classNameCol, failurePercentageCol);
+		
+		failurePercentageCol.setSortType(TableColumn.SortType.DESCENDING);
+		testedClassesTable.getSortOrder().add(failurePercentageCol);
+		
+		
+		
 	}
+	public ObservableList<TestedClass> getData() {
+		return data;
+	}
+	
 }

@@ -20,12 +20,10 @@ public class Model extends Observable {
 	 * </pre>
 	 */
 	private Parser parser;
-	final private TestData testData;
 
 	public Model() {
 		super();
 		// initialize program:
-		testData = TestData.getInstance();
 		parser = new StAXParser();
 
 	}

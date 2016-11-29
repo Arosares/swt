@@ -7,6 +7,7 @@ public class TestRun {
 	private String runID, runName, runUser;
 	private Counters resultSummary;
 	private List<TestedClass> testedClasses = new LinkedList<>();
+	private String path;
 
 	public String getRunID() {
 		return runID;
@@ -45,6 +46,14 @@ public class TestRun {
 
 	public Counters getResultSummary() {
 		return this.resultSummary;
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
 	}
 
 	@Override

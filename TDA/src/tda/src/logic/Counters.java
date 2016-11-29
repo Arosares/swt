@@ -5,6 +5,7 @@ public class Counters {
 	String sumCompleted;
 	String sumDisconnected;
 	String sumError;
+	String sumExecuted;
 	String sumFailed;
 	String sumInProgress;
 	String sumInconclusive;
@@ -17,7 +18,7 @@ public class Counters {
 	String sumTotal;
 	String sumWarning;
 
-	public Counters(String sumAborted, String sumCompleted, String sumDisconnected, String sumError, String sumFailed,
+	public Counters(String sumAborted, String sumCompleted, String sumDisconnected, String sumError, String sumExecuted, String sumFailed,
 			String sumInProgress, String sumInconclusive, String sumNotExecuted, String sumNotRunnable,
 			String sumPassed, String sumPassedButRunAborted, String sumPending, String sumTimeOut, String sumTotal,
 			String sumWarning) {
@@ -26,6 +27,7 @@ public class Counters {
 		this.sumCompleted = sumCompleted;
 		this.sumDisconnected = sumDisconnected;
 		this.sumError = sumError;
+		this.sumExecuted = sumExecuted;
 		this.sumFailed = sumFailed;
 		this.sumInProgress = sumInProgress;
 		this.sumInconclusive = sumInconclusive;
@@ -69,6 +71,14 @@ public class Counters {
 
 	public void setSumError(String sumError) {
 		this.sumError = sumError;
+	}
+//	Added sumExecuted everywhere because it's part of the xmls.
+	public String getSumExecuted() {
+		return sumExecuted;
+	}
+
+	public void setSumExecuted(String sumExecuted) {
+		this.sumExecuted = sumExecuted;
 	}
 
 	public String getSumFailed() {

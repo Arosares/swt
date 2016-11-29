@@ -15,8 +15,7 @@ public class TestedClass {
 	private double currentFailurePercentage = -1.00;
 
 	/**
-	 * classLog:
-	 * testRunID|failurePercentage|List<UnitTest>
+	 * classLog: testRunID|failurePercentage|List<UnitTest>
 	 */
 	private List<UnitTestsToTestRunMapper> classLog = new LinkedList<>();
 
@@ -48,19 +47,19 @@ public class TestedClass {
 		}
 
 	}
-	
-	public double getFailurePercentageByTestrun(TestRun testrun){
+
+	public double getFailurePercentageByTestrun(TestRun testrun) {
 		for (UnitTestsToTestRunMapper unitTestsToTestRunMapper : classLog) {
-			if(unitTestsToTestRunMapper.getTestRun().getRunID().equals(testrun.getRunID())){
+			if (unitTestsToTestRunMapper.getTestRun().getRunID().equals(testrun.getRunID())) {
 				return unitTestsToTestRunMapper.getFailurePercentage();
 			}
 		}
 		throw new IllegalArgumentException(testrun.getRunID() + " can't be found in the class log");
 	}
-	
-	public List<UnitTest> getUnitTestsByTestRun(TestRun testrun){
+
+	public List<UnitTest> getUnitTestsByTestRun(TestRun testrun) {
 		for (UnitTestsToTestRunMapper unitTestsToTestRunMapper : classLog) {
-			if(unitTestsToTestRunMapper.getTestRun().getRunID().equals(testrun.getRunID())){
+			if (unitTestsToTestRunMapper.getTestRun().getRunID().equals(testrun.getRunID())) {
 				return unitTestsToTestRunMapper.getUnitTestList();
 			}
 		}
@@ -86,7 +85,7 @@ public class TestedClass {
 	public void setCurrentFailurePercentage(TestRun testrun) {
 		currentFailurePercentage = getFailurePercentageByTestrun(testrun);
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Name: " + className;
@@ -96,8 +95,7 @@ public class TestedClass {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((className == null) ? 0 : className.hashCode());
+		result = prime * result + ((className == null) ? 0 : className.hashCode());
 		return result;
 	}
 
@@ -117,7 +115,5 @@ public class TestedClass {
 			return false;
 		return true;
 	}
-	
-	
 
 }

@@ -7,10 +7,12 @@ import java.util.Observer;
 import java.util.Optional;
 
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -32,11 +34,11 @@ public class View extends Stage implements Observer {
 	 */
 	private Model model;
 	private Controller controller;
+
 	private BorderPane rootPane;
-	
-	//To be set when selecting a testRun in the treeView for the table
-	private String runID;
 	private TDATableView table;
+	private TDATreeView tree;
+	private TDATestRunTotals totals;
 
 	public View(Model model, Controller controller) {
 		super();
@@ -48,20 +50,34 @@ public class View extends Stage implements Observer {
 		this.setMaximized(true);
 	}
 
+	/**
+	 * @return
+	 * Creates our base panes in our main View. 
+	 * Includes the menuBar on top, and the TestRun Totals and Class Table below.
+	 */
 	private Pane createRootPane() {
 		rootPane = new BorderPane();
-		TDAMenuBar menuBar = new TDAMenuBar(controller);
-		
+		TDAMenuBar menuBar = new TDAMenuBar(controller, this);
+
 		this.rootPane.setTop(menuBar.createMenuBar());
 		GridPane gridPane = new GridPane();
+		gridPane.setAlignment(Pos.TOP_CENTER);
 		rootPane.setCenter(gridPane);
+
+		tree = new TDATreeView(this);
+		Label totalsLabel = new Label("Loaded TestRun Info:");
+		gridPane.add(totalsLabel,1,1);
+		
+		totals = new TDATestRunTotals(controller);
+		gridPane.add(totals.createTestRunTotalsBox(),1,2);
 		
 		table = new TDATableView(controller);
-		rootPane.setCenter(table.createTestedClassesTable());
-		
+		rootPane.setLeft(tree.generateEmptyTreeView());
+//		rootPane.setCenter(table.createTestedClassesTable());
+		gridPane.add(table.createTestedClassesTable(),1,3);
+
 		return rootPane;
 	}
-	
 
 	@Override
 	public void update(Observable o, Object arg) {
@@ -73,8 +89,6 @@ public class View extends Stage implements Observer {
 		Alert error = new Alert(AlertType.ERROR, message);
 		error.showAndWait();
 	}
-
-	
 
 	public List<File> pathAlert() {
 
@@ -101,7 +115,7 @@ public class View extends Stage implements Observer {
 			}
 		});
 	}
-	
+
 	public void exitAlert() {
 		Alert exitAlert = new Alert(AlertType.CONFIRMATION,
 				"Do you really want to exit? All unsaved changes will be lost.");
@@ -113,17 +127,23 @@ public class View extends Stage implements Observer {
 		}
 	}
 
-	public void showTreeView(TreeView<String> treeView) {
-		treeView.setPrefWidth(500);
+	public void showTreeView(TreeView treeView) {
 		rootPane.setLeft(treeView);
 	}
 
 	public TDATableView getTable() {
 		return table;
 	}
+	public TDATestRunTotals getTotals() {
+		return totals;
+	}
 
-	
+	public TDATreeView getTree() {
+		return tree;
+	}
 
-	
+	public Controller getController() {
+		return controller;
+	}
 
 }
