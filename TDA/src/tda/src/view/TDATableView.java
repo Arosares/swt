@@ -50,10 +50,9 @@ public class TDATableView {
 		    TableRow<TestedClass> row = new TableRow<>();
 		    row.setOnMouseClicked(event -> {
 		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
-		            TestedClass rowData = row.getItem();
-		            System.out.println(rowData);
+		            TestedClass testedClass = row.getItem();
 		            
-		            controller.handleTableRowClick(rowData);
+		            controller.handleTableRowClick(testedClass);
 		        }
 		    });
 		    return row ;
