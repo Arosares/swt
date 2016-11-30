@@ -10,6 +10,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -90,7 +91,9 @@ public class View extends Stage implements Observer {
 		});
 
 		gridPane.add(resetGraphs, 1, 5);
-		gridPane.setHalignment(resetGraphs, HPos.CENTER);
+		GridPane.setHalignment(resetGraphs, HPos.CENTER);
+		GridPane.setValignment(resetGraphs, VPos.BOTTOM);
+		gridPane.setVgap(20);
 
 		return rootPane;
 	}
