@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import tda.src.controller.Controller;
@@ -43,6 +44,20 @@ public class TDATableView {
 		
 		testedClassesTable.getColumns().addAll(classNameCol, failurePercentageCol);
 		testedClassesTable.getSortOrder().add(failurePercentageCol);
+		
+		//Make rows able to be double clicked and display the selected row in the graph
+		testedClassesTable.setRowFactory( tv -> {
+		    TableRow<TestedClass> row = new TableRow<>();
+		    row.setOnMouseClicked(event -> {
+		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+		            TestedClass rowData = row.getItem();
+		            System.out.println(rowData);
+		            
+		            controller.handleTableRowClick(rowData);
+		        }
+		    });
+		    return row ;
+		});
 		
 		ScrollPane scrollPane = new ScrollPane(testedClassesTable);
 

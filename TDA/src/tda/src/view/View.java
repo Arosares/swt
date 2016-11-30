@@ -38,6 +38,7 @@ public class View extends Stage implements Observer {
 	private BorderPane rootPane;
 	private TDATableView table;
 	private TDATreeView tree;
+	private TDAGraph graph;
 	private TDATestRunTotals totals;
 
 	public View(Model model, Controller controller) {
@@ -75,6 +76,11 @@ public class View extends Stage implements Observer {
 		rootPane.setLeft(tree.generateEmptyTreeView());
 //		rootPane.setCenter(table.createTestedClassesTable());
 		gridPane.add(table.createTestedClassesTable(),1,3);
+		
+		graph = new TDAGraph();
+		gridPane.add(graph.generateLineChart(), 1, 4);
+		
+		
 
 		return rootPane;
 	}
@@ -140,6 +146,10 @@ public class View extends Stage implements Observer {
 
 	public TDATreeView getTree() {
 		return tree;
+	}
+
+	public TDAGraph getGraph() {
+		return graph;
 	}
 
 	public Controller getController() {

@@ -130,4 +130,8 @@ public class Controller {
 		}
 	}
 
+	public void handleTableRowClick(TestedClass testedClass) {
+		view.getGraph().setChartData(testedClass);
+	}
+
 }
