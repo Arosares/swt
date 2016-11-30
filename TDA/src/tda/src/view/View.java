@@ -45,7 +45,7 @@ public class View extends Stage implements Observer {
 	private TDAGraph graph;
 	private TDATestRunTotals totals;
 	private TDAMenuBar menuBar;
-	
+
 	public View(Model model, Controller controller) {
 		super();
 		this.model = model;
@@ -58,7 +58,8 @@ public class View extends Stage implements Observer {
 
 	/**
 	 * @return Creates our base panes in our main View. Includes the menuBar on
-	 *         top, and the TestRun Totals and Class Table below.
+	 *         top, the TreeView on the Left and the TestRun Totals and Class
+	 *         Table + Graph below.
 	 */
 	private Pane createRootPane() {
 		rootPane = new BorderPane();
@@ -72,6 +73,7 @@ public class View extends Stage implements Observer {
 		rootPane.setCenter(gridPane);
 
 		tree = new TDATreeView(this);
+
 		Label totalsLabel = new Label("Loaded TestRun Info:");
 		gridPane.add(totalsLabel, 1, 1);
 
@@ -79,10 +81,10 @@ public class View extends Stage implements Observer {
 		gridPane.add(totals.createTestRunTotalsBox(), 1, 2);
 
 		table = new TDATableView(controller);
-		rootPane.setLeft(tree.generateEmptyTreeView());
-		// rootPane.setCenter(table.createTestedClassesTable());
-		gridPane.add(table.createTestedClassesTable(), 1, 3);
 
+		rootPane.setLeft(tree.generateEmptyTreeView());
+
+		gridPane.add(table.createTestedClassesTable(), 1, 3);
 		graph = new TDAGraph();
 		gridPane.add(graph.generateLineChart(), 1, 4);
 

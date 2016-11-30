@@ -1,13 +1,19 @@
 package tda.src.logic;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.xml.XMLConstants;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamReader;
+import javax.xml.transform.stax.StAXSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.Validator;
 
 public class StAXParser implements Parser {
 
@@ -26,7 +32,7 @@ public class StAXParser implements Parser {
 		TestRun testRun = null;
 		// UnitTest Data
 		String unitTestID = "", unitTestName = "", unitTestExecutionID = "", testMethodName = "";
-		//UnitTestResult Data
+		// UnitTestResult Data
 		String resultUnitTestID;
 		String unitTestOutcome;
 		// Tested Class Data
@@ -78,7 +84,7 @@ public class StAXParser implements Parser {
 					if ("UnitTestResult".equals(reader.getLocalName())) {
 						resultUnitTestID = reader.getAttributeValue(8);
 						unitTestOutcome = reader.getAttributeValue(5);
-						
+
 						for (UnitTest unitTest : unitTestsOfOneRun) {
 							if (unitTest.getUnitTestID().equals(resultUnitTestID)) {
 								unitTest.setOutcome(unitTestOutcome);
@@ -136,11 +142,11 @@ public class StAXParser implements Parser {
 						sumTimeOut = reader.getAttributeValue(13);
 						sumTotal = reader.getAttributeValue(14);
 						sumWarning = reader.getAttributeValue(15);
-						
-						//Create Counters Class
-						Counters counter = new Counters(sumAborted, sumCompleted, sumDisconnected, sumError, sumExecuted, sumFailed,
-								sumInProgress, sumInconclusive, sumNotExecuted, sumNotRunnable, sumPassed,
-								sumPassedButRunAborted, sumPending, sumTimeOut, sumTotal, sumWarning);
+
+						// Create Counters Class
+						Counters counter = new Counters(sumAborted, sumCompleted, sumDisconnected, sumError,
+								sumExecuted, sumFailed, sumInProgress, sumInconclusive, sumNotExecuted, sumNotRunnable,
+								sumPassed, sumPassedButRunAborted, sumPending, sumTimeOut, sumTotal, sumWarning);
 						testRun.setResultSummary(counter);
 					}
 					if ("StdOut".equals(reader.getLocalName()) && waitForStdOut) {
@@ -164,9 +170,9 @@ public class StAXParser implements Parser {
 						testData.addNewTestedClass(testedClass);
 						testData.addNewUnitTest(unitTest);
 						unitTestsOfOneRun.add(unitTest);
-						
+
 						testRun.addTestedClassToTestRun(testedClass);
-						
+
 					}
 					if ("TestRun".equals(reader.getLocalName())) {
 						System.out.println("Finished TestRun: " + testRun.getRunID());
