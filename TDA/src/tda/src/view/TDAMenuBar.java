@@ -1,14 +1,18 @@
 package tda.src.view;
 
 import java.io.File;
+import java.util.Optional;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import tda.src.controller.Controller;
 import tda.src.logic.TestedClass;
@@ -63,6 +67,14 @@ public class TDAMenuBar {
 				// TODO
 			}
 		});*/
+		MenuItem clearData = new MenuItem("Clear All Data");
+		clearData.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event){
+				controller.handleClearDataButton();
+				event.consume();
+			}
+		});
 		MenuItem exitItem = new MenuItem("Exit");
 		exitItem.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -71,10 +83,22 @@ public class TDAMenuBar {
 				event.consume();
 			}
 		});
-		file.getItems().addAll(openFile, openFolder, exitItem);
+		file.getItems().addAll(openFile, openFolder,clearData, exitItem);
 		menuBar.getMenus().add(file);
 		
 		return menuBar;
 	}
+	
+	public void clearDataAlert(){
+		Alert clearDataAlert = new Alert(AlertType.CONFIRMATION,
+				"Do you really want to clear all Data?\n All loaded TestRuns will be lost.");
+		clearDataAlert.setTitle("Clear Data?");
+		
+		Optional<ButtonType> result = clearDataAlert.showAndWait();
+		if (result.isPresent() && result.get() == ButtonType.OK) {
+			controller.clearData();
+		}
+	}
+	
 
 }

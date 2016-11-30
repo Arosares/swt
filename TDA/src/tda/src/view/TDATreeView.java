@@ -84,6 +84,10 @@ public class TDATreeView {
 		return treeView;
 	}
 
+	public TreeView<String> getTreeView() {
+		return treeView;
+	}
+
 	private void handleMouseClicked(MouseEvent event) {
 		Node node = event.getPickResult().getIntersectedNode();
 		// Accept clicks only on node cells, and not on empty spaces of the

@@ -44,7 +44,8 @@ public class View extends Stage implements Observer {
 	private TDATreeView tree;
 	private TDAGraph graph;
 	private TDATestRunTotals totals;
-
+	private TDAMenuBar menuBar;
+	
 	public View(Model model, Controller controller) {
 		super();
 		this.model = model;
@@ -61,7 +62,7 @@ public class View extends Stage implements Observer {
 	 */
 	private Pane createRootPane() {
 		rootPane = new BorderPane();
-		TDAMenuBar menuBar = new TDAMenuBar(controller, this);
+		menuBar = new TDAMenuBar(controller, this);
 
 		this.rootPane.setTop(menuBar.createMenuBar());
 		GridPane gridPane = new GridPane();
@@ -164,6 +165,10 @@ public class View extends Stage implements Observer {
 
 	public TDAGraph getGraph() {
 		return graph;
+	}
+
+	public TDAMenuBar getMenuBar() {
+		return menuBar;
 	}
 
 	public Controller getController() {

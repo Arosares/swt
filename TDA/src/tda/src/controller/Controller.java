@@ -138,4 +138,32 @@ public class Controller {
 		view.getGraph().getLineChart().getData().clear();
 	}
 
+	public void handleClearDataButton() {
+		view.getMenuBar().clearDataAlert();
+	}
+
+	/**
+	 * Cleares all extracted Data parsed from the XML data.
+	 * Should be updated with additional features added to the TDA.
+	 */
+	public void clearData() {
+		//Clear the testData
+		TestData.getInstance().getTestRunList().clear();
+		TestData.getInstance().getTestedClassList().clear();
+		TestData.getInstance().getUnitTestList().clear();
+		
+		//Delete the Table Data
+		view.getTable().getData().clear();
+		
+		//Delete the TreeView
+		view.getTree().getTreeView().setRoot(null);
+		
+		//Clear the Graph Content by Calling the ResetButton Handler
+		handleResetGraph();
+		
+		//Clear both Observable Lists for the TestRunInfos
+		view.getTotals().getAllCounters().clear();
+		view.getTotals().getGeneratedList().clear();
+	}
+
 }

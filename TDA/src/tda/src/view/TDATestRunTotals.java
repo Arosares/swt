@@ -17,6 +17,8 @@ public class TDATestRunTotals {
 	private Controller controller;
 	private ListView<String> testRunTotals;
 	private Counters totals;
+	private ObservableList<String> generatedList;
+	private ObservableList<String> allCounters;
 
 	public TDATestRunTotals(Controller controller) {
 		super();
@@ -68,9 +70,9 @@ public class TDATestRunTotals {
 
 		totals = testRun.getResultSummary();
 
-		ObservableList<String> generatedList = importantCounters();
+		generatedList = importantCounters();
 		// Show all Counters:
-		ObservableList<String> allCounters = importantCounters();
+		allCounters = importantCounters();
 		allCounters = additionalCounters(allCounters);
 		if(details){
 			testRunTotals.setItems(allCounters);
@@ -118,6 +120,14 @@ public class TDATestRunTotals {
 		allCounters.add("Time Out: ".concat(totals.getSumTimeOut()));
 		allCounters.add("Warning: ".concat(totals.getSumWarning()));
 
+		return allCounters;
+	}
+	
+	public ObservableList<String> getGeneratedList() {
+		return generatedList;
+	}
+
+	public ObservableList<String> getAllCounters() {
 		return allCounters;
 	}
 }
