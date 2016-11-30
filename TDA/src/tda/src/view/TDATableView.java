@@ -3,11 +3,13 @@ package tda.src.view;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.control.Labeled;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 import tda.src.controller.Controller;
 import tda.src.logic.TestRun;
 import tda.src.logic.TestedClass;
@@ -48,6 +50,7 @@ public class TDATableView {
 		//Make rows able to be double clicked and display the selected row in the graph
 		testedClassesTable.setRowFactory( tv -> {
 		    TableRow<TestedClass> row = new TableRow<>();
+		    
 		    row.setOnMouseClicked(event -> {
 		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
 		            TestedClass testedClass = row.getItem();

@@ -134,4 +134,8 @@ public class Controller {
 		view.getGraph().setChartData(testedClass);
 	}
 
+	public void handleResetGraph() {
+		view.getGraph().getLineChart().getData().clear();
+	}
+
 }

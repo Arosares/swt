@@ -44,4 +44,8 @@ public class TDAGraph {
 
 	}
 
+	public LineChart<Number, Number> getLineChart() {
+		return lineChart;
+	}
+
 }
