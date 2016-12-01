@@ -1,5 +1,6 @@
 package tda.src.logic;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,11 +17,11 @@ public class UnitTestsToTestRunMapper {
 		this.testRun = unitTest.getTestRun();
 		unitTestList.add(unitTest);
 	}
-	
-	public void addUnitTestToTestRun(UnitTest unitTest){
+
+	public void addUnitTestToTestRun(UnitTest unitTest) {
 		unitTestList.add(unitTest);
 	}
-	
+
 	public double getFailurePercentage() {
 		calculateFailurePercentage();
 		return failurePercentage;
@@ -34,7 +35,10 @@ public class UnitTestsToTestRunMapper {
 				numberOfFailedTests++;
 			}
 		}
-		failurePercentage = (numberOfFailedTests * 100 / numberOfUnitTests); 
+		failurePercentage = (numberOfFailedTests * 100 / numberOfUnitTests);
+
+		// limit double to two digits after comma
+		failurePercentage = Double.parseDouble(new DecimalFormat("##.##").format(failurePercentage));
 	}
 
 	public List<UnitTest> getUnitTestList() {
@@ -59,7 +63,7 @@ public class UnitTestsToTestRunMapper {
 
 	@Override
 	public String toString() {
-		return "Mapper [testRun=" + testRun.getRunID() + ", unitTestList=" + unitTestList
-				+ ", failurePercentage=" + getFailurePercentage() + "]";
+		return "Mapper [testRun=" + testRun.getRunID() + ", unitTestList=" + unitTestList + ", failurePercentage="
+				+ getFailurePercentage() + "]";
 	}
 }

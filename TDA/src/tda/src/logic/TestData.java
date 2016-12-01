@@ -51,7 +51,7 @@ public class TestData {
 		}
 	}
 
-	public void addNewTestedClass(TestedClass newlyCreatedClass) {
+	public TestedClass addNewTestedClass(TestedClass newlyCreatedClass) {
 		TestedClass existingClass = getClassByName(newlyCreatedClass.getClassName());
 
 		if (existingClass != null) {
@@ -59,8 +59,12 @@ public class TestData {
 			UnitTestsToTestRunMapper newMapping = newlyCreatedClass.getClassLog().get(0);
 			UnitTest unitTestOfNewClass = newMapping.getUnitTestList().get(0);
 			existingClass.addUnitTestToClassLog(unitTestOfNewClass);
+			
+			return existingClass;
 		} else {
 			testedClassList.add(newlyCreatedClass);
+			
+			return newlyCreatedClass;
 		}
 	}
 

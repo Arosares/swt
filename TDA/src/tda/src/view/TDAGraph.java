@@ -36,10 +36,8 @@ public class TDAGraph {
 			int xValue = testRunCounter;
 
 			series.getData().add(new XYChart.Data<Number, Number>(xValue, yValue));
-
 		}
-		series.setName(
-				testedClass.getClassName() + " over " + TestData.getInstance().getTestRunList().size() + " runs");
+		series.setName(testedClass.getClassName() + " over " + testRunCounter + " runs");
 		lineChart.getData().add(series);
 
 	}

@@ -48,13 +48,13 @@ public class TestedClass {
 
 	}
 
-	public double getFailurePercentageByTestrun(TestRun testrun) {
+	public double getFailurePercentageByTestrun(TestRun testRun) {
 		for (UnitTestsToTestRunMapper unitTestsToTestRunMapper : classLog) {
-			if (unitTestsToTestRunMapper.getTestRun().getRunID().equals(testrun.getRunID())) {
+			if (unitTestsToTestRunMapper.getTestRun().getRunID().equals(testRun.getRunID())) {
 				return unitTestsToTestRunMapper.getFailurePercentage();
 			}
 		}
-		throw new IllegalArgumentException(testrun.getRunID() + " can't be found in the class log");
+		throw new IllegalArgumentException(testRun.getRunID() + " can't be found in the class log");
 	}
 
 	public List<UnitTest> getUnitTestsByTestRun(TestRun testrun) {

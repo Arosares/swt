@@ -5,7 +5,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import javafx.collections.ObservableList;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import tda.src.logic.TestData;
@@ -47,8 +46,8 @@ public class Controller {
 	private void parseFilesInDirectory(File[] files) {
 		for (File file : files) {
 			if (file.isDirectory()) {
-				parseFilesInDirectory(file.listFiles()); // Calls same method
-															// again.
+				// Calls same method again.
+				parseFilesInDirectory(file.listFiles());
 			} else {
 				String lowerCaseFile = file.toString().toLowerCase();
 				if (lowerCaseFile.endsWith(".xml") && lowerCaseFile.contains("testrun")) {
@@ -59,7 +58,7 @@ public class Controller {
 		}
 
 	}
-	
+
 	public TreeItem<TestRun> createTreeItems(String rootDirectory) {
 
 		// Not sure if working on windows with this regex
@@ -120,7 +119,7 @@ public class Controller {
 
 	public void handleTreeItemClick(String xmlName) {
 		List<TestRun> testRuns = TestData.getInstance().getTestRunList();
-
+		handleResetGraph();
 		for (TestRun testRun : testRuns) {
 			if (testRun.getPath().contains(xmlName)) {
 				view.getTable().fillTestedClassTable(testRun);
@@ -143,27 +142,32 @@ public class Controller {
 	}
 
 	/**
-	 * Cleares all extracted Data parsed from the XML data.
-	 * Should be updated with additional features added to the TDA.
+	 * Cleares all extracted Data parsed from the XML data. Should be updated
+	 * with additional features added to the TDA.
 	 */
 	public void clearData() {
-		//Clear the testData
+		// Clear the testData
 		TestData.getInstance().getTestRunList().clear();
 		TestData.getInstance().getTestedClassList().clear();
 		TestData.getInstance().getUnitTestList().clear();
-		
-		//Delete the Table Data
-		view.getTable().getData().clear();
-		
-		//Delete the TreeView
+
+		// Delete the Table Data
+		if (view.getTable().getData() != null) {
+			view.getTable().getData().clear();
+		}
+
+		// Delete the TreeView
 		view.getTree().getTreeView().setRoot(null);
-		
-		//Clear the Graph Content by Calling the ResetButton Handler
+
+		// Clear the Graph Content by Calling the ResetButton Handler
 		handleResetGraph();
-		
-		//Clear both Observable Lists for the TestRunInfos
-		view.getTotals().getAllCounters().clear();
-		view.getTotals().getGeneratedList().clear();
+
+		// Clear both Observable Lists for the TestRunInfos
+		if (view.getTotals().getAllCounters() != null && view.getTotals().getGeneratedList() != null) {
+			view.getTotals().getAllCounters().clear();
+			view.getTotals().getGeneratedList().clear();
+		}
+
 	}
 
 }
