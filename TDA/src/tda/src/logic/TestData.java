@@ -68,7 +68,7 @@ public class TestData {
 		}
 	}
 
-	public void addNewUnitTest(UnitTest unitTest) {
+	public synchronized void addNewUnitTest(UnitTest unitTest) {
 		unitTestList.add(unitTest);
 	}
 

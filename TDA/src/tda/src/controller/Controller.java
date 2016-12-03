@@ -6,11 +6,15 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.swing.text.StyledEditorKit.ForegroundAction;
+
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import tda.src.logic.TestData;
 import tda.src.logic.TestRun;
 import tda.src.logic.TestedClass;
+import tda.src.logic.UnitTest;
+import tda.src.logic.UnitTestsToTestRunMapper;
 import tda.src.model.Model;
 import tda.src.view.View;
 
@@ -106,7 +110,18 @@ public class Controller {
 			parseFilesInDirectory(files);
 
 		}
-
+		for (TestRun testRun : TestData.getInstance().getTestRunList()) {
+			System.out.println("Test over: " + testRun.getTestedClasses().size() + " classes");
+			for (TestedClass testedClass : getTestedClassesFromTestRun(testRun)) {
+				System.out.println(testedClass + " had following Tests:");
+				for (UnitTestsToTestRunMapper classLog : testedClass.getClassLog()) {
+					System.out.println(classLog.getUnitTestList().size());
+					for (UnitTest unitTest : classLog.getUnitTestList()) {
+						System.out.println("\t" + unitTest.getUnitTestName());
+					}
+				}
+			}
+		}
 		return selectedDirectory;
 	}
 
