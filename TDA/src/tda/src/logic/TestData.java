@@ -33,7 +33,7 @@ public class TestData {
 		return unitTestList;
 	}
 
-	public void addNewTestRun(TestRun testRun) throws Exception {
+	public synchronized void addNewTestRun(TestRun testRun) throws Exception {
 		boolean existing = false;
 		// add class to list if not already there
 
@@ -51,7 +51,7 @@ public class TestData {
 		}
 	}
 
-	public TestedClass addNewTestedClass(TestedClass newlyCreatedClass) {
+	public synchronized TestedClass addNewTestedClass(TestedClass newlyCreatedClass) {
 		TestedClass existingClass = getClassByName(newlyCreatedClass.getClassName());
 
 		if (existingClass != null) {

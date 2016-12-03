@@ -3,6 +3,7 @@ package tda.src.controller;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 
 import javafx.scene.control.TreeItem;
@@ -44,7 +45,9 @@ public class Controller {
 	}
 
 	private void parseFilesInDirectory(File[] files) {
-		for (File file : files) {
+		List<File> fileList = Arrays.asList(files);
+		
+		fileList.stream().parallel().forEach(file -> {
 			if (file.isDirectory()) {
 				// Calls same method again.
 				parseFilesInDirectory(file.listFiles());
@@ -53,10 +56,8 @@ public class Controller {
 				if (lowerCaseFile.endsWith(".xml") && lowerCaseFile.contains("testrun")) {
 					model.parseFile(file.toString());
 				}
-
 			}
-		}
-
+		});
 	}
 
 	public TreeItem<TestRun> createTreeItems(String rootDirectory) {

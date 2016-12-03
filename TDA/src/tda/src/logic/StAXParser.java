@@ -166,8 +166,8 @@ public class StAXParser implements Parser {
 						UnitTest unitTest = new UnitTest(testRun, unitTestID, unitTestName, unitTestExecutionID,
 								testMethodName);
 						TestedClass testedClass = new TestedClass(testedClassName, unitTest);
-						
-						//returns the existing class if already parsed before
+
+						// returns the existing class if already parsed before
 						testedClass = testData.addNewTestedClass(testedClass);
 						testData.addNewUnitTest(unitTest);
 						unitTestsOfOneRun.add(unitTest);

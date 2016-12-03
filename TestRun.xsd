@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+   <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+         <!-- XML Schema Generated from XML Document on Fri Dec 02 2016 10:26:35 GMT+0100 (CET) -->
+         <!-- with XmlGrid.net Free Online Service http://xmlgrid.net -->
+         <xs:element name="TestRun">
+               <xs:complexType>
+                     <xs:sequence>
+                           <xs:element name="TestSettings">
+                                 <xs:complexType>
+                                       <xs:sequence>
+                                             <xs:element name="Deployment">
+                                                   <xs:complexType>
+                                                         <xs:attribute name="runDeploymentRoot" type="xs:string"></xs:attribute>
+                                                         <xs:attribute name="useDefaultDeploymentRoot" type="xs:string"></xs:attribute>
+                                                         <xs:attribute name="userDeploymentRoot" type="xs:string"></xs:attribute>
+                                                   </xs:complexType>
+                                             </xs:element>
+                                             <xs:element name="Execution">
+                                                   <xs:complexType>
+                                                         <xs:sequence>
+                                                               <xs:element name="TestTypeSpecific"></xs:element>
+                                                               <xs:element name="AgentRule">
+                                                                     <xs:complexType>
+                                                                           <xs:attribute name="name" type="xs:string"></xs:attribute>
+                                                                     </xs:complexType>
+                                                               </xs:element>
+                                                         </xs:sequence>
+                                                   </xs:complexType>
+                                             </xs:element>
+                                             <xs:element name="Properties"></xs:element>
+                                       </xs:sequence>
+                                       <xs:attribute name="id" type="xs:string"></xs:attribute>
+                                       <xs:attribute name="name" type="xs:string"></xs:attribute>
+                                 </xs:complexType>
+                           </xs:element>
+                           <xs:element name="Times">
+                                 <xs:complexType>
+                                       <xs:attribute name="creation" type="xs:string"></xs:attribute>
+                                       <xs:attribute name="finish" type="xs:string"></xs:attribute>
+                                       <xs:attribute name="queuing" type="xs:string"></xs:attribute>
+                                       <xs:attribute name="start" type="xs:string"></xs:attribute>
+                                 </xs:complexType>
+                           </xs:element>
+                           <xs:element name="ResultSummary">
+                                 <xs:complexType>
+                                       <xs:sequence>
+                                             <xs:element name="Counters">
+                                                   <xs:complexType>
+                                                         <xs:attribute name="aborted" type="xs:int"></xs:attribute>
+                                                         <xs:attribute name="completed" type="xs:int"></xs:attribute>
+                                                         <xs:attribute name="disconnected" type="xs:int"></xs:attribute>
+                                                         <xs:attribute name="error" type="xs:int"></xs:attribute>
+                                                         <xs:attribute name="executed" type="xs:int"></xs:attribute>
+                                                         <xs:attribute name="failed" type="xs:int"></xs:attribute>
+                                                         <xs:attribute name="inProgress" type="xs:int"></xs:attribute>
+                                                         <xs:attribute name="inconclusive" type="xs:int"></xs:attribute>
+                                                         <xs:attribute name="notExecuted" type="xs:int"></xs:attribute>
+                                                         <xs:attribute name="notRunnable" type="xs:int"></xs:attribute>
+                                                         <xs:attribute name="passed" type="xs:int"></xs:attribute>
+                                                         <xs:attribute name="passedButRunAborted" type="xs:int"></xs:attribute>
+                                                         <xs:attribute name="pending" type="xs:int"></xs:attribute>
+                                                         <xs:attribute name="timeout" type="xs:int"></xs:attribute>
+                                                         <xs:attribute name="total" type="xs:int"></xs:attribute>
+                                                         <xs:attribute name="warning" type="xs:int"></xs:attribute>
+                                                   </xs:complexType>
+                                             </xs:element>
+                                             <xs:element name="Output">
+                                                   <xs:complexType>
+                                                         <xs:sequence>
+                                                               <xs:element name="StdOut" type="xs:string"></xs:element>
+                                                         </xs:sequence>
+                                                   </xs:complexType>
+                                             </xs:element>
+                                       </xs:sequence>
+                                       <xs:attribute name="outcome" type="xs:string"></xs:attribute>
+                                 </xs:complexType>
+                           </xs:element>
+                           <xs:element name="TestDefinitions">
+                                 <xs:complexType>
+                                       <xs:sequence>
+                                             <xs:element name="UnitTest" maxOccurs="unbounded">
+                                                   <xs:complexType>
+                                                         <xs:sequence>
+                                                               <xs:element name="Execution">
+                                                                     <xs:complexType>
+                                                                           <xs:attribute name="id" type="xs:string"></xs:attribute>
+                                                                     </xs:complexType>
+                                                               </xs:element>
+                                                               <xs:element name="TestMethod">
+                                                                     <xs:complexType>
+                                                                           <xs:attribute name="adapterTypeName" type="xs:string"></xs:attribute>
+                                                                           <xs:attribute name="className" type="xs:string"></xs:attribute>
+                                                                           <xs:attribute name="codeBase" type="xs:string"></xs:attribute>
+                                                                           <xs:attribute name="name" type="xs:string"></xs:attribute>
+                                                                     </xs:complexType>
+                                                               </xs:element>
+                                                         </xs:sequence>
+                                                         <xs:attribute name="id" type="xs:string"></xs:attribute>
+                                                         <xs:attribute name="name" type="xs:string"></xs:attribute>
+                                                         <xs:attribute name="storage" type="xs:string"></xs:attribute>
+                                                   </xs:complexType>
+                                             </xs:element>
+                                       </xs:sequence>
+                                 </xs:complexType>
+                           </xs:element>
+                           <xs:element name="TestLists">
+                                 <xs:complexType>
+                                       <xs:sequence>
+                                             <xs:element name="TestList" maxOccurs="unbounded">
+                                                   <xs:complexType>
+                                                         <xs:attribute name="id" type="xs:string"></xs:attribute>
+                                                         <xs:attribute name="name" type="xs:string"></xs:attribute>
+                                                   </xs:complexType>
+                                             </xs:element>
+                                       </xs:sequence>
+                                 </xs:complexType>
+                           </xs:element>
+                           <xs:element name="TestEntries">
+                                 <xs:complexType>
+                                       <xs:sequence>
+                                             <xs:element name="TestEntry" maxOccurs="unbounded">
+                                                   <xs:complexType>
+                                                         <xs:attribute name="executionId" type="xs:string"></xs:attribute>
+                                                         <xs:attribute name="testId" type="xs:string"></xs:attribute>
+                                                         <xs:attribute name="testListId" type="xs:string"></xs:attribute>
+                                                   </xs:complexType>
+                                             </xs:element>
+                                       </xs:sequence>
+                                 </xs:complexType>
+                           </xs:element>
+                           <xs:element name="Results">
+                                 <xs:complexType>
+                                       <xs:sequence>
+                                             <xs:element name="UnitTestResult" maxOccurs="unbounded">
+                                                   <xs:complexType>
+                                                         <xs:sequence>
+                                                               <xs:element name="Output">
+                                                                     <xs:complexType>
+                                                                           <xs:sequence>
+                                                                                 <xs:element name="ErrorInfo">
+                                                                                       <xs:complexType>
+                                                                                             <xs:sequence>
+                                                                                                   <xs:element name="Message" type="xs:string"></xs:element>
+                                                                                             </xs:sequence>
+                                                                                       </xs:complexType>
+                                                                                 </xs:element>
+                                                                           </xs:sequence>
+                                                                     </xs:complexType>
+                                                               </xs:element>
+                                                         </xs:sequence>
+                                                         <xs:attribute name="computerName" type="xs:string"></xs:attribute>
+                                                         <xs:attribute name="dataRowInfo" type="xs:string"></xs:attribute>
+                                                         <xs:attribute name="duration" type="xs:string"></xs:attribute>
+                                                         <xs:attribute name="endTime" type="xs:string"></xs:attribute>
+                                                         <xs:attribute name="executionId" type="xs:string"></xs:attribute>
+                                                         <xs:attribute name="outcome" type="xs:string"></xs:attribute>
+                                                         <xs:attribute name="relativeResultsDirectory" type="xs:string"></xs:attribute>
+                                                         <xs:attribute name="startTime" type="xs:string"></xs:attribute>
+                                                         <xs:attribute name="testId" type="xs:string"></xs:attribute>
+                                                         <xs:attribute name="testListId" type="xs:string"></xs:attribute>
+                                                         <xs:attribute name="testName" type="xs:string"></xs:attribute>
+                                                         <xs:attribute name="testType" type="xs:string"></xs:attribute>
+                                                   </xs:complexType>
+                                             </xs:element>
+                                       </xs:sequence>
+                                 </xs:complexType>
+                           </xs:element>
+                     </xs:sequence>
+                     <xs:attribute name="xmlns" type="xs:string"></xs:attribute>
+                     <xs:attribute name="id" type="xs:string"></xs:attribute>
+                     <xs:attribute name="name" type="xs:string"></xs:attribute>
+                     <xs:attribute name="runUser" type="xs:string"></xs:attribute>
+               </xs:complexType>
+         </xs:element>
+   </xs:schema>
+ 
