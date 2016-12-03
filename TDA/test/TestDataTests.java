@@ -22,7 +22,9 @@ public class TestDataTests {
 	
 	private UnitTest[] unitTests = new UnitTest[10];
 	
-	private TestedClass testedClass1;
+	private TestedClass testedClass1; 
+	private TestedClass testedClass2; 
+	private TestedClass testedClass3; 
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -31,6 +33,7 @@ public class TestDataTests {
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
+		
 	}
 
 	@Before
@@ -51,14 +54,18 @@ public class TestDataTests {
 		}
 		
 		testedClass1 = new TestedClass("TestMe", unitTests[0]);
+		testedClass2 = new TestedClass("TestMe", unitTests[1]); 
+		testedClass3 = new TestedClass("Test3", unitTests[2]); 
+		
 	}
 
 	@After
-	public void tearDown() throws Exception {
+	public void tearDown() throws Exception { 
+		testData.getTestRunList().clear();
 	}
 	
 	@Test 
-	public void testAddNewTestedClassSuccess(){
+	public void testAddNewTestRunSuccess(){
 		try {
 			testData.addNewTestRun(testRun1);
 		} catch (Exception e) {
@@ -66,6 +73,111 @@ public class TestDataTests {
 		}
 		
 		assertTrue(testData.getTestRunList().contains(testRun1)); 
+	}
+	
+	@Test 
+	public void testAddNewTestRunToAlreadyExistingTestRunListSuccess(){
+		try {
+			testData.addNewTestRun(testRun1);
+			testData.addNewTestRun(testRun2);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		assertTrue(testData.getTestRunList().contains(testRun2) && testData.getTestRunList().contains(testRun1)); 
+	}
+	
+	@Test (expected = Exception.class)
+	public void testAddNewTestRunFail() throws Exception{
+			testData.addNewTestRun(testRun1);
+			testData.addNewTestRun(testRun1);
+	}
+	
+	@Test (expected = Exception.class)
+	public void testAddNewTestRunToAlreadyExistingTestRunListFail() throws Exception{
+			testData.addNewTestRun(testRun1);
+			testData.addNewTestRun(testRun2);
+			testData.addNewTestRun(testRun2);
+	}
+	
+	@Test 
+	public void testAddNewTestedClassSuccess(){
+		try {
+			testData.addNewTestedClass(testedClass1); 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		assertTrue(testData.getTestedClassList().contains(testedClass1)); 
+	}
+	
+	@Test 
+	public void testAddNewTestedClassToAlreadyExistingTestedClassListSuccess(){
+		try {
+			testData.addNewTestedClass(testedClass1); 
+			testData.addNewTestedClass(testedClass3); 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		assertTrue(testData.getTestedClassList().contains(testedClass3) && testData.getTestedClassList().contains(testedClass1)); 
+	}
+	
+	@Test 
+	public void testAddNewTestedClassExistingClass(){
+		try {
+			testData.addNewTestedClass(testedClass1); 
+			testData.addNewTestedClass(testedClass2); 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		assertTrue((testData.getTestedClassList().get(0).getClassLog().get(0).getUnitTestList().get(0).equals(unitTests[0])) && 
+				(testData.getTestedClassList().get(0).getClassLog().get(0).getUnitTestList().get(1).equals(unitTests[1]))); 
+	}
+	
+	@Test 
+	public void testAddNewUnitTest(){
+		testData.addNewUnitTest(unitTests[0]);
+		
+		assertTrue(testData.getUnitTestList().contains(unitTests[0])); 
+	}
+	
+	@Test 
+	public void testGetTestRunByIDSuccess(){
+		try {
+			testData.addNewTestRun(testRun1);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		TestRun addedTestRun = testData.getTestRunByID("Run1"); 
+		
+		assertTrue(addedTestRun == testRun1); 
+	}
+	
+	@Test 
+	public void testGetTestRunByIDFail(){
+		try {
+			testData.addNewTestRun(testRun1);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		TestRun addedTestRun = testData.getTestRunByID("Run2"); 
+		
+		assertTrue(addedTestRun == null); 
+	}
+	
+	@Test 
+	public void testGetClassByName(){
+		testData.addNewTestedClass(testedClass1); 
+		
+		TestedClass addedClass = testData.getClassByName("TestMe"); 
+		
+		assertTrue(addedClass.equals(testedClass1)); 
 	}
 
 }
