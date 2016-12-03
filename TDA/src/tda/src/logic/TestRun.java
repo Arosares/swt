@@ -2,12 +2,15 @@ package tda.src.logic;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class TestRun {
 	private String runID, runName, runUser;
 	private Counters resultSummary;
 	private List<TestedClass> testedClasses = new LinkedList<>();
 	private String path;
+	private TestRunStartTime runDate;
+	private String startTime;
 
 	public String getRunID() {
 		return runID;
@@ -18,8 +21,31 @@ public class TestRun {
 		this.runID = runID;
 		this.runName = runName;
 		this.runUser = runUser;
+		
 	}
+	
+	
+	/**
+	 * Extracts the Time the Test was Run from the startTime String
+	 */
+	private void setRunDate(){
+		
+		String[] startT = startTime.split("T");
+		String[] date = startT[0].split("-");
+		String[] timeWithJunk = startT[1].split(Pattern.quote("."));
+		String[] time = timeWithJunk[0].split(":");
 
+		int year = Integer.parseInt(date[0]);
+		int month = Integer.parseInt(date[1]);
+		int day = Integer.parseInt(date[2]);
+		
+		int hrs = Integer.parseInt(time[0]);
+		int min = Integer.parseInt(time[1]);
+		int sec = Integer.parseInt(time[2]);
+		
+		runDate = new TestRunStartTime(year, month, day, hrs, min, sec);
+	}
+	
 	public void addTestedClassToTestRun(TestedClass testedClass) {
 		boolean existing = false;
 		for (TestedClass existingClass : testedClasses) {
@@ -56,6 +82,23 @@ public class TestRun {
 		this.path = path;
 	}
 
+	public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+		System.out.println("Setting run date ..");
+		
+		setRunDate();
+		
+		System.out.println(runDate);
+	}
+
+	public TestRunStartTime getRunDate() {
+		return runDate;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -80,4 +123,5 @@ public class TestRun {
 			return false;
 		return true;
 	}
+	
 }

@@ -47,7 +47,37 @@ public class TestData {
 			}
 		}
 		if (!existing) {
-			testRunList.add(testRun);
+			int index = 0;
+
+			// Only for first TestRun
+			if (testRunList.isEmpty()) {
+				testRunList.add(testRun);
+			} else {
+				// Insert new TestRuns sorted by their StartTime
+				System.out.println(testRunList.size());
+				for (TestRun existingRun : testRunList) {
+					//If new TestRun is older than existing, increment Index-Counter
+					if (testRun.getRunDate().compareTo(existingRun.getRunDate()) > 0) {
+						index++;
+						continue;
+//						if (index == testRunList.size()) {
+//							testRunList.add(testRun);
+//							break;
+//						}
+					} else {
+						//If Index == List-Size, then just add new Run as last element
+						if (index == testRunList.size()) {
+							testRunList.add(testRun);
+							break;
+						} else {
+						// Add new Run at the proper index in List
+							System.out.println("ListSize: " + testRunList.size() + " Index: " + index);
+							testRunList.add(index, testRun);
+							break;
+						}
+					}
+				}
+			}
 		}
 	}
 
@@ -59,11 +89,11 @@ public class TestData {
 			UnitTestsToTestRunMapper newMapping = newlyCreatedClass.getClassLog().get(0);
 			UnitTest unitTestOfNewClass = newMapping.getUnitTestList().get(0);
 			existingClass.addUnitTestToClassLog(unitTestOfNewClass);
-			
+
 			return existingClass;
 		} else {
 			testedClassList.add(newlyCreatedClass);
-			
+
 			return newlyCreatedClass;
 		}
 	}

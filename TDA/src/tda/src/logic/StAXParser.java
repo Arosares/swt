@@ -111,7 +111,7 @@ public class StAXParser implements Parser {
 
 						testRun = new TestRun(runID, runName, runUser);
 						testRun.setPath(path);
-						testData.addNewTestRun(testRun);
+						
 
 					}
 					if ("Times".equals(reader.getLocalName())) {
@@ -119,6 +119,9 @@ public class StAXParser implements Parser {
 						finishTime = reader.getAttributeValue(1);
 						queuingTime = reader.getAttributeValue(2);
 						startTime = reader.getAttributeValue(3);
+						
+						testRun.setStartTime(startTime);
+						testData.addNewTestRun(testRun);
 
 					}
 					if ("ResultSummary".equals(reader.getLocalName())) {
