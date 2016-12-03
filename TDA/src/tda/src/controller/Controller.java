@@ -103,7 +103,11 @@ public class Controller {
 
 			// Parse all existing xml files in within the selectedDirectory
 			File[] files = selectedDirectory.listFiles();
+			long millis = System.currentTimeMillis();
 			parseFilesInDirectory(files);
+			long finished = System.currentTimeMillis();
+			
+			System.out.println(finished - millis + " ms");
 
 		}
 		return selectedDirectory;
