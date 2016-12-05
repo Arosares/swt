@@ -100,7 +100,7 @@ public class Controller {
 
 		File selectedDirectory = this.view.directoryAlert();
 		if (selectedDirectory != null) {
-
+			
 			// Parse all existing xml files in within the selectedDirectory
 			File[] files = selectedDirectory.listFiles();
 			long millis = System.currentTimeMillis();
@@ -108,7 +108,6 @@ public class Controller {
 			long finished = System.currentTimeMillis();
 			
 			System.out.println(finished - millis + " ms");
-
 		}
 		return selectedDirectory;
 	}
