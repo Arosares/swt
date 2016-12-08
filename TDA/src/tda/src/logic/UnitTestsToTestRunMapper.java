@@ -36,10 +36,9 @@ public class UnitTestsToTestRunMapper {
 			}
 		}
 		failurePercentage = (numberOfFailedTests * 100 / numberOfUnitTests);
-		
-		
+
 		// limit double to two digits after comma
-		failurePercentage = Math.round(failurePercentage * 100) / 100.0;
+		failurePercentage = Double.parseDouble(new DecimalFormat("##.##").format(failurePercentage));
 	}
 
 	public List<UnitTest> getUnitTestList() {

@@ -17,6 +17,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -45,6 +47,8 @@ public class View extends Stage implements Observer {
 	private TDAGraph graph;
 	private TDATestRunTotals totals;
 	private TDAMenuBar menuBar;
+	private TabPane tabPane;
+	private TreeView classTreeView;
 
 	public View(Model model, Controller controller) {
 		super();
@@ -67,6 +71,7 @@ public class View extends Stage implements Observer {
 
 		this.rootPane.setTop(menuBar.createMenuBar());
 		GridPane gridPane = new GridPane();
+
 		// margins around the whole grid (top/right/bottom/left)
 		gridPane.setPadding(new Insets(10, 10, 10, 10));
 		gridPane.setAlignment(Pos.TOP_CENTER);
@@ -74,26 +79,43 @@ public class View extends Stage implements Observer {
 
 		tree = new TDATreeView(this);
 
-		Label totalsLabel = new Label("Loaded TestRun Info:");
-		gridPane.add(totalsLabel, 1, 1);
+		Label IDLabel = new Label("Loaded TestRun:".concat(" no idea how to get the runID"));
+		gridPane.add(IDLabel, 1, 1);
+		Label totalsLabel = new Label("TestRun Result Summary: ");
+		gridPane.add(totalsLabel, 1, 2);
 
 		totals = new TDATestRunTotals(controller);
-		gridPane.add(totals.createTestRunTotalsBox(), 1, 2);
+		gridPane.add(totals.createTestRunTotalsBox(), 1, 3);
 
 		table = new TDATableView(controller);
 
-		rootPane.setLeft(tree.generateEmptyTreeView());
+		/*----- sidebar TabPane for switching between testruns and classes */
+		tabPane = new TabPane();
 
-		gridPane.add(table.createTestedClassesTable(), 1, 3);
-		graph = new TDAGraph();
-		gridPane.add(graph.generateLineChart(), 1, 4);
+		Tab tab1 = new Tab();
+		tab1.setText("Testruns");
+		tab1.setClosable(false);
+		tab1.setContent(tree.generateEmptyTreeView());
+		tabPane.getTabs().add(tab1);
+
+		Tab tab2 = new Tab();
+		tab2.setText("Classes");
+		tab2.setClosable(false);
+		tab2.setContent(generateEmptyClassTreeView());
+		tabPane.getTabs().add(tab2);
+
+		rootPane.setLeft(tabPane);
+
+		gridPane.add(table.createTestedClassesTable(), 1, 4);
+		graph = new TDAGraph(controller);
+		gridPane.add(graph.generateLineChart(), 1, 5);
 
 		Button resetGraphs = new Button("Reset Graph");
 		resetGraphs.setOnMouseClicked(click -> {
 			controller.handleResetGraph();
 		});
 
-		gridPane.add(resetGraphs, 1, 5);
+		gridPane.add(resetGraphs, 1, 6);
 		GridPane.setHalignment(resetGraphs, HPos.CENTER);
 		GridPane.setValignment(resetGraphs, VPos.BOTTOM);
 		gridPane.setVgap(20);
@@ -149,8 +171,12 @@ public class View extends Stage implements Observer {
 		}
 	}
 
-	public void showTreeView(TreeView treeView) {
-		rootPane.setLeft(treeView);
+	public void updateTreeView(TreeView treeView) {
+		tabPane.getTabs().get(0).setContent(treeView);
+	}
+
+	public void updateClassTreeView() {
+		tabPane.getTabs().get(1).setContent(this.classTreeView);
 	}
 
 	public TDATableView getTable() {
@@ -175,6 +201,37 @@ public class View extends Stage implements Observer {
 
 	public Controller getController() {
 		return controller;
+	}
+
+	public TreeView generateEmptyClassTreeView() {
+		this.classTreeView = new TreeView();
+		return this.classTreeView;
+	}
+
+	public void fillClassTreeView() {
+		/*
+		 * DEPRECATED! ObservableList<TestedClass> items =
+		 * FXCollections.observableArrayList(controller.getTestedClassList());
+		 * this.classListView = new ListView<>(items);
+		 * 
+		 * classListView.setCellFactory(new Callback<ListView<TestedClass>,
+		 * ListCell<TestedClass>>() {
+		 * 
+		 * @Override public ListCell<TestedClass> call(ListView<TestedClass> lv)
+		 * { return new ListCell<TestedClass>() {
+		 * 
+		 * @Override public void updateItem(TestedClass item, boolean empty) {
+		 * super.updateItem(item, empty); if (item == null) { setText(null); }
+		 * else { // assume MyDataType.getSomeProperty() returns a // string
+		 * setText(item.getClassName()); } } }; } });
+		 */
+
+		// controller.handleTableRowClick(testedClass);
+
+		// TODO: not strings but objects, so they are clickable for the graph
+		// TODO: update list when folders are added more than once
+
+		updateClassTreeView();
 	}
 
 }

@@ -6,7 +6,6 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
 import tda.src.logic.TestData;
 import tda.src.logic.TestRun;
 import tda.src.logic.TestedClass;
@@ -38,9 +37,10 @@ public class Controller {
 		}
 
 		TestRun testRun = TestData.getInstance().getTestRunList().get(0);
+		TestData.getInstance().printTree();
 
 		view.getTable().fillTestedClassTable(testRun);
-		view.getTotals().showTestRunTotals(testRun, false);
+		view.getTotals().showTestRunTotals(testRun);
 	}
 
 	private void parseFilesInDirectory(File[] files) {
@@ -86,31 +86,18 @@ public class Controller {
 		return rootItem;
 	}
 
-	public TreeView<TestRun> createTreeView(String rootDirectory) {
-
-		TreeView<TestRun> treeView = new TreeView<TestRun>();
-		TreeItem<TestRun> rootItem = createTreeItems(rootDirectory);
-		treeView.setRoot(rootItem);
-
-		return treeView;
-	}
-
 	public File openFolder() {
 
 		File selectedDirectory = this.view.directoryAlert();
 		if (selectedDirectory != null) {
 
-			// Parse all existing xml files in within the selectedDirectory
+//			Parse all existing xml files in within the selectedDirectory
 			File[] files = selectedDirectory.listFiles();
-			System.out.println("Initialize Parsing ...");
-			long millis = System.currentTimeMillis();
 			parseFilesInDirectory(files);
-			long finished = System.currentTimeMillis();
-
-			System.out.println("Finished Parsing!");
-			System.out.println(finished - millis + " ms");
 
 		}
+		
+		TestData.getInstance().printTree();
 
 		return selectedDirectory;
 	}
@@ -129,7 +116,7 @@ public class Controller {
 		for (TestRun testRun : testRuns) {
 			if (testRun.getPath().contains(xmlName)) {
 				view.getTable().fillTestedClassTable(testRun);
-				view.getTotals().showTestRunTotals(testRun, false);
+				view.getTotals().showTestRunTotals(testRun);
 				break;
 			}
 		}
@@ -152,9 +139,10 @@ public class Controller {
 	 * with additional features added to the TDA.
 	 */
 	public void clearData() {
+		// TODO: does not clear testruntotals yet
+
 		// Clear the testData
 		TestData.getInstance().getTestRunList().clear();
-		TestData.getInstance().getTestedClassList().clear();
 		TestData.getInstance().getUnitTestList().clear();
 
 		// Delete the Table Data
@@ -169,11 +157,26 @@ public class Controller {
 		handleResetGraph();
 
 		// Clear both Observable Lists for the TestRunInfos
-		if (view.getTotals().getAllCounters() != null && view.getTotals().getGeneratedList() != null) {
-			view.getTotals().getAllCounters().clear();
+		if (view.getTotals().getGeneratedList() != null) {
+			// view.getTotals().getAllCounters().clear();
 			view.getTotals().getGeneratedList().clear();
 		}
 
+	}
+
+	public double[] calculateChartData(TestedClass testedClass) {
+		double[] yValues = new double[TestData.getInstance().getTestRunList().size()];
+		int cnt = 0;
+		for (TestRun testRun : TestData.getInstance().getTestRunList()) {
+			double yValue = testedClass.getFailurePercentageByTestrun(testRun);
+			if (yValue == -1) {
+				continue;
+			}
+			yValues[cnt] = yValue;
+			cnt++;
+
+		}
+		return yValues;
 	}
 
 }
