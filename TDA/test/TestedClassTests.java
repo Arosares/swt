@@ -32,7 +32,7 @@ public class TestedClassTests {
 
 	@Before
 	public void setUp() throws Exception {
-		testRun1 = new TestRun("Run1", "foo");
+		testRun1 = new TestRun("Run1", "foo", "fooUser");
 		unitTest1 = new UnitTest(testRun1, "test1", "fooTest1", "Run1fooTest1", "testFooBar");
 		unitTest2 = new UnitTest(testRun1, "test2", "fooTest2", "Run1fooTest2", "testFooBar");
 		unitTest3 = new UnitTest(testRun1, "test3", "fooTest3", "Run1fooTest3", "testFooBar");
@@ -151,11 +151,11 @@ public class TestedClassTests {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailedGetUnitTestsByTestRun() {
-		testedClass.getUnitTestsByTestRun(new TestRun("fail01", "FailRun"));
+		testedClass.getUnitTestsByTestRun(new TestRun("fail01", "FailRun", "TestUsr"));
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailedGetFailurePercentageByTestRun() {
-		testedClass.getFailurePercentageByTestrun(new TestRun("fail01", "FailRun"));
+		testedClass.getFailurePercentageByTestrun(new TestRun("fail01", "FailRun", "TestUsr"));
 	}
 }

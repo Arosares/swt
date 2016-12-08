@@ -2,7 +2,6 @@ package tda.src.logic;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
 public class TestedClass {
 	/**
@@ -13,7 +12,6 @@ public class TestedClass {
 	 * </pre>
 	 */
 	private String className;
-	private Queue<String> packageName = new LinkedList<>();
 	private double currentFailurePercentage = -1.00;
 
 	/**
@@ -22,14 +20,9 @@ public class TestedClass {
 	private List<UnitTestsToTestRunMapper> classLog = new LinkedList<>();
 
 	public TestedClass(String className, UnitTest unitTest) {
-		String[] packagePlusClassName = className.split("\\.");
-		
-		this.className = packagePlusClassName[packagePlusClassName.length - 1];
-		
-		for (int i = 0; i < packagePlusClassName.length - 1; i++) {
-			packageName.add(packagePlusClassName[i]);
-		}
-		
+		super();
+		this.className = className;
+
 		classLog.add(new UnitTestsToTestRunMapper(unitTest));
 
 	}
@@ -54,20 +47,14 @@ public class TestedClass {
 		}
 
 	}
-	
-	
-	/**
-	 * 
-	 * @param testRun
-	 * @return the FP or -1 if the testRun didn't test a class
-	 */
+
 	public double getFailurePercentageByTestrun(TestRun testRun) {
 		for (UnitTestsToTestRunMapper unitTestsToTestRunMapper : classLog) {
 			if (unitTestsToTestRunMapper.getTestRun().getRunID().equals(testRun.getRunID())) {
 				return unitTestsToTestRunMapper.getFailurePercentage();
 			}
 		}
-		return -1.0;
+		throw new IllegalArgumentException(testRun.getRunID() + " can't be found in the class log");
 	}
 
 	public List<UnitTest> getUnitTestsByTestRun(TestRun testrun) {
@@ -97,10 +84,6 @@ public class TestedClass {
 
 	public void setCurrentFailurePercentage(TestRun testrun) {
 		currentFailurePercentage = getFailurePercentageByTestrun(testrun);
-	}
-
-	public Queue<String> getPackageName() {
-		return packageName;
 	}
 
 	@Override

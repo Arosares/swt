@@ -1,14 +1,19 @@
 package tda.src.logic;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.xml.XMLConstants;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamReader;
-
-import tda.src.exceptions.WrongXMLAttributeException;
+import javax.xml.transform.stax.StAXSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.Validator;
 
 public class StAXParser implements Parser {
 
@@ -18,8 +23,8 @@ public class StAXParser implements Parser {
 		testData = TestData.getInstance();
 	}
 
-	public void parse(String path) throws WrongXMLAttributeException {
-		// System.out.println("Starting to parse");
+	public void parse(String path) {
+		System.out.println("Starting to parse");
 		List<UnitTest> unitTestsOfOneRun = new LinkedList<>();
 		boolean waitForStdOut = false;
 		boolean readingStdOut = false;
@@ -33,7 +38,7 @@ public class StAXParser implements Parser {
 		// Tested Class Data
 		String testedClassName = "";
 		// TestRun Data
-		String runID, runName;
+		String runID, runName, runUser;
 		// TestRunTimeD
 		String creationTime, finishTime, queuingTime, startTime;
 		String outcome;
@@ -72,139 +77,77 @@ public class StAXParser implements Parser {
 				switch (event) {
 				case XMLStreamConstants.START_ELEMENT:
 					if ("UnitTest".equals(reader.getLocalName())) {
-						if (reader.getAttributeLocalName(0).equals("id")
-								&& reader.getAttributeLocalName(1).equals("name")) {
-							unitTestID = reader.getAttributeValue(0);
-							unitTestName = reader.getAttributeValue(1);
-						} else {
-							throw new WrongXMLAttributeException("Expected another attribute in tag " 
-						+ reader.getLocalName());
-						}
-
+						unitTestID = reader.getAttributeValue(0);
+						unitTestName = reader.getAttributeValue(1);
+						// TODO: Create TestedClass Object
 					}
 					if ("UnitTestResult".equals(reader.getLocalName())) {
-						if(reader.getAttributeLocalName(8).equals("testId") 
-								&& reader.getAttributeLocalName(5).equals("outcome")){
-							resultUnitTestID = reader.getAttributeValue(8);
-							unitTestOutcome = reader.getAttributeValue(5);
+						resultUnitTestID = reader.getAttributeValue(8);
+						unitTestOutcome = reader.getAttributeValue(5);
 
-							for (UnitTest unitTest : unitTestsOfOneRun) {
-								if (unitTest.getUnitTestID().equals(resultUnitTestID)) {
-									unitTest.setOutcome(unitTestOutcome);
-								}
+						for (UnitTest unitTest : unitTestsOfOneRun) {
+							if (unitTest.getUnitTestID().equals(resultUnitTestID)) {
+								unitTest.setOutcome(unitTestOutcome);
 							}
-						}else {
-							throw new WrongXMLAttributeException("Expected another attribute in tag " 
-						+ reader.getLocalName());
 						}
-						
 					}
 
-					if ("Execution".equals(reader.getLocalName()) 
-							&& reader.getAttributeCount() == 1) {
-						if (reader.getAttributeLocalName(0).equals("id")) {
+					if ("Execution".equals(reader.getLocalName())) {
+						if (reader.getAttributeCount() == 1) {
 							// To avoid wrong 'execution' start element
 							unitTestExecutionID = reader.getAttributeValue(0);
-						}else {
-							throw new WrongXMLAttributeException("Expected another attribute in tag " 
-						+ reader.getLocalName());
 						}
 					}
 					if ("TestMethod".equals(reader.getLocalName())) {
-						if(reader.getAttributeLocalName(1).equals("className") 
-								&& reader.getAttributeLocalName(3).equals("name")){
-							testedClassName = reader.getAttributeValue(1);
-							testMethodName = reader.getAttributeValue(3);
-							// TODO: Create UnitTest Object
-						}else {
-							throw new WrongXMLAttributeException("Expected another attribute in tag " 
-						+ reader.getLocalName());
-						}
+						testedClassName = reader.getAttributeValue(1);
+						testMethodName = reader.getAttributeValue(3);
+						// TODO: Create UnitTest Object
 					}
-					if ("TestRun".equals(reader.getLocalName())) { 
-						if(reader.getAttributeLocalName(0).equals("id") 
-								&& reader.getAttributeLocalName(1).equals("name")){
+					if ("TestRun".equals(reader.getLocalName())) {
 
-							runID = reader.getAttributeValue(0);
-							runName = reader.getAttributeValue(1);
+						runID = reader.getAttributeValue(1);
+						runName = reader.getAttributeValue(2);
+						runUser = reader.getAttributeValue(3);
 
-							testRun = new TestRun(runID, runName);
-							testRun.setPath(path);
+						testRun = new TestRun(runID, runName, runUser);
+						testRun.setPath(path);
+						testData.addNewTestRun(testRun);
 
-						} else {
-							throw new WrongXMLAttributeException("Expected another attribute in tag " 
-						+ reader.getLocalName());
-						}
 					}
 					if ("Times".equals(reader.getLocalName())) {
-						if(reader.getAttributeLocalName(0).equals("creation") 
-								&& reader.getAttributeLocalName(1).equals("finish") 
-								&& reader.getAttributeLocalName(2).equals("queuing") 
-								&& reader.getAttributeLocalName(3).equals("start")){ 
-							creationTime = reader.getAttributeValue(0);
-							finishTime = reader.getAttributeValue(1);
-							queuingTime = reader.getAttributeValue(2);
-							startTime = reader.getAttributeValue(3);
-							
-							testRun.setStartTime(startTime);
-							testData.addNewTestRun(testRun);
-						} else {
-							throw new WrongXMLAttributeException("Expected another attribute in tag " 
-						+ reader.getLocalName());
-						}
+						creationTime = reader.getAttributeValue(0);
+						finishTime = reader.getAttributeValue(1);
+						queuingTime = reader.getAttributeValue(2);
+						startTime = reader.getAttributeValue(3);
+
 					}
 					if ("ResultSummary".equals(reader.getLocalName())) {
-						if(reader.getAttributeLocalName(0).equals("outcome")){
-							outcome = reader.getAttributeValue(0);
-							waitForStdOut = true;
-						}else {
-							throw new WrongXMLAttributeException("Expected another attribute in tag " 
-						+ reader.getLocalName());
-						}
+						outcome = reader.getAttributeValue(0);
+						waitForStdOut = true;
 					}
 					if ("Counters".equals(reader.getLocalName())) {
-						if(reader.getAttributeLocalName(0).equals("aborted") 
-								&& reader.getAttributeLocalName(1).equals("completed") 
-								&& reader.getAttributeLocalName(2).equals("disconnected")
-								&& reader.getAttributeLocalName(3).equals("error")
-								&& reader.getAttributeLocalName(4).equals("executed")
-								&& reader.getAttributeLocalName(5).equals("failed")
-								&& reader.getAttributeLocalName(6).equals("inProgress")
-								&& reader.getAttributeLocalName(7).equals("inconclusive")
-								&& reader.getAttributeLocalName(8).equals("notExecuted")
-								&& reader.getAttributeLocalName(9).equals("notRunnable") 
-								&& reader.getAttributeLocalName(10).equals("passed")
-								&& reader.getAttributeLocalName(11).equals("passedButRunAborted")
-								&& reader.getAttributeLocalName(12).equals("pending")
-								&& reader.getAttributeLocalName(13).equals("timeout")
-								&& reader.getAttributeLocalName(14).equals("total")
-								&& reader.getAttributeLocalName(15).equals("warning")) {
-							sumAborted = reader.getAttributeValue(0);
-							sumCompleted = reader.getAttributeValue(1);
-							sumDisconnected = reader.getAttributeValue(2);
-							sumError = reader.getAttributeValue(3);
-							sumExecuted = reader.getAttributeValue(4);
-							sumFailed = reader.getAttributeValue(5);
-							sumInProgress = reader.getAttributeValue(6);
-							sumInconclusive = reader.getAttributeValue(7);
-							sumNotExecuted = reader.getAttributeValue(8);
-							sumNotRunnable = reader.getAttributeValue(9);
-							sumPassed = reader.getAttributeValue(10);
-							sumPassedButRunAborted = reader.getAttributeValue(11);
-							sumPending = reader.getAttributeValue(12);
-							sumTimeOut = reader.getAttributeValue(13);
-							sumTotal = reader.getAttributeValue(14);
-							sumWarning = reader.getAttributeValue(15);
+						sumAborted = reader.getAttributeValue(0);
+						sumCompleted = reader.getAttributeValue(1);
+						sumDisconnected = reader.getAttributeValue(2);
+						sumError = reader.getAttributeValue(3);
+						sumExecuted = reader.getAttributeValue(4);
+						sumFailed = reader.getAttributeValue(5);
+						sumInProgress = reader.getAttributeValue(6);
+						sumInconclusive = reader.getAttributeValue(7);
+						sumNotExecuted = reader.getAttributeValue(8);
+						sumNotRunnable = reader.getAttributeValue(9);
+						sumPassed = reader.getAttributeValue(10);
+						sumPassedButRunAborted = reader.getAttributeValue(11);
+						sumPending = reader.getAttributeValue(12);
+						sumTimeOut = reader.getAttributeValue(13);
+						sumTotal = reader.getAttributeValue(14);
+						sumWarning = reader.getAttributeValue(15);
 
-							// Create Counters Class
-							Counters counter = new Counters(sumAborted, sumCompleted, sumDisconnected, sumError,
-									sumExecuted, sumFailed, sumInProgress, sumInconclusive, sumNotExecuted, sumNotRunnable,
-									sumPassed, sumPassedButRunAborted, sumPending, sumTimeOut, sumTotal, sumWarning);
-							testRun.setResultSummary(counter);
-						}else {
-							throw new WrongXMLAttributeException("Expected another attribute in tag " 
-						+ reader.getLocalName());
-						}
+						// Create Counters Class
+						Counters counter = new Counters(sumAborted, sumCompleted, sumDisconnected, sumError,
+								sumExecuted, sumFailed, sumInProgress, sumInconclusive, sumNotExecuted, sumNotRunnable,
+								sumPassed, sumPassedButRunAborted, sumPending, sumTimeOut, sumTotal, sumWarning);
+						testRun.setResultSummary(counter);
 					}
 					if ("StdOut".equals(reader.getLocalName()) && waitForStdOut) {
 						readingStdOut = true;
@@ -222,17 +165,18 @@ public class StAXParser implements Parser {
 
 						UnitTest unitTest = new UnitTest(testRun, unitTestID, unitTestName, unitTestExecutionID,
 								testMethodName);
-
 						TestedClass testedClass = new TestedClass(testedClassName, unitTest);
-
-						testData.addNewTestedClassToTree(testedClass);
+						
+						//returns the existing class if already parsed before
+						testedClass = testData.addNewTestedClass(testedClass);
 						testData.addNewUnitTest(unitTest);
 						unitTestsOfOneRun.add(unitTest);
 
-						testRun.addTestedClassToTestRun(testData.getClass(testedClass));
+						testRun.addTestedClassToTestRun(testedClass);
+
 					}
 					if ("TestRun".equals(reader.getLocalName())) {
-//						System.out.println("Finished TestRun: " + testRun.getRunID());
+						System.out.println("Finished TestRun: " + testRun.getRunID());
 					}
 					break;
 

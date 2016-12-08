@@ -4,21 +4,20 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class TestRun {
-	private String runID, runName;
+	private String runID, runName, runUser;
 	private Counters resultSummary;
 	private List<TestedClass> testedClasses = new LinkedList<>();
 	private String path;
-	private String startTime;
-	private TestRunStartTime runDate;
 
 	public String getRunID() {
 		return runID;
 	}
 
-	public TestRun(String runID, String runName) {
+	public TestRun(String runID, String runName, String runUser) {
 		super();
 		this.runID = runID;
 		this.runName = runName;
+		this.runUser = runUser;
 	}
 
 	public void addTestedClassToTestRun(TestedClass testedClass) {
@@ -31,32 +30,6 @@ public class TestRun {
 		if (!existing) {
 			testedClasses.add(testedClass);
 		}
-	}
-	
-	public void setStartTime(String startTime) {
-		this.startTime = startTime;
-		setRunDate();
-	}
-	
-	/**
-	 * Extracts the Time the Test was Run from the startTime String
-	 */
-	private void setRunDate(){
-		
-		String[] startT = startTime.split("T");
-		String[] date = startT[0].split("-");
-		String[] timeWithJunk = startT[1].split("\\.");
-		String[] time = timeWithJunk[0].split(":");
-
-		int year = Integer.parseInt(date[0]);
-		int month = Integer.parseInt(date[1]);
-		int day = Integer.parseInt(date[2]);
-		
-		int hrs = Integer.parseInt(time[0]);
-		int min = Integer.parseInt(time[1]);
-		int sec = Integer.parseInt(time[2]);
-		
-		runDate = new TestRunStartTime(year, month, day, hrs, min, sec);
 	}
 
 	public void setTestedClasses(List<TestedClass> testedClasses) {
@@ -81,14 +54,6 @@ public class TestRun {
 
 	public void setPath(String path) {
 		this.path = path;
-	}
-
-	public TestRunStartTime getRunDate() {
-		return runDate;
-	}
-
-	public void setRunDate(TestRunStartTime runDate) {
-		this.runDate = runDate;
 	}
 
 	@Override

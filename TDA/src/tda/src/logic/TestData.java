@@ -1,15 +1,13 @@
 package tda.src.logic;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
 
 public class TestData {
 
 	private static TestData testDataInstance;
+	private ArrayList<TestedClass> testedClassList = new ArrayList<>();
 	private ArrayList<TestRun> testRunList = new ArrayList<>();
 	private ArrayList<UnitTest> unitTestList = new ArrayList<>();
-	private TreeNode root = new TreeNode("/", null);
 
 	private TestData() {
 	}
@@ -27,6 +25,9 @@ public class TestData {
 		return testRunList;
 	}
 
+	public ArrayList<TestedClass> getTestedClassList() {
+		return testedClassList;
+	}
 
 	public ArrayList<UnitTest> getUnitTestList() {
 		return unitTestList;
@@ -46,45 +47,12 @@ public class TestData {
 			}
 		}
 		if (!existing) {
-			int index = 0;
-
-			// Only for first TestRun
-			if (testRunList.isEmpty()) {
-				testRunList.add(testRun);
-			} else {
-				// Insert new TestRuns sorted by their StartTime
-				for (TestRun existingRun : testRunList) {
-					//If new TestRun is older than existing, increment Index-Counter
-					if (testRun.getRunDate().compareTo(existingRun.getRunDate()) > 0) {
-						index++;
-						if (index == testRunList.size()) {
-							testRunList.add(testRun);
-							break;
-						}
-					} else {
-						//If Index == List-Size, then just add new Run as last element
-						if (index == testRunList.size()) {
-							testRunList.add(testRun);
-							break;
-						} else {
-						// Add new Run at the proper index in List
-							testRunList.add(index, testRun);
-							break;
-						}
-					}
-				}
-			}
+			testRunList.add(testRun);
 		}
 	}
 
-	public void printTree() {
-		System.out.println(root.toString());
-	}
-
-	public void addNewTestedClassToTree(TestedClass newlyCreatedClass) {
-		// Save copy for not working on the classes reference
-		Queue<String> packageName = new LinkedList<String>();
-		TestedClass existingClass = getClass(newlyCreatedClass);
+	public TestedClass addNewTestedClass(TestedClass newlyCreatedClass) {
+		TestedClass existingClass = getClassByName(newlyCreatedClass.getClassName());
 
 		if (existingClass != null) {
 			// classLog of new created Classes always have only one item
@@ -92,13 +60,12 @@ public class TestData {
 			UnitTest unitTestOfNewClass = newMapping.getUnitTestList().get(0);
 			existingClass.addUnitTestToClassLog(unitTestOfNewClass);
 			
-
+			return existingClass;
 		} else {
-			packageName.addAll(newlyCreatedClass.getPackageName());
-			root.insert(packageName, newlyCreatedClass);
+			testedClassList.add(newlyCreatedClass);
 			
+			return newlyCreatedClass;
 		}
-		
 	}
 
 	public void addNewUnitTest(UnitTest unitTest) {
@@ -127,11 +94,13 @@ public class TestData {
 	 *         TestedClass doesn't exist
 	 */
 	public TestedClass getClassByName(String name) {
-		return root.searchByName(name);
+		for (TestedClass testedClass : testedClassList) {
+			if (testedClass.getClassName().equals(name)) {
+				return testedClass;
+			}
+		}
+		// System.err.println(name + " is not a valid class name.");
+		// TODO: Throw Exception
+		return null;
 	}
-
-	public TestedClass getClass(TestedClass testedClass) {
-		return root.search(testedClass);
-	}
-
 }
