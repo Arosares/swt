@@ -104,7 +104,6 @@ public class StAXParser implements Parser {
 						// TODO: Create UnitTest Object
 					}
 					if ("TestRun".equals(reader.getLocalName())) {
-
 						runID = reader.getAttributeValue(1);
 						runName = reader.getAttributeValue(2);
 						runUser = reader.getAttributeValue(3);
