@@ -28,6 +28,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import tda.src.controller.Controller;
+import tda.src.logic.TestRun;
 import tda.src.model.Model;
 
 public class View extends Stage implements Observer {
@@ -49,7 +50,7 @@ public class View extends Stage implements Observer {
 	private TDAMenuBar menuBar;
 	private TabPane tabPane;
 	private TreeView classTreeView;
-
+	private Label idLabel;
 	public View(Model model, Controller controller) {
 		super();
 		this.model = model;
@@ -79,12 +80,12 @@ public class View extends Stage implements Observer {
 
 		tree = new TDATreeView(this);
 
-		Label IDLabel = new Label("Loaded TestRun:".concat(" no idea how to get the runID"));
-		gridPane.add(IDLabel, 1, 1);
+		idLabel = new Label();
+		gridPane.add(idLabel, 1, 1);
 		Label totalsLabel = new Label("TestRun Result Summary: ");
 		gridPane.add(totalsLabel, 1, 2);
 
-		totals = new TDATestRunTotals(controller);
+		totals = new TDATestRunTotals(controller, idLabel);
 		gridPane.add(totals.createTestRunTotalsBox(), 1, 3);
 
 		table = new TDATableView(controller);
@@ -127,6 +128,10 @@ public class View extends Stage implements Observer {
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public void setTestRunLabel(TestRun testRun){
+		
 	}
 
 	public void errorAlert(String message) {

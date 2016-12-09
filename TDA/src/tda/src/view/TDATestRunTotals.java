@@ -1,11 +1,11 @@
 package tda.src.view;
 
-import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import tda.src.controller.Controller;
@@ -18,10 +18,12 @@ public class TDATestRunTotals {
 	private ListView<String> testRunTotals;
 	private Counters totals;
 	private ObservableList<String> generatedList;
+	private Label idLabel;
 
-	public TDATestRunTotals(Controller controller) {
+	public TDATestRunTotals(Controller controller, Label idLabel) {
 		super();
 		this.controller = controller;
+		this.idLabel = idLabel;
 	}
 
 	/**
@@ -49,6 +51,7 @@ public class TDATestRunTotals {
 	 */
 	public void showTestRunTotals(TestRun testRun) {
 			ObservableList<String> testResults = listedCounters(testRun);
+			idLabel.setText("Loaded TestRun: ".concat(testRun.getRunID()));
 			testRunTotals.setItems(testResults);
 		
 	}
