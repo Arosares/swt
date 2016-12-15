@@ -9,6 +9,7 @@ import javafx.scene.control.TreeItem;
 import tda.src.logic.TestData;
 import tda.src.logic.TestRun;
 import tda.src.logic.TestedClass;
+import tda.src.logic.TreeNode;
 import tda.src.model.Model;
 import tda.src.view.View;
 
@@ -31,16 +32,25 @@ public class Controller {
 	public void openFile() {
 		List<File> fileChoices = view.pathAlert();
 		if (fileChoices != null) {
+			if (view.isInitiated() == false) {
+				view.updateRootPane();
+			}
 			for (File xmlFile : fileChoices) {
 				model.parseFile(xmlFile.toString());
 			}
 		}
 
+		// TODO: currently NPE, fix to modern data structure
 		TestRun testRun = TestData.getInstance().getTestRunList().get(0);
 		TestData.getInstance().printTree();
 
 		view.getTable().fillTestedClassTable(testRun);
 		view.getTotals().showTestRunTotals(testRun);
+
+		// TODO: add one TestRun to treeView
+		// view.getTree().fillTreeView(selectedDirectory);
+
+		view.getClassTree().fillClassView(TestData.getInstance().getRoot());
 	}
 
 	private void parseFilesInDirectory(File[] files) {
@@ -86,20 +96,24 @@ public class Controller {
 		return rootItem;
 	}
 
-	public File openFolder() {
+	public void openFolder() {
 
 		File selectedDirectory = this.view.directoryAlert();
 		if (selectedDirectory != null) {
-
-//			Parse all existing xml files in within the selectedDirectory
+			if (view.isInitiated() == false) {
+				view.updateRootPane();
+			}
+			// Parse all existing xml files in within the selectedDirectory
 			File[] files = selectedDirectory.listFiles();
 			parseFilesInDirectory(files);
 
+			view.getTree().fillTreeView(selectedDirectory);
+
+			view.getClassTree().fillClassView(TestData.getInstance().getRoot());
 		}
-		
+
 		TestData.getInstance().printTree();
 
-		return selectedDirectory;
 	}
 
 	public void exitMain() {
@@ -153,6 +167,11 @@ public class Controller {
 		// Delete the TreeView
 		view.getTree().getTreeView().setRoot(null);
 
+		// Clear the classesTreeView
+		view.updateClassView(view.getClassTree().generateEmptyClassView());
+
+		// TODO Clear TestRunTotals
+
 		// Clear the Graph Content by Calling the ResetButton Handler
 		handleResetGraph();
 
@@ -177,6 +196,12 @@ public class Controller {
 
 		}
 		return yValues;
+	}
+
+	public void handleClassTreeClick(TreeNode node) {
+		if (node.getTestedClass() != null) {
+			view.getGraph().setChartData(node.getTestedClass());
+		}
 	}
 
 }

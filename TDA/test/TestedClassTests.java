@@ -80,7 +80,7 @@ public class TestedClassTests {
 		testedClass.addUnitTestToClassLog(unitTest2);
 		testedClass.addUnitTestToClassLog(unitTest3);
 		
-		assertEquals(66.66, testedClass.getFailurePercentageByTestrun(testRun1), 0.01);
+		assertEquals(66.67, testedClass.getFailurePercentageByTestrun(testRun1), 0.01);
 	}
 	
 	@Test
@@ -154,8 +154,8 @@ public class TestedClassTests {
 		testedClass.getUnitTestsByTestRun(new TestRun("fail01", "FailRun"));
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void testFailedGetFailurePercentageByTestRun() {
-		testedClass.getFailurePercentageByTestrun(new TestRun("fail01", "FailRun"));
+		assertEquals(-1.0, testedClass.getFailurePercentageByTestrun(new TestRun("fail01", "FailRun")), 0.01);
 	}
 }

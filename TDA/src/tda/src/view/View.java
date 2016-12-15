@@ -6,6 +6,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Optional;
 
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -22,6 +23,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -49,16 +51,23 @@ public class View extends Stage implements Observer {
 	private TDATestRunTotals totals;
 	private TDAMenuBar menuBar;
 	private TabPane tabPane;
-	private TreeView classTreeView;
+	private TDAClassView classTree;
+
+	private HBox nothingLoadedPane;
+	private boolean isInitiated = false;
+	private GridPane gridPane;
+
 	private Label idLabel;
+
 	public View(Model model, Controller controller) {
 		super();
 		this.model = model;
 		this.controller = controller;
 		this.model.addObserver(this);
-		this.setScene(new Scene(createRootPane(), 1200, 900));
+		this.setScene(new Scene(createNothingLoadedPane(), 1200, 900));
 		this.setTitle("Test Data Analyser");
 		this.setMaximized(true);
+
 	}
 
 	/**
@@ -70,15 +79,16 @@ public class View extends Stage implements Observer {
 		rootPane = new BorderPane();
 		menuBar = new TDAMenuBar(controller, this);
 
+		// sticks the menubar to top
 		this.rootPane.setTop(menuBar.createMenuBar());
-		GridPane gridPane = new GridPane();
 
-		// margins around the whole grid (top/right/bottom/left)
+		/*---- CONTENT GRIDPANE with the main content (TableView, Graph,...) ----*/
+		gridPane = new GridPane();
+
+		// margins around the whole center grid (top/right/bottom/left)
 		gridPane.setPadding(new Insets(10, 10, 10, 10));
 		gridPane.setAlignment(Pos.TOP_CENTER);
 		rootPane.setCenter(gridPane);
-
-		tree = new TDATreeView(this);
 
 		idLabel = new Label();
 		gridPane.add(idLabel, 1, 1);
@@ -88,24 +98,9 @@ public class View extends Stage implements Observer {
 		totals = new TDATestRunTotals(controller, idLabel);
 		gridPane.add(totals.createTestRunTotalsBox(), 1, 3);
 
+		tree = new TDATreeView(this);
 		table = new TDATableView(controller);
-
-		/*----- sidebar TabPane for switching between testruns and classes */
-		tabPane = new TabPane();
-
-		Tab tab1 = new Tab();
-		tab1.setText("Testruns");
-		tab1.setClosable(false);
-		tab1.setContent(tree.generateEmptyTreeView());
-		tabPane.getTabs().add(tab1);
-
-		Tab tab2 = new Tab();
-		tab2.setText("Classes");
-		tab2.setClosable(false);
-		tab2.setContent(generateEmptyClassTreeView());
-		tabPane.getTabs().add(tab2);
-
-		rootPane.setLeft(tabPane);
+		classTree = new TDAClassView(this);
 
 		gridPane.add(table.createTestedClassesTable(), 1, 4);
 		graph = new TDAGraph(controller);
@@ -121,6 +116,26 @@ public class View extends Stage implements Observer {
 		GridPane.setValignment(resetGraphs, VPos.BOTTOM);
 		gridPane.setVgap(20);
 
+		/*----- SIDEBAR TABPANE for switching between testruns and classes */
+		tabPane = new TabPane();
+
+		Tab tab1 = new Tab();
+		tab1.setText("Testruns");
+		tab1.setClosable(false);
+		tab1.setContent(tree.generateEmptyTreeView());
+		tabPane.getTabs().add(tab1);
+
+		Tab tab2 = new Tab();
+		tab2.setText("Classes");
+		tab2.setClosable(false);
+		tab2.setContent(classTree.generateEmptyClassView());
+		tabPane.getTabs().add(tab2);
+
+		tabPane.setMinWidth(300);
+		tabPane.setPrefWidth(300);
+		tabPane.setMaxWidth(350);
+
+		rootPane.setLeft(tabPane);
 		return rootPane;
 	}
 
@@ -129,9 +144,9 @@ public class View extends Stage implements Observer {
 		// TODO Auto-generated method stub
 
 	}
-	
-	public void setTestRunLabel(TestRun testRun){
-		
+
+	public void setTestRunLabel(TestRun testRun) {
+
 	}
 
 	public void errorAlert(String message) {
@@ -180,8 +195,13 @@ public class View extends Stage implements Observer {
 		tabPane.getTabs().get(0).setContent(treeView);
 	}
 
-	public void updateClassTreeView() {
-		tabPane.getTabs().get(1).setContent(this.classTreeView);
+	public void updateClassView(TreeView treeView) {
+		tabPane.getTabs().get(1).setContent(treeView);
+	}
+
+	public void clearTotals() {
+		totals = new TDATestRunTotals(controller, idLabel);
+		gridPane.add(totals.createTestRunTotalsBox(), 1, 3);
 	}
 
 	public TDATableView getTable() {
@@ -208,35 +228,69 @@ public class View extends Stage implements Observer {
 		return controller;
 	}
 
-	public TreeView generateEmptyClassTreeView() {
-		this.classTreeView = new TreeView();
-		return this.classTreeView;
+	public TDAClassView getClassTree() {
+		return classTree;
+	}
+
+	public boolean isInitiated() {
+		return isInitiated;
 	}
 
 	public void fillClassTreeView() {
-		/*
-		 * DEPRECATED! ObservableList<TestedClass> items =
-		 * FXCollections.observableArrayList(controller.getTestedClassList());
-		 * this.classListView = new ListView<>(items);
-		 * 
-		 * classListView.setCellFactory(new Callback<ListView<TestedClass>,
-		 * ListCell<TestedClass>>() {
-		 * 
-		 * @Override public ListCell<TestedClass> call(ListView<TestedClass> lv)
-		 * { return new ListCell<TestedClass>() {
-		 * 
-		 * @Override public void updateItem(TestedClass item, boolean empty) {
-		 * super.updateItem(item, empty); if (item == null) { setText(null); }
-		 * else { // assume MyDataType.getSomeProperty() returns a // string
-		 * setText(item.getClassName()); } } }; } });
-		 */
 
-		// controller.handleTableRowClick(testedClass);
-
-		// TODO: not strings but objects, so they are clickable for the graph
 		// TODO: update list when folders are added more than once
 
-		updateClassTreeView();
+		// TODO updateClassTreeView();
 	}
 
+	public void updateRootPane() {
+		this.getScene().setRoot(createRootPane());
+		isInitiated = true;
+	}
+
+	public Pane createNothingLoadedPane() {
+		nothingLoadedPane = new HBox();
+
+		nothingLoadedPane.setAlignment(Pos.CENTER);
+		nothingLoadedPane.setPadding(new Insets(15, 12, 15, 12));
+		nothingLoadedPane.setSpacing(10);
+		nothingLoadedPane.setStyle("-fx-background-color: #336699;");
+
+		Button loadFileButton = new Button();
+		loadFileButton.setPrefSize(164, 164);
+		loadFileButton.setStyle("-fx-background-image: url('/tda/src/view/openfile.png')");
+		loadFileButton.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+
+				controller.openFile();
+			}
+		});
+		/*
+		 * currently not working, bc openFile is using deprecated calls
+		 * loadFileButon.setOnAction(new EventHandler<ActionEvent>() {
+		 * 
+		 * @Override public void handle(ActionEvent event) {
+		 * 
+		 * controller.openFile(); if (isInitiated == false) { updateRootPane();
+		 * }
+		 * 
+		 * } });
+		 */
+
+		Button loadFolderButton = new Button();
+		loadFolderButton.setPrefSize(164, 164);
+		loadFolderButton.setStyle("-fx-background-image: url('/tda/src/view/openfolder.png')");
+		loadFolderButton.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				controller.openFolder();
+			}
+		});
+		nothingLoadedPane.getChildren().addAll(loadFileButton, loadFolderButton);
+
+		return nothingLoadedPane;
+	}
 }

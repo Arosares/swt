@@ -82,6 +82,10 @@ public class TreeNode {
 		this.testedClass = testedClass;
 	}
 	
+	public List<TreeNode> getChildren() {
+		return children;
+	}
+
 	private String printTree(int increment) {
 	    String s = "";
 	    String inc = "";
@@ -97,7 +101,7 @@ public class TreeNode {
 	
 	@Override
 	public String toString() {
-		return printTree(0);
+		return key;
 	}
 	
 	@Override

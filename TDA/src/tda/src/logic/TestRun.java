@@ -5,15 +5,15 @@ import java.util.List;
 
 public class TestRun {
 	private String runID, runName;
+	
+
 	private Counters resultSummary;
 	private List<TestedClass> testedClasses = new LinkedList<>();
 	private String path;
 	private String startTime;
 	private TestRunStartTime runDate;
 
-	public String getRunID() {
-		return runID;
-	}
+	
 
 	public TestRun(String runID, String runName) {
 		super();
@@ -89,6 +89,12 @@ public class TestRun {
 
 	public void setRunDate(TestRunStartTime runDate) {
 		this.runDate = runDate;
+	}
+	public String getRunID() {
+		return runID;
+	}
+	public String getRunName() {
+		return runName;
 	}
 
 	@Override

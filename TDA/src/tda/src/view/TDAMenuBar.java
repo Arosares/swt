@@ -13,6 +13,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import tda.src.controller.Controller;
+import tda.src.logic.TestData;
 
 public class TDAMenuBar {
 	/**
@@ -51,10 +52,7 @@ public class TDAMenuBar {
 
 			@Override
 			public void handle(ActionEvent event) {
-
-				File selectedDirectory = controller.openFolder();
-				view.getTree().fillTreeView(selectedDirectory);
-				view.fillClassTreeView();
+				controller.openFolder();
 			}
 		});
 		/*

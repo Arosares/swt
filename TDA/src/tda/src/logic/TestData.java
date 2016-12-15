@@ -134,4 +134,8 @@ public class TestData {
 		return root.search(testedClass);
 	}
 
+	public TreeNode getRoot() {
+		return root;
+	}
+
 }

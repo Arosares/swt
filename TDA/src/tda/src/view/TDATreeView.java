@@ -39,11 +39,6 @@ public class TDATreeView {
 		// view.showTreeView(treeView);
 		view.updateTreeView(treeView);
 
-		// TODO: insted of get(0) get the marked testRun in the treeView
-		TestRun testRun = TestData.getInstance().getTestRunList().get(0);
-		view.getTable().fillTestedClassTable(testRun);
-		view.getTotals().showTestRunTotals(testRun);
-
 		return treeView;
 	}
 
