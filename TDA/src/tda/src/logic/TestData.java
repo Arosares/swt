@@ -2,6 +2,7 @@ package tda.src.logic;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class TestData {
@@ -30,6 +31,10 @@ public class TestData {
 
 	public ArrayList<UnitTest> getUnitTestList() {
 		return unitTestList;
+	}
+	
+	public List<TestedClass> getTestedClasses() {
+		return root.getTestedClasses();
 	}
 
 	public void addNewTestRun(TestRun testRun) throws Exception {
@@ -97,8 +102,7 @@ public class TestData {
 			packageName.addAll(newlyCreatedClass.getPackageName());
 			root.insert(packageName, newlyCreatedClass);
 			
-		}
-		
+		}	
 	}
 
 	public void addNewUnitTest(UnitTest unitTest) {

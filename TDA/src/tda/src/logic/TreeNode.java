@@ -62,6 +62,10 @@ public class TreeNode {
 		return testedClasses;
 	}
 	
+	public List<TestedClass> getTestedClasses() {
+		return getTestedClasses(new LinkedList<TestedClass>()); 
+	}
+	
 	public TestedClass search(TestedClass testedClass){
 		return searchByName(testedClass.getClassName());
 	}

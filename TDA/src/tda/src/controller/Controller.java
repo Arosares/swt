@@ -10,6 +10,7 @@ import tda.src.logic.TestData;
 import tda.src.logic.TestRun;
 import tda.src.logic.TestedClass;
 import tda.src.logic.TreeNode;
+import tda.src.logic.apriori.AprioriAnalyzer;
 import tda.src.model.Model;
 import tda.src.view.View;
 
@@ -113,6 +114,9 @@ public class Controller {
 		}
 
 		TestData.getInstance().printTree();
+		
+		AprioriAnalyzer analyzer = new AprioriAnalyzer();
+		analyzer.analyze(2, 0);
 
 	}
 
