@@ -17,8 +17,10 @@ public class AprioriAnalyzer {
 	private int failedPercentage;
 	private int minSupport;
 	private double minConfidence;
-
+	
+	//A list containing all testedClasses
 	List<TestedClass> items = new LinkedList<TestedClass>();
+	//A list containing all TestRuns
 	List<TestRun> transactions = new LinkedList<TestRun>();
 
 	HashMap<List<TestedClass>, Integer> itemSet;
@@ -26,7 +28,8 @@ public class AprioriAnalyzer {
 	public AprioriAnalyzer() {
 		items = TestData.getInstance().getTestedClasses();
 		transactions = TestData.getInstance().getTestRunList();
-
+		
+		//Hier wird ein neues itemSet generiert und nicht in die lokale Variable oben geschrieben. Gewollt?
 		HashMap<List<TestedClass>, Integer> itemSet = new HashMap<List<TestedClass>, Integer>();
 
 		this.failedPercentage = 15;
@@ -35,6 +38,8 @@ public class AprioriAnalyzer {
 	public void analyze(int minSupport, double minConfidence) {
 //		this.minSupport = minSupport;
 		this.minConfidence = minConfidence;
+		
+		//Rundung? 31 / 2 wäre glaub 15 
 		this.minSupport = transactions.size() / 2;
 		
 		System.out.println("Started Apriori with minimum support of " + this.minSupport);
@@ -121,6 +126,10 @@ public class AprioriAnalyzer {
 		return frqItemSet;
 	}
 
+	/**
+	 * Maps every TestRun to its TestedClasses with a FP higher then a certain bound (field: failurePercentage)
+	 * @return HasMap, containing one List for each TestRun containing the selected TestedClasses
+	 */
 	private HashMap<List<TestedClass>, Integer> getFirstItemSet() {
 		return transactions
 				.stream()
@@ -160,7 +169,13 @@ public class AprioriAnalyzer {
 	private List<TestedClass> getFailedClasses(TestRun testRun) {
 		return getFailedClasses(failedPercentage, testRun);
 	}
-
+	
+	
+	/**
+	 * @param failurePercentage the min FP a class should have in the List
+	 * @param testRun The TestRun which will be searched for classes
+	 * @return List of TestedClasses containing only classes with higher FP as the param failurePercentage
+	 */
 	private List<TestedClass> getFailedClasses(double failurePercentage,
 			TestRun testRun) {
 		return items
