@@ -34,12 +34,10 @@ public class TDATreeView {
 	public TreeView<String> fillTreeView(File selectedDirectory) {
 		// Create a TreeView that has the selectedDirectory as rootItem
 		treeView = createTreeView(selectedDirectory.toString());
-		view.showTreeView(treeView);
 
-		// TODO: insted of get(0) get the marked testRun in the treeView
-		TestRun testRun = TestData.getInstance().getTestRunList().get(0);
-		view.getTable().fillTestedClassTable(testRun);
-		view.getTotals().showTestRunTotals(testRun);
+		// Below works, but is deprecated
+		// view.showTreeView(treeView);
+		view.updateTreeView(treeView);
 
 		return treeView;
 	}
@@ -76,9 +74,9 @@ public class TDATreeView {
 		EventHandler<MouseEvent> mouseEventHandle = (MouseEvent event) -> {
 			handleMouseClicked(event);
 		};
-		
+
 		treeView.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEventHandle);
-		
+
 		TreeItem<String> rootItem = createTreeItems(rootDirectory);
 		treeView.setRoot(rootItem);
 		return treeView;
