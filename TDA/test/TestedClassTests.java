@@ -32,7 +32,7 @@ public class TestedClassTests {
 
 	@Before
 	public void setUp() throws Exception {
-		testRun1 = new TestRun("Run1", "foo", "fooUser");
+		testRun1 = new TestRun("Run1", "foo");
 		unitTest1 = new UnitTest(testRun1, "test1", "fooTest1", "Run1fooTest1", "testFooBar");
 		unitTest2 = new UnitTest(testRun1, "test2", "fooTest2", "Run1fooTest2", "testFooBar");
 		unitTest3 = new UnitTest(testRun1, "test3", "fooTest3", "Run1fooTest3", "testFooBar");
@@ -80,7 +80,7 @@ public class TestedClassTests {
 		testedClass.addUnitTestToClassLog(unitTest2);
 		testedClass.addUnitTestToClassLog(unitTest3);
 		
-		assertEquals(66.66, testedClass.getFailurePercentageByTestrun(testRun1), 0.01);
+		assertEquals(66.67, testedClass.getFailurePercentageByTestrun(testRun1), 0.01);
 	}
 	
 	@Test
@@ -151,11 +151,11 @@ public class TestedClassTests {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailedGetUnitTestsByTestRun() {
-		testedClass.getUnitTestsByTestRun(new TestRun("fail01", "FailRun", "TestUsr"));
+		testedClass.getUnitTestsByTestRun(new TestRun("fail01", "FailRun"));
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void testFailedGetFailurePercentageByTestRun() {
-		testedClass.getFailurePercentageByTestrun(new TestRun("fail01", "FailRun", "TestUsr"));
+		assertEquals(-1.0, testedClass.getFailurePercentageByTestrun(new TestRun("fail01", "FailRun")), 0.01);
 	}
 }

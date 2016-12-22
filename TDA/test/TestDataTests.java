@@ -8,11 +8,14 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import tda.src.logic.TestData;
 import tda.src.logic.TestRun;
 import tda.src.logic.TestedClass;
 import tda.src.logic.UnitTest;
 
-public class TestRunTests {
+public class TestDataTests {
+	
+	private TestData testData; 
 	
 	private TestRun testRun1;
 	private TestRun testRun2;
@@ -32,6 +35,8 @@ public class TestRunTests {
 
 	@Before
 	public void setUp() throws Exception {
+		testData = TestData.getInstance(); 
+		
 		testRun1 = new TestRun("Run1", "run-name-1");
 		testRun2 = new TestRun("Run2", "run-name-2");
 		
@@ -52,39 +57,38 @@ public class TestRunTests {
 	public void tearDown() throws Exception {
 	}
 	
-	@Test
-	public void testAddNewTestedClassToTestRun() {
-		List<TestedClass> testedClasses = testRun1.getTestedClasses();
-		testRun1.addTestedClassToTestRun(testedClass1);
-		testedClasses.add(testedClass1);
+	@Test 
+	public void testAddNewTestedClassSuccess(){
+		try {
+			testData.addNewTestRun(testRun1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
-		assertEquals(testedClasses, testRun1.getTestedClasses());
+		assertTrue(testData.getTestRunList().contains(testRun1)); 
 	}
-	
-	@Test
-	public void testAddExistingTestedClassToTestRun() {
-		testRun1.addTestedClassToTestRun(testedClass1);
-		List<TestedClass> testedClasses = testRun1.getTestedClasses();
-		
-		// Adding class the second time should have no effect
-		testRun1.addTestedClassToTestRun(testedClass1);
-		
-		assertEquals(testedClasses, testRun1.getTestedClasses());
-	}
-	
-	@Test
-	public void testEqualsSameTestRuns() {
-		assertTrue(testRun1.equals(testRun1));
-	}
-	
-	@Test
-	public void testEqualsSameTestID() {
-		TestRun testRun3 = new TestRun("Run1", "run-name-2");
-		assertTrue(testRun1.equals(testRun3));
-	}
-	
-	@Test
-	public void testEqualsDifferentTestRuns() {
-		assertFalse(testRun1.equals(testRun2));
-	}
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
