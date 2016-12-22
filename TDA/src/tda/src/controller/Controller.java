@@ -116,7 +116,7 @@ public class Controller {
 		TestData.getInstance().printTree();
 		
 		AprioriAnalyzer analyzer = new AprioriAnalyzer();
-		analyzer.analyze(2, 0);
+		analyzer.analyze();
 
 	}
 

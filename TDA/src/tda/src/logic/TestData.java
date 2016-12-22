@@ -10,7 +10,7 @@ public class TestData {
 	private static TestData testDataInstance;
 	private ArrayList<TestRun> testRunList = new ArrayList<>();
 	private ArrayList<UnitTest> unitTestList = new ArrayList<>();
-	private TreeNode root = new TreeNode("/", null);
+	private TreeNode root = new TreeNode("/", null, null);
 
 	private TestData() {
 	}
