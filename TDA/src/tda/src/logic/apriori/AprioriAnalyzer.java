@@ -1,6 +1,7 @@
 package tda.src.logic.apriori;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -58,12 +59,88 @@ public class AprioriAnalyzer implements Analyzer {
 		}
 		
 		// generate strong rules from the frequent item sets
-		generateStrongRules(frequentItemSets);
+		List<StrongRule> strongRules = generateStrongRules(frequentItemSets);
+		for (StrongRule strongRule : strongRules) {
+			strongRule.print();
+		}
 	}
 
-	private void generateStrongRules(List<HashMap<List<TestedClass>, Integer>> frequentItemSets) {
-		// TODO To be implemented!
+	private List<StrongRule> generateStrongRules(List<HashMap<List<TestedClass>, Integer>> frequentItemSets) {
+		
+		// TODO: Calculate max frequent item set..
+		HashMap<List<TestedClass>, Integer> maxFreqItemSet = frequentItemSets.get(frequentItemSets.size() - 1);
+		
+		List<StrongRule> strongRules = new LinkedList<>();
+		
+		for (Entry<List<TestedClass>, Integer> entry : maxFreqItemSet.entrySet()) {
+			List<TestedClass> entryKey = entry.getKey();
+			
+			HashMap<List<TestedClass>, Integer> powerItemSet = getPowerSet(entryKey);
+			System.out.println("Power Set of key " + entryKey);
+			
+			powerItemSet = updateItemSet(powerItemSet, frequentItemSets);
+			printItemSet(powerItemSet);
+			
+			System.out.println("Generate Strong Rules for " + entryKey);
+			
+			strongRules.addAll(generateStrongRulesForEntry(powerItemSet, entryKey));
+			
+			
+		}
+		
+		
+		
+		return strongRules;
+		
+	}
 
+	private List<StrongRule> generateStrongRulesForEntry(HashMap<List<TestedClass>, Integer> powerItemSet, List<TestedClass> fullKey) {
+		List<StrongRule> strongRules = new LinkedList<>();
+		
+		for (Entry<List<TestedClass>, Integer> entry : powerItemSet.entrySet()) {
+			List<TestedClass> entryKey = entry.getKey();
+			if (entryKey.size() >= 1 && entryKey.size() < fullKey.size()) {
+				List<TestedClass> leftSide = entryKey;
+				List<TestedClass> rightSide = new LinkedList<>();
+				rightSide.addAll(fullKey);
+				rightSide.removeAll(leftSide);
+				
+				double confidence = (double) powerItemSet.get(fullKey) / entry.getValue();
+				StrongRule strongRule = new StrongRule(leftSide, rightSide, confidence);
+				strongRules.add(strongRule);
+			}
+		}
+		return strongRules;
+	}
+
+	private HashMap<List<TestedClass>, Integer> updateItemSet(HashMap<List<TestedClass>, Integer> itemSet,
+			List<HashMap<List<TestedClass>, Integer>> frequentItemSets) {
+		
+		HashMap<List<TestedClass>, Integer> result = new HashMap<>();
+		
+		for (Entry<List<TestedClass>, Integer> entry : itemSet.entrySet()) {
+			for (HashMap<List<TestedClass>, Integer> hashMap : frequentItemSets) {
+				Integer value = hashMap.getOrDefault(entry.getKey(), -1);
+				if (value >= minSupport) {
+					result.put(entry.getKey(), value);
+				}
+			}
+		}
+		
+		return result;
+	}
+
+	private HashMap<List<TestedClass>, Integer> getPowerSet(List<TestedClass> testedClasses) {
+		HashMap<List<TestedClass>, Integer> powerItemSet = new HashMap<>();
+		
+		// generates the subset of all lengths from two to length of testedClasses
+		// smaller than two items is not relevant for 
+		for (int i = 1; i <= testedClasses.size(); i++) {
+			// INEFFICIENT
+			powerItemSet.putAll(generateFixedSubset(i, testedClasses));
+		}
+		
+		return powerItemSet;
 	}
 
 	/**
