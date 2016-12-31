@@ -59,10 +59,19 @@ public class AprioriAnalyzer implements Analyzer {
 		}
 		
 		// generate strong rules from the frequent item sets
-		List<StrongRule> strongRules = generateStrongRules(frequentItemSets);
+		List<StrongRule> strongRules = generateStrongRules(frequentItemSets, minConfidence);
 		for (StrongRule strongRule : strongRules) {
 			strongRule.print();
 		}
+	}
+	
+	private List<StrongRule> generateStrongRules(List<HashMap<List<TestedClass>, Integer>> frequentItemSets, double confidence) {
+		List<StrongRule> strongRules = generateStrongRules(frequentItemSets);
+		
+		return strongRules.stream()
+				.filter(rule -> rule.getConfidence() >= confidence)
+				.sorted()
+				.collect(Collectors.toList());
 	}
 
 	private List<StrongRule> generateStrongRules(List<HashMap<List<TestedClass>, Integer>> frequentItemSets) {
@@ -97,6 +106,7 @@ public class AprioriAnalyzer implements Analyzer {
 	private List<StrongRule> generateStrongRulesForEntry(HashMap<List<TestedClass>, Integer> powerItemSet, List<TestedClass> fullKey) {
 		List<StrongRule> strongRules = new LinkedList<>();
 		
+		// S -> (I - S)
 		for (Entry<List<TestedClass>, Integer> entry : powerItemSet.entrySet()) {
 			List<TestedClass> entryKey = entry.getKey();
 			if (entryKey.size() >= 1 && entryKey.size() < fullKey.size()) {
@@ -105,6 +115,7 @@ public class AprioriAnalyzer implements Analyzer {
 				rightSide.addAll(fullKey);
 				rightSide.removeAll(leftSide);
 				
+				// conf = support (I) / support (S)
 				double confidence = (double) powerItemSet.get(fullKey) / entry.getValue();
 				StrongRule strongRule = new StrongRule(leftSide, rightSide, confidence);
 				strongRules.add(strongRule);

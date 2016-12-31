@@ -4,7 +4,7 @@ import java.util.List;
 
 import tda.src.logic.TestedClass;
 
-public class StrongRule {
+public class StrongRule implements Comparable<StrongRule>{
 
 	private List<TestedClass> leftSide;
 	private List<TestedClass> rightSide;
@@ -50,4 +50,14 @@ public class StrongRule {
 		return leftSide + " -> " + rightSide + " | " + confidence + "%";
 	}
 
+	@Override
+	public int compareTo(StrongRule other) {
+		if (other.confidence > this.confidence) {
+			return 1;
+		} else if (other.confidence < this.confidence) {
+			return -1;
+		} else {
+			return 0;
+		}
+	}
 }
