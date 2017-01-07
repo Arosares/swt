@@ -32,8 +32,8 @@ public class TestRunTests {
 
 	@Before
 	public void setUp() throws Exception {
-		testRun1 = new TestRun("Run1", "run-name-1", "fooUser");
-		testRun2 = new TestRun("Run2", "run-name-2", "fooUser");
+		testRun1 = new TestRun("Run1", "run-name-1");
+		testRun2 = new TestRun("Run2", "run-name-2");
 		
 		int half = unitTests.length/2;
 		
@@ -79,7 +79,7 @@ public class TestRunTests {
 	
 	@Test
 	public void testEqualsSameTestID() {
-		TestRun testRun3 = new TestRun("Run1", "run-name-2", "fooUser");
+		TestRun testRun3 = new TestRun("Run1", "run-name-2");
 		assertTrue(testRun1.equals(testRun3));
 	}
 	

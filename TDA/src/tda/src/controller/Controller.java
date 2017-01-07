@@ -6,10 +6,10 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
 import tda.src.logic.TestData;
 import tda.src.logic.TestRun;
 import tda.src.logic.TestedClass;
+import tda.src.logic.TreeNode;
 import tda.src.model.Model;
 import tda.src.view.View;
 
@@ -32,15 +32,25 @@ public class Controller {
 	public void openFile() {
 		List<File> fileChoices = view.pathAlert();
 		if (fileChoices != null) {
+			if (view.isInitiated() == false) {
+				view.updateRootPane();
+			}
 			for (File xmlFile : fileChoices) {
 				model.parseFile(xmlFile.toString());
 			}
 		}
 
+		// TODO: currently NPE, fix to modern data structure
 		TestRun testRun = TestData.getInstance().getTestRunList().get(0);
+		TestData.getInstance().printTree();
 
 		view.getTable().fillTestedClassTable(testRun);
-		view.getTotals().showTestRunTotals(testRun, false);
+		view.getTotals().showTestRunTotals(testRun);
+
+		// TODO: add one TestRun to treeView
+		// view.getTree().fillTreeView(selectedDirectory);
+
+		view.getClassTree().fillClassView(TestData.getInstance().getRoot());
 	}
 
 	private void parseFilesInDirectory(File[] files) {
@@ -86,27 +96,24 @@ public class Controller {
 		return rootItem;
 	}
 
-	public TreeView<TestRun> createTreeView(String rootDirectory) {
-
-		TreeView<TestRun> treeView = new TreeView<TestRun>();
-		TreeItem<TestRun> rootItem = createTreeItems(rootDirectory);
-		treeView.setRoot(rootItem);
-
-		return treeView;
-	}
-
-	public File openFolder() {
+	public void openFolder() {
 
 		File selectedDirectory = this.view.directoryAlert();
 		if (selectedDirectory != null) {
-
+			if (view.isInitiated() == false) {
+				view.updateRootPane();
+			}
 			// Parse all existing xml files in within the selectedDirectory
 			File[] files = selectedDirectory.listFiles();
 			parseFilesInDirectory(files);
 
+			view.getTree().fillTreeView(selectedDirectory);
+
+			view.getClassTree().fillClassView(TestData.getInstance().getRoot());
 		}
 
-		return selectedDirectory;
+		TestData.getInstance().printTree();
+
 	}
 
 	public void exitMain() {
@@ -123,7 +130,7 @@ public class Controller {
 		for (TestRun testRun : testRuns) {
 			if (testRun.getPath().contains(xmlName)) {
 				view.getTable().fillTestedClassTable(testRun);
-				view.getTotals().showTestRunTotals(testRun, false);
+				view.getTotals().showTestRunTotals(testRun);
 				break;
 			}
 		}
@@ -146,9 +153,10 @@ public class Controller {
 	 * with additional features added to the TDA.
 	 */
 	public void clearData() {
+		// TODO: does not clear testruntotals yet
+
 		// Clear the testData
 		TestData.getInstance().getTestRunList().clear();
-		TestData.getInstance().getTestedClassList().clear();
 		TestData.getInstance().getUnitTestList().clear();
 
 		// Delete the Table Data
@@ -159,15 +167,41 @@ public class Controller {
 		// Delete the TreeView
 		view.getTree().getTreeView().setRoot(null);
 
+		// Clear the classesTreeView
+		view.updateClassView(view.getClassTree().generateEmptyClassView());
+
+		// TODO Clear TestRunTotals
+
 		// Clear the Graph Content by Calling the ResetButton Handler
 		handleResetGraph();
 
 		// Clear both Observable Lists for the TestRunInfos
-		if (view.getTotals().getAllCounters() != null && view.getTotals().getGeneratedList() != null) {
-			view.getTotals().getAllCounters().clear();
+		if (view.getTotals().getGeneratedList() != null) {
+			// view.getTotals().getAllCounters().clear();
 			view.getTotals().getGeneratedList().clear();
 		}
 
+	}
+
+	public double[] calculateChartData(TestedClass testedClass) {
+		double[] yValues = new double[TestData.getInstance().getTestRunList().size()];
+		int cnt = 0;
+		for (TestRun testRun : TestData.getInstance().getTestRunList()) {
+			double yValue = testedClass.getFailurePercentageByTestrun(testRun);
+			if (yValue == -1) {
+				continue;
+			}
+			yValues[cnt] = yValue;
+			cnt++;
+
+		}
+		return yValues;
+	}
+
+	public void handleClassTreeClick(TreeNode node) {
+		if (node.getTestedClass() != null) {
+			view.getGraph().setChartData(node.getTestedClass());
+		}
 	}
 
 }

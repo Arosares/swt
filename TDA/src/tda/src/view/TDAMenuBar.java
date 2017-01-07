@@ -7,16 +7,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TableView;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.BorderPane;
 import tda.src.controller.Controller;
-import tda.src.logic.TestedClass;
-import tda.src.model.Model;
+import tda.src.logic.TestData;
 
 public class TDAMenuBar {
 	/**
@@ -28,7 +25,7 @@ public class TDAMenuBar {
 	 */
 	private Controller controller;
 	private View view;
-	
+
 	public TDAMenuBar(Controller controller, View view) {
 		this.controller = controller;
 		this.view = view;
@@ -55,22 +52,19 @@ public class TDAMenuBar {
 
 			@Override
 			public void handle(ActionEvent event) {
-
-				File selectedDirectory = controller.openFolder();
-				view.getTree().fillTreeView(selectedDirectory);
+				controller.openFolder();
 			}
 		});
-/*		MenuItem recentItem = new MenuItem("Recent");
-		recentItem.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				// TODO
-			}
-		});*/
+		/*
+		 * MenuItem recentItem = new MenuItem("Recent");
+		 * recentItem.setOnAction(new EventHandler<ActionEvent>() {
+		 * 
+		 * @Override public void handle(ActionEvent event) { // TODO } });
+		 */
 		MenuItem clearData = new MenuItem("Clear All Data");
 		clearData.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
-			public void handle(ActionEvent event){
+			public void handle(ActionEvent event) {
 				controller.handleClearDataButton();
 				event.consume();
 			}
@@ -83,22 +77,21 @@ public class TDAMenuBar {
 				event.consume();
 			}
 		});
-		file.getItems().addAll(openFile, openFolder,clearData, exitItem);
+		file.getItems().addAll(openFile, openFolder, clearData, exitItem);
 		menuBar.getMenus().add(file);
-		
+
 		return menuBar;
 	}
-	
-	public void clearDataAlert(){
+
+	public void clearDataAlert() {
 		Alert clearDataAlert = new Alert(AlertType.CONFIRMATION,
 				"Do you really want to clear all Data?\n All loaded TestRuns will be lost.");
 		clearDataAlert.setTitle("Clear Data?");
-		
+
 		Optional<ButtonType> result = clearDataAlert.showAndWait();
 		if (result.isPresent() && result.get() == ButtonType.OK) {
 			controller.clearData();
 		}
 	}
-	
 
 }

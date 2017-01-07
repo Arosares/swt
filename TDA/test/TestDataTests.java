@@ -40,8 +40,8 @@ public class TestDataTests {
 	public void setUp() throws Exception {
 		testData = TestData.getInstance(); 
 		
-		testRun1 = new TestRun("Run1", "run-name-1", "fooUser");
-		testRun2 = new TestRun("Run2", "run-name-2", "fooUser");
+		testRun1 = new TestRun("Run1", "run-name-1");
+		testRun2 = new TestRun("Run2", "run-name-2");
 		
 		int half = unitTests.length/2;
 		
@@ -103,37 +103,38 @@ public class TestDataTests {
 	@Test 
 	public void testAddNewTestedClassSuccess(){
 		try {
-			testData.addNewTestedClass(testedClass1); 
+			testData.addNewTestedClassToTree(testedClass1); 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		assertTrue(testData.getTestedClassList().contains(testedClass1)); 
+		assertTrue(testData.getClassByName("testedClass1").equals(testedClass1)); 
 	}
 	
 	@Test 
 	public void testAddNewTestedClassToAlreadyExistingTestedClassListSuccess(){
 		try {
-			testData.addNewTestedClass(testedClass1); 
-			testData.addNewTestedClass(testedClass3); 
+			testData.addNewTestedClassToTree(testedClass1); 
+			testData.addNewTestedClassToTree(testedClass3); 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		assertTrue(testData.getTestedClassList().contains(testedClass3) && testData.getTestedClassList().contains(testedClass1)); 
+		assertTrue(testData.getClassByName("testedClass3").equals(testedClass3) && 
+				testData.getClassByName("testedClass1").equals(testedClass1)); 
 	}
 	
 	@Test 
 	public void testAddNewTestedClassExistingClass(){
 		try {
-			testData.addNewTestedClass(testedClass1); 
-			testData.addNewTestedClass(testedClass2); 
+			testData.addNewTestedClassToTree(testedClass1); 
+			testData.addNewTestedClassToTree(testedClass2); 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		assertTrue((testData.getTestedClassList().get(0).getClassLog().get(0).getUnitTestList().get(0).equals(unitTests[0])) && 
-				(testData.getTestedClassList().get(0).getClassLog().get(0).getUnitTestList().get(1).equals(unitTests[1]))); 
+		assertTrue((testData.getClassByName("testedClass1").getClassLog().get(0).getUnitTestList().get(0).equals(unitTests[0])) && 
+				(testData.getClassByName("testedClass2").getClassLog().get(0).getUnitTestList().get(1).equals(unitTests[1]))); 
 	}
 	
 	@Test 
@@ -173,11 +174,12 @@ public class TestDataTests {
 	
 	@Test 
 	public void testGetClassByName(){
-		testData.addNewTestedClass(testedClass1); 
+		testData.addNewTestedClassToTree(testedClass1); 
 		
 		TestedClass addedClass = testData.getClassByName("TestMe"); 
 		
 		assertTrue(addedClass.equals(testedClass1)); 
+
 	}
 
 }

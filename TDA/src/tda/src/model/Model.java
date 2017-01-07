@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Set;
 
+import tda.src.exceptions.WrongXMLAttributeException;
 import tda.src.logic.Parser;
 import tda.src.logic.StAXParser;
-import tda.src.logic.TestData;
 import tda.src.logic.TestRun;
 import tda.src.logic.TestedClass;
 
@@ -27,7 +27,6 @@ public class Model extends Observable {
 		parser = new StAXParser();
 
 	}
-
 
 	public void setParser(Parser value) {
 		this.parser = value;
@@ -54,17 +53,23 @@ public class Model extends Observable {
 	}
 
 	public void parseFile(String xmlPath) {
-		parser.parse(xmlPath);
+		try {
+			parser.parse(xmlPath);
+		} catch (WrongXMLAttributeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public List<TestedClass> getTestedClassesFromTestRun(TestRun testRun) {
 		List<TestedClass> classesOfOneRun = testRun.getTestedClasses();
+
 		for (TestedClass testedClass : classesOfOneRun) {
 			testedClass.setCurrentFailurePercentage(testRun);
 		}
-		
+
 		return classesOfOneRun;
-		
+
 	}
 
 }
