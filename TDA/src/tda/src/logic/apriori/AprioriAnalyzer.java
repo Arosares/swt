@@ -41,8 +41,9 @@ public class AprioriAnalyzer implements Analyzer {
 	private final int failedPercentage = 15;
 
 	/**
-	 * Default constructor with support = number of transactions / 2 confidence
-	 * = 80 %
+	 * Default constructor with 
+	 * support = number of transactions / 2
+	 * confidence = 80 %
 	 */
 	public AprioriAnalyzer() {
 		newAprioriAnalyzer(-1, 0.8);
@@ -64,10 +65,10 @@ public class AprioriAnalyzer implements Analyzer {
 
 	@Override
 	public void analyze() {
-		System.out.println("Started Apriori with minimum support of " + this.minSupport);
+		System.out.println("Starting Apriori with minimum support of " + this.minSupport);
 
 		// 1. Generate frequent item sets
-		HashMap<List<TestedClass>, Integer> frequentItemSet = getFrequentItemSets();
+		HashMap<List<TestedClass>, Integer> frequentItemSet = getMaxFrequentItemSet();
 
 		// DEBUG
 		printItemSet(frequentItemSet);
@@ -172,15 +173,13 @@ public class AprioriAnalyzer implements Analyzer {
 	}
 
 	/**
-	 * Generates the frequent item sets by steadily increasing length k. Item
+	 * Generates the maximal frequent item set by steadily increasing length k. Item
 	 * sets below the minimum support are pruned and therefore not used in
 	 * further computations.
 	 * 
-	 * @return The list of all frequent item sets, where the first entry is the
-	 *         basis item set and the last entry represents the relevant
-	 *         frequent item set
+	 * @return The maximal frequent item set
 	 */
-	private HashMap<List<TestedClass>, Integer> getFrequentItemSets() {
+	private HashMap<List<TestedClass>, Integer> getMaxFrequentItemSet() {
 		// Generate first item set as basis for the algorithm
 		HashMap<List<TestedClass>, Integer> itemSet = getFirstItemSet();
 		HashMap<List<TestedClass>, Integer> frqItemSet = pruneItemSet(itemSet, minSupport);
@@ -188,35 +187,53 @@ public class AprioriAnalyzer implements Analyzer {
 		// Helper to keep track of the last non empty frequent item set
 		HashMap<List<TestedClass>, Integer> oldFrqItemSet = new HashMap<List<TestedClass>, Integer>();
 
-		// All frequent item sets - to be returned
-		HashMap<List<TestedClass>, Integer> frequentItemSets = new HashMap<List<TestedClass>, Integer>();
+		// Max frequent item set - to be returned
+		HashMap<List<TestedClass>, Integer> maxFrequentItemSet = new HashMap<List<TestedClass>, Integer>();
 
 		// length of item set
 		int k = 1;
 
 		while (!frqItemSet.isEmpty()) {
 			oldFrqItemSet = frqItemSet;
-			
-			 // Adds a copy of the last frequent item set to the output list
-			 HashMap<List<TestedClass>, Integer> itemSetCopy = new
-			 HashMap<List<TestedClass>, Integer>();
-			 itemSetCopy.putAll(frqItemSet); 
-			 // TODO: Check if item set copy is needed /w putAll 
-			 frequentItemSets.putAll(itemSetCopy);
 			 
 			itemSet = initializeNewItemSet(frqItemSet, k + 1);
 			updateItemSet(itemSet);
 
 			itemSet = pruneItemSet(itemSet, minSupport);
-			frqItemSet = eliminateInsignificantItemSets(itemSet, frqItemSet);
-
+			frqItemSet = eliminateInsignificantItemSets(itemSet, oldFrqItemSet);
+			
+			/**
+			* if an entry of the old item set is not a subset of any new frq item set
+			* (i.e. possible rule but no further correlations)
+			* and its key size is greater than 2 (i.e. a rule can be obtained)
+			* then add this entry to the max frequent item set
+			*/
+			for (Entry<List<TestedClass>, Integer> entry : oldFrqItemSet.entrySet()) {
+				if (entry.getKey().size() >= 2 && !isSubset(entry, frqItemSet)) {
+					maxFrequentItemSet.putIfAbsent(entry.getKey(), entry.getValue());
+				}
+			}
+			
 			k++;
 		}
 
-		System.out.println("Computing of Apriori done:");
-		printItemSet(oldFrqItemSet);
-		return oldFrqItemSet;
-		// return frequentItemSets;
+		System.out.println("Computing of Apriori done");
+		System.out.println("Max frequent item set:");
+		printItemSet(maxFrequentItemSet);
+		return maxFrequentItemSet;
+	}
+	
+	
+	/**
+	 * An entry e is the subset of another item set I, 
+	 * if there exists at least one entry e' in I
+	 * so that e' contains all elements of e.
+	 *    
+	 * @return
+	 * 		true if e is subset of I
+	 */
+	private boolean isSubset(Entry<List<TestedClass>, Integer> entry, HashMap<List<TestedClass>, Integer> itemSet) {
+		return itemSet.keySet().stream().anyMatch(key -> key.containsAll(entry.getKey()));
 	}
 
 	private HashMap<List<TestedClass>, Integer> eliminateInsignificantItemSets(
