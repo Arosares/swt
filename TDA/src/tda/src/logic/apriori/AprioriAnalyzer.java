@@ -15,7 +15,7 @@ import tda.src.logic.TestedClass;
 
 /**
  * @author Tobias Schwartz
- * @version 08.01.2017
+ * @version 09.01.2017
  *
  */
 public class AprioriAnalyzer implements Analyzer {
@@ -41,12 +41,16 @@ public class AprioriAnalyzer implements Analyzer {
 	private final int failedPercentage = 15;
 
 	/**
-	 * Default constructor with 
+	 * Creates a new {@link AprioriAnalyzer} with 
 	 * support = number of transactions / 2
 	 * confidence = 80 %
 	 */
 	public AprioriAnalyzer() {
 		newAprioriAnalyzer(-1, 0.8);
+	}
+	
+	public AprioriAnalyzer(double minConfidence) {
+		newAprioriAnalyzer(-1, minConfidence);
 	}
 
 	public AprioriAnalyzer(int minSupport, double minConfidence) {
@@ -74,30 +78,51 @@ public class AprioriAnalyzer implements Analyzer {
 
 		// 2. Generate strong rules from frequent item sets
 		System.out.println("\nStrong Rules");
-		List<StrongRule> strongRules = generateStrongRules(frequentItemSet, minConfidence);
+		List<StrongRule> strongRules = generateStrongRules(frequentItemSet);
+		
+		// 3. Update Cache
+		cachedFrequentItemSets = frequentItemSet;
+		cachedStrongRules = strongRules;
+		
+		strongRules = getStrongRules(minConfidence); 
 		for (StrongRule strongRule : strongRules) {
 			strongRule.print();
 		}
 	}
+	
+	/*** Cache Functionality ***/
+	public List<StrongRule> getStrongRules(double confidence) {
+		if (cachedStrongRules.isEmpty()) {
+			analyze();
+		}
+		return cachedStrongRules
+				.stream()
+				.parallel()
+				.filter(rule -> rule.getConfidence() >= confidence)
+				.sorted()
+				.collect(Collectors.toList());
+	}
+	
+	public HashMap<List<TestedClass>, Integer> getFrequentItemSets() {
+		if (cachedFrequentItemSets.isEmpty()) {
+			return getMaxFrequentItemSet();
+		} else {
+			return cachedFrequentItemSets;
+		}
+	}
+	
+	/* -------------------------------------------------------
+	EVERYTHING BELOW IS INTERNAL COMPUTATION
+	   ------------------------------------------------------- */
+	
 
 	/**
-	 * Generates the strong rules from a given frequent item set and filters by
-	 * a given confidence threshold
+	 * Generates the strong rules from a given frequent item set
 	 * 
 	 * @param frequentItemSet
 	 *            The frequent item set used for generation of strong rules
-	 * @param confidence
-	 *            The minimum confidence for a successful strong rule
-	 * @return A filtered {@link list} of {@link StrongRule}
+	 * @return A {@link list} of all possible {@link StrongRule}s
 	 */
-	private List<StrongRule> generateStrongRules(HashMap<List<TestedClass>, Integer> frequentItemSet,
-			double confidence) {
-		List<StrongRule> strongRules = generateStrongRules(frequentItemSet);
-
-		return strongRules.stream().filter(rule -> rule.getConfidence() >= confidence).sorted()
-				.collect(Collectors.toList());
-	}
-
 	private List<StrongRule> generateStrongRules(HashMap<List<TestedClass>, Integer> frequentItemSet) {
 
 		List<StrongRule> strongRules = new LinkedList<>();
@@ -114,6 +139,16 @@ public class AprioriAnalyzer implements Analyzer {
 		return strongRules;
 	}
 
+	/**
+	 * Generates the strong rules for the powerset of one item set entry
+	 * 
+	 * @param powerItemSet
+	 * 			The powerset of the given key 
+	 * @param fullKey
+	 * 			The key itself
+	 * @return
+	 * 			A List of this entry's {@link StrongRule}s
+	 */
 	private List<StrongRule> generateStrongRulesForEntry(HashMap<List<TestedClass>, Integer> powerItemSet,
 			List<TestedClass> fullKey) {
 		List<StrongRule> strongRules = new LinkedList<>();
