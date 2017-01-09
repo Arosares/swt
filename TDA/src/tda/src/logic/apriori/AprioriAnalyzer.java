@@ -70,9 +70,6 @@ public class AprioriAnalyzer implements Analyzer {
 		// 1. Generate frequent item sets
 		HashMap<List<TestedClass>, Integer> frequentItemSet = getMaxFrequentItemSet();
 
-		// DEBUG
-		printItemSet(frequentItemSet);
-
 		// 2. Generate strong rules from frequent item sets
 		List<StrongRule> strongRules = generateStrongRules(frequentItemSet, minConfidence);
 		for (StrongRule strongRule : strongRules) {
@@ -99,22 +96,23 @@ public class AprioriAnalyzer implements Analyzer {
 	}
 
 	private List<StrongRule> generateStrongRules(HashMap<List<TestedClass>, Integer> frequentItemSet) {
-		// TODO: Maybe other way of calculating MAX frequent item set..
 
 		List<StrongRule> strongRules = new LinkedList<>();
 
 		for (Entry<List<TestedClass>, Integer> entry : frequentItemSet.entrySet()) {
 			List<TestedClass> entryKey = entry.getKey();
 
-			HashMap<List<TestedClass>, Integer> powerItemSet = getPowerSet(entryKey);
 			System.out.println("Power Set of key " + entryKey);
+			HashMap<List<TestedClass>, Integer> powerItemSet = getPowerSet(entryKey);
 
-			powerItemSet = updateItemSet(powerItemSet, frequentItemSet);
+			updateItemSet(powerItemSet);
 			printItemSet(powerItemSet);
 
 			System.out.println("Generate Strong Rules for " + entryKey);
 
 			strongRules.addAll(generateStrongRulesForEntry(powerItemSet, entryKey));
+			
+			System.out.println(" --- ");
 
 		}
 
@@ -138,35 +136,20 @@ public class AprioriAnalyzer implements Analyzer {
 				double confidence = (double) powerItemSet.get(fullKey) / entry.getValue();
 				StrongRule strongRule = new StrongRule(leftSide, rightSide, confidence);
 				strongRules.add(strongRule);
+				strongRule.print();
 			}
 		}
 		return strongRules;
 	}
 
-	private HashMap<List<TestedClass>, Integer> updateItemSet(HashMap<List<TestedClass>, Integer> itemSet,
-			HashMap<List<TestedClass>, Integer> frequentItemSet) {
-
-		HashMap<List<TestedClass>, Integer> result = new HashMap<>();
-
-		for (Entry<List<TestedClass>, Integer> entry : itemSet.entrySet()) {
-				Integer value = frequentItemSet.getOrDefault(entry.getKey(), -1);
-				if (value >= minSupport) {
-					result.put(entry.getKey(), value);
-				}
-		}
-
-		return result;
-	}
-
 	private HashMap<List<TestedClass>, Integer> getPowerSet(List<TestedClass> testedClasses) {
 		HashMap<List<TestedClass>, Integer> powerItemSet = new HashMap<>();
-
-		// generates the subset of all lengths from two to length of
-		// testedClasses
-		// smaller than two items is not relevant for
+		
 		for (int i = 1; i <= testedClasses.size(); i++) {
-			// INEFFICIENT
-			powerItemSet.putAll(generateFixedSubset(i, testedClasses));
+			HashMap<List<TestedClass>, Integer> tmp = generateFixedSubset(i, testedClasses);
+			System.out.println(i + " iteration:");
+			printItemSet(tmp);
+			powerItemSet.putAll(tmp);
 		}
 
 		return powerItemSet;
@@ -351,11 +334,7 @@ public class AprioriAnalyzer implements Analyzer {
 
 	private HashMap<List<TestedClass>, Integer> generateFixedSubset(int length, List<TestedClass> allTestedClasses) {
 		// generating all possible combinations with length k
-		// http://stackoverflow.com/questions/29910312/algorithm-to-get-all-the-combinations-of-size-n-from-an-array-java
-
-		// TODO: Take class distance into account
-		// -> Would do this later for changing filter without need of
-		// recalculating!
+		// based on: http://stackoverflow.com/questions/29910312/algorithm-to-get-all-the-combinations-of-size-n-from-an-array-java
 
 		HashMap<List<TestedClass>, Integer> newItemSet = new HashMap<>();
 
