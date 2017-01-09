@@ -68,9 +68,12 @@ public class AprioriAnalyzer implements Analyzer {
 		System.out.println("Starting Apriori with minimum support of " + this.minSupport);
 
 		// 1. Generate frequent item sets
+		System.out.println("\nMaximal Frequent Item Sets:");
 		HashMap<List<TestedClass>, Integer> frequentItemSet = getMaxFrequentItemSet();
+		printItemSet(frequentItemSet);
 
 		// 2. Generate strong rules from frequent item sets
+		System.out.println("\nStrong Rules");
 		List<StrongRule> strongRules = generateStrongRules(frequentItemSet, minConfidence);
 		for (StrongRule strongRule : strongRules) {
 			strongRule.print();
@@ -102,18 +105,10 @@ public class AprioriAnalyzer implements Analyzer {
 		for (Entry<List<TestedClass>, Integer> entry : frequentItemSet.entrySet()) {
 			List<TestedClass> entryKey = entry.getKey();
 
-			System.out.println("Power Set of key " + entryKey);
 			HashMap<List<TestedClass>, Integer> powerItemSet = getPowerSet(entryKey);
-
 			updateItemSet(powerItemSet);
-			printItemSet(powerItemSet);
-
-			System.out.println("Generate Strong Rules for " + entryKey);
 
 			strongRules.addAll(generateStrongRulesForEntry(powerItemSet, entryKey));
-			
-			System.out.println(" --- ");
-
 		}
 
 		return strongRules;
@@ -136,7 +131,6 @@ public class AprioriAnalyzer implements Analyzer {
 				double confidence = (double) powerItemSet.get(fullKey) / entry.getValue();
 				StrongRule strongRule = new StrongRule(leftSide, rightSide, confidence);
 				strongRules.add(strongRule);
-				strongRule.print();
 			}
 		}
 		return strongRules;
@@ -144,14 +138,9 @@ public class AprioriAnalyzer implements Analyzer {
 
 	private HashMap<List<TestedClass>, Integer> getPowerSet(List<TestedClass> testedClasses) {
 		HashMap<List<TestedClass>, Integer> powerItemSet = new HashMap<>();
-		
 		for (int i = 1; i <= testedClasses.size(); i++) {
-			HashMap<List<TestedClass>, Integer> tmp = generateFixedSubset(i, testedClasses);
-			System.out.println(i + " iteration:");
-			printItemSet(tmp);
-			powerItemSet.putAll(tmp);
+			powerItemSet.putAll(generateFixedSubset(i, testedClasses));
 		}
-
 		return powerItemSet;
 	}
 
@@ -200,9 +189,6 @@ public class AprioriAnalyzer implements Analyzer {
 			k++;
 		}
 
-		System.out.println("Computing of Apriori done");
-		System.out.println("Max frequent item set:");
-		printItemSet(maxFrequentItemSet);
 		return maxFrequentItemSet;
 	}
 	
