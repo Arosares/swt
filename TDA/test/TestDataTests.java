@@ -102,11 +102,7 @@ public class TestDataTests {
 	
 	@Test 
 	public void testAddNewTestedClassSuccess(){
-		try {
-			testData.addNewTestedClassToTree(testedClass1); 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		testData.addNewTestedClassToTree(testedClass1); 
 		
 		assertTrue(testData.getClassByName("testedClass1").equals(testedClass1)); 
 	}
