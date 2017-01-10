@@ -58,9 +58,6 @@ public class AprioriAnalyzer implements Analyzer {
 	}
 
 	private void newAprioriAnalyzer(int minSupport, double minConfidence) {
-		items = TestData.getInstance().getTestedClasses();
-		transactions = TestData.getInstance().getTestRunList();
-
 		itemSet = new HashMap<List<TestedClass>, Integer>();
 
 		this.minSupport = (minSupport >= 0) ? minSupport : (transactions.size() / 2);
@@ -69,6 +66,11 @@ public class AprioriAnalyzer implements Analyzer {
 
 	@Override
 	public void analyze() {
+		items = TestData.getInstance().getTestedClasses();
+		transactions = TestData.getInstance().getTestRunList();
+		
+		minSupport = transactions.size() / 2;
+		
 		System.out.println("Starting Apriori with minimum support of " + this.minSupport);
 
 		// 1. Generate frequent item sets
@@ -105,10 +107,9 @@ public class AprioriAnalyzer implements Analyzer {
 	
 	public HashMap<List<TestedClass>, Integer> getFrequentItemSets() {
 		if (cachedFrequentItemSets.isEmpty()) {
-			return getMaxFrequentItemSet();
-		} else {
-			return cachedFrequentItemSets;
+			analyze();
 		}
+		return cachedFrequentItemSets;
 	}
 	
 	/* -------------------------------------------------------
@@ -202,7 +203,7 @@ public class AprioriAnalyzer implements Analyzer {
 
 		while (!frqItemSet.isEmpty()) {
 			oldFrqItemSet = frqItemSet;
-			 
+			
 			itemSet = initializeNewItemSet(frqItemSet, k + 1);
 			updateItemSet(itemSet);
 

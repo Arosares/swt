@@ -5,12 +5,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+import tda.src.logic.apriori.AprioriAnalyzer;
+
 public class TestData {
 
 	private static TestData testDataInstance;
 	private ArrayList<TestRun> testRunList = new ArrayList<>();
 	private ArrayList<UnitTest> unitTestList = new ArrayList<>();
 	private TreeNode root = new TreeNode("/", null, null);
+	private Analyzer analyzer = new AprioriAnalyzer();
 
 	private TestData() {
 	}
@@ -83,7 +86,7 @@ public class TestData {
 	}
 
 	public void printTree() {
-		System.out.println(root.toString());
+		System.out.println(root.printTree(0));
 	}
 
 	public void addNewTestedClassToTree(TestedClass newlyCreatedClass) {
@@ -140,6 +143,10 @@ public class TestData {
 
 	public TreeNode getRoot() {
 		return root;
+	}
+
+	public AprioriAnalyzer getAnalyzer() {
+		return (AprioriAnalyzer) analyzer;
 	}
 
 }

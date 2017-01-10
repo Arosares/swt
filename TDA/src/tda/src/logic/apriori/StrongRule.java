@@ -47,7 +47,7 @@ public class StrongRule implements Comparable<StrongRule>{
 	}
 	
 	public String toString() {
-		return leftSide + " -> " + rightSide + " | " + confidence + "%";
+		return leftSide + " -> " + rightSide + " | " + confidence * 100 + "%";
 	}
 
 	@Override
