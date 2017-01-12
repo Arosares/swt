@@ -3,8 +3,10 @@ package tda.src.controller;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.LinkedList;
 import java.util.List;
 
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.TreeItem;
 import tda.src.logic.TestData;
 import tda.src.logic.TestRun;
@@ -112,7 +114,8 @@ public class Controller {
 			view.getClassTree().fillClassView(TestData.getInstance().getRoot());
 		}
 
-		TestData.getInstance().printTree();
+		TestData.getInstance().getAnalyzer().analyze();
+		TestData.getInstance().getRoot().printTree(0);
 
 	}
 
@@ -183,19 +186,17 @@ public class Controller {
 
 	}
 
-	public double[] calculateChartData(TestedClass testedClass) {
-		double[] yValues = new double[TestData.getInstance().getTestRunList().size()];
-		int cnt = 0;
+	public List<XYChart.Data<TestRun, Number>> calculateChartData(TestedClass testedClass) {
+		List<XYChart.Data<TestRun, Number>> datas = new LinkedList<>();
 		for (TestRun testRun : TestData.getInstance().getTestRunList()) {
 			double yValue = testedClass.getFailurePercentageByTestrun(testRun);
 			if (yValue == -1) {
 				continue;
 			}
-			yValues[cnt] = yValue;
-			cnt++;
-
+			XYChart.Data<TestRun, Number> dataPoint = new XYChart.Data<TestRun, Number>(testRun, yValue);
+			datas.add(dataPoint);
 		}
-		return yValues;
+		return datas;
 	}
 
 	public void handleClassTreeClick(TreeNode node) {
@@ -203,5 +204,4 @@ public class Controller {
 			view.getGraph().setChartData(node.getTestedClass());
 		}
 	}
-
 }
