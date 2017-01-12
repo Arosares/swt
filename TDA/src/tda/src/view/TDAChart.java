@@ -67,8 +67,17 @@ public class TDAChart {
 	 *  inspired by https://gist.github.com/jewelsea/4681797	*/
 	class HoveredThresholdNode extends StackPane {
 		HoveredThresholdNode(TestRun testRun, Number value) {
-			setPrefSize(15, 15);
+			setPrefSize(10, 10);
 			final Label label = createDataThresholdLabel(testRun, value);
+			
+			setOnMouseClicked(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+					// TODO Auto-generated method stub
+					controller.handleChartNodeClick(testRun);
+				}
+				
+			});
 			setOnMouseEntered(new EventHandler<MouseEvent>() {
 				@Override
 				public void handle(MouseEvent mouseEvent) {
@@ -92,9 +101,8 @@ public class TDAChart {
 			labelString += "\nFailed: " + testRun.getResultSummary().getSumFailed().toString();
 			final Label label = new Label(labelString);
 			label.getStyleClass().addAll("default-color0", "chart-line-symbol", "chart-series-line");
-			label.setStyle("-fx-font-size: 20; -fx-font-weight: bold;");
+			label.setStyle("-fx-font-size: 10;");
 			label.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
-			//TODO: Set correct Label-Size
 			return label;
 		}
 	}

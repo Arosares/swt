@@ -30,7 +30,16 @@ public class TDAcomparison {
 
 	public TDAcomparison(View view) {
 		this.view = view;
-
+		rootPane = new BorderPane();
+		rootPane.setPrefWidth(1200);
+		
+		Label comparisonLabel = new Label("Comparison:");
+		rootPane.setTop(comparisonLabel);
+	}
+	
+	public Pane gernateEmptyComparisonPane(){
+		
+		return rootPane;
 	}
 
 	/**
@@ -46,10 +55,8 @@ public class TDAcomparison {
 	 * @return rootPane: BorderPane
 	 */
 	public Pane generateComparisonPane(TestRun run) {
-		rootPane = new BorderPane();
-		rootPane.setPrefWidth(1200);
-		Label comparisonLabel = new Label("Comparison:");
-		rootPane.setTop(comparisonLabel);
+		
+		
 
 		// TODO: generateComparisonSlot and fill with content
 		rootPane.setLeft(comparisonSlot1);

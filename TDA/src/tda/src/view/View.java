@@ -123,7 +123,7 @@ public class View extends Stage implements Observer {
 		});
 		chartPane.add(resetLineChart, 0, 1);
 		//TODO: add Comparison node below
-//		chartPane.add(comparison.ge, columnIndex, rowIndex);
+		chartPane.add(comparison.gernateEmptyComparisonPane(), 0, 2);
 		
 
 		GridPane.setHalignment(resetLineChart, HPos.CENTER);
@@ -260,6 +260,10 @@ public class View extends Stage implements Observer {
 
 	public TDAClassView getClassTree() {
 		return classTree;
+	}
+
+	public TDAcomparison getComparison() {
+		return comparison;
 	}
 
 	public boolean isInitiated() {

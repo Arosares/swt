@@ -204,4 +204,10 @@ public class Controller {
 			view.getGraph().setChartData(node.getTestedClass());
 		}
 	}
+
+	public void handleChartNodeClick(TestRun testRun) {
+		System.out.println("Clicked node");
+		view.getComparison().generateComparisonPane(testRun);
+		
+	}
 }

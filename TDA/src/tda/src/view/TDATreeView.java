@@ -92,7 +92,7 @@ public class TDATreeView {
 		// TreeView
 		if (node instanceof Text || (node instanceof TreeCell && ((TreeCell) node).getText() != null)) {
 			String xmlName = (String) ((TreeItem) treeView.getSelectionModel().getSelectedItem()).getValue();
-			if (xmlName.endsWith(".xml") && event.getClickCount() == 2) {
+			if (xmlName.endsWith(".xml")) {
 				view.getController().handleTreeItemClick(xmlName);
 			}
 		}
