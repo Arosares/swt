@@ -157,7 +157,7 @@ public class TDAAnalyzerView {
 		String result = "";
 		for (int i = 0; i < testedClasses.size(); i++) {
 			result += testedClasses.get(i).getClassName();
-			if (i <= testedClasses.size() - 1) {
+			if (i < testedClasses.size() - 1) {
 				result += ", ";
 			}
 		}

@@ -105,6 +105,20 @@ public class AprioriAnalyzer implements Analyzer {
 				.collect(Collectors.toList());
 	}
 	
+	public List<StrongRule> getStrongRules(double confidence, int distance) {
+		if (cachedStrongRules.isEmpty()) {
+			analyze();
+		}
+		
+		return cachedStrongRules
+				.stream()
+				.parallel()
+				.filter(rule -> rule.getConfidence() >= confidence)
+				.filter(rule -> rule.getMaxDistance() <= distance)
+				.sorted()
+				.collect(Collectors.toList());
+	}
+	
 	public HashMap<List<TestedClass>, Integer> getFrequentItemSets() {
 		if (cachedFrequentItemSets.isEmpty()) {
 			analyze();
