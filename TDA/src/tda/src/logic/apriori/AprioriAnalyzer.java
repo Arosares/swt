@@ -151,9 +151,41 @@ public class AprioriAnalyzer implements Analyzer {
 		return cachedFrequentItemSets;
 	}
 	
+	public HashMap<List<TestedClass>, Integer> getFrequentItemSets(int distance) {
+		if (cachedFrequentItemSets.isEmpty()) {
+			analyze();
+		}
+	
+		HashMap<List<TestedClass>, Integer> result = new HashMap<>();
+	
+		for (Entry<List<TestedClass>, Integer> entry : cachedFrequentItemSets.entrySet()) {
+			if (getMaxDistance(entry.getKey()) <= distance) {
+				result.put(entry.getKey(), entry.getValue());
+			}
+		}
+		return result;
+	}
+	
 	/* -------------------------------------------------------
 	EVERYTHING BELOW IS INTERNAL COMPUTATION
 	   ------------------------------------------------------- */
+	
+	private int getMaxDistance(List<TestedClass> testedClasses) {
+		if (testedClasses.size() < 2)
+			return 0;
+
+		int maxDistance = 0;
+
+		for (int i = 0; i < testedClasses.size() - 1; i++) {
+			for (int j = i + 1; j < testedClasses.size(); j++) {
+				int distance = TestData.getInstance().getClassDistance(testedClasses.get(i), testedClasses.get(j));
+				if (distance > maxDistance) {
+					maxDistance = distance;
+				}
+			}
+		}
+		return maxDistance;
+	}
 	
 
 	/**

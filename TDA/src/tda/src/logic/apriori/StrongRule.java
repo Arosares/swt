@@ -4,9 +4,8 @@ import java.util.List;
 
 import tda.src.logic.TestData;
 import tda.src.logic.TestedClass;
-import tda.src.logic.TreeNode;
 
-public class StrongRule implements Comparable<StrongRule>{
+public class StrongRule implements Comparable<StrongRule> {
 
 	private List<TestedClass> leftSide;
 	private List<TestedClass> rightSide;
@@ -22,54 +21,47 @@ public class StrongRule implements Comparable<StrongRule>{
 
 	private int computeMaxDistance() {
 		int maxDistance = 0;
-		
+
 		// Distance between left and right side
 		for (TestedClass leftClass : leftSide) {
 			for (TestedClass rightClass : rightSide) {
-				int distance = getDistance(leftClass, rightClass);
+				int distance = TestData.getInstance().getClassDistance(leftClass, rightClass);
 				if (distance > maxDistance) {
 					maxDistance = distance;
 				}
 			}
 		}
-		
+
 		// Distance for only the left side
 		int distance = getMaxDistance(leftSide);
 		if (distance > maxDistance) {
 			maxDistance = distance;
 		}
-		
+
 		// Distance for only the right side
 		distance = getMaxDistance(rightSide);
 		if (distance > maxDistance) {
 			maxDistance = distance;
 		}
-	
+
 		return maxDistance;
 	}
 
 	private int getMaxDistance(List<TestedClass> testedClasses) {
-		if (testedClasses.size() >= 2) return 0;
-		
+		if (testedClasses.size() < 2)
+			return 0;
+
 		int maxDistance = 0;
-		
+
 		for (int i = 0; i < testedClasses.size() - 1; i++) {
 			for (int j = i + 1; j < testedClasses.size(); j++) {
-				int distance = getDistance(testedClasses.get(i), testedClasses.get(j));
+				int distance = TestData.getInstance().getClassDistance(testedClasses.get(i), testedClasses.get(j));
 				if (distance > maxDistance) {
 					maxDistance = distance;
 				}
 			}
 		}
 		return maxDistance;
-	}
-
-	private int getDistance(TestedClass classLeft, TestedClass classRight) {
-		TreeNode root = TestData.getInstance().getRoot();
-		TreeNode leftNode = root.searchNode(classLeft.getClassName());
-		TreeNode rightNode = root.searchNode(classRight.getClassName());
-		
-		return leftNode.getDistance(rightNode);
 	}
 
 	public List<TestedClass> getLeftSide() {
@@ -89,11 +81,11 @@ public class StrongRule implements Comparable<StrongRule>{
 		int round = (int) Math.round(confidence * 100);
 		this.confidence = round / 100.0;
 	}
-	
+
 	public void print() {
 		System.out.println(toString());
 	}
-	
+
 	public String toString() {
 		return leftSide + " -> " + rightSide + " | " + confidence * 100 + "%";
 	}

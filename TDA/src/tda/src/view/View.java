@@ -6,6 +6,8 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Optional;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -18,6 +20,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TreeView;
@@ -31,6 +34,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import tda.src.controller.Controller;
+import tda.src.logic.TestData;
 import tda.src.logic.TestRun;
 import tda.src.model.Model;
 
@@ -55,6 +59,7 @@ public class View extends Stage implements Observer {
 	private TabPane sideTabPane;
 	private TabPane mainWindowTabPane;
 	private TDAClassView classTree;
+	private TDAcomparison comparison;
 
 	private HBox nothingLoadedPane;
 	private boolean isInitiated = false;
@@ -63,6 +68,9 @@ public class View extends Stage implements Observer {
 	private GridPane aprioriPane;
 
 	private Label idLabel;
+	
+	private Slider distanceSlider;
+	private Slider confidenceSlider;
 
 	public View(Model model, Controller controller) {
 		super();
@@ -110,6 +118,7 @@ public class View extends Stage implements Observer {
 
 		
 		graph = new TDAChart(controller);
+		comparison = new TDAcomparison(this);
 		
 		chartPane = new GridPane();
 		ColumnConstraints column1 = new ColumnConstraints();
@@ -123,7 +132,7 @@ public class View extends Stage implements Observer {
 			controller.handleResetGraph();
 		});
 		chartPane.add(resetLineChart, 0, 1);
-		//TODO: add Comparison node below
+		chartPane.add(comparison.generateEmptyComparisonPane(), 0, 2);
 		
 		// Analyzer (Apriori) Pane
 		aprioriPane = new GridPane();
@@ -138,8 +147,25 @@ public class View extends Stage implements Observer {
 		analyzer = new TDAAnalyzerView();
 
 		aprioriPane.add(analyzer.createFrequentItemTable(), 1, 2);
-		aprioriPane.add(analyzer.createStrongRulesTable(), 1, 4);
+		aprioriPane.add(analyzer.createStrongRulesTable(), 1, 3);
 		
+		distanceSlider = new Slider(0, 10, 10);
+		distanceSlider.valueProperty().addListener(new ChangeListener() {
+			@Override
+			public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+				updateAprioriView();
+			}
+		});
+		confidenceSlider = new Slider(0, 1, 0.8);
+		confidenceSlider.valueProperty().addListener(new ChangeListener() {
+			@Override
+			public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+				updateAprioriView();
+			}
+		});
+		
+		aprioriPane.add(distanceSlider, 1, 4);
+		aprioriPane.add(confidenceSlider, 2, 4);
 
 		GridPane.setHalignment(resetLineChart, HPos.CENTER);
 		GridPane.setValignment(resetLineChart, VPos.BOTTOM);
@@ -186,14 +212,20 @@ public class View extends Stage implements Observer {
 		
 		mainWindowTabPane.getSelectionModel().selectedItemProperty().addListener((ov, oldTab, newTab) -> {
 	        if (newTab.getText().equals("Analyzer")) {
-	        	analyzer.fillFrequentItemTable();
-	        	analyzer.fillStrongRulesTable(0.8);
+	        	updateAprioriView();
 	        }
 	    });
 
 		rootPane.setCenter(mainWindowTabPane);
 
 		return rootPane;
+	}
+
+	private void updateAprioriView() {
+		double confidence = confidenceSlider.getValue();
+		int distance = (int) distanceSlider.getValue();
+		analyzer.fillFrequentItemTable(distance);
+		analyzer.fillStrongRulesTable(confidence, distance);
 	}
 
 	@Override
@@ -291,6 +323,10 @@ public class View extends Stage implements Observer {
 
 	public boolean isInitiated() {
 		return isInitiated;
+	}
+	
+	public TDAcomparison getComparison() {
+		return comparison;
 	}
 
 	public void fillClassTreeView() {

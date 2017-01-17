@@ -49,7 +49,8 @@ public class TDAChart {
 			String xAxisLabel = Integer.toString(cnt);
 			XYChart.Data<String, Number> dataPoint = new XYChart.Data<String, Number>(xAxisLabel, data.getYValue());
 			//set the HoverNode for a dataPoint
-			dataPoint.setNode(new HoveredThresholdNode(data.getXValue(), data.getYValue()));
+			dataPoint.setNode(new HoveredThresholdNode(data.getXValue(), data.getYValue(), testedClass));
+			
 			series.getData().add(dataPoint);
 			cnt++;
 		} 
@@ -66,9 +67,17 @@ public class TDAChart {
 	/** a node which displays a value on hover, but is otherwise empty 
 	 *  inspired by https://gist.github.com/jewelsea/4681797	*/
 	class HoveredThresholdNode extends StackPane {
-		HoveredThresholdNode(TestRun testRun, Number value) {
-			setPrefSize(15, 15);
-			final Label label = createDataThresholdLabel(testRun, value);
+		HoveredThresholdNode(TestRun testRun, Number value, TestedClass testedClass) {
+			setPrefSize(10, 10);
+			final Label label = createDataThresholdLabel(testRun, value, testedClass);
+			setOnMouseClicked(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+					controller.handleChartNodeClick(testRun, testedClass);
+				}
+				
+			});
+			
 			setOnMouseEntered(new EventHandler<MouseEvent>() {
 				@Override
 				public void handle(MouseEvent mouseEvent) {
@@ -86,15 +95,14 @@ public class TDAChart {
 
 		}
 
-		private Label createDataThresholdLabel(TestRun testRun, Number value) {
+		private Label createDataThresholdLabel(TestRun testRun, Number value, TestedClass testedClass) {
 			String labelString = testRun.getRunDate().toString();
-			labelString += "\nPassed: " + testRun.getResultSummary().getSumPassed().toString();
-			labelString += "\nFailed: " + testRun.getResultSummary().getSumFailed().toString();
+			labelString += "\nPassed: " + testedClass.getUnitTestsByTestRun(testRun, true).size();
+			labelString += "\nFailed: " + testedClass.getUnitTestsByTestRun(testRun, false).size();
 			final Label label = new Label(labelString);
 			label.getStyleClass().addAll("default-color0", "chart-line-symbol", "chart-series-line");
-			label.setStyle("-fx-font-size: 20; -fx-font-weight: bold;");
+			label.setStyle("-fx-font-size: 10;");
 			label.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
-			//TODO: Set correct Label-Size
 			return label;
 		}
 	}

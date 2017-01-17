@@ -127,6 +127,13 @@ public class TestData {
 		// TODO: Throw Exception
 		return null;
 	}
+	
+	public int getClassDistance(TestedClass classLeft, TestedClass classRight) {
+		TreeNode leftNode = root.searchNode(classLeft.getClassName());
+		TreeNode rightNode = root.searchNode(classRight.getClassName());
+		
+		return leftNode.getDistance(rightNode);
+	}
 
 	/**
 	 * @param name

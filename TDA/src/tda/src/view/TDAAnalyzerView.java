@@ -104,29 +104,28 @@ public class TDAAnalyzerView {
 		return scrollPane;
 	}
 
-	public void fillFrequentItemTable() {
-		HashMap<List<TestedClass>, Integer> itemSet = TestData.getInstance().getAnalyzer().getFrequentItemSets();
+	public void fillFrequentItemTable(int distance) {
+		HashMap<List<TestedClass>, Integer> itemSet = TestData.getInstance().getAnalyzer().getFrequentItemSets(distance);
 		HashMap<String, String> stringItemSet = hashMapToString(itemSet);
 
 		ObservableList<Entry<String, String>> items = FXCollections.observableArrayList(stringItemSet.entrySet());
 		
 		// Sort
-		supportCountCol.setSortType(TableColumn.SortType.DESCENDING);
-		strongRulesTable.getSortOrder().add(supportCountCol);
-		
 		frequentItemsTable.setItems(items);
+		supportCountCol.setSortType(TableColumn.SortType.DESCENDING);
+		frequentItemsTable.getSortOrder().add(supportCountCol);
 	}
 
-	public void fillStrongRulesTable(double confidence) {
-		List<StrongRule> strongRules = TestData.getInstance().getAnalyzer().getStrongRules(confidence);
+	public void fillStrongRulesTable(double confidence, int distance) {
+		List<StrongRule> strongRules = TestData.getInstance().getAnalyzer().getStrongRules(confidence, distance);
 		HashMap<String, String> stringItemSet = strongRulesToStringHashMap(strongRules);
 		
 		ObservableList<Entry<String, String>> items = FXCollections.observableArrayList(stringItemSet.entrySet());
 		
 		// Sort
+		strongRulesTable.setItems(items);
 		confidenceCol.setSortType(TableColumn.SortType.DESCENDING);
 		strongRulesTable.getSortOrder().add(confidenceCol);
-		strongRulesTable.setItems(items);
 	}
 
 	private HashMap<String, String> hashMapToString(HashMap<List<TestedClass>, Integer> itemSet) {
