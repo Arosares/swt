@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.yattasolutions.uml.diagrams.classifier:ClassDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.yattasolutions.uml.diagrams.classifier="http://ns.yatta-solutions.com/umllab/diagrams/classifier/1.1.0" xmi:id="_Rky48NzqEeaMeaEvRdRzBA">
+  <modelElement href="TDA2.uml#_RJQzhdzqEeaMeaEvRdRzBA"/>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_TXrL0NzqEeaMeaEvRdRzBA" source="_TXry6NzqEeaMeaEvRdRzBA">
+    <modelElement href="TDA2.uml#_RU0jQtzqEeaMeaEvRdRzBA"/>
+    <visualProperties xmi:id="_TXtBANzqEeaMeaEvRdRzBA" position="70.0,70.0"/>
+    <nameVisual xmi:id="_TXrL0dzqEeaMeaEvRdRzBA" text=""/>
+    <sourceRole xmi:id="_TXrL0tzqEeaMeaEvRdRzBA" aggregationKind="NONE" name="model">
+      <modelElement href="TDA2.uml#_RU0jQdzqEeaMeaEvRdRzBA"/>
+      <visibility xmi:id="_TXrL09zqEeaMeaEvRdRzBA" label="+"/>
+      <cardinality xmi:id="_TXrL1NzqEeaMeaEvRdRzBA" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_TXrL1dzqEeaMeaEvRdRzBA" aggregationKind="NONE" name="parser" navigable="true">
+      <modelElement href="TDA2.uml#_RU0jQNzqEeaMeaEvRdRzBA"/>
+      <visibility xmi:id="_TXrL1tzqEeaMeaEvRdRzBA" label="+"/>
+      <cardinality xmi:id="_TXrL19zqEeaMeaEvRdRzBA" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_TXry4NzqEeaMeaEvRdRzBA" source="_TXry6NzqEeaMeaEvRdRzBA">
+    <modelElement href="TDA2.uml#_RU1KVNzqEeaMeaEvRdRzBA"/>
+    <visualProperties xmi:id="_TXtBAdzqEeaMeaEvRdRzBA" position="90.0,90.0"/>
+    <nameVisual xmi:id="_TXry4dzqEeaMeaEvRdRzBA" text=""/>
+    <sourceRole xmi:id="_TXry4tzqEeaMeaEvRdRzBA" aggregationKind="NONE" name="model">
+      <modelElement href="TDA2.uml#_RU1KU9zqEeaMeaEvRdRzBA"/>
+      <visibility xmi:id="_TXry49zqEeaMeaEvRdRzBA" label="+"/>
+      <cardinality xmi:id="_TXry5NzqEeaMeaEvRdRzBA" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_TXry5dzqEeaMeaEvRdRzBA" aggregationKind="NONE" name="testRun" navigable="true">
+      <modelElement href="TDA2.uml#_RU1KUNzqEeaMeaEvRdRzBA"/>
+      <visibility xmi:id="_TXry5tzqEeaMeaEvRdRzBA" label="+"/>
+      <cardinality xmi:id="_TXry59zqEeaMeaEvRdRzBA" label="*" max="-1"/>
+    </targetRole>
+  </edges>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_TXry6NzqEeaMeaEvRdRzBA" name="Model" associationsOut="_TXrL0NzqEeaMeaEvRdRzBA _TXry4NzqEeaMeaEvRdRzBA">
+    <modelElement href="TDA2.uml#_ROJTgNzqEeaMeaEvRdRzBA"/>
+    <visualProperties xmi:id="_TXry6dzqEeaMeaEvRdRzBA" position="50.0,50.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_TXry6tzqEeaMeaEvRdRzBA" label="+"/>
+    <attributes xmi:id="_TXry69zqEeaMeaEvRdRzBA" name="parser">
+      <modelElement href="TDA2.uml#_RU0jQNzqEeaMeaEvRdRzBA"/>
+      <visibility xmi:id="_TXry7NzqEeaMeaEvRdRzBA" label="+"/>
+      <cardinality xmi:id="_TXry7dzqEeaMeaEvRdRzBA" label="1" max="1" min="1"/>
+      <type xmi:id="_TXry7tzqEeaMeaEvRdRzBA" name="Parser">
+        <modelElement href="TDA2.uml#_RNfMMNzqEeaMeaEvRdRzBA"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_TXry79zqEeaMeaEvRdRzBA" name="testRun">
+      <modelElement href="TDA2.uml#_RU1KUNzqEeaMeaEvRdRzBA"/>
+      <visibility xmi:id="_TXry8NzqEeaMeaEvRdRzBA" label="+"/>
+      <cardinality xmi:id="_TXry8dzqEeaMeaEvRdRzBA" label="*" max="-1"/>
+      <type xmi:id="_TXry8tzqEeaMeaEvRdRzBA" name="TestRun">
+        <modelElement href="TDA2.uml#_RNqLUNzqEeaMeaEvRdRzBA"/>
+      </type>
+    </attributes>
+    <operations xmi:id="_TXry89zqEeaMeaEvRdRzBA" name="Model">
+      <modelElement href="TDA2.uml#_ROJTgdzqEeaMeaEvRdRzBA"/>
+      <keywords xmi:id="_TXry9NzqEeaMeaEvRdRzBA" keyword="create"/>
+      <visibility xmi:id="_TXry9dzqEeaMeaEvRdRzBA" label="+"/>
+      <cardinality xmi:id="_TXry9tzqEeaMeaEvRdRzBA" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_TXry99zqEeaMeaEvRdRzBA">
+        <modelElement href="TDA2.uml#_ROJThNzqEeaMeaEvRdRzBA"/>
+        <type xmi:id="_TXry-NzqEeaMeaEvRdRzBA" name="Model">
+          <modelElement href="TDA2.uml#_ROJTgNzqEeaMeaEvRdRzBA"/>
+        </type>
+      </outParameters>
+    </operations>
+    <operations xmi:id="_TXry-dzqEeaMeaEvRdRzBA" name="parseFile">
+      <modelElement href="TDA2.uml#_ROJ6kNzqEeaMeaEvRdRzBA"/>
+      <visibility xmi:id="_TXry-tzqEeaMeaEvRdRzBA" label="+"/>
+      <cardinality xmi:id="_TXry-9zqEeaMeaEvRdRzBA" label="1" max="1" min="1"/>
+      <parameters xmi:id="_TXry_NzqEeaMeaEvRdRzBA" name="xmlPath">
+        <modelElement href="TDA2.uml#_ROJ6kdzqEeaMeaEvRdRzBA"/>
+        <cardinality xmi:id="_TXry_dzqEeaMeaEvRdRzBA" label="1" max="1" min="1"/>
+        <type xmi:id="_TXry_tzqEeaMeaEvRdRzBA" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_TXry_9zqEeaMeaEvRdRzBA" name="getTestedClassesFromTestRun">
+      <modelElement href="TDA2.uml#_RTK9c9zqEeaMeaEvRdRzBA"/>
+      <visibility xmi:id="_TXrzANzqEeaMeaEvRdRzBA" label="+"/>
+      <cardinality xmi:id="_TXrzAdzqEeaMeaEvRdRzBA" label="1..*" max="-1" min="1"/>
+      <outParameters xmi:id="_TXrzAtzqEeaMeaEvRdRzBA">
+        <modelElement href="TDA2.uml#_RTK9ddzqEeaMeaEvRdRzBA"/>
+        <type xmi:id="_TXrzA9zqEeaMeaEvRdRzBA" name="TestedClass">
+          <modelElement href="TDA2.uml#_RNw5ANzqEeaMeaEvRdRzBA"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_TXrzBNzqEeaMeaEvRdRzBA" name="testRun">
+        <modelElement href="TDA2.uml#_RTK9dNzqEeaMeaEvRdRzBA"/>
+        <cardinality xmi:id="_TXrzBdzqEeaMeaEvRdRzBA" label="1" max="1" min="1"/>
+        <type xmi:id="_TXrzBtzqEeaMeaEvRdRzBA" name="TestRun">
+          <modelElement href="TDA2.uml#_RNqLUNzqEeaMeaEvRdRzBA"/>
+        </type>
+      </parameters>
+    </operations>
+  </nodes>
+</com.yattasolutions.uml.diagrams.classifier:ClassDiagram>

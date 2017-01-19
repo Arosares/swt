@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.yattasolutions.uml.diagrams.classifier:ClassDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.yattasolutions.uml.diagrams.classifier="http://ns.yatta-solutions.com/umllab/diagrams/classifier/1.1.0" xmi:id="_Rk_GMNzqEeaMeaEvRdRzBA">
+  <modelElement href="TDA2.uml#_RJWTENzqEeaMeaEvRdRzBA"/>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_UhQqENzqEeaMeaEvRdRzBA" name="WrongXMLAttributeException">
+    <modelElement href="TDA2.uml#_RNSX4NzqEeaMeaEvRdRzBA"/>
+    <visualProperties xmi:id="_UhQqEdzqEeaMeaEvRdRzBA" position="50.0,50.0"/>
+    <visibility xmi:id="_UhQqEtzqEeaMeaEvRdRzBA" label="+"/>
+    <attributes xmi:id="_UhQqE9zqEeaMeaEvRdRzBA" defaultValue="-6082910519611169383L" name="serialVersionUID" staticAttribute="true">
+      <modelElement href="TDA2.uml#_RUnH49zqEeaMeaEvRdRzBA"/>
+      <visibility xmi:id="_UhQqFNzqEeaMeaEvRdRzBA" label="-"/>
+      <cardinality xmi:id="_UhQqFdzqEeaMeaEvRdRzBA" label="1" max="1" min="1"/>
+      <type xmi:id="_UhQqFtzqEeaMeaEvRdRzBA" name="long">
+        <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#long"/>
+      </type>
+    </attributes>
+    <operations xmi:id="_UhQqF9zqEeaMeaEvRdRzBA" name="WrongXMLAttributeException">
+      <modelElement href="TDA2.uml#_RNSX4dzqEeaMeaEvRdRzBA"/>
+      <keywords xmi:id="_UhQqGNzqEeaMeaEvRdRzBA" keyword="create"/>
+      <visibility xmi:id="_UhQqGdzqEeaMeaEvRdRzBA" label="+"/>
+      <cardinality xmi:id="_UhQqGtzqEeaMeaEvRdRzBA" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_UhQqG9zqEeaMeaEvRdRzBA">
+        <modelElement href="TDA2.uml#_RNS-8tzqEeaMeaEvRdRzBA"/>
+        <type xmi:id="_UhQqHNzqEeaMeaEvRdRzBA" name="WrongXMLAttributeException">
+          <modelElement href="TDA2.uml#_RNSX4NzqEeaMeaEvRdRzBA"/>
+        </type>
+      </outParameters>
+    </operations>
+    <operations xmi:id="_UhQqHdzqEeaMeaEvRdRzBA" name="WrongXMLAttributeException">
+      <modelElement href="TDA2.uml#_RNS-89zqEeaMeaEvRdRzBA"/>
+      <keywords xmi:id="_UhQqHtzqEeaMeaEvRdRzBA" keyword="create"/>
+      <visibility xmi:id="_UhQqH9zqEeaMeaEvRdRzBA" label="+"/>
+      <cardinality xmi:id="_UhQqINzqEeaMeaEvRdRzBA" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_UhQqIdzqEeaMeaEvRdRzBA">
+        <modelElement href="TDA2.uml#_RNTmAtzqEeaMeaEvRdRzBA"/>
+        <type xmi:id="_UhQqItzqEeaMeaEvRdRzBA" name="WrongXMLAttributeException">
+          <modelElement href="TDA2.uml#_RNSX4NzqEeaMeaEvRdRzBA"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_UhQqI9zqEeaMeaEvRdRzBA" name="message">
+        <modelElement href="TDA2.uml#_RNS-9NzqEeaMeaEvRdRzBA"/>
+        <cardinality xmi:id="_UhQqJNzqEeaMeaEvRdRzBA" label="1" max="1" min="1"/>
+        <type xmi:id="_UhQqJdzqEeaMeaEvRdRzBA" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_UhQqJtzqEeaMeaEvRdRzBA" name="WrongXMLAttributeException">
+      <modelElement href="TDA2.uml#_RT9nodzqEeaMeaEvRdRzBA"/>
+      <keywords xmi:id="_UhQqJ9zqEeaMeaEvRdRzBA" keyword="create"/>
+      <visibility xmi:id="_UhQqKNzqEeaMeaEvRdRzBA" label="+"/>
+      <cardinality xmi:id="_UhQqKdzqEeaMeaEvRdRzBA" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_UhQqKtzqEeaMeaEvRdRzBA">
+        <modelElement href="TDA2.uml#_RT9nqNzqEeaMeaEvRdRzBA"/>
+        <type xmi:id="_UhQqK9zqEeaMeaEvRdRzBA" name="WrongXMLAttributeException">
+          <modelElement href="TDA2.uml#_RNSX4NzqEeaMeaEvRdRzBA"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_UhQqLNzqEeaMeaEvRdRzBA" name="message">
+        <modelElement href="TDA2.uml#_RT9notzqEeaMeaEvRdRzBA"/>
+        <cardinality xmi:id="_UhQqLdzqEeaMeaEvRdRzBA" label="1" max="1" min="1"/>
+        <type xmi:id="_UhQqLtzqEeaMeaEvRdRzBA" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_UhQqL9zqEeaMeaEvRdRzBA" name="cause">
+        <modelElement href="TDA2.uml#_RT9no9zqEeaMeaEvRdRzBA"/>
+        <cardinality xmi:id="_UhQqMNzqEeaMeaEvRdRzBA" label="1" max="1" min="1"/>
+        <type xmi:id="_UhQqMdzqEeaMeaEvRdRzBA" name="Throwable">
+          <modelElement href="TDA2.uml#_RT9Ak9zqEeaMeaEvRdRzBA"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_UhQqMtzqEeaMeaEvRdRzBA" name="enableSuppression">
+        <modelElement href="TDA2.uml#_RT9npNzqEeaMeaEvRdRzBA"/>
+        <cardinality xmi:id="_UhQqM9zqEeaMeaEvRdRzBA" label="1" max="1" min="1"/>
+        <type xmi:id="_UhQqNNzqEeaMeaEvRdRzBA" name="boolean">
+          <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_UhQqNdzqEeaMeaEvRdRzBA" name="writableStackTrace">
+        <modelElement href="TDA2.uml#_RT9npdzqEeaMeaEvRdRzBA"/>
+        <cardinality xmi:id="_UhQqNtzqEeaMeaEvRdRzBA" label="1" max="1" min="1"/>
+        <type xmi:id="_UhQqN9zqEeaMeaEvRdRzBA" name="boolean">
+          <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_UhQqONzqEeaMeaEvRdRzBA" name="WrongXMLAttributeException">
+      <modelElement href="TDA2.uml#_RT9nqdzqEeaMeaEvRdRzBA"/>
+      <keywords xmi:id="_UhQqOdzqEeaMeaEvRdRzBA" keyword="create"/>
+      <visibility xmi:id="_UhQqOtzqEeaMeaEvRdRzBA" label="+"/>
+      <cardinality xmi:id="_UhQqO9zqEeaMeaEvRdRzBA" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_UhQqPNzqEeaMeaEvRdRzBA">
+        <modelElement href="TDA2.uml#_RT-OsdzqEeaMeaEvRdRzBA"/>
+        <type xmi:id="_UhQqPdzqEeaMeaEvRdRzBA" name="WrongXMLAttributeException">
+          <modelElement href="TDA2.uml#_RNSX4NzqEeaMeaEvRdRzBA"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_UhQqPtzqEeaMeaEvRdRzBA" name="message">
+        <modelElement href="TDA2.uml#_RT9nqtzqEeaMeaEvRdRzBA"/>
+        <cardinality xmi:id="_UhQqP9zqEeaMeaEvRdRzBA" label="1" max="1" min="1"/>
+        <type xmi:id="_UhQqQNzqEeaMeaEvRdRzBA" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_UhQqQdzqEeaMeaEvRdRzBA" name="cause">
+        <modelElement href="TDA2.uml#_RT9nq9zqEeaMeaEvRdRzBA"/>
+        <cardinality xmi:id="_UhQqQtzqEeaMeaEvRdRzBA" label="1" max="1" min="1"/>
+        <type xmi:id="_UhQqQ9zqEeaMeaEvRdRzBA" name="Throwable">
+          <modelElement href="TDA2.uml#_RT9Ak9zqEeaMeaEvRdRzBA"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_UhQqRNzqEeaMeaEvRdRzBA" name="WrongXMLAttributeException">
+      <modelElement href="TDA2.uml#_RT-OstzqEeaMeaEvRdRzBA"/>
+      <keywords xmi:id="_UhQqRdzqEeaMeaEvRdRzBA" keyword="create"/>
+      <visibility xmi:id="_UhQqRtzqEeaMeaEvRdRzBA" label="+"/>
+      <cardinality xmi:id="_UhQqR9zqEeaMeaEvRdRzBA" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_UhQqSNzqEeaMeaEvRdRzBA">
+        <modelElement href="TDA2.uml#_RT-OttzqEeaMeaEvRdRzBA"/>
+        <type xmi:id="_UhQqSdzqEeaMeaEvRdRzBA" name="WrongXMLAttributeException">
+          <modelElement href="TDA2.uml#_RNSX4NzqEeaMeaEvRdRzBA"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_UhQqStzqEeaMeaEvRdRzBA" name="cause">
+        <modelElement href="TDA2.uml#_RT-Os9zqEeaMeaEvRdRzBA"/>
+        <cardinality xmi:id="_UhQqS9zqEeaMeaEvRdRzBA" label="1" max="1" min="1"/>
+        <type xmi:id="_UhQqTNzqEeaMeaEvRdRzBA" name="Throwable">
+          <modelElement href="TDA2.uml#_RT9Ak9zqEeaMeaEvRdRzBA"/>
+        </type>
+      </parameters>
+    </operations>
+  </nodes>
+</com.yattasolutions.uml.diagrams.classifier:ClassDiagram>

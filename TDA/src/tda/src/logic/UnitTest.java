@@ -1,8 +1,5 @@
 package tda.src.logic;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class UnitTest {
 
 	private String unitTestID;

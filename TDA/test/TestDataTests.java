@@ -22,9 +22,9 @@ public class TestDataTests {
 	
 	private UnitTest[] unitTests = new UnitTest[10];
 	
-	private TestedClass testedClass1; 
+	private TestedClass testedClass1;
 	private TestedClass testedClass2; 
-	private TestedClass testedClass3; 
+	private TestedClass testedClass3;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -33,7 +33,6 @@ public class TestDataTests {
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		
 	}
 
 	@Before
@@ -55,12 +54,11 @@ public class TestDataTests {
 		
 		testedClass1 = new TestedClass("TestMe", unitTests[0]);
 		testedClass2 = new TestedClass("TestMe", unitTests[1]); 
-		testedClass3 = new TestedClass("Test3", unitTests[2]); 
-		
+		testedClass3 = new TestedClass("Test3", unitTests[2]);
 	}
 
 	@After
-	public void tearDown() throws Exception { 
+	public void tearDown() throws Exception {
 		testData.getTestRunList().clear();
 	}
 	
@@ -177,7 +175,7 @@ public class TestDataTests {
 		assertTrue(addedClass.equals(testedClass1)); 
 
 	}
-
+	
 }
 
 
