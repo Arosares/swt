@@ -72,9 +72,7 @@ public class TDAClassView {
 		// TreeView
 		if (node instanceof Text || (node instanceof TreeCell && ((TreeCell) node).getText() != null)) {
 			TreeNode clickedNode = (TreeNode) ((TreeItem) classView.getSelectionModel().getSelectedItem()).getValue();
-			if (event.getClickCount() == 2) {
 				view.getController().handleClassTreeClick(clickedNode);
-			}
 		}
 	}
 

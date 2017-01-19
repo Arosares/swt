@@ -78,7 +78,29 @@ public class TestedClass {
 		}
 		throw new IllegalArgumentException(testrun.getRunID() + " can't be found in the class log");
 	}
-
+	
+	public List<UnitTest> getUnitTestsByTestRun(TestRun testRun, boolean passed){
+		List<UnitTest> unitTests = getUnitTestsByTestRun(testRun);
+		List<UnitTest> returnList = new LinkedList<>();
+		for (UnitTest unitTest : unitTests) {
+			if (unitTest.hasPassed() == passed) {
+				returnList.add(unitTest);
+			}
+		}
+		return returnList;
+	}
+	
+	public List<String> getUnitTestsNamesByTestRun(TestRun testRun, boolean passed){
+		List<UnitTest> unitTests = getUnitTestsByTestRun(testRun);
+		List<String> returnList = new LinkedList<>();
+		for (UnitTest unitTest : unitTests) {
+			if (unitTest.hasPassed() == passed) {
+				returnList.add(unitTest.getUnitTestName());
+			}
+		}
+		return returnList;
+	}
+	
 	public List<UnitTestsToTestRunMapper> getClassLog() {
 		return classLog;
 	}

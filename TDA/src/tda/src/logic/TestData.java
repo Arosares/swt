@@ -2,14 +2,19 @@ package tda.src.logic;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
+
+import tda.src.logic.apriori.AprioriAnalyzer;
+
 
 public class TestData {
 
 	private static TestData testDataInstance;
 	private ArrayList<TestRun> testRunList = new ArrayList<>();
 	private ArrayList<UnitTest> unitTestList = new ArrayList<>();
-	private TreeNode root = new TreeNode("/", null);
+	private TreeNode root = new TreeNode("/", null, null);
+	private Analyzer analyzer = new AprioriAnalyzer();
 
 	private TestData() {
 	}
@@ -30,6 +35,10 @@ public class TestData {
 
 	public ArrayList<UnitTest> getUnitTestList() {
 		return unitTestList;
+	}
+	
+	public List<TestedClass> getTestedClasses() {
+		return root.getTestedClasses();
 	}
 
 	public void addNewTestRun(TestRun testRun) throws Exception {
@@ -78,7 +87,7 @@ public class TestData {
 	}
 
 	public void printTree() {
-		System.out.println(root.toString());
+		System.out.println(root.printTree(0));
 	}
 
 	public void addNewTestedClassToTree(TestedClass newlyCreatedClass) {
@@ -97,8 +106,7 @@ public class TestData {
 			packageName.addAll(newlyCreatedClass.getPackageName());
 			root.insert(packageName, newlyCreatedClass);
 			
-		}
-		
+		}	
 	}
 
 	public void addNewUnitTest(UnitTest unitTest) {
@@ -120,6 +128,13 @@ public class TestData {
 		// TODO: Throw Exception
 		return null;
 	}
+	
+	public int getClassDistance(TestedClass classLeft, TestedClass classRight) {
+		TreeNode leftNode = root.searchNode(classLeft.getClassName());
+		TreeNode rightNode = root.searchNode(classRight.getClassName());
+		
+		return leftNode.getDistance(rightNode);
+	}
 
 	/**
 	 * @param name
@@ -136,6 +151,15 @@ public class TestData {
 
 	public TreeNode getRoot() {
 		return root;
+	}
+	
+	public int getTreeHeight() {
+		return root.getDepth() - 2;
+	}
+
+	public AprioriAnalyzer getAnalyzer() {
+//		System.out.println("TreeHeight is: " + getTreeHeight());
+		return (AprioriAnalyzer) analyzer;
 	}
 
 }
