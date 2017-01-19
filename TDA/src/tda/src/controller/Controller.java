@@ -12,7 +12,6 @@ import tda.src.logic.TestData;
 import tda.src.logic.TestRun;
 import tda.src.logic.TestedClass;
 import tda.src.logic.TreeNode;
-import tda.src.logic.apriori.StrongRule;
 import tda.src.model.Model;
 import tda.src.view.View;
 
@@ -20,7 +19,6 @@ public class Controller {
 
 	final private Model model;
 	final private View view;
-	private TestedClass lastComparedClass;
 
 	public Controller() {
 		this.model = new Model();
@@ -233,31 +231,10 @@ public class Controller {
 			view.getGraph().setChartData(node.getTestedClass());
 		}
 	}
-	public void handleContextMenuClick(TestRun testRun, TestedClass testedClass, boolean isSlot1) {
+	public void handleChartNodeClick(TestRun testRun, TestedClass testedClass) {
 		System.out.println("Clicked node " + testRun.getRunName());
+		view.getComparison().updateComparisonSlot(testedClass, testRun, true);
 		
-		if (lastComparedClass == null) {
-			view.getComparison().updateComparisonSlot(testedClass, testRun, isSlot1);
-			lastComparedClass = testedClass;
-		} else if (testedClass.equals(lastComparedClass)) {
-			view.getComparison().updateComparisonSlot(testedClass, testRun, isSlot1);
-		} else {
-			System.out.println("Yaw Dawg, don't compare different classes!");
-			view.errorAlert("You cannot compare different classes with each other!\n Please select the same class");
-			lastComparedClass = null;
-			//TODO: Improve Handling of different class selection
-		}
-		
-		
-	}
-
-	public void handleStrongRuleTableClick(StrongRule strongRule) {
-		for (TestedClass testedClass : strongRule.getLeftSide()) {
-			view.getGraph().setChartData(testedClass);
-		}
-		for (TestedClass testedClass : strongRule.getRightSide()) {
-			view.getGraph().setChartData(testedClass);
-		}
 	}
 	
 }

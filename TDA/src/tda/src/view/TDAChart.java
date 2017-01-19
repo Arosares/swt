@@ -2,7 +2,6 @@ package tda.src.view;
 
 import java.util.List;
 
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
@@ -10,10 +9,7 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
-import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import tda.src.controller.Controller;
@@ -37,7 +33,6 @@ public class TDAChart {
 		yAxis.setLabel("Failure Percentage");
 
 		lineChart.setTitle("Failure Percentage over all TestRuns");
-		lineChart.setMinHeight(400);
 
 		return lineChart;
 	}
@@ -54,8 +49,7 @@ public class TDAChart {
 			String xAxisLabel = Integer.toString(cnt);
 			XYChart.Data<String, Number> dataPoint = new XYChart.Data<String, Number>(xAxisLabel, data.getYValue());
 			//set the HoverNode for a dataPoint
-			HoveredThresholdNode hoverNode = new HoveredThresholdNode(data.getXValue(), data.getYValue(), testedClass);
-			dataPoint.setNode(hoverNode);
+			dataPoint.setNode(new HoveredThresholdNode(data.getXValue(), data.getYValue(), testedClass));
 			
 			series.getData().add(dataPoint);
 			cnt++;
@@ -76,7 +70,14 @@ public class TDAChart {
 		HoveredThresholdNode(TestRun testRun, Number value, TestedClass testedClass) {
 			setPrefSize(10, 10);
 			final Label label = createDataThresholdLabel(testRun, value, testedClass);
-			final ContextMenu contextMenu = createContextMenu(testRun, testedClass);
+			setOnMouseClicked(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+					controller.handleChartNodeClick(testRun, testedClass);
+				}
+				
+			});
+			
 			setOnMouseEntered(new EventHandler<MouseEvent>() {
 				@Override
 				public void handle(MouseEvent mouseEvent) {
@@ -91,38 +92,7 @@ public class TDAChart {
 					setCursor(Cursor.CROSSHAIR);
 				}
 			});
-			setOnContextMenuRequested(new EventHandler<ContextMenuEvent>(){
-				@Override
-				public void handle(ContextMenuEvent contextEvent){
-					contextMenu.show(lineChart, contextEvent.getScreenX(), contextEvent.getScreenY());
-				}
-			});
 
-		}
-
-		private ContextMenu createContextMenu(TestRun testRun, TestedClass testedClass) {
-			 ContextMenu contextMenu = new ContextMenu();
-			 
-		        MenuItem item1 = new MenuItem("Add to Compare-Slot 1");
-		        item1.setOnAction(new EventHandler<ActionEvent>() {
-		 
-		            @Override
-		            public void handle(ActionEvent event) {
-		                controller.handleContextMenuClick(testRun, testedClass, true);
-		            }
-		        });
-		        MenuItem item2 = new MenuItem("Add to Compare-Slot 2");
-		        item2.setOnAction(new EventHandler<ActionEvent>() {
-		 
-		            @Override
-		            public void handle(ActionEvent event) {
-		                controller.handleContextMenuClick(testRun, testedClass, false);
-		            }
-		        });
-		 
-		        // Add MenuItem to ContextMenu
-		        contextMenu.getItems().addAll(item1, item2);
-			return contextMenu;
 		}
 
 		private Label createDataThresholdLabel(TestRun testRun, Number value, TestedClass testedClass) {

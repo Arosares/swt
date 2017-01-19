@@ -55,18 +55,19 @@ public class TreeNode {
 	 * @param node
 	 * @return
 	 */
-	public int getDepth() {
+	public int getDepth(TreeNode currentNode) {
 		int maxDepth = 0;
 		
-		if(children.isEmpty()){
-			return maxDepth;
-		}
-		
-		for(TreeNode child : children){
-			maxDepth = Math.max(maxDepth, child.getDepth() + 1);
-		}
-		
+			if(currentNode.getChildren().isEmpty()){
+				return maxDepth;
+			}
+			for(TreeNode child : currentNode.getChildren()){
+				maxDepth = Math.max(maxDepth, 1+getDepth(child));
+			}
+//			maxDist = Math.max(maxDist, getDistance(node)+1);
+//		
 		return maxDepth;
+
 	}
 
 	/**

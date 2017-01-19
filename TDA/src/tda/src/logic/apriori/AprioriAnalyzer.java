@@ -8,6 +8,10 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.omg.CORBA.FREE_MEM;
+
+import com.sun.javafx.image.impl.ByteIndexed.Getter;
+
 import tda.src.logic.Analyzer;
 import tda.src.logic.TestData;
 import tda.src.logic.TestRun;
@@ -70,13 +74,14 @@ public class AprioriAnalyzer implements Analyzer {
 
 		// 1. Generate frequent item sets
 		System.out.println("\nMaximal Frequent Item Sets:");
-		HashMap<List<TestedClass>, Integer> frequentItemSet = getMaxFrequentItemSet();
+		HashMap<List<TestedClass>, Integer> frequentItemSet = getMaxFrequentItemSet(2);
 		printItemSet(frequentItemSet);
 
 		// 2. Generate strong rules from frequent item sets
 		System.out.println("\nStrong Rules");
-		List<StrongRule> strongRules = generateStrongRules(frequentItemSet);
-		
+//		for(int dist = 2; dist < 8; dist++){
+		List<StrongRule> strongRules = generateStrongRules(frequentItemSet, 2);
+//		}
 		// 3. Update Cache
 		cachedFrequentItemSets = frequentItemSet;
 		cachedStrongRules = strongRules;
@@ -182,8 +187,10 @@ public class AprioriAnalyzer implements Analyzer {
 				if (distance > maxDistance) {
 					maxDistance = distance;
 				}
+				System.out.println("Class " + testedClasses.get(i) + " , " + testedClasses.get(j) + " Distance: " + maxDistance);
 			}
 		}
+		
 		return maxDistance;
 	}
 	
@@ -195,14 +202,14 @@ public class AprioriAnalyzer implements Analyzer {
 	 *            The frequent item set used for generation of strong rules
 	 * @return A {@link list} of all possible {@link StrongRule}s
 	 */
-	private List<StrongRule> generateStrongRules(HashMap<List<TestedClass>, Integer> frequentItemSet) {
+	private List<StrongRule> generateStrongRules(HashMap<List<TestedClass>, Integer> frequentItemSet, int distanceCap) {
 
 		List<StrongRule> strongRules = new LinkedList<>();
 
 		for (Entry<List<TestedClass>, Integer> entry : frequentItemSet.entrySet()) {
 			List<TestedClass> entryKey = entry.getKey();
 
-			HashMap<List<TestedClass>, Integer> powerItemSet = getPowerSet(entryKey);
+			HashMap<List<TestedClass>, Integer> powerItemSet = getPowerSet(entryKey, distanceCap);
 			updateItemSet(powerItemSet);
 
 			strongRules.addAll(generateStrongRulesForEntry(powerItemSet, entryKey));
@@ -243,10 +250,10 @@ public class AprioriAnalyzer implements Analyzer {
 		return strongRules;
 	}
 
-	private HashMap<List<TestedClass>, Integer> getPowerSet(List<TestedClass> testedClasses) {
+	private HashMap<List<TestedClass>, Integer> getPowerSet(List<TestedClass> testedClasses, int distanceCap) {
 		HashMap<List<TestedClass>, Integer> powerItemSet = new HashMap<>();
 		for (int i = 1; i <= testedClasses.size(); i++) {
-			powerItemSet.putAll(generateFixedSubset(i, testedClasses));
+			powerItemSet.putAll(generateFixedSubset(i, testedClasses, distanceCap));
 		}
 		return powerItemSet;
 	}
@@ -258,7 +265,8 @@ public class AprioriAnalyzer implements Analyzer {
 	 * 
 	 * @return The maximal frequent item set
 	 */
-	private HashMap<List<TestedClass>, Integer> getMaxFrequentItemSet() {
+	//TODO: We need to create multiple sets based on potential Distance settings
+	private HashMap<List<TestedClass>, Integer> getMaxFrequentItemSet(int distanceCap) {
 		// Generate first item set as basis for the algorithm
 		HashMap<List<TestedClass>, Integer> itemSet = getFirstItemSet();
 		HashMap<List<TestedClass>, Integer> frqItemSet = pruneItemSet(itemSet, minSupport);
@@ -275,11 +283,17 @@ public class AprioriAnalyzer implements Analyzer {
 		while (!frqItemSet.isEmpty()) {
 			oldFrqItemSet = frqItemSet;
 			
-			itemSet = initializeNewItemSet(frqItemSet, k + 1);
+			System.out.println("Looking at length " + k);
+			printItemSet(frqItemSet);
+			itemSet = initializeNewItemSet(frqItemSet, k + 1, distanceCap);
+			
 			updateItemSet(itemSet);
+			
+			printItemSet(itemSet);
 
 			itemSet = pruneItemSet(itemSet, minSupport);
-			frqItemSet = eliminateInsignificantItems(itemSet, oldFrqItemSet);
+			frqItemSet = eliminateInsignificantItems(itemSet, oldFrqItemSet, distanceCap);
+			
 			
 			/*
 			* if an entry of the old item set is not a subset of any new frq item set
@@ -325,11 +339,11 @@ public class AprioriAnalyzer implements Analyzer {
 	 * 		item set containing only significant items
 	 */
 	private HashMap<List<TestedClass>, Integer> eliminateInsignificantItems(
-			HashMap<List<TestedClass>, Integer> itemSet, HashMap<List<TestedClass>, Integer> oldItemSet) {
+			HashMap<List<TestedClass>, Integer> itemSet, HashMap<List<TestedClass>, Integer> oldItemSet, int distanceCap) {
 		HashMap<List<TestedClass>, Integer> result = new HashMap<>();
 
 		for (Entry<List<TestedClass>, Integer> entry : itemSet.entrySet()) {
-			HashMap<List<TestedClass>, Integer> subset = generateFixedSubset(entry.getKey().size() - 1, entry.getKey());
+			HashMap<List<TestedClass>, Integer> subset = generateFixedSubset(entry.getKey().size() - 1, entry.getKey(), distanceCap);
 			if (subset.entrySet().stream().allMatch(e -> oldItemSet.containsKey(e.getKey()))) {
 				result.put(entry.getKey(), entry.getValue());
 			}
@@ -369,10 +383,13 @@ public class AprioriAnalyzer implements Analyzer {
 	 * @return
 	 */
 	private HashMap<List<TestedClass>, Integer> initializeNewItemSet(HashMap<List<TestedClass>, Integer> itemSet,
-			int length) {
+			int length, int distanceCap) {
+		System.out.println("WEED");
+		System.out.println(itemSet);
 		List<TestedClass> allTestedClasses = extractTestedClasses(itemSet);
-
-		return generateFixedSubset(length, allTestedClasses);
+		System.out.println("OI!");
+		System.out.println(allTestedClasses);
+		return generateFixedSubset(length, allTestedClasses, distanceCap);
 	}
 
 	/**
@@ -483,7 +500,7 @@ public class AprioriAnalyzer implements Analyzer {
 				.collect(Collectors.toList());
 	}
 
-	private HashMap<List<TestedClass>, Integer> generateFixedSubset(int length, List<TestedClass> allTestedClasses) {
+	private HashMap<List<TestedClass>, Integer> generateFixedSubset(int length, List<TestedClass> allTestedClasses, int distanceCap) {
 		// generating all possible combinations with length k
 		// based on: http://stackoverflow.com/questions/29910312/algorithm-to-get-all-the-combinations-of-size-n-from-an-array-java
 
@@ -495,6 +512,9 @@ public class AprioriAnalyzer implements Analyzer {
 			// first index sequence: 0, 1, 2, ...
 			for (int i = 0; (indices[i] = i) < length - 1; i++)
 				;
+//			TODO: 
+			System.out.println("WAT?");
+			System.out.println(allTestedClasses.toString());
 			newItemSet.put(getSubset(allTestedClasses, indices), 0);
 			for (;;) {
 				int i;
@@ -508,6 +528,9 @@ public class AprioriAnalyzer implements Analyzer {
 					for (++i; i < length; i++) { // fill up remaining items
 						indices[i] = indices[i - 1] + 1;
 					}
+//					if (TestData.getInstance().getClassDistance(classLeft, classRight))
+					System.out.println("Subset to be put: ");
+					System.out.println(getSubset(allTestedClasses, indices));
 					newItemSet.put(getSubset(allTestedClasses, indices), 0);
 				}
 			}
@@ -518,11 +541,20 @@ public class AprioriAnalyzer implements Analyzer {
 	// generate actual subset by index sequence
 	List<TestedClass> getSubset(List<TestedClass> allTestedClasses, int[] subset) {
 		List<TestedClass> result = new ArrayList<>(subset.length);
-
+		System.out.println(allTestedClasses);
 		for (int i = 0; i < subset.length; i++) {
+//			if(TestData.getInstance().getClassDistance(allTestedClasses.get(subset[i])))
 			result.add(i, allTestedClasses.get(subset[i]));
+			System.out.println("Result.add: ");
+			System.out.println(result);
 		}
-
+		System.out.println("results in: ");
+		System.out.println(result);
+		if(TestData.getInstance().getClassDistance(result.get(0),result.get(1))<=4){
+			System.out.println("Distance sufficiently small");
+			}else{
+			result.clear();
+		}
 		return result;
 	}
 }

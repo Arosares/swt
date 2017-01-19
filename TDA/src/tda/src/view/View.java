@@ -68,7 +68,7 @@ public class View extends Stage implements Observer {
 	private GridPane aprioriPane;
 
 	private Label idLabel;
-
+	
 	private Slider distanceSlider;
 	private Slider confidenceSlider;
 
@@ -134,10 +134,40 @@ public class View extends Stage implements Observer {
 		chartPane.add(resetLineChart, 0, 1);
 
 		chartPane.add(comparison.generateEmptyComparisonPane(), 0, 2);
-
+		
 		// Analyzer (Apriori) Pane
-		analyzer = new TDAAnalyzerView(controller);
-		aprioriPane = analyzer.getAprioriPane();
+		aprioriPane = new GridPane();
+
+		// margins around the whole center grid (top/right/bottom/left)
+		aprioriPane.setPadding(new Insets(10, 10, 10, 10));
+		aprioriPane.setAlignment(Pos.TOP_CENTER);
+
+		Label aprioriHeader = new Label("Apriori Analyzer");
+		aprioriPane.add(aprioriHeader, 1, 1);
+
+		analyzer = new TDAAnalyzerView();
+
+		aprioriPane.add(analyzer.createFrequentItemTable(), 1, 2);
+
+		aprioriPane.add(analyzer.createStrongRulesTable(), 1, 3);
+		
+		distanceSlider = new Slider(0, 10, 10);
+		distanceSlider.valueProperty().addListener(new ChangeListener() {
+			@Override
+			public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+				updateAprioriView();
+			}
+		});
+		confidenceSlider = new Slider(0, 1, 0.8);
+		confidenceSlider.valueProperty().addListener(new ChangeListener() {
+			@Override
+			public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+				updateAprioriView();
+			}
+		});
+		
+		aprioriPane.add(distanceSlider, 1, 4);
+		aprioriPane.add(confidenceSlider, 2, 4);
 
 		GridPane.setHalignment(resetLineChart, HPos.CENTER);
 		GridPane.setValignment(resetLineChart, VPos.BOTTOM);
@@ -171,6 +201,7 @@ public class View extends Stage implements Observer {
 		mainTab1.setContent(tablePane);
 
 		mainWindowTabPane.getTabs().add(mainTab1);
+
 		Tab mainTab2 = new Tab("Chart");
 		mainTab2.setClosable(false);
 		mainTab2.setContent(chartPane);
@@ -183,7 +214,7 @@ public class View extends Stage implements Observer {
 
 		mainWindowTabPane.getSelectionModel().selectedItemProperty().addListener((ov, oldTab, newTab) -> {
 	        if (newTab.getText().equals("Analyzer")) {
-	        	analyzer.updateAprioriView();
+	        	updateAprioriView();
 	        }
 	    });
 
@@ -192,6 +223,12 @@ public class View extends Stage implements Observer {
 		return rootPane;
 	}
 
+	private void updateAprioriView() {
+		double confidence = confidenceSlider.getValue();
+		int distance = (int) distanceSlider.getValue();
+		analyzer.fillFrequentItemTable(distance);
+		analyzer.fillStrongRulesTable(confidence, distance);
+	}
 
 	@Override
 	public void update(Observable o, Object arg) {
@@ -292,7 +329,7 @@ public class View extends Stage implements Observer {
 	public boolean isInitiated() {
 		return isInitiated;
 	}
-
+	
 	public TDAcomparison getComparison() {
 		return comparison;
 	}

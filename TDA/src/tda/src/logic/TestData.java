@@ -153,7 +153,7 @@ public class TestData {
 	}
 	
 	public int getTreeHeight() {
-		return root.getDepth() - 2;
+		return root.getDepth(root)-2;
 	}
 
 	public AprioriAnalyzer getAnalyzer() {

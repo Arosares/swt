@@ -17,14 +17,15 @@ public class TDATableView {
 	private Controller controller;
 	private TableView<TestedClass> testedClassesTable;
 	private ObservableList<TestedClass> data;
-	private TableColumn<TestedClass, String> classNameCol;
-	private TableColumn<TestedClass, Double> failurePercentageCol;
+	private TableColumn classNameCol;
+	private TableColumn failurePercentageCol;
 
 	public TDATableView(Controller controller) {
 		super();
 		this.controller = controller;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Node createTestedClassesTable() {
 		testedClassesTable = new TableView<TestedClass>();
 		testedClassesTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -32,8 +33,8 @@ public class TDATableView {
 		testedClassesTable.setPrefWidth(800);
 		testedClassesTable.setPrefHeight(300);
 
-		classNameCol = new TableColumn<TestedClass, String>("Tested Class");
-		failurePercentageCol = new TableColumn<TestedClass, Double>("Failure Percentage");
+		classNameCol = new TableColumn("Tested Class");
+		failurePercentageCol = new TableColumn("Failure Percentage");
 
 		classNameCol.setCellValueFactory(new PropertyValueFactory<TestedClass, String>("className"));
 		failurePercentageCol

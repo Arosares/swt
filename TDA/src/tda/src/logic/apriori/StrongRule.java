@@ -11,14 +11,12 @@ public class StrongRule implements Comparable<StrongRule> {
 	private List<TestedClass> rightSide;
 	private double confidence;
 	private int maxDistance;
-	private String ruleString;
 
 	public StrongRule(List<TestedClass> leftSide, List<TestedClass> rightSide, double confidence) {
 		this.leftSide = leftSide;
 		this.rightSide = rightSide;
 		setConfidence(confidence);
 		maxDistance = computeMaxDistance();
-		setRuleString();
 	}
 
 	private int computeMaxDistance() {
@@ -81,30 +79,15 @@ public class StrongRule implements Comparable<StrongRule> {
 	private void setConfidence(double confidence) {
 		// limit double to two digits after comma
 		int round = (int) Math.round(confidence * 100);
-		this.confidence = round;
+		this.confidence = round / 100.0;
 	}
 
 	public void print() {
 		System.out.println(toString());
 	}
 
-	public void setRuleString() {
-		String rule = "";
-		for (int i = 0; i < leftSide.size(); i++) {
-			rule += leftSide.get(i).getClassName();
-			if (i < leftSide.size() - 1) {
-				rule += ", ";
-			}
-		}
-		rule += " -> ";
-		for (int i = 0; i < rightSide.size(); i++) {
-			rule += rightSide.get(i).getClassName();
-			if (i < rightSide.size() - 1) {
-				rule += ", ";
-			}
-
-		}
-		ruleString = rule;
+	public String toString() {
+		return leftSide + " -> " + rightSide + " | " + confidence * 100 + "%";
 	}
 
 	@Override
@@ -120,9 +103,5 @@ public class StrongRule implements Comparable<StrongRule> {
 
 	public int getMaxDistance() {
 		return maxDistance;
-	}
-
-	public String getRuleString() {
-		return ruleString;
 	}
 }
