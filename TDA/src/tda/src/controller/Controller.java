@@ -157,6 +157,7 @@ public class Controller {
 	}
 
 	public void handleTreeItemClick(String xmlName) {
+		view.getMainWindowTabPane().getSelectionModel().select(view.getTableTab());
 		List<TestRun> testRuns = TestData.getInstance().getTestRunList();
 		handleResetGraph();
 		for (TestRun testRun : testRuns) {
@@ -169,6 +170,7 @@ public class Controller {
 	}
 
 	public void handleTableRowClick(TestedClass testedClass) {
+		view.getMainWindowTabPane().getSelectionModel().select(view.getChartTab());
 		view.getGraph().setChartData(testedClass);
 	}
 
@@ -230,6 +232,7 @@ public class Controller {
 
 	public void handleClassTreeClick(TreeNode node) {
 		if (node.getTestedClass() != null) {
+			view.getMainWindowTabPane().getSelectionModel().select(view.getChartTab());
 			view.getGraph().setChartData(node.getTestedClass());
 		}
 	}
@@ -252,6 +255,8 @@ public class Controller {
 	}
 
 	public void handleStrongRuleTableClick(StrongRule strongRule) {
+		view.getMainWindowTabPane().getSelectionModel().select(view.getChartTab());
+
 		for (TestedClass testedClass : strongRule.getLeftSide()) {
 			view.getGraph().setChartData(testedClass);
 		}

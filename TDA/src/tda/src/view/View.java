@@ -58,6 +58,9 @@ public class View extends Stage implements Observer {
 	private TDAMenuBar menuBar;
 	private TabPane sideTabPane;
 	private TabPane mainWindowTabPane;
+	private Tab tableTab;
+	private Tab chartTab;
+	private Tab analyzerTab;
 	private TDAClassView classTree;
 	private TDAcomparison comparison;
 
@@ -166,20 +169,20 @@ public class View extends Stage implements Observer {
 
 		mainWindowTabPane = new TabPane();
 
-		Tab mainTab1 = new Tab("Table");
-		mainTab1.setClosable(false);
-		mainTab1.setContent(tablePane);
+		tableTab = new Tab("Table");
+		tableTab.setClosable(false);
+		tableTab.setContent(tablePane);
 
-		mainWindowTabPane.getTabs().add(mainTab1);
-		Tab mainTab2 = new Tab("Chart");
-		mainTab2.setClosable(false);
-		mainTab2.setContent(chartPane);
-		mainWindowTabPane.getTabs().add(mainTab2);
+		mainWindowTabPane.getTabs().add(tableTab);
+		chartTab = new Tab("Chart");
+		chartTab.setClosable(false);
+		chartTab.setContent(chartPane);
+		mainWindowTabPane.getTabs().add(chartTab);
 
-		Tab mainTab3 = new Tab("Analyzer");
-		mainTab3.setClosable(false);
-		mainTab3.setContent(aprioriPane);
-		mainWindowTabPane.getTabs().add(mainTab3);
+		analyzerTab = new Tab("Analyzer");
+		analyzerTab.setClosable(false);
+		analyzerTab.setContent(aprioriPane);
+		mainWindowTabPane.getTabs().add(analyzerTab);
 
 		mainWindowTabPane.getSelectionModel().selectedItemProperty().addListener((ov, oldTab, newTab) -> {
 	        if (newTab.getText().equals("Analyzer")) {
@@ -295,6 +298,22 @@ public class View extends Stage implements Observer {
 
 	public TDAcomparison getComparison() {
 		return comparison;
+	}
+
+	public TabPane getMainWindowTabPane() {
+		return mainWindowTabPane;
+	}
+
+	public Tab getTableTab() {
+		return tableTab;
+	}
+
+	public Tab getChartTab() {
+		return chartTab;
+	}
+
+	public Tab getAnalyzerTab() {
+		return analyzerTab;
 	}
 
 	public void fillClassTreeView() {
