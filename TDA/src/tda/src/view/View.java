@@ -312,6 +312,10 @@ public class View extends Stage implements Observer {
 		return chartTab;
 	}
 
+	public TDAAnalyzerView getAnalyzer() {
+		return analyzer;
+	}
+
 	public Tab getAnalyzerTab() {
 		return analyzerTab;
 	}

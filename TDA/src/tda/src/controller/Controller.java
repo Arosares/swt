@@ -67,7 +67,7 @@ public class Controller {
 	 * @param files
 	 */
 	private void parseFilesInDirectory(File[] files) {
-		//TODO: Redundant Check to prevent Exceptions
+		// TODO: Redundant Check to prevent Exceptions
 		if (files.length != 0) {
 			for (File file : files) {
 				if (file.isDirectory()) {
@@ -141,7 +141,7 @@ public class Controller {
 	}
 
 	/**
-	 * Calls the exit Alert Window. 
+	 * Calls the exit Alert Window.
 	 */
 	public void exitMain() {
 		this.view.exitAlert();
@@ -204,15 +204,19 @@ public class Controller {
 		// Clear the classesTreeView
 		view.updateClassView(view.getClassTree().generateEmptyClassView());
 
-		// TODO Clear TestRunTotals
-
 		// Clear the Graph Content by Calling the ResetButton Handler
 		handleResetGraph();
 
 		// Clear both Observable Lists for the TestRunInfos
-		if (view.getTotals().getGeneratedList() != null) {
-			// view.getTotals().getAllCounters().clear();
-			view.getTotals().getGeneratedList().clear();
+		if (view.getTotals().getTestResults() != null) {
+			view.getTotals().getIdLabel().setText("");
+			view.getTotals().getTestResults().clear();
+		}
+
+		// Clear Apriori View
+		if (view.getAnalyzer().getFrequentItems() != null && view.getAnalyzer().getStrongRuleItems() != null) {
+			view.getAnalyzer().getFrequentItems().clear();
+			view.getAnalyzer().getStrongRuleItems().clear();
 		}
 
 	}
@@ -236,22 +240,22 @@ public class Controller {
 			view.getGraph().setChartData(node.getTestedClass());
 		}
 	}
+
 	public void handleContextMenuClick(TestRun testRun, TestedClass testedClass, boolean isSlot1) {
 		System.out.println("Clicked node " + testRun.getRunName());
-		
+
 		if (compareSlot1 == null) {
 			view.getComparison().updateComparisonSlot(testedClass, testRun, isSlot1);
 			compareSlot1 = testedClass;
 		} else if (!isSlot1 && !testedClass.equals(compareSlot1)) {
-			
+
 			System.out.println("Yaw Dawg, don't compare different classes!");
 			view.errorAlert("You cannot compare different classes with each other!\n Please select the same class");
 		} else {
 			view.getComparison().updateComparisonSlot(testedClass, testRun, isSlot1);
 			compareSlot1 = testedClass;
 		}
-		
-		
+
 	}
 
 	public void handleStrongRuleTableClick(StrongRule strongRule) {
@@ -265,5 +269,5 @@ public class Controller {
 			view.getGraph().setChartData(testedClass);
 		}
 	}
-	
+
 }

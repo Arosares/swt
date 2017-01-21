@@ -16,7 +16,7 @@ public class TDATestRunTotals {
 	private Controller controller;
 	private ListView<String> testRunTotals;
 	private Counters totals;
-	private ObservableList<String> generatedList;
+	private ObservableList<String> testResults;
 	private Label idLabel;
 
 	public TDATestRunTotals(Controller controller, Label idLabel) {
@@ -50,7 +50,7 @@ public class TDATestRunTotals {
 	 *            values from the controller, then creates that list.
 	 */
 	public void showTestRunTotals(TestRun testRun) {
-		ObservableList<String> testResults = listedCounters(testRun);
+		testResults = listedCounters(testRun);
 		idLabel.setText("Loaded TestRun: ".concat(testRun.getRunName()));
 		testRunTotals.setItems(testResults);
 
@@ -110,8 +110,12 @@ public class TDATestRunTotals {
 		return testResults;
 	}
 
-	public ObservableList<String> getGeneratedList() {
-		return generatedList;
+	public ObservableList<String> getTestResults() {
+		return testResults;
+	}
+
+	public Label getIdLabel() {
+		return idLabel;
 	}
 
 }

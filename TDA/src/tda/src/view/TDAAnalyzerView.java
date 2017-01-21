@@ -34,6 +34,8 @@ public class TDAAnalyzerView {
 	private Slider confidenceSlider;
 	private TableView<Entry<String, String>> frequentItemsTable;
 	private TableView<StrongRule> strongRulesTable;
+	private ObservableList<StrongRule> strongRuleItems;
+	ObservableList<Entry<String, String>> frequentItems;
 	
 	private TableColumn<Entry<String, String>, String> supportCountCol;
 	TableColumn<StrongRule, String> strongRuleCol;
@@ -68,10 +70,10 @@ public class TDAAnalyzerView {
 		});
 		
 		
-		confidenceSlider = new Slider(.5, 1, 0.8);
+		confidenceSlider = new Slider(1, 100, 60);
 		confidenceSlider.setShowTickLabels(true);
 		confidenceSlider.setShowTickMarks(true);
-		confidenceSlider.setMajorTickUnit(.1);
+		confidenceSlider.setMajorTickUnit(5);
 		confidenceSlider.setMinorTickCount(10);
 		confidenceSlider.setSnapToTicks(true);
 		confidenceSlider.valueProperty().addListener(new ChangeListener() {
@@ -168,10 +170,10 @@ public class TDAAnalyzerView {
 				.getFrequentItemSets(distance);
 		HashMap<String, String> stringItemSet = hashMapToString(itemSet);
 
-		ObservableList<Entry<String, String>> items = FXCollections.observableArrayList(stringItemSet.entrySet());
+		frequentItems = FXCollections.observableArrayList(stringItemSet.entrySet());
 
 		// Sort
-		frequentItemsTable.setItems(items);
+		frequentItemsTable.setItems(frequentItems);
 		supportCountCol.setSortType(TableColumn.SortType.DESCENDING);
 		frequentItemsTable.getSortOrder().add(supportCountCol);
 	}
@@ -179,10 +181,10 @@ public class TDAAnalyzerView {
 	public void fillStrongRulesTable(double confidence, int distance) {
 		List<StrongRule> strongRules = TestData.getInstance().getAnalyzer().getStrongRules(confidence, distance);
 
-		ObservableList<StrongRule> items = FXCollections.observableArrayList(strongRules);
+		strongRuleItems = FXCollections.observableArrayList(strongRules);
 
 		// Sort
-		strongRulesTable.setItems(items);
+		strongRulesTable.setItems(strongRuleItems);
 		confidenceCol.setSortType(TableColumn.SortType.DESCENDING);
 //		strongRulesTable.getSortOrder().addAll(strongRuleCol, confidenceCol);
 	}
@@ -235,5 +237,13 @@ public class TDAAnalyzerView {
 
 	public GridPane getAprioriPane() {
 		return aprioriPane;
+	}
+
+	public ObservableList<StrongRule> getStrongRuleItems() {
+		return strongRuleItems;
+	}
+
+	public ObservableList<Entry<String, String>> getFrequentItems() {
+		return frequentItems;
 	}
 }
