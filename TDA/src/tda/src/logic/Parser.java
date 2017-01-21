@@ -6,8 +6,7 @@ public interface Parser {
    
    /**
     *  Parses a given XML File in our Data-Structure.
-    *  Mainly to {@code UnitTest.java} format
- * @throws WrongXMLAttributeException 
+ * @throws WrongXMLAttributeException if the XML is not valid.
     */
 	public void parse(String path) throws WrongXMLAttributeException;
 

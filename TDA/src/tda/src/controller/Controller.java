@@ -20,7 +20,7 @@ public class Controller {
 
 	final private Model model;
 	final private View view;
-	private TestedClass lastComparedClass;
+	private TestedClass compareSlot1;
 
 	public Controller() {
 		this.model = new Model();
@@ -239,22 +239,23 @@ public class Controller {
 	public void handleContextMenuClick(TestRun testRun, TestedClass testedClass, boolean isSlot1) {
 		System.out.println("Clicked node " + testRun.getRunName());
 		
-		if (lastComparedClass == null) {
+		if (compareSlot1 == null) {
 			view.getComparison().updateComparisonSlot(testedClass, testRun, isSlot1);
-			lastComparedClass = testedClass;
-		} else if (testedClass.equals(lastComparedClass)) {
-			view.getComparison().updateComparisonSlot(testedClass, testRun, isSlot1);
-		} else {
+			compareSlot1 = testedClass;
+		} else if (!isSlot1 && !testedClass.equals(compareSlot1)) {
+			
 			System.out.println("Yaw Dawg, don't compare different classes!");
 			view.errorAlert("You cannot compare different classes with each other!\n Please select the same class");
-			lastComparedClass = null;
-			//TODO: Improve Handling of different class selection
+		} else {
+			view.getComparison().updateComparisonSlot(testedClass, testRun, isSlot1);
+			compareSlot1 = testedClass;
 		}
 		
 		
 	}
 
 	public void handleStrongRuleTableClick(StrongRule strongRule) {
+		handleResetGraph();
 		view.getMainWindowTabPane().getSelectionModel().select(view.getChartTab());
 
 		for (TestedClass testedClass : strongRule.getLeftSide()) {
