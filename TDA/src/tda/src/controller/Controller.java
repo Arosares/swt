@@ -8,8 +8,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TreeItem;
 import tda.src.logic.TestData;
 import tda.src.logic.TestRun;
@@ -276,7 +274,7 @@ public class Controller {
 	public void handleAboutTDAClick() {
 		view.getAboutTDAView().show();
 	}
-	
+
 	public void handleTDAManualClick() {
 		view.getManualView().show();
 	}
@@ -288,6 +286,15 @@ public class Controller {
 		} catch (IOException e) {
 			e.printStackTrace();
 			return "Manual could not be found";
+		}
+	}
+
+	public String getLicence() {
+		try {
+			return model.getLicene();
+		} catch (IOException e) {
+			System.err.println("Licence.txt not found or readable\n" + e.getMessage());
+			return "Licence could not be found";
 		}
 	}
 

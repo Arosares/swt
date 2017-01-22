@@ -84,7 +84,6 @@ public class Model extends Observable {
 	}
 
 	public String getManual() throws IOException  {
-		// TODO Auto-generated method stub
 		String manual = "";
 		Path readMe = Paths.get("ReadMe/ReadMe.txt");
 		
@@ -94,6 +93,18 @@ public class Model extends Observable {
 		}
 		
 		return manual;
+	}
+	
+	public String getLicene() throws IOException  {
+		String licence = "";
+		Path licencePath = Paths.get("ReadMe/Licence.txt");
+		
+		List<String> lines = Files.readAllLines(licencePath);
+		for (String string : lines) {
+			licence += string + "\n";
+		}
+		
+		return licence;
 	}
 
 }
