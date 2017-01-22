@@ -34,6 +34,7 @@ public class TDAMenuBar {
 	public Node createMenuBar() {
 		MenuBar menuBar = new MenuBar();
 		Menu file = new Menu("File");
+		Menu help = new Menu("Help");
 
 		// Open the File Browser, capable of selecting multiple files
 		MenuItem openFile = new MenuItem("Open File");
@@ -79,7 +80,19 @@ public class TDAMenuBar {
 		});
 		file.getItems().addAll(openFile, openFolder, clearData, exitItem);
 		menuBar.getMenus().add(file);
-
+		
+		MenuItem aboutTDA = new MenuItem("About TDA");
+		aboutTDA.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				controller.handleAboutTDAClick();
+				event.consume();
+			}
+			
+		});
+		
+		help.getItems().add(aboutTDA);
+		menuBar.getMenus().add(help);
 		return menuBar;
 	}
 

@@ -7,6 +7,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TreeItem;
 import tda.src.logic.TestData;
 import tda.src.logic.TestRun;
@@ -268,6 +270,11 @@ public class Controller {
 		for (TestedClass testedClass : strongRule.getRightSide()) {
 			view.getGraph().setChartData(testedClass);
 		}
+	}
+
+	public void handleAboutTDAClick() {
+		// TODO Auto-generated method stub
+		view.getAboutTDAView().show();
 	}
 
 }

@@ -63,6 +63,7 @@ public class View extends Stage implements Observer {
 	private Tab analyzerTab;
 	private TDAClassView classTree;
 	private TDAcomparison comparison;
+	private AboutTDAView aboutTDAView;
 
 	private HBox nothingLoadedPane;
 	private boolean isInitiated = false;
@@ -97,6 +98,7 @@ public class View extends Stage implements Observer {
 
 		// sticks the menubar to top
 		this.rootPane.setTop(menuBar.createMenuBar());
+		aboutTDAView = new AboutTDAView(controller);
 
 		/*---- CONTENT GRIDPANE with the main content (TableView, Graph,...) ----*/
 		tablePane = new GridPane();
@@ -282,6 +284,10 @@ public class View extends Stage implements Observer {
 
 	public TDAMenuBar getMenuBar() {
 		return menuBar;
+	}
+
+	public AboutTDAView getAboutTDAView() {
+		return aboutTDAView;
 	}
 
 	public Controller getController() {
