@@ -81,6 +81,14 @@ public class TDAMenuBar {
 		file.getItems().addAll(openFile, openFolder, clearData, exitItem);
 		menuBar.getMenus().add(file);
 		
+		MenuItem manual = new MenuItem("Manual");
+		manual.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				controller.handleTDAManualClick();
+				event.consume();
+			}
+		});
 		MenuItem aboutTDA = new MenuItem("About TDA");
 		aboutTDA.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -91,7 +99,7 @@ public class TDAMenuBar {
 			
 		});
 		
-		help.getItems().add(aboutTDA);
+		help.getItems().addAll(manual, aboutTDA);
 		menuBar.getMenus().add(help);
 		return menuBar;
 	}

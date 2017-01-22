@@ -1,6 +1,7 @@
 package tda.src.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.LinkedList;
@@ -273,8 +274,21 @@ public class Controller {
 	}
 
 	public void handleAboutTDAClick() {
-		// TODO Auto-generated method stub
 		view.getAboutTDAView().show();
+	}
+	
+	public void handleTDAManualClick() {
+		view.getManualView().show();
+	}
+
+	public String getManual() {
+		// TODO Auto-generated method stub
+		try {
+			return model.getManual();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return "Manual could not be found";
+		}
 	}
 
 }

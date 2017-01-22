@@ -1,5 +1,16 @@
 package tda.src.model;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Observable;
@@ -70,6 +81,19 @@ public class Model extends Observable {
 
 		return classesOfOneRun;
 
+	}
+
+	public String getManual() throws IOException  {
+		// TODO Auto-generated method stub
+		String manual = "";
+		Path readMe = Paths.get("ReadMe/ReadMe.txt");
+		
+		List<String> lines = Files.readAllLines(readMe);
+		for (String string : lines) {
+			manual += string + "\n";
+		}
+		
+		return manual;
 	}
 
 }

@@ -1,5 +1,3 @@
-ReadMe
-
 Test Data Analyzer by Group A
 
 Outline
@@ -38,15 +36,15 @@ TDA shall help visualize all this information and show possible correlations bet
 
 3.1) 	Loading XML Files
 	To Load XML Files into the TDA there are two ways:
-		a) 	On startup click the folder button to select a folder and parse the folder and all underlying folders in recursive strategy or
-			click the file button to select one or more specific XML files to be parsed.
+		a) 	On startup click the folder button to select a folder and parse the folder and all underlying folders
+			in recursive strategy or click the file button to select one or more specific XML files to be parsed.
 		b) 	On the Menubar click File -> Open folder or Open file
 	If successful you will then see the sidebar being updated with information.
 	
 3.2) 	Displaying one TestRun in the class Table
 	To display a testrun in the table you have to click on a testrun shown in the sidebar with the TestRun - Tab active.
-	It will automatically sort all tested classes by this testrun by its failure percentage(fp) and highlight classes red with a fp higher than 75%
-	and yellow with a fp higher than 50%.
+	It will automatically sort all tested classes by this testrun by its failure percentage(fp) and highlight classes
+	red with a fp higher than 75% and yellow with a fp higher than 50%.
 
 3.3)	Display the change of a classes failure percentage over all testruns.
 	To display the change of a classes fp there are two ways:
