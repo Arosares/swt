@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TDA (Group A)</title>
+	<style>
+	body {
+		/*
+			Styling based on:
+			https://ia.net/topics/100e2r
+		*/
+		width: 50%;
+		margin: auto;
+		font-family: "Nitti Grotesk",Helvetica,Arial,sans-serif;
+		font-size: 18px;
+		line-height: 1.4em;
+		background-color: #fff;
+		color: #333;
+	}
+	.outline-link {
+		color: #333;
+		text-decoration: none;
+	}
+	.outline-link:hover {
+		border-bottom: 1px dotted;
+	}
+	.man-entry {
+		margin: 40px 0;
+	}
+	.main-block {
+		margin-top: 60px; 
+	}
+	h2,h3,h4 {
+		margin: 0;
+		padding: 0;
+	}
+	</style>
+</head>
+<body>
+<header>
+	<h1>Test Data Analyzer by Group A</h1>
+</header>
+
+<div id="outline">
+	<h2>Outline</h2>
+	<ol id="main-menu">
+		<li><a href="#general-info" class="outline-link">General Information</a></li>
+		<li>
+			<a href="#manual" class="outline-link">Manual</a>
+			<ol>
+				<li><a href="#man-load" class="outline-link">Load XML Files</a></li>
+				<li><a href="#man-table" class="outline-link">Display one TestRun in the class table</a></li>
+				<li><a href="#man-chart" class="outline-link">Display a class' failure percentage over all testruns (chart)</a></li>
+				<li><a href="#man-compare" class="outline-link">Compare a class in two different testruns</a></li>
+				<li><a href="#man-apriori" class="outline-link">Dependency analysis of failed classes</a></li>
+			</ol>
+		</li>
+		<li><a href="#licence" class="outline-link">Licence</a></li>
+	</ol>
+
+</div>
+
+<hr>
+
+<div id="content">
+	<div id="general-info" class="main-block">
+		<h2 id="general-info">General Information</h2>
+		<p>In the following we describe this software as TDA.<br>
+		XML files are the files provided by medatixx GmbH & Co. KG and each file will be parsed and displayed as one TestRun.
+		One TestRun consists of several UnitTests testing different classes.
+		<br>
+		TDA shall help visualize all this information and show possible correlations between different TestRuns per class.</p>	
+	</div>
+	
+
+	<div id="manual" class="main-block">
+		<h2>User Manual</h2>
+
+		<div id="man-load" class="man-entry">
+			<h3>2.1 Load XML Files</h3>
+			<p>To Load XML Files into the TDA there are two ways:</p>
+			<ol>
+				<li>On startup click the folder button to select a folder and parse the folder and all underlying folders
+				in recursive strategy or click the file button to select one or more specific XML files to be parsed.</li>
+				<li>On the Menubar click File -> Open folder or Open file</li>
+			</ol>
+			<p>If successful, you will then see the sidebar being updated with information.</p>
+		</div>
+		<div id="man-table" class="man-entry">
+			<h3>2.2 Display one TestRun in the class table</h3>
+			<p>To display a testrun in the table you have to click on a testrun shown in the sidebar with the TestRun - Tab active.
+		It will automatically sort all tested classes by this testrun by its failure percentage(fp) and highlight classes
+		red with a fp higher than 75% and yellow with a fp higher than 50%.</p>
+		</div>
+		<div id="man-chart" class="man-entry">
+			<h3>2.3 Display the change of a class' failure percentage over all testruns (chart)</h3>
+			<p>There are two ways to add a class to the chart:</p>
+			<ol>
+				<li>Open the "Classes" tab in the left sidebar. Then select a class by a single click on its name in the package view.</li>
+				<li>Open the "Table" tab in the main window. Then select a class by a double click on its name in the table.</li>
+			</ol>
+			<p>Both actions will show the desired chart in the "Chart" tab on the main window.
+			You can add several classes to the chart for comparison by following the same procedure.<br>
+			The chart may be resetted by using the button "Clear Data" underneath the chart.</p>
+		</div>
+		<div id="man-compare" class="man-entry">
+			<h3>2.4 Compare a class in two different testruns</h3>
+			<p>To compare different testruns right-click on the corresponding node on the line chart and add it to one of the comparison
+		slots. When both are filled you can use the "Compare" button to see directly which UnitTests failed or passed now and before.<br>
+		Note: You can not compare two different classes.</p>
+		</div>
+		<div id="man-apriori" class="man-entry">
+			<h3>2.5 Dependency analysis of failed classes</h3>
+			<p>To see the dependencies between two failed classes click on the Analyzer Tab on the main window.
+		There you will see the Strong Rule. In each row there are classes that are probably dependend with a given confidence.
+		Use the sliders to set the minimum confidence aswell as the minimum distance of two classes.</p>
+		</div>
+	</div>
+
+	<div id="licence" class="main-block">
+		<h2>Licence</h2>
+		<p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus atque, dicta, mollitia repellat consequatur ullam. Eaque sapiente praesentium, unde soluta harum consequatur repudiandae quibusdam hic, libero excepturi in nisi architecto.</span>
+		<span>Repellendus id, sapiente perspiciatis error. Voluptates error fuga optio amet in dignissimos et, dolorem blanditiis qui neque tempore hic libero nisi omnis laudantium aperiam accusantium, recusandae corporis, eveniet voluptatum voluptate!</span>
+		<span>Minus quaerat ipsa modi aliquam libero magnam quo, cum sapiente dolorem, omnis animi pariatur. Dicta dignissimos officia laborum, veritatis, id, enim est beatae repellendus quidem deserunt aut ab dolor nulla.</span>
+		<span>Alias impedit magni magnam rerum amet obcaecati rem nam? Nemo, ullam voluptates odit dolorem velit illum illo vel deleniti, explicabo quas odio laudantium minima quae fuga et laborum ex voluptatum.</span>
+		<span>Tempore qui sit recusandae, veniam deleniti quo vel eos soluta necessitatibus id. Dolores magni, in, asperiores illo repellendus pariatur itaque ipsa magnam ducimus commodi, officiis blanditiis! Eaque commodi iusto non!</span></p>
+
+	</div>
+</div>
+	
+</body>
+</html>
