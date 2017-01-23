@@ -1,4 +1,4 @@
-ISC-Licence
+The ISC Licence
 
 Copyright (c) 2017, SWT-Lab Group A*
 
