@@ -7,7 +7,6 @@ import java.util.Queue;
 
 import tda.src.logic.apriori.AprioriAnalyzer;
 
-
 public class TestData {
 
 	private static TestData testDataInstance;
@@ -41,6 +40,11 @@ public class TestData {
 		return root.getTestedClasses();
 	}
 
+	/**
+	 * Checks if a pasted testrun is already in the files, and adds it if not.
+	 * @param testRun
+	 * @throws Exception
+	 */
 	public void addNewTestRun(TestRun testRun) throws Exception {
 		boolean existing = false;
 		// add class to list if not already there
@@ -124,7 +128,6 @@ public class TestData {
 				return testRun;
 			}
 		}
-		// System.err.println(runID + " is not a valid test run id.");
 		// TODO: Throw Exception
 		return null;
 	}

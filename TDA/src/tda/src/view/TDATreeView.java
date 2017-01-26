@@ -11,8 +11,6 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import tda.src.logic.TestData;
-import tda.src.logic.TestRun;
 
 public class TDATreeView {
 
@@ -21,7 +19,6 @@ public class TDATreeView {
 
 	public TDATreeView(View view) {
 		this.view = view;
-
 	}
 
 	public TreeView<String> generateEmptyTreeView() {
@@ -34,7 +31,6 @@ public class TDATreeView {
 	public TreeView<String> fillTreeView(File selectedDirectory) {
 		// Create a TreeView that has the selectedDirectory as rootItem
 		treeView = createTreeView(selectedDirectory.toString());
-
 		// Below works, but is deprecated
 		// view.showTreeView(treeView);
 		view.updateTreeView(treeView);
@@ -48,6 +44,7 @@ public class TDATreeView {
 		String[] rootFolder = rootDirectory.split("/|\\\\");
 
 		TreeItem<String> rootItem = new TreeItem<String>(rootFolder[rootFolder.length - 1]);
+		rootItem.setExpanded(true);
 		Path rootPath = Paths.get(rootDirectory);
 		File[] files = rootPath.toFile().listFiles();
 		for (File file : files) {

@@ -6,8 +6,6 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Optional;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -20,6 +18,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Separator;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -34,7 +34,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import tda.src.controller.Controller;
-import tda.src.logic.TestData;
 import tda.src.logic.TestRun;
 import tda.src.model.Model;
 
@@ -82,7 +81,7 @@ public class View extends Stage implements Observer {
 		this.model = model;
 		this.controller = controller;
 		this.model.addObserver(this);
-		this.setScene(new Scene(createNothingLoadedPane(), 1200, 900));
+		this.setScene(new Scene(createNothingLoadedPane()));
 		this.setTitle("Test Data Analyser");
 		this.setMaximized(true);
 
@@ -98,7 +97,7 @@ public class View extends Stage implements Observer {
 		menuBar = new TDAMenuBar(controller, this);
 		aboutTDAView = new AboutTDAView(controller);
 		manualView = new TDAManual(controller);
-		
+
 		// sticks the menubar to top
 		this.rootPane.setTop(menuBar.createMenuBar());
 
@@ -134,17 +133,26 @@ public class View extends Stage implements Observer {
 		chartPane.setPadding(new Insets(10, 10, 10, 10));
 		chartPane.add(graph.generateLineChart(), 0, 0);
 
-		Button resetLineChart = new Button("Reset LineCharts");
+		Button resetLineChart = new Button("Reset Data");
 		resetLineChart.setOnMouseClicked(click -> {
 			controller.handleResetGraph();
+			controller.handleResetComparison();
 		});
-		chartPane.add(resetLineChart, 0, 1);
+
+		resetLineChart.setMinSize(80, 60);
+		chartPane.add(resetLineChart, 0, 3);
+
+		chartPane.add(new Separator(), 0, 1);
 
 		chartPane.add(comparison.generateEmptyComparisonPane(), 0, 2);
+		ScrollPane comparisonScrollPane = new ScrollPane(chartPane);
+		comparisonScrollPane.setFitToHeight(true);
+		comparisonScrollPane.setFitToWidth(true);
 
 		// Analyzer (Apriori) Pane
 		analyzer = new TDAAnalyzerView(controller);
 		aprioriPane = analyzer.getAprioriPane();
+
 
 		GridPane.setHalignment(resetLineChart, HPos.CENTER);
 		GridPane.setValignment(resetLineChart, VPos.BOTTOM);
@@ -152,7 +160,7 @@ public class View extends Stage implements Observer {
 
 		/*----- SIDEBAR TABPANE for switching between testruns and classes */
 		sideTabPane = new TabPane();
-
+		sideTabPane.setPrefWidth(300);
 		Tab tab1 = new Tab();
 		tab1.setText("Testruns");
 		tab1.setClosable(false);
@@ -164,13 +172,11 @@ public class View extends Stage implements Observer {
 		tab2.setClosable(false);
 		tab2.setContent(classTree.generateEmptyClassView());
 		sideTabPane.getTabs().add(tab2);
-
-		sideTabPane.setMinWidth(300);
-		sideTabPane.setPrefWidth(300);
-		sideTabPane.setMaxWidth(350);
+//		sideTabPane.setMinWidth(300);
+//		sideTabPane.setPrefWidth(300);
+		sideTabPane.setPrefWidth(250);
 
 		rootPane.setLeft(sideTabPane);
-
 		mainWindowTabPane = new TabPane();
 
 		tableTab = new Tab("Table");
@@ -180,7 +186,7 @@ public class View extends Stage implements Observer {
 		mainWindowTabPane.getTabs().add(tableTab);
 		chartTab = new Tab("Chart");
 		chartTab.setClosable(false);
-		chartTab.setContent(chartPane);
+		chartTab.setContent(comparisonScrollPane);
 		mainWindowTabPane.getTabs().add(chartTab);
 
 		analyzerTab = new Tab("Analyzer");
@@ -189,16 +195,15 @@ public class View extends Stage implements Observer {
 		mainWindowTabPane.getTabs().add(analyzerTab);
 
 		mainWindowTabPane.getSelectionModel().selectedItemProperty().addListener((ov, oldTab, newTab) -> {
-	        if (newTab.getText().equals("Analyzer")) {
-	        	analyzer.updateAprioriView();
-	        }
-	    });
+			if (newTab.getText().equals("Analyzer")) {
+				analyzer.updateAprioriView();
+			}
+		});
 
 		rootPane.setCenter(mainWindowTabPane);
 
 		return rootPane;
 	}
-
 
 	@Override
 	public void update(Observable o, Object arg) {

@@ -48,7 +48,7 @@ public class TDAcomparison {
 				.add(getClass().getResource("ComparisonSlotStylesheet.css").toExternalForm());
 		rootPane = new BorderPane();
 		rootPane.setPrefWidth(1200);
-		rootPane.setPrefHeight(600);
+		rootPane.setMinHeight(400);
 
 		Label comparisonLabel = new Label("Comparison of one class over two testruns");
 		comparisonLabel.setStyle("-fx-font: 18 Verdana;");
@@ -63,6 +63,8 @@ public class TDAcomparison {
 
 		compareButton = new Button("Compare");
 		compareButton.setMinWidth(150);
+		compareButton.setMinHeight(70);
+		compareButton.setPrefHeight(70);
 		compareButton.setPadding(new Insets(10, 10, 10, 10));
 
 		compareButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -81,17 +83,22 @@ public class TDAcomparison {
 
 		rootPane.setLeft(comparisonSlot1);
 		rootPane.setRight(comparisonSlot2);
-		rootPane.setBottom(compareButton);
+		rootPane.setCenter(compareButton);
 		rootPane.setAlignment(compareButton, Pos.CENTER);
 		rootPane.setMargin(compareButton, new Insets(12, 12, 12, 12));
 		return rootPane;
+	}
+
+	public void reset() {
+		rootPane = (BorderPane) generateEmptyComparisonPane();
+
 	}
 
 	private VBox generateEmptyComparisonSlot() {
 		VBox comparisonVBox = new VBox();
 		comparisonVBox.setStyle("-fx-border-color: black");
 		comparisonVBox.setPadding(new Insets(15, 15, 15, 15));
-		comparisonVBox.setPrefWidth(650);
+		comparisonVBox.setPrefWidth(530);
 		Label timeStamp = new Label("Run - Date");
 		comparisonVBox.getChildren().addAll(generateEmptyDetailsHBox(), timeStamp, generateEmptyTestsVBox());
 		return comparisonVBox;
@@ -225,11 +232,11 @@ public class TDAcomparison {
 		comparedSlot = new VBox();
 		comparedSlot.setStyle("-fx-border-color: black");
 		comparedSlot.setPadding(new Insets(15, 15, 15, 15));
-		comparedSlot.setPrefWidth(650);
+		comparedSlot.setPrefWidth(530);
 
 		HBox detailsBox = new HBox();
 		// detailsBox.setPadding(new Insets(10, 10, 10, 10));
-		detailsBox.setSpacing(50);
+		detailsBox.setSpacing(30);
 
 		/** Detailsbox **/
 		Label passedLabel = new Label();

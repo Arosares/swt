@@ -17,6 +17,9 @@ public class TDAManual {
 	}
 	public void show(){
 		Stage stage = new Stage(StageStyle.UTILITY);
+		stage.setAlwaysOnTop(true);
+		stage.centerOnScreen();
+		
 		ScrollPane root = new ScrollPane();
 		BorderPane manualPane = new BorderPane();
 		manualPane.setPadding(new Insets(8, 8, 8, 8));

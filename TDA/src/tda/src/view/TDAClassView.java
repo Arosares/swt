@@ -41,7 +41,7 @@ public class TDAClassView {
 
 	public TreeItem<TreeNode> createClassItems(TreeNode node) {
 		TreeItem<TreeNode> rootItem = new TreeItem<TreeNode>(node);
-
+		rootItem.setExpanded(true);
 		// All Leafs
 		if (node.getChildren().size() == 0) {
 			return rootItem;

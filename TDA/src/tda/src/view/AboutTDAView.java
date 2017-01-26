@@ -17,6 +17,8 @@ public class AboutTDAView {
 
 	public void show() {
 		Stage stage = new Stage(StageStyle.UTILITY);
+		stage.setAlwaysOnTop(true);
+		stage.centerOnScreen();
 		stage.setTitle("About TDA");
 		BorderPane aboutPane = new BorderPane();
 		Text copyRight = new Text(controller.getLicence());

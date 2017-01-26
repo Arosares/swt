@@ -4,6 +4,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+/**
+ * Represents a class, tested with {@code UnitTest} in a {@code TestRun}.
+ *
+ */
 public class TestedClass {
 	/**
 	 * <pre>
@@ -21,19 +25,34 @@ public class TestedClass {
 	 */
 	private List<UnitTestsToTestRunMapper> classLog = new LinkedList<>();
 
+	/**
+	 * Constructor to instantiate an object of {@code TestedClass}.
+	 * 
+	 * @param className
+	 *            - The name of the {@code TestedClass}
+	 * @param unitTest
+	 *            - A {@code UnitTest} used to test this {@code TestedClass}
+	 */
 	public TestedClass(String className, UnitTest unitTest) {
 		String[] packagePlusClassName = className.split("\\.");
-		
+
 		this.className = packagePlusClassName[packagePlusClassName.length - 1];
-		
+
 		for (int i = 0; i < packagePlusClassName.length - 1; i++) {
 			packageName.add(packagePlusClassName[i]);
 		}
-		
+
 		classLog.add(new UnitTestsToTestRunMapper(unitTest));
 
 	}
 
+	/**
+	 * Adds a {@code UnitTest} to the {@code classLog} of this
+	 * {@code TestedClass}.
+	 * 
+	 * @param unitTest
+	 *            - The {@code UnitTest} to be added
+	 */
 	public void addUnitTestToClassLog(UnitTest unitTest) {
 		String runID = unitTest.getTestRun().getRunID();
 
@@ -54,12 +73,17 @@ public class TestedClass {
 		}
 
 	}
-	
-	
+
 	/**
+	 * Returns the failure percentage of this {@code TestedClass} in the passed
+	 * {@code TestRun}.
 	 * 
 	 * @param testRun
-	 * @return the FP or -1 if the testRun didn't test a class
+	 *            - The {@code TestRun} of which the failure percentage of this
+	 *            {@code TestedClass} is returned.
+	 * 
+	 * @return {@code double} the failure percentage or -1 if the passed
+	 *         {@code TestRun} didn't test this {@code TestedClass}.
 	 */
 	public double getFailurePercentageByTestrun(TestRun testRun) {
 		for (UnitTestsToTestRunMapper unitTestsToTestRunMapper : classLog) {
@@ -70,6 +94,22 @@ public class TestedClass {
 		return -1.0;
 	}
 
+	/**
+	 * Returns a {@code List} of {@code UnitTest} that test this
+	 * {@code TestedClass} in the passed {@code TestRun}.
+	 * 
+	 * @param testrun
+	 *            - The {@code TestRun} of which a {@code List} of
+	 *            {@code UnitTest} is returned.
+	 * 
+	 * @throws {@code
+	 *             IllegalArgumentException} if the passed {@code TestRun} can
+	 *             not be found.
+	 * 
+	 * @return {@code List} of {@code UnitTest}.
+	 * 
+	 * 
+	 */
 	public List<UnitTest> getUnitTestsByTestRun(TestRun testrun) {
 		for (UnitTestsToTestRunMapper unitTestsToTestRunMapper : classLog) {
 			if (unitTestsToTestRunMapper.getTestRun().getRunID().equals(testrun.getRunID())) {
@@ -101,26 +141,62 @@ public class TestedClass {
 		return returnList;
 	}
 	
+
+	/**
+	 * Returns the classLog of this {@code TestedClass}.
+	 * 
+	 * @return {@code List} of {@code UnitTestsToTestRunMapper}
+	 */
 	public List<UnitTestsToTestRunMapper> getClassLog() {
 		return classLog;
 	}
 
+	/**
+	 * Sets the name of this {@code TestedClass}.
+	 * 
+	 * @param value
+	 *            - A {@code String} containing the name to be set.
+	 */
 	public void setClassName(String value) {
 		this.className = value;
 	}
 
+	/**
+	 * Returns the name of this {@code TestedClass}.
+	 * 
+	 * @return {@code String} containing the name of this {@code TestedClass}
+	 */
 	public String getClassName() {
 		return this.className;
 	}
 
+	/**
+	 * Returns the current failure percentage of this {@code TestedClass}.
+	 * 
+	 * @return {@code double} the current failure percentage
+	 */
 	public double getCurrentFailurePercentage() {
 		return currentFailurePercentage;
 	}
 
+	/**
+	 * Calls the method {@code getFailurePercentageByTestrun(TestRun testrun)}
+	 * with the passed {@code TestRun} as parameter.
+	 * 
+	 * @param testrun
+	 *            - The {@code TestRun} that is passed to
+	 *            {@code getFailurePercentageByTestrun(TestRun testrun)} as
+	 *            parameter.
+	 */
 	public void setCurrentFailurePercentage(TestRun testrun) {
 		currentFailurePercentage = getFailurePercentageByTestrun(testrun);
 	}
 
+	/**
+	 * Returns the package name of this {@code TestedClass}. 
+	 * 
+	 * @return {@code Queue} of {@code String} containing the package name. 
+	 */
 	public Queue<String> getPackageName() {
 		return packageName;
 	}

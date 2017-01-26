@@ -2,6 +2,7 @@ package tda.src.logic.apriori;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
@@ -70,12 +71,19 @@ public class AprioriAnalyzer implements Analyzer {
 
 		// 1. Generate frequent item sets
 		System.out.println("\nMaximal Frequent Item Sets:");
-		HashMap<List<TestedClass>, Integer> frequentItemSet = getMaxFrequentItemSet();
+		//TODO: PLACEHOLDER NUMBER
+		HashMap<List<TestedClass>, Integer> frequentItemSet = new HashMap<List<TestedClass>, Integer>();
+		List<StrongRule> strongRules = new ArrayList<StrongRule>();
+//		for(int i = 5; i < TestData.getInstance().getTreeHeight() * 2+1; i++){
+//			System.out.println("FOR-LOOP, i = " + i);
+//			System.out.println("Distance: " + i + ", current starting Set:" + frequentItemSet);
+		frequentItemSet = getMaxFrequentItemSet(TestData.getInstance().getTreeHeight() * 2+1);
 		printItemSet(frequentItemSet);
+//		}
 
 		// 2. Generate strong rules from frequent item sets
 		System.out.println("\nStrong Rules");
-		List<StrongRule> strongRules = generateStrongRules(frequentItemSet);
+		strongRules = generateStrongRules(frequentItemSet);
 		
 		// 3. Update Cache
 		cachedFrequentItemSets = frequentItemSet;
@@ -242,6 +250,25 @@ public class AprioriAnalyzer implements Analyzer {
 		}
 		return strongRules;
 	}
+	
+//	private int checkDistance(HashMap<List<TestedClass>, Integer> currentItemSet,
+//			List<TestedClass> fullKey) {
+//		int itemDistance = 0;
+//				//Similar to the StrongRule generation above
+//		for (Entry<List<TestedClass>, Integer> setItem : currentItemSet.entrySet()) {
+//			List<TestedClass> itemKey = setItem.getKey();
+//			if (itemKey.size() >= 1 && itemKey.size() < fullKey.size()) {
+//				List<TestedClass> leftSide = itemKey;
+//				List<TestedClass> rightSide = new LinkedList<>();
+//				rightSide.addAll(fullKey);
+//				rightSide.removeAll(leftSide);
+//				ItemDistanceCheck getDistance = new ItemDistanceCheck(leftSide, rightSide);
+//				
+//				itemDistance = getDistance.getMaxDistance();
+//			}
+//		}
+//		return itemDistance;
+//	}	
 
 	private HashMap<List<TestedClass>, Integer> getPowerSet(List<TestedClass> testedClasses) {
 		HashMap<List<TestedClass>, Integer> powerItemSet = new HashMap<>();
@@ -258,7 +285,8 @@ public class AprioriAnalyzer implements Analyzer {
 	 * 
 	 * @return The maximal frequent item set
 	 */
-	private HashMap<List<TestedClass>, Integer> getMaxFrequentItemSet() {
+	private HashMap<List<TestedClass>, Integer> getMaxFrequentItemSet(int distanceCap) {
+		System.out.println("Starting getMaxFrequentItemSet with distanceCap " + distanceCap);
 		// Generate first item set as basis for the algorithm
 		HashMap<List<TestedClass>, Integer> itemSet = getFirstItemSet();
 		HashMap<List<TestedClass>, Integer> frqItemSet = pruneItemSet(itemSet, minSupport);
@@ -279,7 +307,21 @@ public class AprioriAnalyzer implements Analyzer {
 			updateItemSet(itemSet);
 
 			itemSet = pruneItemSet(itemSet, minSupport);
+			//Distance Check
+			HashMap<List<TestedClass>, Integer> distanceLimitedItemSet = new HashMap<List<TestedClass>, Integer>(); 
+
+			for(Entry<List<TestedClass>, Integer> setItem : itemSet.entrySet()){
+				if(getMaxDistance(setItem.getKey()) < distanceCap){
+					distanceLimitedItemSet.put(setItem.getKey(), setItem.getValue());
+				}
+			}
+			System.out.println("Distance Cap set to: " + distanceCap);
+			System.out.println("Itemset before Distance check: " + itemSet);
+			itemSet = distanceLimitedItemSet;
+			System.out.println("Itemset after Distance check: " + itemSet);
+						
 			frqItemSet = eliminateInsignificantItems(itemSet, oldFrqItemSet);
+			System.out.println("frqItems: " + frqItemSet);
 			
 			/*
 			* if an entry of the old item set is not a subset of any new frq item set

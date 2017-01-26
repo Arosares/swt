@@ -1,5 +1,9 @@
 package tda.src.logic;
 
+/**
+ * Represents the date on which a {@code TestRun} was started.
+ *
+ */
 public class TestRunStartTime implements Comparable<TestRunStartTime> {
 	private int year;
 	private int month;
@@ -8,6 +12,22 @@ public class TestRunStartTime implements Comparable<TestRunStartTime> {
 	private int min;
 	private int sec;
 
+	/**
+	 * Constructor to instantiate an object of type {@code TestRunStartTime}.
+	 * 
+	 * @param year
+	 *            - an {@code int} representing the year.
+	 * @param month
+	 *            - an {@code int} representing the month.
+	 * @param day
+	 *            - an {@code int} representing the day.
+	 * @param hour
+	 *            - an {@code int} representing the hour.
+	 * @param min
+	 *            - an {@code int} representing the minute.
+	 * @param sec
+	 *            - an {@code int} representing the second.
+	 */
 	public TestRunStartTime(int year, int month, int day, int hour, int min, int sec) {
 		super();
 		this.year = year;
@@ -18,26 +38,56 @@ public class TestRunStartTime implements Comparable<TestRunStartTime> {
 		this.sec = sec;
 	}
 
+	/**
+	 * Returns the year of this {@code TestRunStartTime}.
+	 * 
+	 * @return an {@code int} representing the year.
+	 */
 	public int getYear() {
 		return year;
 	}
 
+	/**
+	 * Returns the month of this {@code TestRunStartTime}.
+	 * 
+	 * @return an {@code int} representing the month.
+	 */
 	public int getMonth() {
 		return month;
 	}
 
+	/**
+	 * Returns the day of this {@code TestRunStartTime}.
+	 * 
+	 * @return an {@code int} representing the day.
+	 */
 	public int getDay() {
 		return day;
 	}
 
+	/**
+	 * Returns the hour of this {@code TestRunStartTime}.
+	 * 
+	 * @return an {@code int} representing the hour.
+	 */
 	public int getHour() {
 		return hour;
 	}
 
+	/**
+	 * Returns the minute of this {@code TestRunStartTime}.
+	 * 
+	 * @return an {@code int} representing the hour.
+	 */
 	public int getMin() {
 		return min;
 	}
 
+	/**
+	 * Returns the second of this {@code TestRunStartTime}.
+	 * 
+	 * @return an {@code int} representing the second.
+	 */
 	public int getSec() {
 		return sec;
 	}

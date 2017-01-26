@@ -29,8 +29,10 @@ public class Controller {
 
 	}
 
+	/**
+	 * Loads the view
+	 */
 	public void start() {
-		// TODO implement this operation
 		this.view.show();
 	}
 
@@ -62,6 +64,7 @@ public class Controller {
 
 	}
 
+
 	/**
 	 * parseFilesInDirectory parses an entire Directory, including sub-folders
 	 * 
@@ -87,6 +90,9 @@ public class Controller {
 	}
 
 	/**
+	 * Generates a Tree showing strings of the names of all tested Classes, and
+	 * the folders containing them.
+	 * 
 	 * @param rootDirectory
 	 * @return
 	 */
@@ -135,15 +141,16 @@ public class Controller {
 			view.getTree().fillTreeView(selectedDirectory);
 
 			view.getClassTree().fillClassView(TestData.getInstance().getRoot());
-
-			TestData.getInstance().getAnalyzer().analyze();
-			TestData.getInstance().getRoot().printTree(0);
+			
+			startAnalyzer();
+			
 		}
 	}
+	public void startAnalyzer(){
+		TestData.getInstance().getAnalyzer().analyze();
+		TestData.getInstance().getRoot().printTree(0);
+	}
 
-	/**
-	 * Calls the exit Alert Window.
-	 */
 	public void exitMain() {
 		this.view.exitAlert();
 	}
@@ -157,10 +164,17 @@ public class Controller {
 		return model.getTestedClassesFromTestRun(testRun);
 	}
 
+	/**
+	 * Handles clicks on our Testrun List, and calls the testrun Summary and
+	 * Class Table.
+	 * 
+	 * @param xmlName
+	 */
 	public void handleTreeItemClick(String xmlName) {
 		view.getMainWindowTabPane().getSelectionModel().select(view.getTableTab());
 		List<TestRun> testRuns = TestData.getInstance().getTestRunList();
 		handleResetGraph();
+		handleResetComparison();
 		for (TestRun testRun : testRuns) {
 			if (testRun.getPath().contains(xmlName)) {
 				view.getTable().fillTestedClassTable(testRun);
@@ -170,26 +184,44 @@ public class Controller {
 		}
 	}
 
+	/**
+	 * Loads a Class into the Linechart when doubleclicking on it in the
+	 * "Table"-View
+	 * 
+	 * @param testedClass
+	 */
+	// TODO: Potentially Obsolete?
 	public void handleTableRowClick(TestedClass testedClass) {
 		view.getMainWindowTabPane().getSelectionModel().select(view.getChartTab());
 		view.getGraph().setChartData(testedClass);
+		System.out.println("WAT");
 	}
 
+	/**
+	 * Clears the Linechart upon being called by the respective Button.
+	 */
 	public void handleResetGraph() {
 		view.getGraph().getLineChart().getData().clear();
 	}
 
+	/**
+	 * Handles the "Clear Data" Dialogue that opens when the user selects the
+	 * appropriate Option in the dropdown-Menu.
+	 */
 	public void handleClearDataButton() {
 		view.getMenuBar().clearDataAlert();
 	}
 
+	public void handleResetComparison() {
+		view.getComparison().reset();
+	}
+
 	/**
-	 * Cleares all extracted Data parsed from the XML data. Should be updated
-	 * with additional features added to the TDA.
+	 * Clears all loaded Data from the system by calling clear-functions in
+	 * TestData as well as erasing all visible lists and tables in the view. 
+	 * The TestRun summary is cleared over a function in the view.
 	 */
 	public void clearData() {
-		// TODO: does not clear testruntotals yet
-
 		// Clear the testData
 		TestData.getInstance().getTestRunList().clear();
 		TestData.getInstance().getUnitTestList().clear();
@@ -202,11 +234,16 @@ public class Controller {
 		// Delete the TreeView
 		view.getTree().getTreeView().setRoot(null);
 
+		// Calls the View funtion that replaces the Testrun Summary with an
+		// empty one
+		view.clearTotals();
+
 		// Clear the classesTreeView
 		view.updateClassView(view.getClassTree().generateEmptyClassView());
 
 		// Clear the Graph Content by Calling the ResetButton Handler
 		handleResetGraph();
+		handleResetComparison();
 
 		// Clear both Observable Lists for the TestRunInfos
 		if (view.getTotals().getTestResults() != null) {

@@ -22,6 +22,9 @@ import tda.src.logic.StAXParser;
 import tda.src.logic.TestRun;
 import tda.src.logic.TestedClass;
 
+/**
+ * Class to initialize the database of TDA. 
+ */
 public class Model extends Observable {
 	/**
 	 * <pre>
@@ -32,6 +35,10 @@ public class Model extends Observable {
 	 */
 	private Parser parser;
 
+	/**
+	 * Constructor to instantiate the {@code Model}.  
+	 * Creates an instance of class {@code StAXParser}. 
+	 */
 	public Model() {
 		super();
 		// initialize program:
@@ -39,10 +46,20 @@ public class Model extends Observable {
 
 	}
 
+	/**
+	 * Sets the {@code Parser} of this {@code Model}. 
+	 * 
+	 * @param value - The {@code Parser} to be set. 
+	 */
 	public void setParser(Parser value) {
 		this.parser = value;
 	}
 
+	/**
+	 * Returns the {@code Parser} of this {@code Model}. 
+	 * 
+	 * @return {@code Parser}
+	 */
 	public Parser getParser() {
 		return this.parser;
 	}
@@ -56,6 +73,12 @@ public class Model extends Observable {
 	 */
 	private Set<TestRun> testRun;
 
+	/**
+	 * Returns the {@code HashSet} of {@code TestRun} of this {@code Model}. 
+	 * If no {@code HashSet} of {@code TestRun} exists, a new one is created. 
+	 * 
+	 * @return {@code HashSet} of {@code TestRun} 
+	 */
 	public Set<TestRun> getTestRun() {
 		if (this.testRun == null) {
 			this.testRun = new HashSet<TestRun>();
@@ -63,6 +86,13 @@ public class Model extends Observable {
 		return this.testRun;
 	}
 
+	/**
+	 * Calls the method {@code parse()} of the {@code Parser} of this {@code Model}. 
+	 * 
+	 * @param xmlPath - A {@code String} containing the location of the XML file to be parsed. 
+	 * 
+	 * @throws {@code WrongXMLAttributeException} if an invalid attribute is found in the XML file during the parsing process. 
+	 */
 	public void parseFile(String xmlPath) {
 		try {
 			parser.parse(xmlPath);
@@ -72,6 +102,13 @@ public class Model extends Observable {
 		}
 	}
 
+	/**
+	 * Returns a {@code List} of {@code TestedClass} associated with the passed {@code TestRun}. 
+	 * 
+	 * @param testRun - The {@code TestRun} of which the {@code List} of {@code TestedClass} is returned. 
+	 * 
+	 * @return {@code List} of {@code TestedClass}
+	 */
 	public List<TestedClass> getTestedClassesFromTestRun(TestRun testRun) {
 		List<TestedClass> classesOfOneRun = testRun.getTestedClasses();
 

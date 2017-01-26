@@ -50,19 +50,31 @@ public class TDAChart {
 		List<XYChart.Data<TestRun, Number>> datas = controller.calculateChartData(testedClass);
 		int cnt = 1;
 		for (XYChart.Data<TestRun, Number> data : datas) {
-			
+
 			String xAxisLabel = Integer.toString(cnt);
 			XYChart.Data<String, Number> dataPoint = new XYChart.Data<String, Number>(xAxisLabel, data.getYValue());
-			//set the HoverNode for a dataPoint
+			// set the HoverNode for a dataPoint
 			HoveredThresholdNode hoverNode = new HoveredThresholdNode(data.getXValue(), data.getYValue(), testedClass);
 			dataPoint.setNode(hoverNode);
-			
+
 			series.getData().add(dataPoint);
 			cnt++;
-		} 
-			
-		series.setName(testedClass.getClassName());
-		lineChart.getData().add(series);
+		}
+
+		
+		boolean existing = false;
+		
+		for (XYChart.Series<String, Number> series : lineChart.getData()) {
+			if (series.getName().equals(testedClass.getClassName())) {
+				existing = true;
+			} 
+		}
+		
+		if (!existing) {
+			series.setName(testedClass.getClassName());
+			lineChart.getData().add(series);
+		}
+		
 
 	}
 
@@ -70,8 +82,10 @@ public class TDAChart {
 		return lineChart;
 	}
 
-	/** a node which displays a value on hover, but is otherwise empty 
-	 *  inspired by https://gist.github.com/jewelsea/4681797	*/
+	/**
+	 * a node which displays a value on hover, but is otherwise empty inspired
+	 * by https://gist.github.com/jewelsea/4681797
+	 */
 	class HoveredThresholdNode extends StackPane {
 		HoveredThresholdNode(TestRun testRun, Number value, TestedClass testedClass) {
 			setPrefSize(10, 10);
@@ -91,9 +105,9 @@ public class TDAChart {
 					setCursor(Cursor.CROSSHAIR);
 				}
 			});
-			setOnContextMenuRequested(new EventHandler<ContextMenuEvent>(){
+			setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
 				@Override
-				public void handle(ContextMenuEvent contextEvent){
+				public void handle(ContextMenuEvent contextEvent) {
 					contextMenu.show(lineChart, contextEvent.getScreenX(), contextEvent.getScreenY());
 				}
 			});
@@ -101,27 +115,27 @@ public class TDAChart {
 		}
 
 		private ContextMenu createContextMenu(TestRun testRun, TestedClass testedClass) {
-			 ContextMenu contextMenu = new ContextMenu();
-			 
-		        MenuItem item1 = new MenuItem("Add to Compare-Slot 1");
-		        item1.setOnAction(new EventHandler<ActionEvent>() {
-		 
-		            @Override
-		            public void handle(ActionEvent event) {
-		                controller.handleContextMenuClick(testRun, testedClass, true);
-		            }
-		        });
-		        MenuItem item2 = new MenuItem("Add to Compare-Slot 2");
-		        item2.setOnAction(new EventHandler<ActionEvent>() {
-		 
-		            @Override
-		            public void handle(ActionEvent event) {
-		                controller.handleContextMenuClick(testRun, testedClass, false);
-		            }
-		        });
-		 
-		        // Add MenuItem to ContextMenu
-		        contextMenu.getItems().addAll(item1, item2);
+			ContextMenu contextMenu = new ContextMenu();
+
+			MenuItem item1 = new MenuItem("Add to Compare-Slot 1");
+			item1.setOnAction(new EventHandler<ActionEvent>() {
+
+				@Override
+				public void handle(ActionEvent event) {
+					controller.handleContextMenuClick(testRun, testedClass, true);
+				}
+			});
+			MenuItem item2 = new MenuItem("Add to Compare-Slot 2");
+			item2.setOnAction(new EventHandler<ActionEvent>() {
+
+				@Override
+				public void handle(ActionEvent event) {
+					controller.handleContextMenuClick(testRun, testedClass, false);
+				}
+			});
+
+			// Add MenuItem to ContextMenu
+			contextMenu.getItems().addAll(item1, item2);
 			return contextMenu;
 		}
 

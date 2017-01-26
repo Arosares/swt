@@ -32,8 +32,8 @@ public class TDAAnalyzerView {
 	private GridPane aprioriPane;
 	private Slider distanceSlider;
 	private Slider confidenceSlider;
-	private TableView<Entry<String, String>> frequentItemsTable;
-	private TableView<StrongRule> strongRulesTable;
+	private TableView<Entry<String, String>> frequentItemsTable = new TableView<>();
+	private TableView<StrongRule> strongRulesTable = new TableView<StrongRule>();
 	private ObservableList<StrongRule> strongRuleItems;
 	ObservableList<Entry<String, String>> frequentItems;
 	
@@ -47,6 +47,7 @@ public class TDAAnalyzerView {
 		aprioriPane = new GridPane();
 		// margins around the whole center grid (top/right/bottom/left)
 		aprioriPane.setPadding(new Insets(10, 10, 10, 10));
+		aprioriPane.setVgap(10);
 		aprioriPane.setAlignment(Pos.TOP_CENTER);
 
 		Label aprioriHeader = new Label("Apriori Analyzer");
@@ -83,9 +84,14 @@ public class TDAAnalyzerView {
 			}
 		});
 		
-
-		aprioriPane.add(distanceSlider, 1, 4);
-		aprioriPane.add(confidenceSlider, 1, 5);
+		Label distanceLabel = new Label("Class Distance");
+		distanceLabel.setAlignment(Pos.TOP_RIGHT);
+		Label confidenceLabel = new Label("Confidence");
+		confidenceLabel.setAlignment(Pos.TOP_RIGHT);
+		aprioriPane.add(distanceLabel, 1, 4);
+		aprioriPane.add(distanceSlider, 1, 5);
+		aprioriPane.add(confidenceLabel, 1, 6);
+		aprioriPane.add(confidenceSlider, 1, 7);
 	}
 
 	@SuppressWarnings({ "unchecked" })
@@ -121,7 +127,6 @@ public class TDAAnalyzerView {
 		frequentItemsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		frequentItemsTable.setPrefWidth(800);
 		frequentItemsTable.setPrefHeight(300);
-
 		ScrollPane scrollPane = new ScrollPane(frequentItemsTable);
 
 		return scrollPane;
@@ -159,9 +164,7 @@ public class TDAAnalyzerView {
 		    });
 		    return row ;
 		});
-		
 		ScrollPane scrollPane = new ScrollPane(strongRulesTable);
-
 		return scrollPane;
 	}
 
