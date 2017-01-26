@@ -1,0 +1,135 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The following document uses the KOMA Script class
+% see http://www.komascript.de/ for more information
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper,12pt,twoside,BCOR=15mm,parskip=half*]{scrartcl}
+
+\usepackage[utf8]{inputenc} % for directly inserting umlauts etc.
+                            % need to store all files as UTF 8 /!\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Please insert your group's details below
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% group name
+\def\groupname{X} % replace X by A,B,C,...
+\def\groupcontact{Prof.\ Dr.\ G.~Lüttgen}
+%\def\groupcontact{Dr.\ A.~Heußner}
+
+% first group member
+\def\AName{First1 Last1}
+\def\AMatrikel{Matrikelnr1}
+\def\AStudSem{Degree Course/Semester}
+
+% second group member
+\def\BName{First2 Last2}
+\def\BMatrikel{Matrikelnr2}
+\def\BStudSem{WI/5}
+
+% third group member
+\def\CName{First3 Last3}
+\def\CMatrikel{Matrikelnr3}
+\def\CStudSem{AI/3}
+
+% fourth group member
+\def\DName{First4 Last4}
+\def\DMatrikel{Matrikelnr4}
+\def\DStudSem{SoSySc/4}
+
+% fifth group member
+\def\EName{First5 Last5}
+\def\EMatrikel{Matrikelnr5}
+\def\EStudSem{WIPäd/5}
+
+% sixth group member
+\def\FName{First6 Last6}
+\def\FMatrikel{Matrikelnr6}
+\def\FStudSem{WIPäd/5}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% adapt the following only if needed !
+
+%\usepackage[ngerman]{babel} % change to German spelling etc.
+
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+
+\bibliographystyle{alpha}
+
+% Definition of headings
+\usepackage[headsepline]{scrpage2}
+\pagestyle{scrheadings}
+\clearscrheadfoot
+\automark[section]{section}
+\ohead{\headmark}
+\ofoot{\thepage}
+\ifoot{Group \groupname}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% main document
+
+\begin{document}
+
+\input{howto} % just comment this line in your final version
+
+\input{titlepage}
+
+
+
+\cleardoubleemptypage
+\tableofcontents
+
+\clearpage
+\listoffigures
+\listoftables
+
+\clearpage
+\section{Project Organization}
+\input{organization}
+
+\clearpage
+\section{Requirements}
+\input{requirements}
+
+\clearpage
+\section{Architecture \& Design}
+\input{design}
+
+\clearpage
+\section{Realization}
+\input{sprintoverview}
+\input{sprint1}
+\clearpage
+\input{sprint2}
+\clearpage
+\input{sprint3}
+\clearpage
+\input{sprint4}
+\clearpage
+\input{sprint5}
+
+\clearpage
+\section{Quality Assurance}
+\input{quality}
+
+\clearpage
+\section{Project Review}
+\input{review}
+
+\clearpage
+\bibliography{references}
+
+\clearpage
+\appendix
+\section{Product Backlog}
+\input{backlog}
+
+\clearpage
+\section{Additional Material}
+\input{additional}
+
+\clearpage
+\input{declaration}
+\end{document}

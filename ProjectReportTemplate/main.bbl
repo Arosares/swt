@@ -1,0 +1,18 @@
+\begin{thebibliography}{Knu84}
+
+\bibitem[Coh04]{userstories}
+M.~Cohn.
+\newblock {\em User Stories Applied: For Agile Software Development}.
+\newblock Addison-Wesley, 2004.
+
+\bibitem[Knu84]{texbook}
+D.~E. Knuth.
+\newblock {\em The {{\TeX}book}}.
+\newblock Addison-Wesley, 1984.
+
+\bibitem[SB01]{scrumbook}
+K.~Schwaber and M.~Beedle.
+\newblock {\em Agile Software Development with Scrum}.
+\newblock Prentice-Hall, 2001.
+
+\end{thebibliography}
