@@ -1,9 +1,41 @@
-\flushleft
-\emph{(Approx.~5--8~pages of text.) Tobias}
-
+%\flushleft
+%\emph{(Approx.~5--8~pages of text.) Tobias}
+\iffalse
 \emph{Describe both the architecture and the design of your 
 software. Illustrate its architecture and design using appropriate UML diagrams. 
 Motivate its architecture and design in the light of design principles and 
 possible alternatives. Also highlight any use of architectural 
 patterns and design patterns. Pay special attention to justifying all design 
 decisions taken.}
+\fi
+
+\subsection{Initial Idea}
+At the beginning of the project, the model-view-controller architecture has been chosen to be the basis for the TDA. For this, the project is divided into three different layers, each responsible for a specific functionality. In particular, the business logic is separated from the control and presentation layer. This follows the principle of separation of concerns.
+
+The model-view-controller pattern is defined as a compound pattern. This means that it is a combination of several other design patterns that work together. As the name predicts, it consists of a model, view and controller, which all have different responsibilities. The view is responsible for displaying information and for allowing interaction with the user. The model holds the program's data and executes all related computations. It is the representation of the business logic. Finally, the controller works close with the view and functions as a translator for the interaction between the previously mentioned components. View and controller together build the user interface.
+While the model can function on its own, view and controller depend on the existence of a model. This makes the user interface easily changeable or even exchangeable as a whole, without touching the logic at all. In other words, the proposed architecture is also designed for change. Additionally, it is possible to implement multiple views next to each other, all relying on the same underlying logic. The preferred view can then even be displayed at run time and for example based on the machine or device it is being executed on.
+
+Since the TDA shall display all the information in an adequate graphical user interface, this approach seemed to fulfill the criteria and fit our needs. Although there were no concrete plans for implementing an additional user interface, it is always a good practice to be prepared for similar requests that arise later in the project phase.
+
+Also very early in the project development, we discussed how the given XML-files shall be read and whether they shall be processed and stored internally for later, faster processing. Database approaches were discussed and compared to directly loading the information in an internal infrastructure. A detailed description of this process and the final results can be found in section~\ref{sec:data_structures}.
+The selected data structure and its location also have a big influence on the selected architecture and the overall class interaction. With the current approach, this clearly was a part of the model.
+
+After other components like the parser and the analyzer were addressed in later project development, the model steadily increased in size and with it in complexity. Other design patterns and architectures were needed, in order to maintain the highly flexible and clearly structured code that we strive to achieve. That's why we changed the high-level architecture, as described in detail in the following paragraph, and used the previously explained model-view-controller pattern only as a subsystem for the new architecture.
+
+\subsection{Final approach}
+The high level architecture of the TDA now follows the repository architecture. This design is defined by one central entity and different subsystems that are connected directly to the named system. The central entity hereby usually functions as a data storage. In the following, the advantages and disadvantages are being weighed against each other and it is concluded why the introduced architecture is a good fit to our needs.
+
+The repository architecture in general is designed for change. Having different subsystems for different functionality allows for exchangeability and therefore flexibility in the later software development and maintenance. Also adding or removing subsystems can easily be done. Furthermore, the central data storage allows for convenient and consistent data management. Data is only stored at one position and is not hold by any subsystem. This means that changes to the data system are automatically propagated to other components through the shared repository. Subsystems therefore also don't need to worry about how and where the given information is processed and used. They just have to follow the given restrictions on accepted data types.
+
+This also names one of the challenges of the repository architecture. All components need to agree on a certain standard of communication and use the same data types to be compatible. Additionally, one single access point also introduces a single point of failure. It therefore is extremely important that the used system is failure robust and stable over time. The repository should also be able to handle multiple requests at the same time and manage resources efficiently. Since all other systems depend on it, a slowdown would affect the whole project. Finally, the distribution of the repository across many different machines may cause some additional challenges.
+
+It can be concluded that the introduces repository architecture simplifies the access and management of the data in a project significantly. This comes with some restrictions in terms of the communication and data types. Therefore, the proposed architecture is often only a solution for relatively small and structured systems [FSE – V14, p26].
+
+The Test Data Analyzer represents such a small and structured system. Also the project has a limited scope and therefore the final product will remain rather small. Lastly, the repository is well suited for projects with a database. Since the TDA stores data internally, this is fitting too. To concluded, the TDA is benefiting from all of the repository architecture's advantages while limiting the disadvantages to a minimum. Therefore, the proposed architecture is well suited as a high level architecture for the overall project.
+
+While the internal data structure represents the repository, the other components act as its subsystems. These include the user interface, the parser and the analyzer. 
+
+\subsection{General Principles}
+
+
+\subsection{Data Structure}\label{sec:data_structures}
