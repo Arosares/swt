@@ -22,13 +22,62 @@ sequel to refer to a certain story.}
   \begin{tabular}{l||l|l|l|l|}
     ID & Name & Size &  Source & Sprint\\
     \hline
-    \vdots&\vdots&\vdots&\vdots&\vdots\\
+    1&Testing&Medium&Project brief&5\\
+    2&Research StAX Parser&Small&Project brief&2\\
+    3&Imports in tree structure&Medium&Assumed by us&3\\ %Original ID was 2.001; Sprint could be wrong
+    9&Testrun Selection&Medium&Project brief&2\\
+    18&XMLParsing&Medium&Project brief&1\\
+    ?&Testrun table&Medium&Project brief&2\\
+    ?&Testrun chart&Medium&Project brief&2\\
+    ?&Association Analysis&Large&Project brief&3\\
+    23&Implement Apriori Algorithm&Large&Project brief&4\\
+    24&Display Analysis Data&Medium&Project brief&4\\
+    25&Additional usage scenario&Medium&Project brief&5\\
+    26&Code Documentation&Small&Project brief&5\\
+    27&Distribution with suited license&Small&Project brief&5\\ %not sure about origin of 27/28
+    28&Creating a help function&Small&Project brief&5\\
+    213&Evolution of a class&Large&Assumed by us&4\\
+    
+    
+    
+    
   \end{tabular}
   \label{tab:user_stories}
 \end{table}
 
 \subsection{Requirements derived from project brief}
+\subsubsection{Functional requirements}
+\begin{itemize}	
+	\item Association analysis shall use the well-established Apriori algorithm
+	\item XML-files shall be parsed using the StAX parser
+	
+\end{itemize}
 
+\subsubsection{Development constraints}
+\begin{itemize}
+	\item The software has to run on a standard SWT-lab PC
+	\item Software shall be implemented in Java; documented using Jdoc; tested with JUnit;
+	\item Copied code shall be cited with its source
+	\item Development shall be done via the SWT-Git-repository
+	\item Commit messages shall have the following format: \\
+	SPRINT n SUBSTANTIAL m \\
+	documentation of commit \\
+	full name of responsible person
+	\item The file structure shall be as follows:
+	\begin{itemize}
+		\item 'src' containing source files
+		\item 'test' containing JUnit tests
+		\item 'doc' containing JavaDoc of the sources
+		\item 'uml' containing UML-diagram files
+	\end{itemize}
+	\item Final release shall look as follows:
+	\begin{itemize}
+		\item source files; unit tests; Jdoc
+		\item binary release (jar)
+		\item project report
+	\end{itemize}
+	
+\end{itemize}
 \subsection{Requirements assumed by us}
 \subsubsection{Functional requirements}
 
