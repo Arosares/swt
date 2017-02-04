@@ -5,12 +5,88 @@
 
 \subsubsection*{Sprint Planning}
 
-\emph{State the goal of and the user stories chosen for this sprint (sprint backlog). Detail the tasks that your group derived from each user story, and provide the names of the team members allocated to each task.}
+Our goal for Sprint 1 was to implement the StAX parser to offer the basic functionality of parsing the given test run XML files into our internal data structure to the client. \\ 
+We also wanted to design a first paper prototype of our system, so that we could get a first feedback on our design desicions. \\ 
+Our Sprint backlog for this Sprint contained three user stories: \# 18 XML Parsing, \# 9 Test Run Selection and \# 12 Store XML in classes. Additionally we created a research story for this Sprint, belonging to the StAX parser. All members of the group should research the functionality of the StAX parser, so that everybody understands how it works and can support its implementation. \\ 
+The tasks we derived from our user stories can be found in the following tables. \\ 
+
+\begin{table}[h]
+  \caption{User Story number 18: XML Parsing}
+  \label{US_Parsing}
+  \centering
+  \begin{tabular}{p{1.5cm}|p{9cm}|p{3cm}|}
+  	Task number & Task description & Assigned to \\ 
+  	\hline
+  	\hline
+  	18.1 & Create package structure for project & Frank \\
+  	\hline
+  	18.2 & Create parser class & Tobias, Frank, Andreas \\ 
+  	\hline
+  	18.3 & Find elements in XML file & Tobias, Frank, Andreas \\ 
+  	\hline
+  	18.4 & Implement parsing functionality & Tobias, Frank \\ 
+  	\hline
+  	18.5 & Store parsed information in data structure & Tobias, Frank, Andreas \\ 
+  	\hline
+  \end{tabular}
+\end{table} 
+
+\ \\
+
+\begin{table}[h]
+  \caption{User Story number 9: Test Run Selection}
+  \label{US_Selection}
+  \centering
+  \begin{tabular}{p{1.5cm}|p{9cm}|p{3cm}|}
+  	Task number & Task description & Assigned to \\ 
+  	\hline
+  	\hline
+  	9.1 & Find possible methods to select XML files & all \\ 
+  	\hline
+  	9.2 & Implement Methods to select XML files & Simon, Jan, Andreas \\ 
+  	\hline
+  	9.3 & Create paper prototype of GUI & all \\
+  	\hline
+  \end{tabular}
+\end{table} 
+
+\ \\ 
+
+\begin{table}[h]
+  \caption{User Story number 12: Store XML in classes}
+  \label{US_Storage}
+  \centering
+  \begin{tabular}{p{1.5cm}|p{9cm}|p{3cm}|}
+  	Task number & Task description & Assigned to \\ 
+  	\hline
+  	\hline
+  	12.1 & Identify classes to represent information stored in XML files & all \\ 
+  	\hline
+  	12.2 & Create class TestData & Jan \\ 
+  	\hline
+  	12.3 & Create classes TestRun, TestedClass and UnitTest & Simon \\ 
+  	\hline
+  	12.4 & Link data structure classes & Frank \\ 
+  	\hline
+  \end{tabular}
+\end{table} 
 
 \subsubsection*{Noteworthy Development Aspects}
 
-\emph{Describe and justify the development approach taken and the artefacts produced in this sprint (e.g., prototypes).  State any peculiarities of this sprint, such as peculiarities  regarding (i)~adopted development practices, (ii)~encountered obstacles, (iii)~questions that arose and needed clarification possibly from the client, or (iv)~important aspects regarding --- or changes to --- your software architecture, your algorithms or your techniques applied to solve a technical problem.}
+During our first session in Sprint 1 all members of our group had a long and detailled discussion about the design of our internal data structure. This discussion included the questions what kind of classes we needed to implement to model the information of the test run files and how to connect these classes. A lot of time and thought was invested in these decisions, which resulted in a much tighter time schedule for the rest of the Sprint. But in the end this invested time resulted in a well based foundation for the TDA. \\ 
+
+We then decided to split our group in two. The one half of our group, consisting of Jan, Simon, and Robert, worked on the implementation of the data structure. The other half, consisting of Andreas, Frank, and Tobias, worked on the implementation of the StAX parser. This distribution of work regarding the basic functionalities of our system was chosen to minimize the risk of delays, caused by a member that could decide to leave the project, by distributing the knowledge amongst several persons. \\ 
+
+The downside of this division of work was that there was a period of time in which the one team could not continue with the implementation of the parser because it had to wait for information on the available methods and constructors of the data structure classes from the other team. \\ 
+
+While they waited for the necessary information to store the test run data into the data structure after it has been parsed, the parser team members started to design a paper prototype. The prototype illustrated our ideas for the graphical user interface of TDA and its usage. During the Sprint 1 review meeting the paper prototype was used to present our ideas to the client and receive his feedback. \\ 
+
+In the beginning there were some minor problems regarding Git and its functionality. But after we agreed on how to use the branching functions and clarifying how to merge the different branches our work flow was improved. \\ 
+
 
 \subsubsection*{Sprint Review}
 
-\emph{Describe the product increment produced in this sprint. Compare the achieved increment with the sprint goal and the user stories that were chosen for this sprint. Give a brief summary on your group's retrospective, including changes to the product backlog and also to the development process and/or techniques that you installed after the sprint in order to overcome any identified obstacle.}
+We invested a lot of time into the design of our internal data structure. This and the delay in the parser development, caused by the dependency on the data structure interfaces, led to unfinished work planned in this Sprint. \\
+
+We did not fully achieve our goal for Sprint 1. Our parser was already working but we were not yet able to store all necessary information in our data structure and offer an easy way to select the XML files. User story \# 12 was finished but \# 9 and \# 18 were not. \\ 
+
