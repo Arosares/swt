@@ -8,76 +8,65 @@ Goal: Association Analysis and Graph
 
 The goal for Sprint 3 was to finish and merge in the LineChart visual output that missed the Sprint 2 deadline (by then still called "Graph") and the implementation of the Apriori Algorithm. 
 For the purpose of creating a working Apriori Implementation, a research story with unknown size was assigned. 
-In the first session, everyone not assigned to the LineChart was busy with refactoring previous code or improving the GUI, as we expected additional work to crop up once the chart was integrated into the GUI and work on Apriori could not start until research was done.
+In the first session, everyone not assigned to the LineChart was busy with refactoring previous code or improving the GUI, as we expected additional work to crop up once the chart was integrated into the GUI, and work on Apriori could not start until research was done.
 
 Stories: 
 
-\begin{table}[h]
-  \caption{Stories and Tasks}
-  \label{User Stories Sprint 3}
-  \centering
-  \begin{tabular}{p{1cm}|p{1cm}|p{5cm}|p{3cm}|p{3cm}|}
-  	Nr. & Prio & Story & Tasks & Assigned \\ 
-  	\hline
-  	\hline
-  	R1 & 1 & Research Apriori & none & Jan Martin \\ 
-  	\hline
-  	8 & 1 & Association Analysis & Implement Apriori & Jan Martin \\ 
-  	\hline
-  	? & 2 & Testrun graph & ? & Frank Kessler, Simon Meyer \\ 
-  	\hline
-  	TBD & 3 & WIP & AB & BA \\ 
-  	\hline
-  \end{tabular}
-\end{table}
-
-Stories2: 
-
 \begin{itemize}
-	\item Association Analysis (8) 
+	\item User Story 8: Association Analysis
 	\end{itemize}
 	
 \begin{table}[h]
-  \caption{Tasks Story 8}
+  \caption{User Story 8 Tasks}
   \label{Story 8 Tasks}
   \centering
   \begin{tabular}{p{1cm}|p{5cm}|p{3cm}|}
   	Nr & Description & Assigned \\ 
   	\hline
-  	1 & Implement Apriori & someone \\ 
+  	18.1 & Implement Apriori & Jan Martin \\ 
   	\hline
-  	2 & Something Apriori & someone else \\ 
+  	18.2* & Order Classes in a Tree Structure & * \\ 
   	\hline
   \end{tabular}
 \end{table}
+*This additional Task was born of the change request received mid-sprint, and not part of the original planning.
 	
 \begin{itemize}	
 	\item Research Aprior (R1) 
 \end{itemize}
 
+\begin{itemize}
+	\item User Story ?: Testrun Graph
+	\end{itemize}
+	
 \begin{table}[h]
-  \caption{Tasks Story ?}
+  \caption{User Story ? Tasks}
   \label{Story ? Tasks}
   \centering
   \begin{tabular}{p{1cm}|p{5cm}|p{3cm}|}
   	Nr & Description & Assigned \\ 
   	\hline
-  	3 & I don't even & know anymore \\ 
+  	?.1 & Classes Sidebar Overview & ? \\ 
+  	\hline
+  	?.2 & Graph for displaying a single class and its failure percentage over all loaded testruns & Frank Kessler \\ 
+  	\hline
+  	?.3 & Event handling for class selection in sidebar overview to display corresponding graph & ? \\ 
   	\hline
   \end{tabular}
 \end{table}
 
-Stories 3:
-
-\paragraph*{User Story 8: Implement Apriori}
-
-\begin{itemize}
-	\item Task 1: Implement Apriori  - Assigned to: X
-	\item Task 2: Implement Apriori more - Assigned to: Y
-\end{itemize}
 
 \subsubsection*{Noteworthy Development Aspects}
 \emph{Describe and justify the development approach taken and the artefacts produced in this sprint (e.g., prototypes).  State any peculiarities of this sprint, such as peculiarities  regarding (i)~adopted development practices, (ii)~encountered obstacles, (iii)~questions that arose and needed clarification possibly from the client, or (iv)~important aspects regarding --- or changes to --- your software architecture, your algorithms or your techniques applied to solve a technical problem.}
+
+The Sprint started with planning out our goal, which was condensed into two primary fields of work: 1) Finish the remains of Sprint 2, and implement the logic for Association Analysis. 
+
+While research on Apriori was ongoing, most of the team focused on polishing the UI, fixing minor bugs, and refactoring unperformant classes; leftovers from Sprint 2 and tasks we felt "had to be done" without a story to attach them to. \
+User Story ? progressed quickly, with a GUI implementation ready after the first day of development. 
+Meanwhile, research on Apriori produced only a tenuous grasp on the Algorithms peculiarities, which was shared between group members after the following Sprint Meeting. 
+When the change request came in, we analysed the requirements and came to the conclusion that the distance calculation required  would benefit from an internal architecture that ordered parsed testruns and classes in a tree structure. 
+As this promised a more intuitive way to both save and display parsed information, the main challenge of User Story 8 turned into refactoring our internal class structure, though this did take up a significant portion of development time, exasperated by half the lab's computers not working on that sprint increment.  
+
 
 \subsubsection*{Sprint Review}
 \emph{Describe the product increment produced in this sprint. Compare the achieved increment with the sprint goal and the user stories that were chosen for this sprint. Give a brief summary on your group's retrospective, including changes to the product backlog and also to the development process and/or techniques that you installed after the sprint in order to overcome any identified obstacle.}
