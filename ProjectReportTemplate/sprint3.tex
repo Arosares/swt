@@ -1,7 +1,5 @@
 \subsection{Sprint No.~3}
 
-\emph{(Approx.~2--3~pages of text.) Jan}
-
 \subsubsection*{Sprint Planning}
 
 Goal: Association Analysis and Graph
@@ -11,29 +9,6 @@ For the purpose of creating a working Apriori Implementation, a research story w
 In the first session, everyone not assigned to the LineChart was busy with refactoring previous code or improving the GUI, as we expected additional work to crop up once the chart was integrated into the GUI, and work on Apriori could not start until research was done.
 
 Stories: 
-
-\begin{itemize}
-	\item User Story 8: Association Analysis
-	\end{itemize}
-	
-\begin{table}[h]
-  \caption{User Story 8 Tasks}
-  \label{Story 8 Tasks}
-  \centering
-  \begin{tabular}{p{1cm}|p{5cm}|p{3cm}|}
-  	Nr & Description & Assigned \\ 
-  	\hline
-  	18.1 & Implement Apriori & Jan Martin \\ 
-  	\hline
-  	18.2* & Order Classes in a Tree Structure & * \\ 
-  	\hline
-  \end{tabular}
-\end{table}
-*This additional Task was born of the change request received mid-sprint, and not part of the original planning.
-	
-\begin{itemize}	
-	\item Research Aprior (R1) 
-\end{itemize}
 
 \begin{itemize}
 	\item User Story ?: Testrun Graph
@@ -54,23 +29,57 @@ Stories:
   	\hline
   \end{tabular}
 \end{table}
+	
+\begin{itemize}	
+	\item Research Aprior (R1) Assigned: Jan Martin
+\end{itemize}
+
+\newpage
+\begin{itemize}
+	\item User Story 8: Association Analysis
+	\end{itemize}
+
+\begin{table}[h]
+  \caption{User Story 8 Tasks}
+  \label{Story 8 Tasks}
+  \centering
+  \begin{tabular}{p{1cm}|p{5cm}|p{3cm}|}
+  	Nr & Description & Assigned \\ 
+  	\hline
+  	18.1 & Implement Apriori & Jan Martin \\ 
+  	\hline
+  	18.2* & Order Classes in a Tree Structure & Frank Kessler, Tobias Schwartz \\ 
+  	\hline
+  \end{tabular}
+\end{table}
+*This additional Task was born of the change request received mid-sprint, and not part of the original planning.
+
+
 
 
 \subsubsection*{Noteworthy Development Aspects}
-\emph{Describe and justify the development approach taken and the artefacts produced in this sprint (e.g., prototypes).  State any peculiarities of this sprint, such as peculiarities  regarding (i)~adopted development practices, (ii)~encountered obstacles, (iii)~questions that arose and needed clarification possibly from the client, or (iv)~important aspects regarding --- or changes to --- your software architecture, your algorithms or your techniques applied to solve a technical problem.}
 
 The Sprint started with planning out our goal, which was condensed into two primary fields of work: 1) Finish the remains of Sprint 2, and implement the logic for Association Analysis. 
 
-While research on Apriori was ongoing, most of the team focused on polishing the UI, fixing minor bugs, and refactoring unperformant classes; leftovers from Sprint 2 and tasks we felt "had to be done" without a story to attach them to. \
-User Story ? progressed quickly, with a GUI implementation ready after the first day of development. 
-Meanwhile, research on Apriori produced only a tenuous grasp on the Algorithms peculiarities, which was shared between group members after the following Sprint Meeting. 
-When the change request came in, we analysed the requirements and came to the conclusion that the distance calculation required  would benefit from an internal architecture that ordered parsed testruns and classes in a tree structure. 
-As this promised a more intuitive way to both save and display parsed information, the main challenge of User Story 8 turned into refactoring our internal class structure, though this did take up a significant portion of development time, exasperated by half the lab's computers not working on that sprint increment.  
+While research on Apriori was ongoing, most of the team focused on polishing the UI, fixing minor bugs, and refactoring unperformant classes; leftovers from Sprint 2 and tasks we felt "had to be done" without a story to attach them to. \ 
+We also performed undocumented research into a potential XML validation, which was thought to provide us performance gains and potential fail saves in the future.
+User Story ? progressed quickly, with a GUI implementation ready after the first day of development; Progress on smaller tasks was hampered by a lack of working computers in the lab at the time.
+Meanwhile, research on Apriori at first produced only a tenuous grasp on the Algorithms peculiarities, which was shared between group members after the following Sprint Meeting. 
+When the change request came in, we analysed the requirements and came to the conclusion that the distance calculation required would benefit from an internal architecture that ordered parsed testruns and classes in a tree structure. 
+As this promised a more intuitive way to both save and display parsed information, the main challenge of User Story 8 turned into refactoring our internal class structure, though this would end up taking a significant portion of development time. 
+Work on XML validation was halted and we started refactoring the data structure, all the while updating our previous diagrams and continuing research on Apriori.
+After further research, work on our first Apriori Implementation was begun, and XML validation was reworked and implemented, while half the team continued adapting our existing methods to the modified data structure. Due to doubts about the performance of the system, two teammembers worked on different approaches to Apriori on different Branches. Teammembers switched work as necessary between the main tasks as to ensure cross-compatibility and sufficient progress. 
+
+The main Artefact produced during Sprint 3 were two different implementations of Apriori Algorithm, the first of which was presented during the Sprint 3 review meeting with the client. 
 
 
 \subsubsection*{Sprint Review}
-\emph{Describe the product increment produced in this sprint. Compare the achieved increment with the sprint goal and the user stories that were chosen for this sprint. Give a brief summary on your group's retrospective, including changes to the product backlog and also to the development process and/or techniques that you installed after the sprint in order to overcome any identified obstacle.}
 
-The original intent for Sprint 3 was to implement both the LineChart visual output that missed the Sprint 2 deadline and the Apriori Algorithm. For this purpose, development time was allotted to research , and some trial and error was expected on both user stories. 
-While the GUI implementation of the Chart proved to be easier than expected, the Apriori development did not. Mid Sprint, the Group received the Change Request, and, after analysing the new requirements, it was evident that the planned Apriori implementation would have to be significantly changed after the Change request would be merged in. 
-Thus we decided to prioritize the implementation of the treeview necessary for the adapted Apriori both in the program logic and the GUI. 
+The original intent for Sprint 3 was to finish the remains of Sprint 2 and implement the Apriori Algorithm. 
+
+The Linechart was implemented and working within the GUI, and the Apriori did work in the backend, though no strong rules were generated yet. We also managed to refactor our data structure for significant performance gains and polish our main GUI, creating a faster, better looking programm and making the sprint overall a success. 
+However, in retrospect, the path to reach those goals was more winded than we'd hoped. 
+We had to allocate research time for Apriori, which would have delayed implementation and incurred wait time for teammembers if it wasn't for the lack of computers to actually work on; This research should have been done in the previous sprint. 
+When we moved around priorities after receiving the change request from the client, we lacked the time we expected to finish Apriori within the new specifications, as well as the knowledge of how to proceed in such a situation, resulting in a lot of undocumented extra work. 
+Further, after creating the first output of our Apriori Algorithm, it occurred to us that we never made a UI prototype of the Apriori output, having created the original prototype before we knew that Apriori was.
+The presented Apriori Implementation was never merged into the master branch and later dropped entirely in favour of a revised version, meaning that in the end we didn't actually reach the goal of Apriori implementation. 

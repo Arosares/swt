@@ -26,7 +26,7 @@ The Test Data Analyzer represents such a small and structured system. Also the p
 
 While the internal data structure represents the repository, the other components act as its subsystems. These include the user interface, the parser and the analyzer.
 
-To make the repository even more omnipresent, we implemented it as Singleton. This creational design pattern allows to instantiate one and only one instance of the class. Additionally, every other class can access this single instance by using a special static getter method. This ensures that every class easily can access all of the repositories data and methods, without actually holding an own reference. Not only does this prevent unnecessary reference passing, it also ensures data consistency by making sure that no other class creates or holds a different instance of the repository.
+To make the repository even more omnipresent, we implemented it as Singleton. This creational design pattern allows to instantiate one and only one instance of the class. Additionally, every other class can access this single instance by using a special static getter method. This ensures that every class can easily access all of the repository's data and methods, without actually holding an own reference. Not only does this prevent unnecessary reference passing, it also ensures data consistency by making sure that no other class creates or holds a different instance of the repository.
 
 \subsection{General Principles}
 
@@ -40,9 +40,9 @@ A set of important principles, that also includes many other patterns and summar
 The SRP states that every responsibility should be in a separate class. This principle also includes the principle of separation of concerns, which has been one of our major objectives. It was taken into account at any time during the development process and led to smaller and more thought through classes with clear responsibilities. As already mentioned previously, also the used architectures rely on this idea.
 \paragraph{The Open-Closed Principle (OCP):}
 ``A class should be open for extension, but closed for modification'' [B. Meyer]\\
-This means that a class' behavior should be able to be extended, without changing it. Usually, this is achieved by using abstract classes and well-defined class descriptions (interfaces). The latter was also a crucial part of our project and will be discussed in the coming principles.
+This means that a class' behavior should be able to be extended, without changing it. Usually, this is achieved by using abstract classes and well-defined class descriptions (interfaces). The latter was also a crucial part of our project and will be discussed in the following principles.
 \paragraph{The Liskov Substitution Principle (LSP):}
-We always tried to program to an interface, not an implementation. Using interfaces brought many benefits, including the already mentioned exchangeability. To make this possible, subtypes must be substitutable for their base types. This is exactly what the Liskov Substitution Principle stands for. 
+We always tried to program to an interface, not an implementation. For example, both parser and analyzer relied on an interface. Using interfaces brought many benefits, including the already mentioned exchangeability. To make this possible, subtypes must be substitutable for their base types. This is exactly what the Liskov Substitution Principle stands for. 
 \paragraph{The Interface Segregation Principle (ISP):}
 Closely related to the previous principle is the ISP. It describes that the dependency between classes should depend on the smallest possible interface. To look at it from another perspective, it also means to avoid "fat" or "polluted" interfaces. Such an interface can be broken up into groups of member functions. Each group serves a different set of clients. We always prevented this by making our interfaces as small and cohesive as possible. The size of the project probably also helped maintaining this property.
 \paragraph{The Dependency Inversion Principle (DIP):}
@@ -54,6 +54,16 @@ The principle can best be summarized in these two aspects:
 These two properties are essential in creating object oriented software that is resilient to change. Since the abstractions and details are all isolated from each other, the code is also much easier to maintain. It also prevents tight coupling and difficult class dependencies. Therefore, the whole system architecture was designed with the dependency inversion principle in mind.
 
 
-Further: High cohesion, loose coupling and encapsulation
- 
+Further: High cohesion, loose coupling and encapsulation\\
+Überhaupt noch erwähnen?!
+
+
 \subsection{Data Structure}\label{sec:data_structures}
+
+Since the application's main task is to read and evaluate information stored in XML-files, it was crucial for the project to discuss how this data will be processed and how it then later can again be accessed. We soon concluded that we want to save the parsed data in an own internal storage system to make it available for fast access at later point, without the need of parsing any further information. This also correlated with our client needs, who made clear that he would rather wait longer in the beginning than while using the program.\\
+We first thought about storing the information in an SQL database and therefore looked up possible ways of implementing this without generating too much overhead. We soon realized that without the use of external libraries this task would require too much of our precious time, since we all were no experts on implementing databases from scratch in java.\\
+Instead, we set up an internal data structure that parsed all information from the XML-files into different, corresponding classes. This infrastructure allows to lookup information from any TestRun, TestedClass or UnitTest. And since the access point to the data structure is represented by our repository, this information can be accessed anytime from anywhere in the whole project.\\
+
+
+
+
