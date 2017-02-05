@@ -25,32 +25,45 @@ sequel to refer to a certain story.}
     1&Testing&Medium&Project brief&5\\
     2&Research StAX Parser&Small&Project brief&2\\
     3&Imports in tree structure&Medium&Assumed by us&3\\ %Original ID was 2.001; Sprint could be wrong
+    8&Association Analysis&Large&Project brief&3\\
     9&Testrun Selection&Medium&Project brief&2\\
+    12&Store XML in classes&Medium&Assumed by us&1\\ 
     18&XMLParsing&Medium&Project brief&1\\
     ?&Testrun table&Medium&Project brief&2\\
     ?&Testrun chart&Medium&Project brief&2\\
-    ?&Association Analysis&Large&Project brief&3\\
+    
     23&Implement Apriori Algorithm&Large&Project brief&4\\
     24&Display Analysis Data&Medium&Project brief&4\\
     25&Additional usage scenario&Medium&Project brief&5\\
     26&Code Documentation&Small&Project brief&5\\
     27&Distribution with suited license&Small&Project brief&5\\ %not sure about origin of 27/28
     28&Creating a help function&Small&Project brief&5\\
-    213&Evolution of a class&Large&Assumed by us&4\\
-    
-    
-    
-    
-  \end{tabular}
+    213&Evolution of a class&Large&Assumed by us&4\\ 
+  
+	\end{tabular}
   \label{tab:user_stories}
 \end{table}
+
+As you may notice out user stories have quite strange IDs with a lot of numbers missing in between. This is because in the beginning we wanted to prevent that the IDs indicate a ordering. Retrospectively, we came to the conclusion that this was a mistake, as it caused more confusion in our group.\\
+In the end we tried to fix this a little bit (user stories 23-28), however, the project was already quite far in progress, so the majority of user stories still has random IDs.  \\
+\newline
+In Sprint 0 we scanned the project brief for requirements which we then tried to translate into user stories.\\
+In the planning meeting of every sprint we looked into the specific requirements of the feature we wanted to implement to derive more user stories.
 
 \subsection{Requirements derived from project brief}
 \subsubsection{Functional requirements}
 \begin{itemize}	
+	\item A table shall show all tested classes of one testrun ordered by their failure percentage
+	\item A chart shall display the change of a specific class over all parsed testruns
 	\item Association analysis shall use the well-established Apriori algorithm
 	\item XML-files shall be parsed using the StAX parser
 	
+\end{itemize}
+
+\subsubsection{Non-Functional requirements}
+\begin{itemize}
+	\item All features shall be tested sufficiently
+	\item Source code shall be documented properly
 \end{itemize}
 
 \subsubsection{Development constraints}
