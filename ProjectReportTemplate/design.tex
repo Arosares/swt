@@ -1,13 +1,4 @@
-%\flushleft
-%\emph{(Approx.~5--8~pages of text.) Tobias}
-\iffalse
-\emph{Describe both the architecture and the design of your 
-software. Illustrate its architecture and design using appropriate UML diagrams. 
-Motivate its architecture and design in the light of design principles and 
-possible alternatives. Also highlight any use of architectural 
-patterns and design patterns. Pay special attention to justifying all design 
-decisions taken.}
-\fi
+\emph{(Approx.~5--8~pages of text.) Tobias}
 
 \subsection{Initial Idea}
 At the beginning of the project, the model-view-controller architecture has been chosen to be the basis for the TDA. For this, the project is divided into three different layers, each responsible for a specific functionality. In particular, the business logic is separated from the control and presentation layer. This follows the principle of separation of concerns.
@@ -33,9 +24,36 @@ It can be concluded that the introduces repository architecture simplifies the a
 
 The Test Data Analyzer represents such a small and structured system. Also the project has a limited scope and therefore the final product will remain rather small. Lastly, the repository is well suited for projects with a database. Since the TDA stores data internally, this is fitting too. To concluded, the TDA is benefiting from all of the repository architecture's advantages while limiting the disadvantages to a minimum. Therefore, the proposed architecture is well suited as a high level architecture for the overall project.
 
-While the internal data structure represents the repository, the other components act as its subsystems. These include the user interface, the parser and the analyzer. 
+While the internal data structure represents the repository, the other components act as its subsystems. These include the user interface, the parser and the analyzer.
+
+To make the repository even more omnipresent, we implemented it as Singleton. This creational design pattern allows to instantiate one and only one instance of the class. Additionally, every other class can access this single instance by using a special static getter method. This ensures that every class easily can access all of the repositories data and methods, without actually holding an own reference. Not only does this prevent unnecessary reference passing, it also ensures data consistency by making sure that no other class creates or holds a different instance of the repository.
 
 \subsection{General Principles}
 
+This section summarizes all further design patterns and principles that were applied over the course of this project and taught in the Software Engineering lecture.
 
+A set of important principles, that also includes many other patterns and summarize their main ideas, are the so called \textbf{S.O.L.I.D. principles}. In the following, every principle is explained and displayed how it has affected our design decisions.
+
+[Based on http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod]
+
+\paragraph{Single Responsibility Principle (SRP):}
+The SRP states that every responsibility should be in a separate class. This principle also includes the principle of separation of concerns, which has been one of our major objectives. It was taken into account at any time during the development process and led to smaller and more thought through classes with clear responsibilities. As already mentioned previously, also the used architectures rely on this idea.
+\paragraph{The Open-Closed Principle (OCP):}
+``A class should be open for extension, but closed for modification'' [B. Meyer]\\
+This means that a class' behavior should be able to be extended, without changing it. Usually, this is achieved by using abstract classes and well-defined class descriptions (interfaces). The latter was also a crucial part of our project and will be discussed in the coming principles.
+\paragraph{The Liskov Substitution Principle (LSP):}
+We always tried to program to an interface, not an implementation. Using interfaces brought many benefits, including the already mentioned exchangeability. To make this possible, subtypes must be substitutable for their base types. This is exactly what the Liskov Substitution Principle stands for. 
+\paragraph{The Interface Segregation Principle (ISP):}
+Closely related to the previous principle is the ISP. It describes that the dependency between classes should depend on the smallest possible interface. To look at it from another perspective, it also means to avoid "fat" or "polluted" interfaces. Such an interface can be broken up into groups of member functions. Each group serves a different set of clients. We always prevented this by making our interfaces as small and cohesive as possible. The size of the project probably also helped maintaining this property.
+\paragraph{The Dependency Inversion Principle (DIP):}
+The principle can best be summarized in these two aspects:
+\begin{enumerate}
+\item High level modules should not depend upon low level modules. Both should depend upon abstractions.
+\item Abstractions should not depend upon details. Details should depend upon abstractions.
+\end{enumerate}
+These two properties are essential in creating object oriented software that is resilient to change. Since the abstractions and details are all isolated from each other, the code is also much easier to maintain. It also prevents tight coupling and difficult class dependencies. Therefore, the whole system architecture was designed with the dependency inversion principle in mind.
+
+
+Further: High cohesion, loose coupling and encapsulation
+ 
 \subsection{Data Structure}\label{sec:data_structures}
