@@ -35,7 +35,7 @@ While the internal data structure represents the repository, the other component
 
 To make the repository even more omnipresent, we implemented it as Singleton. This creational design pattern allows to instantiate one and only one instance of the class. Additionally, every other class can access this single instance by using a special static getter method. This ensures that every class can easily access all of the repository's data and methods, without actually holding an own reference. Not only does this prevent unnecessary reference passing, it also ensures data consistency by making sure that no other class creates or holds a different instance of the repository. Figure \ref{RepoDiagram} shows the high level architecture of this approach.
 
-\begin{figure}[H]
+\begin{figure}[h]
 \begin{center}
 \includegraphics[scale=0.6]{pics/repository_architecture.png}
 \caption{Repository Architecture Diagram}
