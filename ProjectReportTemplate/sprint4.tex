@@ -1,15 +1,14 @@
 
 \subsection{Sprint No.~4}
 
-\emph{(Approx.~2--3~pages of text.)}
-
 \subsubsection*{Sprint Planning}
 
 Goal: Rework apriori algorithm and display its results and implement evolution of classes' unittest comparison (additional usage scenario)
 
-The goal for Sprint 4 was to rework the Apriori Algorithm for higher performance, and actually display it's results in our GUI, as well as the implementation of our first bonus usage scenario, which we suggested in Sprint 1. 
-For this purpose, we created a new User Story for Apriori in line with our effort to improve internal documentation.
-We also started splitting User Stories into more tasks than before and introduced a general category for tasks that could be done if time allowed, mostly related to polishing or minor bug fixes.
+The goal of Sprint 4 was to rework the current apriori algorithm approach, finish it by adding the functionality for the strong rule generation and finally display it's results in our GUI.
+Additionally, our first bonus usage scenario, which we suggested in Sprint 1, had to be implemented.
+
+In order to improve our internal documentation and to address the goal of the sprint, we split the previous association analysis user story into two new, smaller ones. The first for the apriori algorithm implementation and the second for displaying it's results. We also started to assign more tasks to our user stories than before and introduced a general category for tasks that could be done if time allowed, mostly related to polishing the software or fixing minor bugs. These were mostly too small or unimportant to address them in an own user story.
 
 \begin{itemize}
 	\item User Story 23: Implement Apriori Algorithm (Prio 1 / Size L)
@@ -30,7 +29,7 @@ so that I can generate the frequent item sets and the strong rules of loaded tes
   	\hline
   	23.3 & Filter for class distances & Jan Martin \\ 
   	\hline
-  	23.4 & Generate strong rules & Tobias Schwartz, Jan Martin \\ 
+  	23.4 & Generate strong rules & Tobias Schwartz \\ 
   	\hline
   \end{tabular}
 \end{table}
@@ -57,31 +56,6 @@ so that I immediately see the dependencies between failed classes.
   	\hline
   \end{tabular}
 \end{table}
-
-\begin{itemize}
-	\item General Tasks (No User Story)
-	\end{itemize}
-
-\begin{table}[h]
-  \caption{General Tasks}
-  \label{General Tasks}
-  \centering
-  \begin{tabular}{p{1cm}|p{5cm}|p{3cm}|}
-  	Nr & Description & Assigned \\ 
-  	\hline
-  	(Gen) & clear data: clear testrunsummary as well & --- \\ 
-  	\hline
-  	(Gen) & change tableview highlighting (background, textcolour) & --- \\ 
-  	\hline
-  	(Gen) & hide classes with 0 failure percentage & --- \\ 
-  	\hline
-  	(Gen) & Update UseCase- and Scope-of-Workarea Diagrams & Andreas Köllner \\ 
-  	\hline
-  	(Gen) & digitalize paper-mockups & Andreas Köllner \\ 
-  	\hline
-  \end{tabular}
-\end{table}
-We used the "General" category to sum up tasks that a teammember could do when their main task was done for the sprint increment or they otherwise had to wait on the work of another team member. 
 
 \begin{itemize}
 	\item User Story 213: Evolution of a class (additional usage scenario) (Prio 1 / Size L)
@@ -115,9 +89,49 @@ so that I know what changed (improvement/deterioration).
   \end{tabular}
 \end{table}
 
+\begin{itemize}
+	\item General Tasks (No User Story)
+	\end{itemize}
+
+\begin{table}[h]
+  \caption{General Tasks}
+  \label{General Tasks}
+  \centering
+  \begin{tabular}{p{1cm}|p{5cm}|p{3cm}|}
+  	Nr & Description & Assigned \\ 
+  	\hline
+  	(Gen) & clear data: clear testrunsummary as well & --- \\ 
+  	\hline
+  	(Gen) & change tableview highlighting (background, textcolour) & --- \\ 
+  	\hline
+  	(Gen) & hide classes with 0 failure percentage & --- \\ 
+  	\hline
+  	(Gen) & Update UseCase- and Scope-of-Workarea Diagrams & Andreas Köllner \\ 
+  	\hline
+  	(Gen) & digitalize paper-mockups & Andreas Köllner \\ 
+  	\hline
+  \end{tabular}
+\end{table}
+
 
 \subsubsection*{Noteworthy Development Aspects}
 
+Apart from all previous expectations, the implementation of the Apriori algorithm consumed way more time than expected. Not only did we have to rewrite this whole portion, we also had to do some more detailed background reading to refine our knowledge about the different aspects of the algorithm. Since it seemed inefficient to make all group members read into this subject on a deeper level, it was hard to verify and discuss the results properly in the group. Similarly, the design of the algorithm's output in the GUI was mainly determined by the developers of said procedure.
+
+Due to illness we had to cope with huge team member absence during this sprint. Also during the winter break many team members were unavailable and therefore the project did not continue with the pace we planned.
+
+This resulted in delayed work, mostly in the graphical aspects of the program. In particular, the display of the Apriori algorithm's output was not finished by the end of the sprint. Also user story \ref{evolution213} was only done partially. From user story \#213, tasks 213.5 - 213.8 were left uncompleted. 
+
+To summarize, in this sprint a mockup for the additional usage scenario has been created and translated into our GUI. Other than that, the only progress has been achieved in the Apriori algorithm development.
+
 \subsubsection*{Sprint Review}
+
+As already mentioned, we had acute problems with team member illness and winter break unavailability. This resulted in a less effective sprint. In fact, no user story was fully completed and therefore obviously the sprint goal was not achieved.
+We still managed to finally finish the apriori algorithm and considering the lack of manpower, had some major progress in developing our additional usage scenario.  
+
+We were also able to present those improvements in the meeting with the client. Although it was hard to show all the implemented functionality due to lack of displaying all information properly in the GUI, we still were able to discuss the important features and get some valuable feedback. Especially design recommendations were highly appreciated.
+
+Furthermore, we discussed that due to the impediments we encountered, we shall propose one more usage scenario but should not focus on its development.
+
 
 
