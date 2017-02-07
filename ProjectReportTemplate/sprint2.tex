@@ -6,15 +6,12 @@ In Sprint 2 our goal was to display the information we draw out of the test run 
 Since we were not able to complete all user stories we chose for Sprint 1 our Sprint backlog for Sprint 2 contained four user stories. We still had to finish our work on user story \# 18 XML Parsing and we had not even started to implement user story \# 9 Test Run Selection. After some initial research on user story \# 9 and input from the client during the Sprint 1 review meeting we decided to create new tasks for it, which are more precise and easier to handle. Additionally two new user stories were planned for completion in this Sprint, user story \# 7 Test Run Table and \# 3 Test Run Chart. \\ 
 The following tables give an overview on our Sprint backlog for Sprint 2. \\ 
 
-\newpage 
-
 \begin{table}[h]
   \caption{User Story number 18: XML Parsing}
   \label{US_Parsing2}
   \centering
-  \begin{tabular}{p{1.5cm}|p{9cm}|p{3cm}|}
-  	Task number & Task description & Assigned to \\ 
-  	\hline
+  \begin{tabular}{p{1cm}|p{5cm}|p{3cm}|}
+  	Nr & Description & Assigned \\ 
   	\hline
   	18.5 & Store parsed information in data structure & Frank, Tobias \\ 
   	\hline
@@ -27,9 +24,8 @@ The following tables give an overview on our Sprint backlog for Sprint 2. \\
   \caption{User Story number 9: Test Run Selection}
   \label{US_Selection2}
   \centering
-  \begin{tabular}{p{1.5cm}|p{9cm}|p{3cm}|}
-  	Task number & Task description & Assigned to \\ 
-  	\hline
+  \begin{tabular}{p{1cm}|p{5cm}|p{3cm}|}
+  	Nr & Description & Assigned \\ 
   	\hline
   	9.21 & Create Main GUI window & Simon \\ 
   	\hline
@@ -50,9 +46,8 @@ The following tables give an overview on our Sprint backlog for Sprint 2. \\
   \caption{User Story number 7: Test Run Table}
   \label{US_Table}
   \centering
-  \begin{tabular}{p{1.5cm}|p{9cm}|p{3cm}|}
-  	Task number & Task description & Assigned to \\ 
-  	\hline
+  \begin{tabular}{p{1cm}|p{5cm}|p{3cm}|}
+  	Nr & Description & Assigned \\ 
   	\hline
   	7.1 & Calculate failure percentages of classes in test run & Frank, Tobias \\ 
   	\hline
@@ -73,9 +68,8 @@ The following tables give an overview on our Sprint backlog for Sprint 2. \\
   \caption{User Story number 3: Test Run Chart}
   \label{US_Chart}
   \centering
-  \begin{tabular}{p{1.5cm}|p{9cm}|p{3cm}|}
-  	Task number & Task description & Assigned to \\ 
-  	\hline
+  \begin{tabular}{p{1cm}|p{5cm}|p{3cm}|}
+  	Nr & Description & Assigned \\ 
   	\hline
   	3.1 & Classes sidebar overview &  \\ 
   	\hline
@@ -90,17 +84,17 @@ The following tables give an overview on our Sprint backlog for Sprint 2. \\
 
 \subsubsection*{Noteworthy Development Aspects}
 
-In the Sprint review meeting for Sprint 1 we presented our so far implementations to the client. We also presented our first paper prototype. Our design decisions were approved by the client and we could start to implement TDA's GUI accordingly. \\ 
+In the Sprint review meeting for Sprint 1 we presented our so far implemented functionality to the client. We also presented our first paper prototype. Our design decisions were approved by the client and we could start to implement TDA's GUI accordingly. \\ 
 
 During the presentation of our paper protype in which we presented the navigation through the system and its functionalities the client requested that we not only offer the possibility to select one or several files but also a method to select a root folder. All XML files in the selected folder and its subfolders should be parsed into our system. This request lead to the reworking of the tasks for user story \# 9. \\ 
 
 The paper prototype was refined and extended, since it did not yet contain our first additional usage scenario. This additional scenario describes the possibility to compare the unit tests, their results and the failure percentage of a specific class in different test runs. We discussed how this scenario could be implemented and designed the paper prototype accordingly. \\ 
 
-Additional artefacts that we produced during this Sprint were the high level architecture diagram and our use case diagram. \\ 
-The high level architecture diagram was designed to help us to visualise the Model View Controller pattern we chose for our system. It was also used to help us decide which classes and functions belong to which part of the TDA. \\ 
+Additional artefacts that we reworked during this Sprint were the high level architecture diagram and our use case diagram. \\ 
+The high level architecture diagram was designed to help us to visualise the Model View Controller pattern we chose for our system in the beginning of the project. It was also used to help us decide which classes and functions belong to which part of the TDA. \\ 
 The use case diagram was intended to help us identify the different actors that would interact with the system. We also hoped to better understand the relationships and dependencies between the funcionalities of the TDA. \\ 
 
-Both diagrams were presented to Ms. Sediki during the Mid Sprint Meeting. After her feedback we needed to refine the high level architecture diagram to better represent our so far implemented system. The use case diagram also needed to be reworked. During the reworking of the use case diagram we realised that all functionalities the TDA offers depend on the selection of test run XML files that should be parsed and analysed. This led to the fact that the first thing the user has to do after starting the TDA is to select one or several files, or a root folder containing test run XML files, that should be parsed. So we designed a new GUI window that offers the user only the to functionalities to either select one or several files or to select a folder. After the parsing has finished and its information is stored in TDA's data structure the user can then access the other implemented functionalities.
+Both diagrams were presented to Ms. Sediki during the Mid Sprint Meeting. After her feedback we needed to refine the high level architecture diagram to better represent our so far implemented system. The use case diagram also needed to be reworked. During the reworking of the use case diagram we realised that all functionalities the TDA offers depend on the selection of test run XML files that should be parsed and analysed. This led to the fact that the first thing the user has to do after starting the TDA is to select one or several files, or a root folder containing test run XML files, that should be parsed. So we designed a new GUI window that offers the user only the two functionalities to either select one or several files or to select a folder. After the parsing has finished and its information is stored in TDA's data structure the user can then access the other implemented functionalities.
 
 \subsubsection*{Sprint Review}
 
@@ -110,4 +104,4 @@ After all we were able to present the client a working GUI in which it is possib
 
 During this Sprint the work flow in our group was improved by the fact that parallel work was much more possible, since the dependencies between the different tasks were reduced. \\ 
 
-Several merge conflicts and resulting errors in our system has cost us a lot of time. To reduce the merge conflicts we decided to create more branches and make sure to not work on the same functionalities or in the same classes in parallel. \\ 
+Several merge conflicts and resulting errors in our system had cost us a lot of time. To reduce the merge conflicts we decided to create more branches and make sure to not work on the same functionalities or in the same classes in parallel. \\ 
