@@ -151,3 +151,36 @@ This includes all internal classes excepting the controller and model classes th
 \emph{(Approx.~4--7~pages of text.)}
 
 \emph{Describe and justify the different quality assurance techniques that your group has applied alongside the project's conduct, including the INVEST criteria for the user stories, SMART criteria for the tasks derived from user stories, unit tests for your code, and others.  Illustrate your approach to quality assurance by giving relevant examples for each employed technique. Finally, do not forget to evaluate your software's interfaces (including the GUI).}
+
+\newpage
+
+\ \\
+\textbf{Activity Diagrams}\\
+\ \\
+The following activity diagrams were also used as a means of assuring the quality and logical work-flow of our product. They show how a normal user activity works internally and which actions shall and can be taken by the user.\\ 
+In figure \ref{AD-SaP} the activity of selecting and parsing a file/multiple files/a folder is displayed with the end-point not being a indication of the program terminating, but instead just an end to this activity. In the next activity diagram in figure \ref{AD-CToOTR}, the previous activity "select and parse files" is nested inside it, due teo space restrictions and because the user is able to, but doesn't have to also execute the task "display class table of one testrun" after parsing. The last figure \ref{AD-DCCoTR} shows the "display class chart over testruns" activity and contains the previous two activities again, because of the same reasons previously mentioned. These diagrams were of great help during the development process, as they gave a clear overview over the logical sequence of actions and brought some errors in our code to our attention: for example, we previously did not switch our center GUI-window to chart tab, even though this was only logical to do. Due to the diagram \ref{AD-DCCoTR}, we spotted this overlooked error in our code and fixed it. This was also only possible, because the diagram was based, but not restricted to our code and we adapted both bi-directional.\\
+\ \\
+\begin{figure}[h]
+\begin{center}
+\includegraphics[scale=0.27]{pics/activityDiagramSelectAndParseFiles.png}
+\caption{Activity Diagram: select and parse files} 
+\label{AD-SaP}
+\end{center}
+\end{figure}
+\ \\
+\begin{figure}[h]
+\begin{center}
+\includegraphics[scale=0.3]{pics/activityDisplayClassTableOfOneTestrun.png}
+\caption{Activity Diagram: display class table of one testrun} 
+\label{AD-CToOTR}
+\end{center}
+\end{figure}
+\ \\
+\begin{figure}[h]
+\begin{center}
+\includegraphics[scale=0.3]{pics/activityDisplayClassChartOverTestruns.png}
+\caption{Activity Diagram: display class chart over testruns} 
+\label{AD-DCCoTR}
+\end{center}
+\end{figure}
+\ \\
