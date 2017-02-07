@@ -5,17 +5,18 @@ In this section we describe the overall goal of the project, the internal organi
 
 In this subsection we describe the goal of the Test Data Analyser (TDA). The TDA is developed for medatixx GmbH \& Co. KG, a company that develops software for medical practices. TDA is an application to help software developers and testers at medatixx to analyse test data of their software. Purpose, advantage, and measurement are the three parts of which the goal of TDA is made of. \\
 \ \\
-\large\textbf{Purpose}\\ 
+{\large\textbf{Purpose}}\\ 
+
 During the development of their software, medatixx uses a sequence of builds, i.e. (pre-)release versions of the software. To ensure the quality of their product, each build is tested via a number of unit tests which are defined and executed on the classes of the corresponding build. The collection of these unit tests, their classes and the build they belong to, and their results is called a test run. TDA shall support the analysis of these test runs to help medatixx to discover builds with classes that are problematic to test. \\ 
 To do so, TDA shall extract the necessary information from the test run XML files provided by medatixx, analyse the information in different ways including the usesage of the Apriori algorithm and visualise the results of the information analysis. \\ 
 \ \\
 
-\large\textbf{Advantage}\\ 
+{\large\textbf{Advantage}}\\ 
 The TDA provides new and more detailled information on the tests of different builds. It highlights the classes with the highest failure percentage of a specific test run. It shows the evolution of a class by visualising its failure percentages over multiple test runs. By using the Apriori algorithm it shows possible associations between different classes. It offers an easy method to compare the tests of a specific class in different test runs. \\ 
 With the additional information the TDA is making available for testers at medatixx, they get new insight into their testing methodology and the overall test quality is improved. \\
 \ \\
 
-\large\textbf{Measurement}\\ 
+{\large\textbf{Measurement}}\\ 
 Due to the easily accessible information on test runs and the discovered associations between classes, the resolution of failed classes and their corresponding unit tests will be accelerated by 50 \%. 
 
 %TODO: Find better solution for table
