@@ -1,20 +1,4 @@
 %\flushleft
-\emph{(Approx.~6--12~pages of text.) Frank}
-
-\emph{Document and analyse the software's functional requirements, 
-non-functional requirements and development constraints. In particular, state 
-whether a requirement is derived from the project brief, is an assumption made 
-by your group, or has been added by the client. You may apply any documentation 
-and analysis technique taught in module SWT-FSE-B or from the 
-requirements engineering literature, including techniques based on user stories, 
-use cases and prototyping. Properly reference and justify all employed 
-techniques.}
-
-\emph{This section shall also include a table containing an overview of all user 
-stories. Use Table~\ref{tab:user_stories} as a template, and order the stories 
-regarding their ID (story number). Name the source of the story: project brief 
-(PB), the client (C), or other sources. You can use the stories' name+ID in the 
-sequel to refer to a certain story.}
 
 \begin{table}[!h]
   \caption{List of user stories}
@@ -25,7 +9,7 @@ sequel to refer to a certain story.}
     R1&Research Apriori&Medium&Project brief&1\\
     R2&Research StAX Parser&Small&Project brief&1\\
     1&Testing&Medium&Project brief&5\\
-    2&Imports in tree structure&Medium&Assumed by us&2\\ %Original ID was 2.001; 
+    2&Imports in tree structure&Medium&Client&2\\ %Original ID was 2.001; 
     3&Testrun chart&Medium&Project brief&3\\
     7&Testrun table&Medium&Project brief&2\\
     8&Association Analysis&Large&Project brief&3\\
@@ -44,12 +28,20 @@ sequel to refer to a certain story.}
   \label{tab:user_stories}
 \end{table}
 
-As you may notice out user stories have quite strange IDs with a lot of numbers missing in between. This is because in the beginning we wanted to prevent that the IDs indicate a ordering. Retrospectively, we came to the conclusion that this was a mistake, as it caused more confusion in our group.\\
+As you may notice our user stories have quite strange IDs with a lot of numbers missing in between. This is because in the beginning we wanted to prevent that the IDs indicate an order. Retrospectively, we came to the conclusion that this was a mistake, as it caused more confusion in our group.\\
 In the end we tried to fix this a little bit (user stories 23-28), however, the project was already quite far in progress, so the majority of user stories still has random IDs.  \\
 \newline
 In Sprint 0 we discussed the content of the project brief and to make sure we all were on the same page we proceeded to draw a first use case diagram. This was helpful in multiple ways, as it gave us an overview over the whole project in addition to helping us figure out functional requirements.\\
-The use case diagram was always maintained when we received new requirements from the client or we changed our code in a way that certain features can only be accessed before a certain action is done. Thanks to this progress, we for example came to the conclusion that a start screen where you can select xml-files makes a lot of sense, since all features depend on data.
-Based on this use case diagram we then proceeded to write user stories and corresponding tasks. This way we always had the requirements in eye-sight on the task-board.
+The use case diagram was always maintained when we received new requirements from the client or we changed our code in such way that we had to update the diagram. Thanks to this progress, we for example came to the conclusion that a start screen where you can select xml-files makes a lot of sense, since all features depend on data, which has to be parsed first.
+
+\begin{sidewaysfigure}
+	\begin{center}
+		\includegraphics[scale=0.6]{pics/UseCaseDiagram.jpg}
+		\caption{Use case diagram}
+		\label{use-case}
+	\end{center}	
+\end{sidewaysfigure}
+Based on this use case diagram \ref{use-case} we then proceeded to write user stories and corresponding tasks. This way we always had the requirements in eye-sight on the task-board.
 
 \subsection{Requirements derived from project brief}
 \subsubsection{Functional requirements}
@@ -142,6 +134,8 @@ Fit criteria: every *.xml file is parsed and added to the data structure
 Fit criteria: The table highlights the classes correctly according to failure percentage
 \item Failure percentages in table should be rounded to 2 decimals\\
 Fit criteria: All percentages are rounded correctly
+\item Testrun totals: a note, stating that not all totals of the testrun are shown above the table should be visible; a button shall enable the user to see all totals\\
+Fit criteria: All relevant information is displayed, when the details button is pressed
 
 %Sprint 3:
 \item one click in tree sidebars for selecting files (no doubleclick)\\
@@ -156,6 +150,9 @@ Fit criteria: Correct filtering of confidence and by distance shall be possible
 \item A second additional usage scenario should be proposed, but due to the given point in time the focus should be to finalize the already implemented functionality\\
 Fit criteria: The scenario is presented to the client and accepted
 
+
+Fit criteria: 
+
 \end{itemize}
 
 \subsubsection{Non-functional requirements}
@@ -164,9 +161,7 @@ Fit criteria: The scenario is presented to the client and accepted
 \item The software shall load most of its data in the beginning, so you can use the tool without waiting times later on\\
 Fit criteria: When switching between features there shall be minimal loading times if at all
 
-%maybeFR
-\item Testrun totals: a note, stating that not all totals of the testrun are shown, should be visible; a button shall enable the user to see all totals\\
-Fit criteria: TODO - This is FR - not NFR, right?
+
 
 \item program shall adapt its layout automatically to lower resolutions or resizing\\
 Fit criteria: The content is always well readable, no matter the resolution or display size
