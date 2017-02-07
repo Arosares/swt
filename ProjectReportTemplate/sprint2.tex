@@ -3,7 +3,7 @@
 \subsubsection*{Sprint Planning}
 
 In Sprint 2 our goal was to display the information we draw out of the test run XML files during parsing in a graphical user interface, so that the user has an easy way to access the information we stored in the data structure of TDA. \\ 
-Since we were not able to complete all user stories we chose for Sprint 1 our Sprint backlog for Sprint 2 contained four user stories. We still had to finish our work on user story \# 18 XML Parsing and we had not even started to implement user story \# 9 Test Run Selection. After some initial research on user story \# 9 and input from the client during the Sprint 1 review meeting we decided to create new tasks for it, which are more precise and easier to handle. Additionally two new user stories were planned for completion in this Sprint, user story \# 7 Test Run Table and \# 3 Test Run Chart. \\ 
+Since we were not able to complete all user stories we chose for Sprint 1 our Sprint backlog for Sprint 2 contained four user stories. We still had to finish our work on user story \# 18 XML Parsing and we had not even started to implement user story \# 9 Test Run Selection. After some initial research on user story \# 9 and input from the client during the Sprint 1 review meeting we decided to create new tasks for it, which are more precise and easier to handle. Additionally three new user stories were planned for completion in this Sprint, user story \# 2 Show Imports in Tree Structure, user story \# 7 Test Run Table, and \# 3 Test Run Chart. \\ 
 The following tables give an overview on our Sprint backlog for Sprint 2. \\ 
 
 \begin{table}[h]
@@ -14,6 +14,24 @@ The following tables give an overview on our Sprint backlog for Sprint 2. \\
   	Nr & Description & Assigned \\ 
   	\hline
   	18.5 & Store parsed information in data structure & Frank, Tobias \\ 
+  	\hline
+  \end{tabular}
+\end{table} 
+
+\ \\
+
+\begin{table}[h]
+  \caption{User Story number 2: Imports in tree structure}
+  \label{US_Tree}
+  \centering
+  \begin{tabular}{p{1cm}|p{5cm}|p{3cm}|}
+  	Nr & Description & Assigned \\ 
+  	\hline
+  	2.1 & Create tree items & Andreas \\ 
+  	\hline
+  	2.2 & Create tree view & Andreas \\ 
+  	\hline 
+  	2.3 & Implement handling on tree view items & Frank \\ 
   	\hline
   \end{tabular}
 \end{table} 
@@ -86,7 +104,7 @@ The following tables give an overview on our Sprint backlog for Sprint 2. \\
 
 In the Sprint review meeting for Sprint 1 we presented our so far implemented functionality to the client. We also presented our first paper prototype. Our design decisions were approved by the client and we could start to implement TDA's GUI accordingly. \\ 
 
-During the presentation of our paper protype in which we presented the navigation through the system and its functionalities the client requested that we not only offer the possibility to select one or several files but also a method to select a root folder. All XML files in the selected folder and its subfolders should be parsed into our system. This request lead to the reworking of the tasks for user story \# 9. \\ 
+During the presentation of our paper protype in which we presented the navigation through the system and its functionalities the client requested that we not only offer the possibility to select one or several files but also a method to select a root folder. All XML files in the selected folder and its subfolders should be parsed into our system. This request lead to the reworking of the tasks for user story \# 9 and the creation of user story \# 2. \\ 
 
 The paper prototype was refined and extended, since it did not yet contain our first additional usage scenario. This additional scenario describes the possibility to compare the unit tests, their results and the failure percentage of a specific class in different test runs. We discussed how this scenario could be implemented and designed the paper prototype accordingly. \\ 
 
@@ -98,7 +116,7 @@ Both diagrams were presented to Ms. Sediki during the Mid Sprint Meeting. After 
 
 \subsubsection*{Sprint Review}
 
-Our goal for Sprint 2 was not fully reached. We did not implement the test run chart, documented in user story \# 3. We were able to finish user story \# 18 XML Parsing. The only task of user story \# 7 Test Run Table was the highlighting of the classes with the highest failure percentages. \\ 
+Our goal for Sprint 2 was not fully reached. We did not implement the test run chart, documented in user story \# 3. We were able to finish user stories \# 2 Show Imports in Tree Structure and \# 18 XML Parsing. The only task of user story \# 7 Test Run Table was the highlighting of the classes with the highest failure percentages. \\ 
 
 After all we were able to present the client a working GUI in which it is possible to select and parse test run files. The parsed test runs are displayed in a directory tree view and can be selected to display the corresponding table containing all its classes and their failure percentages. The table is also sorted in descending order of failure percentage as requested. The GUI also displays a summary of the selected test run which shows the total number of unit tests, the number of passed and failed unit tests, etc. \\ 
 
