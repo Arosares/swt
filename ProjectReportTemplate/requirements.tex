@@ -76,8 +76,10 @@ Based on this use case diagram we then proceeded to write user stories and corre
 
 \subsubsection{Non-Functional requirements}
 \begin{itemize}
-	\item All features shall be tested sufficiently
-	\item Source code shall be documented properly
+	\item All features shall be tested sufficiently\\
+	Fit criteria: Coverage of at least 90\%
+	\item Source code shall be documented properly\\
+	Fit criteria: Every class is documented according to the project brief
 \end{itemize}
 
 \subsubsection{Development constraints}
@@ -108,16 +110,22 @@ Based on this use case diagram we then proceeded to write user stories and corre
 \subsection{Requirements assumed by us}
 \subsubsection{Functional requirements}
 \begin{itemize}
-	\item The class overview in the sidebar shall display all classes in a tree structure based on the packages they are in
-	\item All relevant data from the xml-files shall be stored in corresponding classes(data structure)
-	\item The user shall be able to compare two specific testruns of one class with respect to its unit tests.
+	\item The class overview in the sidebar shall display all classes in a tree structure\\
+	Fit criteria: classes are in a tree based on packet structure and clicking on them inserts them in the chart
+	\item All relevant data from the xml-files shall be stored in corresponding classes(data structure)\\
+	Fit criteria: all unit tests on the data structure pass
+	\item The user shall be able to compare two specific testruns of one class with respect to its unit tests.\\
+	Fit criteria: Not possible to compare different classes; Shows all passed and failed unit tests and the difference between two runs
 \end{itemize}
 
 \subsubsection{Non-functional requirements}
 \begin{itemize}
-	\item The software shall run reliably.
-	\item Parsing and computing shall be reasonable fast with respect to the amount of files parsed.
-	\item The parser shall only parse xml-files with the correct format
+	\item The software shall run reliably\\
+	Fit criteria: Shall maintain a 95\%+ uptime
+	\item Parsing and computing shall be reasonable fast with respect to the amount of files parsed\\
+	Fit criteria: Should not take longer than 2 minutes for 1000 files
+	\item The parser shall only parse xml-files with the correct format\\
+	Fit criteria: When a wrong format is detected an exception shall be thrown
 \end{itemize}
 \subsection{Requirements added by client}
 \subsubsection{Functional requirements}
@@ -125,32 +133,45 @@ Based on this use case diagram we then proceeded to write user stories and corre
 \begin{itemize}
 
 %Sprint 1:
-\item choose a folder and parse all containing XML files in the folder and its subdirectory.
+\item choose a folder and parse all containing XML files in the folder and its subdirectory\\
+Fit criteria: every *.xml file is parsed and added to the data structure
 
 %Sprint 2:
 %Maybe NFR:
-\item Table: classes with failure percentages between 50 - 75\% should be highlighted yellow and failure percentages between 75 - 100\% should be highlighted red; it should be possible to hide/show all classes with a failure percentage of 0\%
+\item Table: classes with failure percentages between 50 - 75\% should be highlighted yellow and failure percentages between 75 - 100\% should be highlighted red; it should be possible to hide/show all classes with a failure percentage of 0\%\\
+Fit criteria: The table highlights the classes correctly according to failure percentage
+\item Failure percentages in table should be rounded to 2 decimals\\
+Fit criteria: All percentages are rounded correctly
 
 %Sprint 3:
-\item one click in tree sidebars for selecting files (no doubleclick)
-\item hover over chart entries shall show testrun information
-\item chart shall have its own page instead of being shown in the main window below the class table
-\item The functions to filter the Apriori results by confidence and distance should be implemented
+\item one click in tree sidebars for selecting files (no doubleclick)\\
+Fit criteria: Only one click is needed to select testruns or classes
+\item hover over chart entries shall show testrun information\\
+Fit criteria: On hover the start time and the number of failed/passed unit tests shall be displayed
+\item chart shall have its own page instead of being shown in the main window below the class table\\
+Fit criteria: the chart shall not be under the table anymore, so it has more space to display data
+\item The functions to filter the Apriori results by confidence and distance should be implemented\\
+Fit criteria: Correct filtering of confidence and by distance shall be possible
 
-\item A second additional usage scenario should be proposed, but due to the given point in time the focus should be to finalize the already implemented functionality.
+\item A second additional usage scenario should be proposed, but due to the given point in time the focus should be to finalize the already implemented functionality\\
+Fit criteria: The scenario is presented to the client and accepted
 
 \end{itemize}
 
 \subsubsection{Non-functional requirements}
 \begin{itemize}
 %Sprint 2:
-\item The software shall load most of its data in the beginning, so you can use the tool without waiting times later on
-\item Failure percentages in table should be shorted to 2 decimal places
-%maybeFR
-\item Testrun totals: a note, stating that not all totals of the testrun are shown, should be visible; a button should enable the user to see all totals.
+\item The software shall load most of its data in the beginning, so you can use the tool without waiting times later on\\
+Fit criteria: When switching between features there shall be minimal loading times if at all
 
-\item program shall adapt its layout automatically to lower resolutions or resizings
+%maybeFR
+\item Testrun totals: a note, stating that not all totals of the testrun are shown, should be visible; a button shall enable the user to see all totals\\
+Fit criteria: TODO - This is FR - not NFR, right?
+
+\item program shall adapt its layout automatically to lower resolutions or resizing\\
+Fit criteria: The content is always well readable, no matter the resolution or display size
 %Sprint 4:
 %NFR
-\item The outcome of the Apriori algorithm should be visualized in a better way, since the two tables are not easy to read.
+\item The outcome of the Apriori algorithm should be visualized in a better way, since the two tables are not easy to read.\\
+Fit criteria: A easier to understand visualization shall make clear what classes are dependent
 \end{itemize}
