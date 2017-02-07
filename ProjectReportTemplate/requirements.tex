@@ -54,11 +54,24 @@ Based on this use case diagram we then proceeded to write user stories and corre
 \subsection{Requirements derived from project brief}
 \subsubsection{Functional requirements}
 \begin{itemize}	
-	\item A table shall show all tested classes of one testrun ordered by their failure percentage
-	\item A chart shall display the change of a specific class over all parsed testruns
-	\item Association analysis shall use the well-established Apriori algorithm
-	\item XML-files shall be parsed using the StAX parser
-	\item Two more usage scenarios shall be suggested to the client and implemented after conformation
+	\item A table shall show all tested classes of one testrun\\
+	Fit criteria: testruns ordered descending by failure percentage and highlight red if failure percentage is higher than 75\% and yellow if it's between 50 and 75\% 
+	\item A chart shall display the change of a specific class over all parsed testruns\\
+	Fit criteria: every class can be added to chart only once - not multiple times; Is good readable even with a lot of testruns
+	\item Association analysis shall use the well-established Apriori algorithm\\
+	Fit criteria: Strong rules are generated from frequent item sets
+	\item XML-files shall be parsed using the StAX parser\\
+	Fit criteria: Every correct xml-file will be read and stored in our data structure
+	\item The user shall be able to select a specific testrun to get more information\\
+	Fit criteria: When testrun is selected the table and all relevant testrun details will be shown.
+	\item The association analysis output shall be displayed in a convenient way.\\
+	Fit criteria: It visualizes the output in an easy, but contentful way, which is approved by the client.
+	\item Two more usage scenarios shall be suggested to the client and implemented\\
+	Fit criteria: Scenarios are accepted by the client and implemented to his wishes
+	\item The software shall be distributed with a suited open-source licence\\
+	Fit criteria: Licence shall be visible from within the software and be free("libre")
+	\item A manual shall be accessible from within the software\\
+	Fit criteria: Explains all features and how they are used
 \end{itemize}
 
 \subsubsection{Non-Functional requirements}
@@ -96,11 +109,15 @@ Based on this use case diagram we then proceeded to write user stories and corre
 \subsubsection{Functional requirements}
 \begin{itemize}
 	\item The class overview in the sidebar shall display all classes in a tree structure based on the packages they are in
+	\item All relevant data from the xml-files shall be stored in corresponding classes(data structure)
+	\item The user shall be able to compare two specific testruns of one class with respect to its unit tests.
 \end{itemize}
 
 \subsubsection{Non-functional requirements}
 \begin{itemize}
+	\item The software shall run reliably.
 	\item Parsing and computing shall be reasonable fast with respect to the amount of files parsed.
+	\item The parser shall only parse xml-files with the correct format
 \end{itemize}
 \subsection{Requirements added by client}
 \subsubsection{Functional requirements}
