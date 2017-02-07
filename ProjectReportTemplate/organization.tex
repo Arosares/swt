@@ -49,7 +49,7 @@ Due to the easily accessible information on test runs and the discovered associa
 	\hline
     Frank Keßler & Low level architecture & Low level architechture diagram & 10 \\ 
     \hline
-    Frank Keßler & data structure & classes in database package & 20 \\ 
+    Frank Keßler & data structure & classes in database package & 30 \\ 
     \hline 
     Frank Keßler & Loading correct testrun in Table from treeview & Corresponding methods & 6 \\ 
     \hline
@@ -59,6 +59,8 @@ Due to the easily accessible information on test runs and the discovered associa
     \hline
     Frank Keßler & Comparison view & corresponding methods & 6\\
     \hline
+    Frank Keßler & Implementation of class tree structure & Code in project & 10 \\
+    \hline
     Frank Keßler & Loading correct class in chart & Corresponding methods & 8 \\ 
     \hline
     Frank Keßler & Changed classlist to a tree based structure & Treenode.java & 10 \\ 
@@ -67,8 +69,10 @@ Due to the easily accessible information on test runs and the discovered associa
     \hline
     Frank Keßler & Author of chapter 2 & Chapter in project report & 10 \\ 
     \hline
+    Frank Keßler & License and Documentation & license and documentation file & 6 \\
+    \hline
     \hline 
-    \textbf{Total \newline Frank Keßler} & & & \textbf{total 136}   \\
+    \textbf{Total \newline Frank Keßler} & & & \textbf{total 152}   \\
     \hline
     \hline
     Andreas & Identify user stories & User story cards & 5 \\
@@ -191,6 +195,35 @@ Due to the easily accessible information on test runs and the discovered associa
     \textbf{Total \newline Simon} & & & \textbf{total 115}   \\
     \hline
     \hline
+    Tobias Schwartz & Identify user stories & User story cards & 5 \\
+    \hline
+    Tobias Schwartz & StAX Parser & Methods for parsing & 3 \\ 
+    \hline
+	Tobias Schwartz & Preparing paper prototype & Paper prototype & 6 \\ 
+    \hline
+    Tobias Schwartz & Documenting Sprint 0 & Sprint 0 documentation wiki & 6 \\
+    \hline
+    Tobias Schwartz & Low level architecture & Low level architecture diagram & 10 \\ 
+    \hline
+    Tobias Schwartz & Data Structure & classes in database package & 30 \\
+    \hline
+    Tobias Schwartz & Implementation of Apriori Algorithm & Code in the analyzer package & 50 \\ 
+    \hline
+    Tobias Schwartz & Implementation of class tree structure & Code in project & 10 \\
+    \hline
+    Tobias Schwartz & Implementation of class distance calculation & Code in project & 2 \\
+    \hline
+    Tobias Schwartz & Refactoring of whole project & Refactored project & 8 \\
+    \hline
+    Tobias Schwartz & Author of chapter "Architecture and Design" & Chapter in project report & 15 \\ 
+    \hline
+    Tobias Schwartz & Author of sprint 4 & Chapter in project report & 5 \\ 
+    \hline
+    Tobias Schwartz & Converted manual into HTML & manual file & 2 \\ 
+    \hline
+    \hline 
+    \textbf{Total \newline Tobias Schwartz} & & & \textbf{total 152}   \\
+    \hline
   \caption{Distribution of work}
 \end{longtable}
 
@@ -225,17 +258,7 @@ In the next step we thought about the boundaries of our system, i.e. the scope o
 \end{center}
 \end{figure}
 
-After we defined the scope of work of the TDA we discussed which architecture and design patterns we could use for our system. Also first ideas for specific classes and interfaces arose. Gladly, all of us had already visited the DSG-AJP-B course in previous semesters and so we could all contribute equally to the discussion without too much additional explanation of any named techniques. Since we have to deliver a GUI application in Java, we decided on a standard model-view-controller pattern. The corresponding high level architecture diagram is shown below in figure \ref{HLA}. \\ 
-
-\newpage
-
-\begin{figure}[h]
-\begin{center}
-\includegraphics[scale=0.3]{pics/Architecture_diagram.jpg}
-\caption{High level architecture} 
-\label{HLA}
-\end{center}
-\end{figure}
+After we defined the scope of work of the TDA we discussed which architecture and design patterns we could use for our system. Also first ideas for specific classes and interfaces arose. Gladly, all of us had already visited the DSG-AJP-B course in previous semesters and so we could all contribute equally to the discussion without too much additional explanation of any named techniques. Since we have to deliver a GUI application in Java, we first decided on a standard model-view-controller pattern. We later then realized that a repository architecture fits our needs better, as described in detail in section \ref{sec:design} \\
 
 In the next step we constructed a central glossary to minimize misunderstandings in our communication and make sure to understand the language of the client. \\ 
 
