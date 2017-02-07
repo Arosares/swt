@@ -47,8 +47,9 @@ sequel to refer to a certain story.}
 As you may notice out user stories have quite strange IDs with a lot of numbers missing in between. This is because in the beginning we wanted to prevent that the IDs indicate a ordering. Retrospectively, we came to the conclusion that this was a mistake, as it caused more confusion in our group.\\
 In the end we tried to fix this a little bit (user stories 23-28), however, the project was already quite far in progress, so the majority of user stories still has random IDs.  \\
 \newline
-In Sprint 0 we scanned the project brief for requirements which we then tried to translate into user stories.\\
-In the planning meeting of every sprint we looked into the specific requirements of the feature we wanted to implement to derive more user stories.
+In Sprint 0 we discussed the content of the project brief and to make sure we all were on the same page we proceeded to draw a first use case diagram. This was helpful in multiple ways, as it gave us an overview over the whole project in addition to helping us figure out functional requirements.\\
+The use case diagram was always maintained when we received new requirements from the client or we changed our code in a way that certain features can only be accessed before a certain action is done. Thanks to this progress, we for example came to the conclusion that a start screen where you can select xml-files makes a lot of sense, since all features depend on data.
+Based on this use case diagram we then proceeded to write user stories and corresponding tasks. This way we always had the requirements in eye-sight on the task-board.
 
 \subsection{Requirements derived from project brief}
 \subsubsection{Functional requirements}
@@ -57,7 +58,7 @@ In the planning meeting of every sprint we looked into the specific requirements
 	\item A chart shall display the change of a specific class over all parsed testruns
 	\item Association analysis shall use the well-established Apriori algorithm
 	\item XML-files shall be parsed using the StAX parser
-	
+	\item Two more usage scenarios shall be suggested to the client and implemented after conformation
 \end{itemize}
 
 \subsubsection{Non-Functional requirements}
@@ -93,10 +94,13 @@ In the planning meeting of every sprint we looked into the specific requirements
 \end{itemize}
 \subsection{Requirements assumed by us}
 \subsubsection{Functional requirements}
+\begin{itemize}
+	\item The class overview in the sidebar shall display all classes in a tree structure based on the packages they are in
+\end{itemize}
 
 \subsubsection{Non-functional requirements}
 \begin{itemize}
-\item The class overview in the sidebar shall display all classes in a tree structure based on the packages they are in
+	\item Parsing and computing shall be reasonable fast with respect to the amount of files parsed.
 \end{itemize}
 \subsection{Requirements added by client}
 \subsubsection{Functional requirements}
@@ -123,7 +127,7 @@ In the planning meeting of every sprint we looked into the specific requirements
 \subsubsection{Non-functional requirements}
 \begin{itemize}
 %Sprint 2:
-
+\item The software shall load most of its data in the beginning, so you can use the tool without waiting times later on
 \item Failure percentages in table should be shorted to 2 decimal places
 %maybeFR
 \item Testrun totals: a note, stating that not all totals of the testrun are shown, should be visible; a button should enable the user to see all totals.
