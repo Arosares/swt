@@ -138,21 +138,22 @@ The task encompassed pretty much the entire User Story (Size \textbf{L}), didn't
 \end{table}
 Newer tasks often concerned themselves with a more clearly defined goal, becoming smaller and more easily estimated in the process. 
 
-\newpage
-\textbf{DEPCRECATED}
-When it came to Tasks, our team only gradually realized the practical importance of the "Specific" in the \textbf{ SMART}-criteria; our early User Stories frequently only contained one or two Tasks, like "Implement Apriori". This became an apparent problem when we tried to improve our documentation in Sprint 4, and we found progress was very hard to track when two people worked on a single task for the majority of a sprint. 
-Following this revelation, tasks were created based on what part of the code they concerned themselves with, like refactoring a single class, or a single function, for example the implementation of a distance calculation that spanned multiple classes but could still be linked to a single userstory and completed by a single teammember or a team of two. 
-This also made the effort required for a single task more easily measurable and allowed us to track our progress in greater detail. A good example of this would be the difference between user stories 8 and 23, both concerning themselves with the implementation of the Apriori algorithm.
+\paragraph{Unit Tests}
+To confirm the correct functionality of our code, we employed JUnit tests, testing specified methods in a vacuum and comparing the outputs. 
+The original idea was to write tests after completing a class, but the priority for unit tests was generally seen as lower than that of implementing required features. Thus, our test coverage was lower closer we got to the completion of crucial features. 
+The team invested a significant portion of time in Sprint 5 to increase Test coverage wherever possible, though we didn't manage to get full coverage. 
+Classes primarily concerned with the GUI went mostly untested due to a lack of time and technical knowledge on our part. 
 
-To ensure the working condition of our software, we employed extensive tests of internal methods wherever applicable. 
-This includes all internal classes excepting the controller and model classes that frequently contain too many links to other classes, making testing them alone impractical. Most of the methods in those classes are indirectly tested through the tests of the classes they call upon. 
+\paragraph{JDoc internal documentation}
+Well documented code is easier to read, understand, and work on, and thus improves workflow and program quality. Especially during the middle sprints, our documentation was woefully lacking, reducing our efficiency when returning to previously written code. We tried to remedy this problem Starting in Sprint 4, but didn't manage to fully document all our classes.
 
+\paragraph{Acceptance Tests}
+To measure if a User Story has been successfully completed, Acceptance Tests can be used to confirm that the program is running within expectations. 
+We mostly employed these tests for our GUI classes, frequently writing code, testing it, then adapting or fixing it based on the result. 
+However, we did not document these tasks, as the desired result was often described in the User Story, and the tests were done by the team members tasked with the story. In a longer project, or a larger team, better documentation and potentially testing-tasks would certainly be required to prevent confusion.
 
-\emph{(Approx.~4--7~pages of text.)}
+\emph{... Finally, do not forget to evaluate your software's interfaces (including the GUI).}
 
-\emph{Describe and justify the different quality assurance techniques that your group has applied alongside the project's conduct, including the INVEST criteria for the user stories, SMART criteria for the tasks derived from user stories, unit tests for your code, and others.  Illustrate your approach to quality assurance by giving relevant examples for each employed technique. Finally, do not forget to evaluate your software's interfaces (including the GUI).}
-
-\newpage
 
 \ \\
 \textbf{Activity Diagrams}\\
