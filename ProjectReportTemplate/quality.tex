@@ -1,21 +1,17 @@
 %\flushleft
-\emph{(Approx.~4--7~pages of text.)}
-
-\emph{Describe and justify the different quality assurance techniques that your group has applied alongside the project's conduct, including the INVEST criteria for the user stories, SMART criteria for the tasks derived from user stories, unit tests for your code, and others.  Illustrate your approach to quality assurance by giving relevant examples for each employed technique. Finally, do not forget to evaluate your software's interfaces (including the GUI).}
 
 What did we do to ensure the quality of our final product? 
 
 To ensure the development stayed on track and produced useable and useful code, our User Stories adhered to the INVEST criteria as much as practical, always detailing a specific feature either wanted by the client or seen as necessary by the Team for the inner workings of the program. 
 However, we had to deviate from the template to adjust to the peculiarities of the project at hand:
 The limited time of roughly 80 manhours total per sprint made it impractical to limit a userstory to "one third of a sprint"; Most often, a single sprint consisted of between two and three user stories, each of which spanned at least half a sprint to implement by between one and four people. 
+\paragraph{INVEST} 
 The criteria and how closely we managed to follow them:
-
-\newpage
-\begin{table}[h]
+\begin{table}[h!]
   \caption{INVEST}
   \label{INVEST}
   \centering
-  \begin{tabular}{|p{3cm} | p{9.5cm}|}
+  \begin{tabular}{|p{3cm} | p{11cm}|}
 	\hline  	 
   	 Criteria & Comments \\ 
   	 \hline
@@ -77,3 +73,7 @@ This also made the effort required for a single task more easily measurable and 
 To ensure the working condition of our software, we employed extensive tests of internal methods wherever applicable. 
 This includes all internal classes excepting the controller and model classes that frequently contain too many links to other classes, making testing them alone impractical. Most of the methods in those classes are indirectly tested through the tests of the classes they call upon. 
 
+
+\emph{(Approx.~4--7~pages of text.)}
+
+\emph{Describe and justify the different quality assurance techniques that your group has applied alongside the project's conduct, including the INVEST criteria for the user stories, SMART criteria for the tasks derived from user stories, unit tests for your code, and others.  Illustrate your approach to quality assurance by giving relevant examples for each employed technique. Finally, do not forget to evaluate your software's interfaces (including the GUI).}
