@@ -11,7 +11,7 @@ The criteria and how closely we managed to follow them:
   \caption{INVEST}
   \label{INVEST}
   \centering
-  \begin{tabular}{|p{3cm} | p{11cm}|}
+  \begin{tabular}{|p{3cm} | p{10cm}|}
 	\hline  	 
   	 Criteria & Comments \\ 
   	 \hline
@@ -24,6 +24,16 @@ The criteria and how closely we managed to follow them:
   	\hline
   	Estimable & A Story's size should always be estimable, whether by elaborate method or an educated guess. As we did have no experience in working as a team, we categorized stories roughly into three sizes: L, M, S.  Within that framework, our size estimates were relatively accurate.   \\ 
   	\hline
+  	  \end{tabular}
+\end{table}
+\begin{table}[h!]
+  \caption{INVEST: cont}
+  \centering
+  \begin{tabular}{|p{3cm} | p{10cm}|}
+	\hline  	 
+  	 Criteria & Comments \\ 
+  	 \hline
+  	 \hline
   	Small & User Stories should be no larger than one third of a sprint. Due to the limited amount of work time in a sprint, less than 20 hours per team member, we frequently did not manage to adhere to this principle. Early sprints only had two user stories each.  \\ 
   	\hline
   	Testable & To see if a User Story is complete, it desired result needs to be confirm-able by acceptance tests. Our stories generally have success criteria that can be tested against, though in the case of the GUI this was largely done by manual testing, as the team judged writing GUI tests to be too time-consuming to consider. \\ 
@@ -31,8 +41,8 @@ The criteria and how closely we managed to follow them:
   \end{tabular}
 \end{table}
 
-\newpage
-\paragraph{example user story card} 
+\paragraph{Example user story card} \
+The Story below has an estimated size, a defined and testable goal, and is important to the project. How exactly it is to be done is not part of the user story, instead being detailed in the respective tasks, or decided by the assigned team member at the time of implementation. 
 \begin{table}[h]
   \caption{User Story 7: Testrun Table, Front}
   \label{Story 7 Example}
@@ -47,26 +57,72 @@ The criteria and how closely we managed to follow them:
   	\hline
   \end{tabular}
 \end{table}
-\begin{table}[h]
+\begin{table}[!h]
   \caption{User Story 7: Testrun Table, Back}
-  \label{Story 7 Example}
-  \centering
+  \label{Story 7 Example}  \centering
   \begin{tabular}{|p{10cm} p{1cm}|}
+    \hline
   	  &    \\ 
   	The story is done when &    \\ 
   	 - the classes are sorted in decending order of failure percentage &    \\ 
   	 - the classes with the highest failure percentage are highlighted &   \\ 
-  	 
-  	  &  
-  	   \\ 
+  	  &     \\ 
   	\hline
   \end{tabular}
 \end{table}
 
-The Story above has an estimated size, a defined and testable goal, and is important to the project. How exactly is to be done is not part of the user story, instead being detailed in the respective tasks, or decided by the assigned team member at the time of implementation. 
+\paragraph{Tasks} 
+When it came to Tasks, our team only gradually realized the practical importance of the \textbf{ SMART}-criteria; over the course of the project our organization improved.
 
 
-When it came to Tasks, our team only gradually realized the practical importance of the "Specific" in the SMART-criteria; our early User Stories frequently only contained one or two Tasks, like "Implement Apriori". This became an apparent problem when we tried to improve our documentation in Sprint 4, and we found progress was very hard to track when two people worked on a single task for the majority of a sprint. 
+\begin{table}[h!]
+  \caption{SMART}
+  \label{SMART}
+  \centering
+  \begin{tabular}{|p{3cm} | p{5cm}| p{5cm}|}
+	\hline  	 
+  	 Criteria & Meaning & did we follow it? \\ 
+  	 \hline
+  	 \hline
+  	\hfill \break SPECIFIC & 
+  	The task describes an increment of work in sufficient detail in unambiguous words consistent with terminology in the rest of the Project & 
+  	 Early on, not all out tasks fulfilled this criteria because we hadn't sufficiently defined our terminology. Some tasks encompassed to much work to possibly  be concise. This improved significantly over the course of the project.\\ 
+  	\hline
+  	\hfill \break MEASURABLE &
+  	 The Task Goal is measurable so the team can test against it's completion & The goal of the teams tasks was always clear enough to be measurable. \\ 
+  	\hline
+  	\hfill \break ACHIEVABLE &
+  	 The task goal shall be achievable by the assigned team member &
+  	 We supported each other whenever a teammember had a problem. In a few cases, tasks were aborted after it was revealed they weren't doable within given constraints (like time).   \\ 
+  	\hline
+  	\hfill \break RELEVANT &
+  	 The task clearly contributes to the containing User Story & 
+  	 All our tasks contributed to the goals set by the User Story   \\ 
+  	\hline
+  	\hfill \break TIME BOXED &
+  	 The task is limited to a specific duration before the assigned team member(s) seek help & Most our tasks were limited to a single 4-hour meeting through the length of the containing User Story. Some tasks, mostly relating to Apriori, took significantly longer. 
+  	    \\ 
+  	\hline
+  	  \end{tabular}
+\end{table}
+
+When we kicked off the project, we created User Stories for Project Goals that we wanted to tackle in later Sprints, and didn't update them after gathering knowledge; This resulted in tasks like the following:
+
+\begin{table}
+  \label{Example Task 1}
+  \centering
+	\begin{tabular}[h]{ |p{4cm} p{4cm}| }
+	\hline
+	Implement Apriori & 8.1 \\
+	 . & \\
+	 \hfill \break
+	 L & Assigned : Jan 
+	\end{tabular}
+\end{table}
+
+\newpage
+\textbf{DEPCRECATED}
+When it came to Tasks, our team only gradually realized the practical importance of the "Specific" in the \textbf{ SMART}-criteria; our early User Stories frequently only contained one or two Tasks, like "Implement Apriori". This became an apparent problem when we tried to improve our documentation in Sprint 4, and we found progress was very hard to track when two people worked on a single task for the majority of a sprint. 
 Following this revelation, tasks were created based on what part of the code they concerned themselves with, like refactoring a single class, or a single function, for example the implementation of a distance calculation that spanned multiple classes but could still be linked to a single userstory and completed by a single teammember or a team of two. 
 This also made the effort required for a single task more easily measurable and allowed us to track our progress in greater detail. A good example of this would be the difference between user stories 8 and 23, both concerning themselves with the implementation of the Apriori algorithm.
 

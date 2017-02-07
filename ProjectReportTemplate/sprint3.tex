@@ -11,7 +11,7 @@ In the first session, everyone not assigned to the LineChart was busy with refac
 Stories: 
 
 \begin{itemize}
-	\item User Story 3: Testrun Graph
+	\item User Story 3: Testrun Chart
 	\end{itemize}
 As a user,
 I want to display a graph that shows the failure percentages of a specific class over all loaded testruns, so that I can see the evolution of the failure percentage.
@@ -22,11 +22,11 @@ I want to display a graph that shows the failure percentages of a specific class
   \begin{tabular}{p{1cm}|p{5cm}|p{3cm}|}
   	Nr & Description & Assigned \\ 
   	\hline
-  	3.1 & Classes Sidebar Overview & ? \\ 
+  	3.1 & Classes Sidebar Overview &  \\ 
   	\hline
   	3.2 & Graph for displaying a single class and its failure percentage over all loaded testruns & Frank Kessler \\ 
   	\hline
-  	3.3 & Event handling for class selection in sidebar overview to display corresponding graph & ? \\ 
+  	3.3 & Event handling for class selection in sidebar overview to display corresponding graph &  \\ 
   	\hline
   \end{tabular}
 \end{table}
@@ -60,11 +60,11 @@ The user needs to see possible Relations between failure percentages of differen
 
 \subsubsection*{Noteworthy Development Aspects}
 
-The Sprint started with planning out our goal, which was condensed into two primary fields of work: 1) Finish the remains of Sprint 2, and implement the logic for Association Analysis. 
+The Sprint started with planning out our goal, which was condensed into two primary fields of work: 1) Finish the remains of Sprint 2, 2) implement the logic for Association Analysis. 
 
-While research on Apriori was ongoing, most of the team focused on polishing the UI, fixing minor bugs, and refactoring unperformant classes; leftovers from Sprint 2 and tasks we felt "had to be done" without a story to attach them to. \ 
+While research on Apriori was ongoing, most of the team focused on polishing the GUI, fixing minor bugs, and refactoring unperformant classes; leftovers from Sprint 2 and tasks we felt "had to be done" without a story to attach them to. \ 
 We also performed undocumented research into a potential XML validation, which was thought to provide us performance gains and potential fail saves in the future.
-User Story ? progressed quickly, with a GUI implementation ready after the first day of development; Progress on smaller tasks was hampered by a lack of working computers in the lab at the time.
+User Story 3 progressed quickly, with a GUI implementation ready after the first day of development; Progress on smaller tasks was hampered by a lack of working computers in the lab at the time.
 Meanwhile, research on Apriori at first produced only a tenuous grasp on the Algorithms peculiarities, which was shared between group members after the following Sprint Meeting. 
 When the change request came in, we analysed the requirements and came to the conclusion that the distance calculation required would benefit from an internal architecture that ordered parsed testruns and classes in a tree structure. 
 As this promised a more intuitive way to both save and display parsed information, the main challenge of User Story 8 turned into refactoring our internal class structure, though this would end up taking a significant portion of development time. 
@@ -82,6 +82,6 @@ The Linechart was implemented and working within the GUI, and the Apriori did wo
 However, the Apriori wasn't finished, resulting in the Sprint goal not being reached. 
 We had to allocate research time for Apriori, which would have delayed implementation and incurred wait time for teammembers if it wasn't for the lack of computers to actually work on; This research should have been done in the previous sprint. We were further delayed by a team member's illness.
 When we moved around priorities after receiving the change request from the client, we lacked the time we expected to finish Apriori within the new specifications, as well as the knowledge of how to proceed in such a situation, resulting in a lot of undocumented extra work. 
-Further, after creating the first output of our Apriori Algorithm, it occurred to us that we never made a UI prototype of the Apriori output, having created the original prototype before we knew that Apriori was.
+Further, after creating the first output of our Apriori Algorithm, it occurred to us that we never made a GUI prototype of the Apriori output, having created the original prototype before we knew what Apriori was.
 The presented Apriori Implementation was never merged into the master branch and later dropped entirely in favour of a revised version, meaning that in hindsight we didn't actually reach the goal of Apriori implementation at all.
 On the organizational side, we managed to shorten our meetings significantly without any ill effects and improved team cohesion.
