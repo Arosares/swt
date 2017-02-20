@@ -41,8 +41,12 @@ public class TDAChart {
 
 		return lineChart;
 	}
-
+	
 	public void setChartData(TestedClass testedClass) {
+		setChartData(testedClass, false);
+	}
+
+	public void setChartData(TestedClass testedClass, boolean background) {
 		// a series equals a line in the graph; so here there will be line for
 		// every class you click
 		series = new XYChart.Series<>();
@@ -54,13 +58,12 @@ public class TDAChart {
 			String xAxisLabel = Integer.toString(cnt);
 			XYChart.Data<String, Number> dataPoint = new XYChart.Data<String, Number>(xAxisLabel, data.getYValue());
 			// set the HoverNode for a dataPoint
-			HoveredThresholdNode hoverNode = new HoveredThresholdNode(data.getXValue(), data.getYValue(), testedClass);
+			HoveredThresholdNode hoverNode = new HoveredThresholdNode(data.getXValue(), data.getYValue(), testedClass, background);
 			dataPoint.setNode(hoverNode);
 
 			series.getData().add(dataPoint);
 			cnt++;
 		}
-
 		
 		boolean existing = false;
 		
@@ -73,8 +76,13 @@ public class TDAChart {
 		if (!existing) {
 			series.setName(testedClass.getClassName());
 			lineChart.getData().add(series);
+			
+			if (background) {
+				Node line = series.getNode().lookup(".chart-series-line");
+				line.setStyle("-fx-stroke-width: 0.7;");
+//				"-fx-stroke: #ddd;"
+			}
 		}
-		
 
 	}
 
@@ -87,7 +95,13 @@ public class TDAChart {
 	 * by https://gist.github.com/jewelsea/4681797
 	 */
 	class HoveredThresholdNode extends StackPane {
-		HoveredThresholdNode(TestRun testRun, Number value, TestedClass testedClass) {
+		HoveredThresholdNode(TestRun testRun, Number value, TestedClass testedClass, boolean background) {
+			if (background) {
+				setVisible(false);
+//				setPrefSize(3, 3);
+				return;
+			}
+			
 			setPrefSize(10, 10);
 			final Label label = createDataThresholdLabel(testRun, value, testedClass);
 			final ContextMenu contextMenu = createContextMenu(testRun, testedClass);

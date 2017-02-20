@@ -35,6 +35,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import tda.src.controller.Controller;
 import tda.src.logic.TestRun;
+import tda.src.logic.statistics.StatisticAnalyzer;
 import tda.src.model.Model;
 
 public class View extends Stage implements Observer {
@@ -52,6 +53,7 @@ public class View extends Stage implements Observer {
 	private TDATableView table;
 	private TDATreeView tree;
 	private TDAAnalyzerView analyzer;
+	private TDAStatisticView statistics;
 	private TDAChart graph;
 	private TDATestRunTotals totals;
 	private TDAMenuBar menuBar;
@@ -60,6 +62,7 @@ public class View extends Stage implements Observer {
 	private Tab tableTab;
 	private Tab chartTab;
 	private Tab analyzerTab;
+	private Tab statisticsTab;
 	private TDAClassView classTree;
 	private TDAcomparison comparison;
 	private AboutTDAView aboutTDAView;
@@ -70,11 +73,9 @@ public class View extends Stage implements Observer {
 	private GridPane tablePane;
 	private GridPane chartPane;
 	private GridPane aprioriPane;
+	private GridPane statisticsPane;
 
 	private Label idLabel;
-
-	private Slider distanceSlider;
-	private Slider confidenceSlider;
 
 	public View(Model model, Controller controller) {
 		super();
@@ -152,6 +153,10 @@ public class View extends Stage implements Observer {
 		// Analyzer (Apriori) Pane
 		analyzer = new TDAAnalyzerView(controller);
 		aprioriPane = analyzer.getAprioriPane();
+		
+		// Statistics (Most Relevant Classes) Pane
+		statistics = new TDAStatisticView(controller);
+		statisticsPane = statistics.getStatisticsPane();
 
 
 		GridPane.setHalignment(resetLineChart, HPos.CENTER);
@@ -193,9 +198,17 @@ public class View extends Stage implements Observer {
 		analyzerTab.setClosable(false);
 		analyzerTab.setContent(aprioriPane);
 		mainWindowTabPane.getTabs().add(analyzerTab);
-
+		
+		statisticsTab = new Tab("Statistics");
+		statisticsTab.setClosable(false);
+		statisticsTab.setContent(statisticsPane);
+		mainWindowTabPane.getTabs().add(statisticsTab);
+		
 		mainWindowTabPane.getSelectionModel().selectedItemProperty().addListener((ov, oldTab, newTab) -> {
-			if (newTab.getText().equals("Analyzer")) {
+			if (newTab == statisticsTab) {
+				statistics.updateStatisticsView();
+			} else if (newTab == analyzerTab) {
+				System.out.println("Apriori Update");
 				analyzer.updateAprioriView();
 			}
 		});

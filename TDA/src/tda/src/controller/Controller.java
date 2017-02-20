@@ -308,6 +308,22 @@ public class Controller {
 		}
 	}
 
+	public void handleClassItemTableClick(TestedClass testedClass, double confidence, int distance) {
+		handleResetGraph();
+		view.getMainWindowTabPane().getSelectionModel().select(view.getChartTab());
+		
+		List<StrongRule> strongRules = TestData.getInstance().getAnalyzer().getStrongRules(confidence, distance);
+		for (StrongRule strongRule : strongRules) {
+			if (strongRule.getLeftSide().contains(testedClass)) {
+				for (TestedClass tc : strongRule.getRightSide()) {
+					view.getGraph().setChartData(tc, true);
+				}
+			}
+		}
+		
+		view.getGraph().setChartData(testedClass);
+	}
+	
 	public void handleAboutTDAClick() {
 		view.getAboutTDAView().show();
 	}
@@ -334,5 +350,4 @@ public class Controller {
 			return "Licence could not be found";
 		}
 	}
-
 }
