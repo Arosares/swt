@@ -16,10 +16,14 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
-import tda.src.controller.Controller;
-import tda.src.logic.TestRun;
-import tda.src.logic.TestedClass;
+import tda.src.datastructure.TestRun;
+import tda.src.datastructure.TestedClass;
+import tda.src.gui.controller.Controller;
 
+/**
+ * Display the Line Chart
+ *
+ */
 public class TDAChart {
 
 	private final CategoryAxis xAxis = new CategoryAxis();

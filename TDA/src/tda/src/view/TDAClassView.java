@@ -7,8 +7,12 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import tda.src.logic.TreeNode;
+import tda.src.datastructure.TreeNode;
 
+/**
+ * Implements the sidebar view "classes"
+ *
+ */
 public class TDAClassView {
 
 	private TreeView<TreeNode> classView;

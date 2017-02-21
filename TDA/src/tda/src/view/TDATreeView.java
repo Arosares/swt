@@ -12,6 +12,11 @@ import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
+/**
+ * Shows all Testruns in a treeview similiar to how they are stored in
+ * filesystem
+ *
+ */
 public class TDATreeView {
 
 	private TreeView<String> treeView;

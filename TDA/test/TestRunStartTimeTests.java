@@ -4,7 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import tda.src.logic.TestRunStartTime;
+import tda.src.datastructure.TestRunStartTime;
 
 public class TestRunStartTimeTests {
 	

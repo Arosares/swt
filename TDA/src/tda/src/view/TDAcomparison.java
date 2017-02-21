@@ -19,9 +19,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import tda.src.logic.TestRun;
-import tda.src.logic.TestedClass;
+import tda.src.datastructure.TestRun;
+import tda.src.datastructure.TestedClass;
 
+/**
+ * Implements the comparison between two testruns of one testedclass
+ *
+ */
 public class TDAcomparison {
 
 	private final View view;
@@ -127,34 +131,6 @@ public class TDAcomparison {
 		Text testsView = new Text("No testrun loaded");
 		return testsView;
 	}
-
-	/**
-	 * generates the upper level Pane
-	 * <ul>
-	 * <li>comparisonLabel: Simple Label displaying "Comparison:"</li>
-	 * <li>comparisonSlot1
-	 * <li>
-	 * <li>comparisonSlot2</li>
-	 * </ul>
-	 * 
-	 * @param run
-	 * @return rootPane: BorderPane
-	 */
-	/*
-	 * public Pane generateComparisonPane(TestRun run) {
-	 * 
-	 * TODO: generateComparisonSlot and fill with content
-	 * 
-	 * rootPane.setLeft(comparisonSlot1); rootPane.setCenter(compareButton);
-	 * rootPane.setRight(comparisonSlot2); return rootPane;
-	 * 
-	 * 
-	 * 
-	 * Does nothing
-	 *
-	 * 
-	 * }
-	 */
 
 	/**
 	 * generates one comparison slot <br/>

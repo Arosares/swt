@@ -33,10 +33,14 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import tda.src.controller.Controller;
-import tda.src.logic.TestRun;
-import tda.src.model.Model;
+import tda.src.datastructure.TestRun;
+import tda.src.gui.controller.Controller;
+import tda.src.gui.model.Model;
 
+/**
+ * Main Window of the TDA
+ *
+ */
 public class View extends Stage implements Observer {
 	/**
 	 * <pre>
@@ -135,7 +139,7 @@ public class View extends Stage implements Observer {
 
 		Button resetLineChart = new Button("Reset Data");
 		resetLineChart.setOnMouseClicked(click -> {
-			controller.handleResetGraph();
+			controller.handleResetChart();
 			controller.handleResetComparison();
 		});
 

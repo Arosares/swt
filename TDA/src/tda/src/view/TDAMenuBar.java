@@ -12,9 +12,13 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import tda.src.controller.Controller;
-import tda.src.logic.TestData;
+import tda.src.datastructure.TestData;
+import tda.src.gui.controller.Controller;
 
+/**
+ * Implements the Menubar of the software
+ *
+ */
 public class TDAMenuBar {
 	/**
 	 * <pre>
@@ -26,11 +30,25 @@ public class TDAMenuBar {
 	private Controller controller;
 	private View view;
 
+	/**
+	 * Carries over the controller and view
+	 * 
+	 * @param controller
+	 * @param view
+	 */
 	public TDAMenuBar(Controller controller, View view) {
 		this.controller = controller;
 		this.view = view;
 	}
 
+	// TODO: Kann hier nochmal wer drueber gucken?
+	/**
+	 * Creates a Menu Bar with two dropdown menus, "File" and "Help". The Menu
+	 * Items are "Open File", "Open Folder", "Clear Data" and "Exit" in the
+	 * first and "Manual" and "About TDA" in the second Menu, respectively.
+	 * 
+	 * @return
+	 */
 	public Node createMenuBar() {
 		MenuBar menuBar = new MenuBar();
 		Menu file = new Menu("File");
@@ -80,7 +98,7 @@ public class TDAMenuBar {
 		});
 		file.getItems().addAll(openFile, openFolder, clearData, exitItem);
 		menuBar.getMenus().add(file);
-		
+
 		MenuItem manual = new MenuItem("Manual");
 		manual.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -96,14 +114,18 @@ public class TDAMenuBar {
 				controller.handleAboutTDAClick();
 				event.consume();
 			}
-			
+
 		});
-		
+
 		help.getItems().addAll(manual, aboutTDA);
 		menuBar.getMenus().add(help);
 		return menuBar;
 	}
 
+	/**
+	 * Shows a Popup Window asking the user if they really want to clear all
+	 * Data.
+	 */
 	public void clearDataAlert() {
 		Alert clearDataAlert = new Alert(AlertType.CONFIRMATION,
 				"Do you really want to clear all Data?\n All loaded TestRuns will be lost.");

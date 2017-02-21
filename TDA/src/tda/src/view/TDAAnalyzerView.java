@@ -21,14 +21,18 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
-import tda.src.controller.Controller;
-import tda.src.logic.TestData;
-import tda.src.logic.TestedClass;
-import tda.src.logic.apriori.StrongRule;
+import tda.src.datastructure.TestData;
+import tda.src.datastructure.TestedClass;
+import tda.src.gui.controller.Controller;
+import tda.src.logic.analyzer.StrongRule;
 
+/**
+ * Displays the outputs of the Apriori display
+ *
+ */
 public class TDAAnalyzerView {
 	private Controller controller;
-	
+
 	private GridPane aprioriPane;
 	private Slider distanceSlider;
 	private Slider confidenceSlider;
@@ -36,11 +40,19 @@ public class TDAAnalyzerView {
 	private TableView<StrongRule> strongRulesTable = new TableView<StrongRule>();
 	private ObservableList<StrongRule> strongRuleItems;
 	ObservableList<Entry<String, String>> frequentItems;
-	
+
 	private TableColumn<Entry<String, String>, String> supportCountCol;
 	TableColumn<StrongRule, String> strongRuleCol;
 	private TableColumn<StrongRule, Double> confidenceCol;
 
+	/**
+	 * TDAAnalyzerView creates a new Tab in our main view, showing the Table
+	 * with the visual output of the Apriori Analyzer. Built-In sliders allow
+	 * filtering the provided data without recalculation.
+	 * 
+	 * @param controller
+	 */
+	@SuppressWarnings("unchecked")
 	public TDAAnalyzerView(Controller controller) {
 		super();
 		this.controller = controller;
@@ -54,9 +66,7 @@ public class TDAAnalyzerView {
 		aprioriPane.add(aprioriHeader, 1, 1);
 		aprioriPane.add(createFrequentItemTable(), 1, 2);
 		aprioriPane.add(createStrongRulesTable(), 1, 3);
-		
-		
-		
+
 		distanceSlider = new Slider(2, 10, 10);
 		distanceSlider.setShowTickLabels(true);
 		distanceSlider.setShowTickMarks(true);
@@ -69,8 +79,7 @@ public class TDAAnalyzerView {
 				updateAprioriView();
 			}
 		});
-		
-		
+
 		confidenceSlider = new Slider(1, 100, 60);
 		confidenceSlider.setShowTickLabels(true);
 		confidenceSlider.setShowTickMarks(true);
@@ -83,7 +92,7 @@ public class TDAAnalyzerView {
 				updateAprioriView();
 			}
 		});
-		
+
 		Label distanceLabel = new Label("Class Distance");
 		distanceLabel.setAlignment(Pos.TOP_RIGHT);
 		Label confidenceLabel = new Label("Confidence");
@@ -94,6 +103,12 @@ public class TDAAnalyzerView {
 		aprioriPane.add(confidenceSlider, 1, 7);
 	}
 
+	/**
+	 * Creates the table with the frequent item sets discovered by Apriori. Alse
+	 * creates a scrollpane for the table.
+	 * 
+	 * @return
+	 */
 	@SuppressWarnings({ "unchecked" })
 	public Node createFrequentItemTable() {
 		TableColumn<Entry<String, String>, String> itemSetCol = new TableColumn<>("Frequent Items");
@@ -132,17 +147,20 @@ public class TDAAnalyzerView {
 		return scrollPane;
 	}
 
+	/**
+	 * Creates a Table to show Strong Rules within the selected Data set, as
+	 * discovered by our Apriori-Algorithm.
+	 * 
+	 * @return
+	 */
 	@SuppressWarnings({ "unchecked" })
 	public Node createStrongRulesTable() {
-		
-		
-		
+
 		strongRuleCol = new TableColumn<>("Strong Rule");
 		strongRuleCol.setCellValueFactory(new PropertyValueFactory<StrongRule, String>("ruleString"));
 
 		confidenceCol = new TableColumn<>("Confidence");
-		confidenceCol.setCellValueFactory(
-				new PropertyValueFactory<StrongRule, Double>("confidence"));
+		confidenceCol.setCellValueFactory(new PropertyValueFactory<StrongRule, Double>("confidence"));
 
 		strongRuleCol.setMinWidth(500);
 		confidenceCol.setSortType(TableColumn.SortType.DESCENDING);
@@ -151,23 +169,29 @@ public class TDAAnalyzerView {
 		strongRulesTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		strongRulesTable.setPrefWidth(800);
 		strongRulesTable.setPrefHeight(300);
-		
+
 		strongRulesTable.getColumns().addAll(strongRuleCol, confidenceCol);
-		
-		strongRulesTable.setRowFactory( tv -> {
-		    TableRow<StrongRule> row = new TableRow<>();
-		    row.setOnMouseClicked(event -> {
-		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
-		            StrongRule strongRule = row.getItem();
-		            controller.handleStrongRuleTableClick(strongRule);
-		        }
-		    });
-		    return row ;
+
+		strongRulesTable.setRowFactory(tv -> {
+			TableRow<StrongRule> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && (!row.isEmpty())) {
+					StrongRule strongRule = row.getItem();
+					controller.handleStrongRuleTableClick(strongRule);
+				}
+			});
+			return row;
 		});
 		ScrollPane scrollPane = new ScrollPane(strongRulesTable);
 		return scrollPane;
 	}
 
+	/**
+	 * Fills the Frequent Item Table with data. Distance is required for
+	 * on-the-fly filtering. Minimum support can not be adjusted dynamically.
+	 * 
+	 * @param distance
+	 */
 	public void fillFrequentItemTable(int distance) {
 		HashMap<List<TestedClass>, Integer> itemSet = TestData.getInstance().getAnalyzer()
 				.getFrequentItemSets(distance);
@@ -181,6 +205,13 @@ public class TDAAnalyzerView {
 		frequentItemsTable.getSortOrder().add(supportCountCol);
 	}
 
+	/**
+	 * Fills the Strong-Rules Table. Confidence and distance are provided for
+	 * filtering.
+	 * 
+	 * @param confidence
+	 * @param distance
+	 */
 	public void fillStrongRulesTable(double confidence, int distance) {
 		List<StrongRule> strongRules = TestData.getInstance().getAnalyzer().getStrongRules(confidence, distance);
 
@@ -189,9 +220,16 @@ public class TDAAnalyzerView {
 		// Sort
 		strongRulesTable.setItems(strongRuleItems);
 		confidenceCol.setSortType(TableColumn.SortType.DESCENDING);
-//		strongRulesTable.getSortOrder().addAll(strongRuleCol, confidenceCol);
+		// strongRulesTable.getSortOrder().addAll(strongRuleCol, confidenceCol);
 	}
 
+	/**
+	 * Sub-method called to turn the provided hash-table of ItemSets into
+	 * display-able strings.
+	 * 
+	 * @param itemSet
+	 * @return
+	 */
 	private HashMap<String, String> hashMapToString(HashMap<List<TestedClass>, Integer> itemSet) {
 		HashMap<String, String> result = new HashMap<String, String>();
 
@@ -203,6 +241,13 @@ public class TDAAnalyzerView {
 		return result;
 	}
 
+	/**
+	 * Sub-method called to turn the provided hash-table of Strong Rules into
+	 * display-able strings.
+	 * 
+	 * @param strongRules
+	 * @return
+	 */
 	private HashMap<String, String> strongRulesToStringHashMap(List<StrongRule> strongRules) {
 		HashMap<String, String> result = new HashMap<String, String>();
 
@@ -216,6 +261,12 @@ public class TDAAnalyzerView {
 		return result;
 	}
 
+	/**
+	 * Turns class names to Strings, then returns them
+	 * 
+	 * @param testedClasses
+	 * @return
+	 */
 	private String testedClassListToString(List<TestedClass> testedClasses) {
 		String result = "";
 		for (int i = 0; i < testedClasses.size(); i++) {
@@ -227,12 +278,17 @@ public class TDAAnalyzerView {
 		return result;
 	}
 
+	/**
+	 * Updates the View then the sliders are moved by the user.
+	 * 
+	 */
 	public void updateAprioriView() {
 		int maxDst = TestData.getInstance().getTreeHeight() * 2;
 		distanceSlider.setMax(maxDst);
-		
+
 		int distance = (int) distanceSlider.getValue();
-		if (distance >= maxDst) distanceSlider.setValue(maxDst);
+		if (distance >= maxDst)
+			distanceSlider.setValue(maxDst);
 		double confidence = confidenceSlider.getValue();
 		fillFrequentItemTable(distance);
 		fillStrongRulesTable(confidence, distance);

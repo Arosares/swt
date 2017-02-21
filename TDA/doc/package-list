@@ -1,1 +1,8 @@
 
+tda.src.controller
+tda.src.exceptions
+tda.src.logic
+tda.src.logic.apriori
+tda.src.main
+tda.src.model
+tda.src.view

@@ -8,9 +8,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tda.src.logic.TestRun;
-import tda.src.logic.TestedClass;
-import tda.src.logic.UnitTest;
+import tda.src.datastructure.TestRun;
+import tda.src.datastructure.TestedClass;
+import tda.src.datastructure.UnitTest;
 
 public class TestRunTests {
 	

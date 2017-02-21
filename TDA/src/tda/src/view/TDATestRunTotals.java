@@ -7,10 +7,14 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
-import tda.src.controller.Controller;
-import tda.src.logic.Counters;
-import tda.src.logic.TestRun;
+import tda.src.datastructure.Counters;
+import tda.src.datastructure.TestRun;
+import tda.src.gui.controller.Controller;
 
+/**
+ * Displays the Totals of one selected testRun
+ *
+ */
 public class TDATestRunTotals {
 
 	private Controller controller;
@@ -26,8 +30,10 @@ public class TDATestRunTotals {
 	}
 
 	/**
-	 * @return Creates a flat Horizontal Box containing our Counters, to be
-	 *         displayed at the top of the main View.
+	 * Creates a flat Horizontal Box containing our Counters, to be displayed at
+	 * the top of the main View.
+	 * 
+	 * @return
 	 */
 	public Node createTestRunTotalsBox() {
 
@@ -44,10 +50,10 @@ public class TDATestRunTotals {
 	}
 
 	/**
+	 * Asks the linked Methods for an Observable list by passing on values from
+	 * the controller, then creates that list.
+	 * 
 	 * @param testRun
-	 * @param details
-	 *            Asks the linked Methods for an Observable list by passing on
-	 *            values from the controller, then creates that list.
 	 */
 	public void showTestRunTotals(TestRun testRun) {
 		testResults = listedCounters(testRun);
@@ -57,6 +63,9 @@ public class TDATestRunTotals {
 	}
 
 	/**
+	 * Grabs a summary of test run results from the chosen testrun, then filters
+	 * the input to remove results of 0 with a series of if-functions. 
+	 * 
 	 * @param totals
 	 * @return Creates an Observable List with the all Counters, and returns it.
 	 */

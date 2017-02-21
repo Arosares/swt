@@ -8,8 +8,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import tda.src.controller.Controller;
+import tda.src.gui.controller.Controller;
 
+/**
+ * Displays the Manual
+ *
+ */
 public class TDAManual {
 	private Controller controller;
 	public TDAManual(Controller controller){

@@ -9,11 +9,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tda.src.logic.TestData;
-import tda.src.logic.TestRun;
-import tda.src.logic.TestedClass;
-import tda.src.logic.TreeNode;
-import tda.src.logic.UnitTest;
+import tda.src.datastructure.TestData;
+import tda.src.datastructure.TestRun;
+import tda.src.datastructure.TestedClass;
+import tda.src.datastructure.TreeNode;
+import tda.src.datastructure.UnitTest;
 
 public class TreeNodeTests {
 	private TestRun testRun1;

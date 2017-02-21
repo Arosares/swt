@@ -8,10 +8,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import tda.src.controller.Controller;
-import tda.src.logic.TestRun;
-import tda.src.logic.TestedClass;
+import tda.src.datastructure.TestRun;
+import tda.src.datastructure.TestedClass;
+import tda.src.gui.controller.Controller;
 
+/**
+ * Implements the table of testedclasses over one testrun
+ *
+ */
 public class TDATableView {
 
 	private Controller controller;
@@ -25,6 +29,14 @@ public class TDATableView {
 		this.controller = controller;
 	}
 
+	/**
+	 * Creates a Table showing all tested classes of a chosen Testrun. The table
+	 * is filled with data as soon as a testrun is selected, in 
+	 * "fillTestedClasstable"
+	 * 
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
 	public Node createTestedClassesTable() {
 		testedClassesTable = new TableView<TestedClass>();
 		testedClassesTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -66,8 +78,7 @@ public class TDATableView {
 			};
 
 			// Make rows able to be double clicked and display the selected row
-			// in
-			// the graph
+			// in the chart
 			row.setOnMouseClicked(event -> {
 				if (event.getClickCount() == 2 && (!row.isEmpty())) {
 					TestedClass testedClass = row.getItem();
@@ -84,7 +95,11 @@ public class TDATableView {
 
 	}
 
-	@SuppressWarnings("unchecked")
+	/**
+	 * Fills the ClassTable with Data and sorts it by failure percentage
+	 * 
+	 * @param testRun
+	 */
 	public void fillTestedClassTable(TestRun testRun) {
 		data = FXCollections.observableArrayList(controller.getTestedClassesFromTestRun(testRun));
 

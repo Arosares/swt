@@ -8,10 +8,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tda.src.logic.TestData;
-import tda.src.logic.TestRun;
-import tda.src.logic.TestedClass;
-import tda.src.logic.UnitTest;
+import tda.src.datastructure.TestData;
+import tda.src.datastructure.TestRun;
+import tda.src.datastructure.TestedClass;
+import tda.src.datastructure.UnitTest;
 
 public class TestDataTests {
 	
@@ -76,6 +76,8 @@ public class TestDataTests {
 	@Test 
 	public void testAddNewTestRunToAlreadyExistingTestRunListSuccess(){
 		try {
+			testRun1.setStartTime("2016-09-21T14:57:43.7071946+02:00");
+			testRun2.setStartTime("2016-09-21T14:58:43.7071946+02:00");
 			testData.addNewTestRun(testRun1);
 			testData.addNewTestRun(testRun2);
 		} catch (Exception e) {

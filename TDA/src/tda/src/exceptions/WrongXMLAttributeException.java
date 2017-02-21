@@ -9,7 +9,6 @@ public class WrongXMLAttributeException extends Exception {
 
 	public WrongXMLAttributeException() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public WrongXMLAttributeException(String message, Throwable cause, boolean enableSuppression,

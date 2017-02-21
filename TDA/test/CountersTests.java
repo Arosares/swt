@@ -4,11 +4,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import tda.src.logic.Counters;
-import tda.src.logic.TestData;
-import tda.src.logic.TestRun;
-import tda.src.logic.TestedClass;
-import tda.src.logic.UnitTest;
+import tda.src.datastructure.Counters;
+import tda.src.datastructure.TestData;
+import tda.src.datastructure.TestRun;
+import tda.src.datastructure.TestedClass;
+import tda.src.datastructure.UnitTest;
 
 public class CountersTests { 
 	
